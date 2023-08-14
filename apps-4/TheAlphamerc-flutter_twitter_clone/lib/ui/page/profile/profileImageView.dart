@@ -10,18 +10,23 @@ class ProfileImageView extends StatelessWidget {
   final String avatar;
   static Route<T> getRoute<T>(String avatar) {
     return SlideLeftRoute<T>(
-        builder: (BuildContext context) => ProfileImageView(avatar: avatar));
+      builder: (BuildContext context) => ProfileImageView(avatar: avatar),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     const List<Choice> choices = const <Choice>[
       const Choice(
-          title: 'Share image link', icon: Icons.share, isEnable: true),
+        title: 'Share image link',
+        icon: Icons.share,
+        isEnable: true,
+      ),
       const Choice(
-          title: 'Open in browser',
-          icon: Icons.open_in_browser,
-          isEnable: true),
+        title: 'Open in browser',
+        icon: Icons.open_in_browser,
+        isEnable: true,
+      ),
       const Choice(title: 'Save', icon: Icons.save),
     ];
     // var authstate = Provider.of<AuthState>(context, listen: false);
@@ -45,13 +50,16 @@ class ProfileImageView extends StatelessWidget {
             itemBuilder: (BuildContext context) {
               return choices.map((Choice choice) {
                 return PopupMenuItem<Choice>(
-                    value: choice,
-                    child: Text(choice.title,
-                        style: TextStyles.textStyle14.copyWith(
-                          color: choice.isEnable
-                              ? AppColor.secondary.withOpacity(.9)
-                              : AppColor.lightGrey,
-                        )));
+                  value: choice,
+                  child: Text(
+                    choice.title,
+                    style: TextStyles.textStyle14.copyWith(
+                      color: choice.isEnable
+                          ? AppColor.secondary.withOpacity(.9)
+                          : AppColor.lightGrey,
+                    ),
+                  ),
+                );
               }).toList();
             },
           ),

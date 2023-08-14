@@ -56,9 +56,7 @@ class _SearchPageState extends State<SearchPage> {
           addAutomaticKeepAlives: false,
           physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) => _UserTile(user: list[index]),
-          separatorBuilder: (_, index) => Divider(
-            height: 0,
-          ),
+          separatorBuilder: (_, index) => Divider(height: 0),
           itemCount: list?.length ?? 0,
         ),
       ),
@@ -83,10 +81,12 @@ class _UserTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Flexible(
-            child: TitleText(user.displayName,
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-                overflow: TextOverflow.ellipsis),
+            child: TitleText(
+              user.displayName,
+              fontSize: 16,
+              fontWeight: FontWeight.w800,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           SizedBox(width: 3),
           user.isVerified

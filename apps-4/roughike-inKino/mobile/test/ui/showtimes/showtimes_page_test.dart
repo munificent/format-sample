@@ -26,13 +26,11 @@ void main() {
     });
 
     Future<void> _buildShowtimesPage(WidgetTester tester) {
-      return tester.pumpWidget(
-        MaterialApp(
-          supportedLocales: supportedLocales,
-          localizationsDelegates: localizationsDelegates,
-          home: ShowtimesPageContent(mockViewModel),
-        ),
-      );
+      return tester.pumpWidget(MaterialApp(
+        supportedLocales: supportedLocales,
+        localizationsDelegates: localizationsDelegates,
+        home: ShowtimesPageContent(mockViewModel),
+      ));
     }
 
     testWidgets(
@@ -52,29 +50,29 @@ void main() {
       },
     );
 
-    testWidgets('when shows exist, should show them',
-        (WidgetTester tester) async {
-      when(mockViewModel.status).thenReturn(LoadingStatus.success);
-      when(mockViewModel.shows).thenReturn(listOf(
-        Show(
+    testWidgets(
+      'when shows exist, should show them',
+      (WidgetTester tester) async {
+        when(mockViewModel.status).thenReturn(LoadingStatus.success);
+        when(mockViewModel.shows).thenReturn(listOf(Show(
           title: 'Show title',
           theaterAndAuditorium: 'Auditorium One',
           presentationMethod: '2D',
           start: DateTime(2018),
           end: DateTime(2018),
-        ),
-      ));
+        )));
 
-      await _buildShowtimesPage(tester);
-      await tester.pumpAndSettle();
+        await _buildShowtimesPage(tester);
+        await tester.pumpAndSettle();
 
-      expect(find.byKey(ShowtimeList.contentKey), findsOneWidget);
-      expect(find.byKey(ShowtimeList.emptyViewKey), findsNothing);
-      expect(find.text('Show title'), findsOneWidget);
+        expect(find.byKey(ShowtimeList.contentKey), findsOneWidget);
+        expect(find.byKey(ShowtimeList.emptyViewKey), findsNothing);
+        expect(find.text('Show title'), findsOneWidget);
 
-      LoadingViewState state = tester.state(find.byType(LoadingView));
-      expect(state.errorContentVisible, isFalse);
-    });
+        LoadingViewState state = tester.state(find.byType(LoadingView));
+        expect(state.errorContentVisible, isFalse);
+      },
+    );
 
     testWidgets(
       'when clicking "try again" on the error view, should call refreshShowtimes on the view model',

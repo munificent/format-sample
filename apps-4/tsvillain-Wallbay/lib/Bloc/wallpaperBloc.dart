@@ -17,11 +17,10 @@ class WallpaperBloc extends Bloc<WallpaperEvent, WallpaperState> {
     if (event is GetAllWallpaper) {
       yield WallpaperIsLoading();
       try {
-        var response = await http
-            .get(Uri.encodeFull(editorChoiceEndPoint + perPageLimit), headers: {
-          "Accept": "application/json",
-          "Authorization": "$apiKey"
-        });
+        var response = await http.get(
+          Uri.encodeFull(editorChoiceEndPoint + perPageLimit),
+          headers: {"Accept": "application/json", "Authorization": "$apiKey"},
+        );
         var data = jsonDecode(response.body)["photos"];
         _wallpaper = List<Wallpaper>();
         for (var i = 0; i < data.length; i++) {

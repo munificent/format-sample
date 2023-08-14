@@ -10,10 +10,7 @@ class MockShowtimesPageViewModel extends Mock
 
 void main() {
   group('ShowtimeDateSelector', () {
-    final dates = listOf(
-      DateTime(2018, 1, 1),
-      DateTime(2018, 1, 2),
-    );
+    final dates = listOf(DateTime(2018, 1, 1), DateTime(2018, 1, 2));
 
     MockShowtimesPageViewModel mockViewModel;
 
@@ -22,9 +19,9 @@ void main() {
     });
 
     Future<void> _buildDateSelector(WidgetTester tester) {
-      return tester.pumpWidget(MaterialApp(
-        home: ShowtimeDateSelector(mockViewModel),
-      ));
+      return tester.pumpWidget(
+        MaterialApp(home: ShowtimeDateSelector(mockViewModel)),
+      );
     }
 
     testWidgets(
@@ -46,8 +43,9 @@ void main() {
         DateTime date;
 
         when(mockViewModel.dates).thenReturn(dates);
-        when(mockViewModel.changeCurrentDate)
-            .thenReturn((newDate) => date = newDate);
+        when(mockViewModel.changeCurrentDate).thenReturn(
+          (newDate) => date = newDate,
+        );
 
         await _buildDateSelector(tester);
         await tester.tap(find.text('Tue'));

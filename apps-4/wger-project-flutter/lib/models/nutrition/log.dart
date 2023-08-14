@@ -67,8 +67,12 @@ class Log {
     this.comment,
   });
 
-  Log.fromMealItem(MealItem mealItem, this.planId, this.mealId,
-      [DateTime? dateTime]) {
+  Log.fromMealItem(
+    MealItem mealItem,
+    this.planId,
+    this.mealId, [
+    DateTime? dateTime,
+  ]) {
     ingredientId = mealItem.ingredientId;
     ingredientObj = mealItem.ingredientObj;
     weightUnitId = mealItem.weightUnitId;

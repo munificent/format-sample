@@ -21,10 +21,7 @@ class TheaterParser {
         normalizedName = 'All theaters';
       }
 
-      return Theater(
-        id: id,
-        name: normalizedName,
-      );
+      return Theater(id: id, name: normalizedName);
     });
 
     return listFrom(theaters);

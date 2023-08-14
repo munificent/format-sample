@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ImageHeightItem extends StatelessWidget {
-  ImageHeightItem(this.buildContext, this.image, this.height,
-      {this.imageRatio = 1.618,
-      this.onTap,
-      this.radius = 4,
-      this.elevation = 8});
+  ImageHeightItem(
+    this.buildContext,
+    this.image,
+    this.height, {
+    this.imageRatio = 1.618,
+    this.onTap,
+    this.radius = 4,
+    this.elevation = 8,
+  });
   final BuildContext buildContext;
   final String image;
   final double height;
@@ -28,10 +32,7 @@ class ImageHeightItem extends StatelessWidget {
         width: width,
         height: height,
         fit: BoxFit.cover,
-        child: InkWell(
-          onTap: onTap ?? () {},
-          splashColor: Colors.white12,
-        ),
+        child: InkWell(onTap: onTap ?? () {}, splashColor: Colors.white12),
       ),
     );
   }

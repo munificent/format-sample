@@ -12,11 +12,7 @@ class ShowtimeDateSelector extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Color(0xFF0F1633),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            blurRadius: 5.0,
-            spreadRadius: 2.0,
-          ),
+          BoxShadow(color: Colors.black45, blurRadius: 5.0, spreadRadius: 2.0),
         ],
       ),
       height: 56.0,
@@ -34,10 +30,7 @@ class ShowtimeDateSelector extends StatelessWidget {
 }
 
 class _DateSelectorItem extends StatelessWidget {
-  _DateSelectorItem(
-    this.date,
-    this.viewModel,
-  );
+  _DateSelectorItem(this.date, this.viewModel);
 
   final DateTime date;
   final ShowtimesPageViewModel viewModel;
@@ -45,8 +38,9 @@ class _DateSelectorItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSelected = date == viewModel.selectedDate;
-    final backgroundColor =
-        isSelected ? const Color(0xFFF9C243) : const Color(0xFF0F1633);
+    final backgroundColor = isSelected
+        ? const Color(0xFFF9C243)
+        : const Color(0xFF0F1633);
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 100),
@@ -75,8 +69,9 @@ class _ItemContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dayColor =
-        isSelected ? const Color(0xFF0F1633) : const Color(0xFF717DAD);
+    final dayColor = isSelected
+        ? const Color(0xFF0F1633)
+        : const Color(0xFF717DAD);
     final dateColor = isSelected ? const Color(0xFF0F1633) : Colors.white;
     final dateWeight = isSelected ? FontWeight.w500 : FontWeight.w300;
 

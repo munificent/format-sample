@@ -44,9 +44,7 @@ class _TransactionToState extends State<TransactionTo> {
             },
           );
         } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return Center(child: CircularProgressIndicator());
         }
       },
     );

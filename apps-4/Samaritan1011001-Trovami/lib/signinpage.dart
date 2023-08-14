@@ -27,9 +27,10 @@ final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 TextStyle textStyle = new TextStyle(
-    color: const Color.fromRGBO(255, 255, 255, 0.4),
-    fontSize: 16.0,
-    fontWeight: FontWeight.normal);
+  color: const Color.fromRGBO(255, 255, 255, 0.4),
+  fontSize: 16.0,
+  fontWeight: FontWeight.normal,
+);
 
 Color textFieldColor = const Color.fromRGBO(0, 0, 0, 0.7);
 ScrollController scrollController = new ScrollController();
@@ -59,12 +60,18 @@ class SigninFormState extends State<SignInForm>
 //  var httpClient = HttpClientFireBase();
 
   final IconData mail = const IconData(0xe158, fontFamily: 'MaterialIcons');
-  final IconData lock_outline =
-      const IconData(0xe899, fontFamily: 'MaterialIcons');
-  final IconData signinicon =
-      const IconData(0xe315, fontFamily: 'MaterialIcons');
-  final IconData signupicon =
-      const IconData(0xe316, fontFamily: 'MaterialIcons');
+  final IconData lock_outline = const IconData(
+    0xe899,
+    fontFamily: 'MaterialIcons',
+  );
+  final IconData signinicon = const IconData(
+    0xe315,
+    fontFamily: 'MaterialIcons',
+  );
+  final IconData signupicon = const IconData(
+    0xe316,
+    fontFamily: 'MaterialIcons',
+  );
   bool _autovalidate = false;
   bool _formWasEdited = false;
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -76,15 +83,12 @@ class SigninFormState extends State<SignInForm>
   String email = '';
   String password = '';
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'email',
-    ],
-  );
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['email']);
 
   void showInSnackBar(String value) {
-    _scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text(value)));
+    _scaffoldKey.currentState.showSnackBar(
+      new SnackBar(content: new Text(value)),
+    );
   }
 
 //  _ensureLoggedIn() async {
@@ -141,11 +145,9 @@ class SigninFormState extends State<SignInForm>
             userexists = true;
             loggedinUser = user.email;
             loggedInUsername = user.displayName;
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => Homepagelayout(users: response),
-              ),
-            );
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => Homepagelayout(users: response),
+            ));
           }
         });
       }
@@ -153,15 +155,14 @@ class SigninFormState extends State<SignInForm>
         HttpClientFireBase httpClient = HttpClientFireBase();
 
         await httpClient.post(
-            url: 'https://trovami-bcd81.firebaseio.com/users.json',
-            body: guserjson);
+          url: 'https://trovami-bcd81.firebaseio.com/users.json',
+          body: guserjson,
+        );
         loggedinUser = user.email;
         loggedInUsername = user.displayName;
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => Homepagelayout(users: response),
-          ),
-        );
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Homepagelayout(users: response),
+        ));
       } else {
         setState(() {
           _isgooglesigincomplete = true;
@@ -184,15 +185,14 @@ class SigninFormState extends State<SignInForm>
         if (email == us["emailid"]) {
           loggedinUser = email;
           loggedInUsername = us["name"];
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => Homepagelayout(users: usrmap),
-            ),
-          );
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Homepagelayout(users: usrmap),
+          ));
         }
       });
       showInSnackBar(
-          'Login EmailID or Password is incorrect. Please Try again.');
+        'Login EmailID or Password is incorrect. Please Try again.',
+      );
     }
   }
 
@@ -205,8 +205,9 @@ class SigninFormState extends State<SignInForm>
   }
 
   setGoogleSigninListener() {
-    _googleSignIn.onCurrentUserChanged
-        .listen((GoogleSignInAccount account) async {});
+    _googleSignIn.onCurrentUserChanged.listen(
+      (GoogleSignInAccount account) async {},
+    );
     _googleSignIn.signInSilently();
   }
 
@@ -215,12 +216,14 @@ class SigninFormState extends State<SignInForm>
     setGoogleSigninListener();
 
     controller = new AnimationController(
-        duration: const Duration(seconds: 10), vsync: this);
-    animation =
-        new ColorTween(begin: Colors.red, end: Colors.blue).animate(controller)
-          ..addListener(() {
-            setState(() {});
-          });
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    );
+    animation = new ColorTween(begin: Colors.red, end: Colors.blue).animate(
+      controller,
+    )..addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -270,34 +273,36 @@ class SigninFormState extends State<SignInForm>
                         children: <Widget>[
                           new Container(
                             child: new InputField(
-                                hintText: 'Email',
-                                obscureText: false,
-                                textInputType: TextInputType.text,
-                                textStyle: textStyle,
-                                hintStyle: textStyle,
-                                textFieldColor: textFieldColor,
-                                icon: Icons.mail_outline,
-                                iconColor:
-                                    const Color.fromRGBO(255, 255, 255, 0.4),
-                                bottomMargin: 20.0,
-                                validateFunction: _validateName,
-                                onSaved: (String value) {
-                                  email = value;
-                                }),
-                          ),
-                          new InputField(
-                              hintText: 'Password',
-                              obscureText: true,
+                              hintText: 'Email',
+                              obscureText: false,
                               textInputType: TextInputType.text,
                               textStyle: textStyle,
                               hintStyle: textStyle,
                               textFieldColor: textFieldColor,
-                              icon: Icons.lock_outline,
-                              iconColor: Colors.white,
+                              icon: Icons.mail_outline,
+                              iconColor:
+                                  const Color.fromRGBO(255, 255, 255, 0.4),
                               bottomMargin: 20.0,
+                              validateFunction: _validateName,
                               onSaved: (String value) {
-                                password = value;
-                              }),
+                                email = value;
+                              },
+                            ),
+                          ),
+                          new InputField(
+                            hintText: 'Password',
+                            obscureText: true,
+                            textInputType: TextInputType.text,
+                            textStyle: textStyle,
+                            hintStyle: textStyle,
+                            textFieldColor: textFieldColor,
+                            icon: Icons.lock_outline,
+                            iconColor: Colors.white,
+                            bottomMargin: 20.0,
+                            onSaved: (String value) {
+                              password = value;
+                            },
+                          ),
                         ],
                       ),
                     ),

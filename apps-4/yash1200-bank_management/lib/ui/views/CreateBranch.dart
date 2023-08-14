@@ -23,20 +23,12 @@ class _CreateBranchState extends State<CreateBranch> {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: darkColor,
-          ),
+          icon: Icon(Icons.arrow_back_ios, color: darkColor),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
-          'Create',
-          style: TextStyle(
-            color: darkColor,
-          ),
-        ),
+        title: Text('Create', style: TextStyle(color: darkColor)),
       ),
       body: Center(
         child: Form(
@@ -48,9 +40,7 @@ class _CreateBranchState extends State<CreateBranch> {
               child: Column(
                 children: <Widget>[
                   CustomImage('assets/sun.png'),
-                  SizedBox(
-                    height: size.height / 20,
-                  ),
+                  SizedBox(height: size.height / 20),
                   TextFormField(
                     controller: nameController,
                     decoration: InputDecoration(
@@ -68,9 +58,7 @@ class _CreateBranchState extends State<CreateBranch> {
                       }
                     },
                   ),
-                  SizedBox(
-                    height: size.height / 80,
-                  ),
+                  SizedBox(height: size.height / 80),
                   TextFormField(
                     controller: desController,
                     maxLines: 2,
@@ -87,23 +75,17 @@ class _CreateBranchState extends State<CreateBranch> {
                       return null;
                     },
                   ),
-                  SizedBox(
-                    height: size.height / 40,
-                  ),
+                  SizedBox(height: size.height / 40),
                   FlatButton(
                     onPressed: () {
                       if (_fKey.currentState.validate()) {
                         createBranch(nameController.text, desController.text);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Creating new branch',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            'Creating new branch',
+                            style: TextStyle(fontSize: 16),
                           ),
-                        );
+                        ));
                         Navigator.pop(context);
                       }
                     },
@@ -114,10 +96,7 @@ class _CreateBranchState extends State<CreateBranch> {
                     padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                     child: Text(
                       'Create',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
                 ],

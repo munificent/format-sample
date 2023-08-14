@@ -24,26 +24,21 @@ import 'package:wger/providers/auth.dart';
 import 'package:wger/screens/auth_screen.dart';
 
 void main() {
-  testWidgets('Test the widgets on the auth screen, login mode',
-      (WidgetTester tester) async {
-    // Wrap screen in material app so that the media query gets a context
-    await tester.pumpWidget(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (ctx) => AuthProvider(),
-          ),
-        ],
+  testWidgets(
+    'Test the widgets on the auth screen, login mode',
+    (WidgetTester tester) async {
+      // Wrap screen in material app so that the media query gets a context
+      await tester.pumpWidget(MultiProvider(
+        providers: [ChangeNotifierProvider(create: (ctx) => AuthProvider())],
         child: Consumer<AuthProvider>(
           builder: (ctx, auth, _) => MaterialApp(
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: const Locale('en'),
-            home: AuthScreen(),
-          ),
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: const Locale('en'),
+                home: AuthScreen(),
+              ),
         ),
-      ),
-    );
+      ));
 /*
     Provider<Auth>(
         create: (_) => Auth(),
@@ -56,49 +51,54 @@ void main() {
 
  */
 
-    Consumer<AuthProvider>(
-      builder: (ctx, auth, _) => MaterialApp(
-        builder: (ctx, authResultSnapshot) => AuthScreen(),
-      ),
-    );
-    await tester.pumpAndSettle();
-    expect(find.text('WGER'), findsOneWidget);
+      Consumer<AuthProvider>(
+        builder: (ctx, auth, _) => MaterialApp(
+              builder: (ctx, authResultSnapshot) => AuthScreen(),
+            ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('WGER'), findsOneWidget);
 
-    // Verify that the correct buttons and input fields are shown: login
-    expect(find.text('REGISTER INSTEAD'), findsOneWidget);
-    expect(find.text('LOGIN INSTEAD'), findsNothing);
+      // Verify that the correct buttons and input fields are shown: login
+      expect(find.text('REGISTER INSTEAD'), findsOneWidget);
+      expect(find.text('LOGIN INSTEAD'), findsNothing);
 
-    // Check that the correct widgets are shown
-    expect(find.byKey(const Key('inputUsername')), findsOneWidget);
-    expect(find.byKey(const Key('inputEmail')), findsNothing);
-    expect(find.byKey(const Key('inputPassword')), findsOneWidget);
-    expect(find.byKey(const Key('inputServer')), findsNothing);
-    expect(find.byKey(const Key('inputPassword2')), findsNothing);
-    expect(find.byKey(const Key('actionButton')), findsOneWidget);
-    expect(find.byKey(const Key('toggleActionButton')), findsOneWidget);
-    expect(find.byKey(const Key('toggleCustomServerButton')), findsOneWidget);
-  }, skip: true); // TODO(x): skipped because of technical problems:
+      // Check that the correct widgets are shown
+      expect(find.byKey(const Key('inputUsername')), findsOneWidget);
+      expect(find.byKey(const Key('inputEmail')), findsNothing);
+      expect(find.byKey(const Key('inputPassword')), findsOneWidget);
+      expect(find.byKey(const Key('inputServer')), findsNothing);
+      expect(find.byKey(const Key('inputPassword2')), findsNothing);
+      expect(find.byKey(const Key('actionButton')), findsOneWidget);
+      expect(find.byKey(const Key('toggleActionButton')), findsOneWidget);
+      expect(find.byKey(const Key('toggleCustomServerButton')), findsOneWidget);
+    },
+    skip: true,
+  ); // TODO(x): skipped because of technical problems:
   // either the provider wasn't found or, if the call was removed, the
   // localization data could not be loaded...
 
-  testWidgets('Test the widgets on the auth screen, registration',
-      (WidgetTester tester) async {
-    // Wrap screen in material app so that the media query gets a context
-    await tester.pumpWidget(MaterialApp(home: AuthScreen()));
-    await tester.tap(find.byKey(const Key('toggleActionButton')));
+  testWidgets(
+    'Test the widgets on the auth screen, registration',
+    (WidgetTester tester) async {
+      // Wrap screen in material app so that the media query gets a context
+      await tester.pumpWidget(MaterialApp(home: AuthScreen()));
+      await tester.tap(find.byKey(const Key('toggleActionButton')));
 
-    // Rebuild the widget after the state has changed.
-    await tester.pump();
-    expect(find.text('REGISTER INSTEAD'), findsNothing);
-    expect(find.text('LOGIN INSTEAD'), findsOneWidget);
+      // Rebuild the widget after the state has changed.
+      await tester.pump();
+      expect(find.text('REGISTER INSTEAD'), findsNothing);
+      expect(find.text('LOGIN INSTEAD'), findsOneWidget);
 
-    // Check that the correct widgets are shown
-    expect(find.byKey(const Key('inputUsername')), findsOneWidget);
-    expect(find.byKey(const Key('inputEmail')), findsOneWidget);
-    expect(find.byKey(const Key('inputPassword')), findsOneWidget);
-    expect(find.byKey(const Key('inputServer')), findsOneWidget);
-    expect(find.byKey(const Key('inputPassword2')), findsOneWidget);
-    expect(find.byKey(const Key('actionButton')), findsOneWidget);
-    expect(find.byKey(const Key('toggleActionButton')), findsOneWidget);
-  }, skip: true);
+      // Check that the correct widgets are shown
+      expect(find.byKey(const Key('inputUsername')), findsOneWidget);
+      expect(find.byKey(const Key('inputEmail')), findsOneWidget);
+      expect(find.byKey(const Key('inputPassword')), findsOneWidget);
+      expect(find.byKey(const Key('inputServer')), findsOneWidget);
+      expect(find.byKey(const Key('inputPassword2')), findsOneWidget);
+      expect(find.byKey(const Key('actionButton')), findsOneWidget);
+      expect(find.byKey(const Key('toggleActionButton')), findsOneWidget);
+    },
+    skip: true,
+  );
 }

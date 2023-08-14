@@ -8,9 +8,7 @@ class TextStyles {
   }
 
   static TextStyle get onPrimarySubTitleText {
-    return TextStyle(
-      color: Colors.white,
-    );
+    return TextStyle(color: Colors.white);
   }
 
   static TextStyle get titleStyle {
@@ -23,16 +21,25 @@ class TextStyles {
 
   static TextStyle get subtitleStyle {
     return TextStyle(
-        color: AppColor.darkGrey, fontSize: 14, fontWeight: FontWeight.bold);
+      color: AppColor.darkGrey,
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    );
   }
 
   static TextStyle get userNameStyle {
     return TextStyle(
-        color: AppColor.darkGrey, fontSize: 14, fontWeight: FontWeight.bold);
+      color: AppColor.darkGrey,
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    );
   }
 
   static TextStyle get textStyle14 {
     return TextStyle(
-        color: AppColor.darkGrey, fontSize: 14, fontWeight: FontWeight.bold);
+      color: AppColor.darkGrey,
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    );
   }
 }

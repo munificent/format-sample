@@ -15,10 +15,7 @@ class AccountSettingsPage extends StatelessWidget {
     var user = Provider.of<AuthState>(context).userModel ?? UserModel();
     return Scaffold(
       backgroundColor: TwitterColor.white,
-      appBar: SettingsAppBar(
-        title: 'Account',
-        subtitle: user?.userName,
-      ),
+      appBar: SettingsAppBar(title: 'Account', subtitle: user?.userName),
       body: ListView(
         children: <Widget>[
           HeaderWidget('Login and security'),
@@ -28,10 +25,7 @@ class AccountSettingsPage extends StatelessWidget {
             // navigateTo: 'AccountSettingsPage',
           ),
           Divider(height: 0),
-          SettingRowWidget(
-            "Phone",
-            subtitle: user?.contact,
-          ),
+          SettingRowWidget("Phone", subtitle: user?.contact),
           SettingRowWidget(
             "Email address",
             subtitle: user?.email,
@@ -39,10 +33,7 @@ class AccountSettingsPage extends StatelessWidget {
           ),
           SettingRowWidget("Password"),
           SettingRowWidget("Security"),
-          HeaderWidget(
-            'Data and Permission',
-            secondHeader: true,
-          ),
+          HeaderWidget('Data and Permission', secondHeader: true),
           SettingRowWidget("Country"),
           SettingRowWidget("Your Fwitter data"),
           SettingRowWidget("Apps and sessions"),

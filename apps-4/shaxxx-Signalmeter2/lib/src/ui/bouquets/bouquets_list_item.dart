@@ -13,8 +13,8 @@ class BouquetsListItem extends StatelessWidget {
   const BouquetsListItem({
     Key key,
     @required this.bouquet,
-  })  : assert(bouquet != null),
-        super(key: key);
+  }) : assert(bouquet != null),
+       super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +33,7 @@ class BouquetsListItem extends StatelessWidget {
                   margin:
                       EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      const Radius.circular(10.0),
-                    ),
+                    borderRadius: BorderRadius.all(const Radius.circular(10.0)),
                     color: viewModel.selected
                         ? theme.accentColor.withOpacity(0.3)
                         : theme.primaryColor.withOpacity(0.3),

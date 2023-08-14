@@ -15,27 +15,24 @@ class _CustomFilterSheetState extends State<CustomFilterSheet> {
     var provider = Provider.of<AppProvider>(context);
     return ListView(
       shrinkWrap: true,
-      children: List<Widget>.generate(
-        3,
-        (index) {
-          return RadioListTile(
-            value: index,
-            groupValue: provider.transactionIndex,
-            onChanged: (index) {
-              provider.setTransactionIndex(index);
-              Navigator.pop(context);
-            },
-            title: Text(
-              titleType[index],
-              style: TextStyle(
-                fontWeight: index == provider.transactionIndex
-                    ? FontWeight.w400
-                    : FontWeight.w300,
-              ),
+      children: List<Widget>.generate(3, (index) {
+        return RadioListTile(
+          value: index,
+          groupValue: provider.transactionIndex,
+          onChanged: (index) {
+            provider.setTransactionIndex(index);
+            Navigator.pop(context);
+          },
+          title: Text(
+            titleType[index],
+            style: TextStyle(
+              fontWeight: index == provider.transactionIndex
+                  ? FontWeight.w400
+                  : FontWeight.w300,
             ),
-          );
-        },
-      ),
+          ),
+        );
+      }),
     );
   }
 }

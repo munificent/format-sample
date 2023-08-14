@@ -25,12 +25,9 @@ class _WelcomePageState extends State<WelcomePage> {
         label: "Create Account",
         onPressed: () {
           var state = Provider.of<AuthState>(context, listen: false);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Signup(loginCallback: state.getCurrentUser),
-            ),
-          );
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => Signup(loginCallback: state.getCurrentUser),
+          ));
         },
         borderRadius: 30,
       ),
@@ -40,9 +37,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _body() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 40,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -56,9 +51,7 @@ class _WelcomePageState extends State<WelcomePage> {
               'See what\'s happening in the world right now.',
               fontSize: 25,
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             _submitButton(),
             Spacer(),
             Wrap(
@@ -73,13 +66,11 @@ class _WelcomePageState extends State<WelcomePage> {
                 InkWell(
                   onTap: () {
                     var state = Provider.of<AuthState>(context, listen: false);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SignIn(loginCallback: state.getCurrentUser),
-                      ),
-                    );
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => SignIn(
+                            loginCallback: state.getCurrentUser,
+                          ),
+                    ));
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 2, vertical: 10),
@@ -90,10 +81,10 @@ class _WelcomePageState extends State<WelcomePage> {
                       fontWeight: FontWeight.w300,
                     ),
                   ),
-                )
+                ),
               ],
             ),
-            SizedBox(height: 20)
+            SizedBox(height: 20),
           ],
         ),
       ),

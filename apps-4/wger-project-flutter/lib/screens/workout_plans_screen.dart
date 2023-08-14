@@ -33,9 +33,7 @@ class WorkoutPlansScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WgerAppBar(
-        AppLocalizations.of(context).labelWorkoutPlans,
-      ),
+      appBar: WgerAppBar(AppLocalizations.of(context).labelWorkoutPlans),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
@@ -50,8 +48,9 @@ class WorkoutPlansScreen extends StatelessWidget {
         },
       ),
       body: Consumer<WorkoutPlansProvider>(
-        builder: (context, workoutProvider, child) =>
-            WorkoutPlansList(workoutProvider),
+        builder: (context, workoutProvider, child) => WorkoutPlansList(
+              workoutProvider,
+            ),
       ),
     );
   }

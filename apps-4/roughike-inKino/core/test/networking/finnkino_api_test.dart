@@ -13,10 +13,7 @@ import '../parsers/show_test_seeds.ignore.dart';
 void main() {
   group('FinnkinoApi', () {
     final date = DateTime(2018);
-    final theater = Theater(
-      id: 'abc123',
-      name: 'Test theater',
-    );
+    final theater = Theater(id: 'abc123', name: 'Test theater');
 
     List<Request> requestLog = [];
 

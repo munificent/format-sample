@@ -20,7 +20,8 @@ class CustomLinkMediaInfo extends StatelessWidget {
       return null;
     }
     RegExp reg = RegExp(
-        r"(https?|http)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]*");
+      r"(https?|http)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]*",
+    );
     Iterable<Match> _matches = reg.allMatches(text);
     if (_matches.isNotEmpty) {
       return _matches.first.group(0);
@@ -30,7 +31,8 @@ class CustomLinkMediaInfo extends StatelessWidget {
   }
 
   Future<Either<Exception, LinkMediaInfo>> fetchLinkMediaInfoFromApi(
-      String url) async {
+    String url,
+  ) async {
     try {
       var response = await http.Client()
           .get(Uri.tryParse("https://noembed.com/embed?url=" + url))
@@ -79,9 +81,7 @@ class CustomLinkMediaInfo extends StatelessWidget {
     /// `LinkPreview` uses [flutter_link_preview] package to fetch url metadata.
     /// It is seen that `flutter_link_preview` package is unable to fetch youtube metadata
     if (!uri.contains("youtu")) {
-      return LinkPreview(
-        url: uri,
-      );
+      return LinkPreview(url: uri);
     }
 
     /// Youtube thumbnail preview builder
@@ -148,28 +148,26 @@ class CustomLinkMediaInfo extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Expanded(
-                                    child: Text(
-                                  Uri.tryParse(model.providerUrl).authority,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyles.subtitleStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
+                                  child: Text(
+                                    Uri.tryParse(model.providerUrl).authority,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyles.subtitleStyle.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ))
+                                ),
                               ],
-                            )
+                            ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
-              ).ripple(
-                () {
-                  Utility.launchURL(uri);
-                },
-                borderRadius: BorderRadius.circular(10),
-              ),
+              ).ripple(() {
+                Utility.launchURL(uri);
+              }, borderRadius: BorderRadius.circular(10)),
             ),
           );
         }
