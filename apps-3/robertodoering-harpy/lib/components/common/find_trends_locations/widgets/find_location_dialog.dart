@@ -66,12 +66,10 @@ class _FindLocationDialogState extends State<FindLocationDialog> {
 
     tabController.animateTo(2);
 
-    bloc.add(
-      FindTrendsLocationsEvent.search(
-        latitude: _latitude!,
-        longitude: _longitude!,
-      ),
-    );
+    bloc.add(FindTrendsLocationsEvent.search(
+      latitude: _latitude!,
+      longitude: _longitude!,
+    ));
   }
 
   void _onFormChanged() {
@@ -101,8 +99,9 @@ class _FindLocationDialogState extends State<FindLocationDialog> {
           onFormChanged: _onFormChanged,
           onLatitudeChanged: (latitude) => _latitude = latitude,
           onLongitudeChanged: (longitude) => _longitude = longitude,
-          onConfirm:
-              _enableConfirm ? () => _onConfirm(bloc, tabController) : null,
+          onConfirm: _enableConfirm
+              ? () => _onConfirm(bloc, tabController)
+              : null,
         ),
         const FoundLocationsContent(),
       ],

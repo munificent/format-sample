@@ -138,9 +138,7 @@ void main() {
         activity: [successActivity],
       );
       final expectedTaskStates = [
-        TrackingTaskState.loading(
-          trackingInfoList: [init],
-        ),
+        TrackingTaskState.loading(trackingInfoList: [init]),
         TrackingTaskState.loaded(
           result: [expectedResult],
           trackingInfoList: [complete],
@@ -150,32 +148,24 @@ void main() {
         ),
       ];
 
+      when(() => mockTrackingRepo.insertTrackingInfoList(any())).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
       when(
-        () => mockTrackingRepo.insertTrackingInfoList(any()),
+        () => mockTrackNumberRepo.deleteTrackNumberServices([trackServices[1]]),
       ).thenAnswer((_) async => StorageResult.empty);
       when(
-        () => mockTrackNumberRepo.deleteTrackNumberServices(
-          [trackServices[1]],
-        ),
+        () => mockTrackNumberRepo
+            .updateTrackNumberServices([expectedDisabledService]),
       ).thenAnswer((_) async => StorageResult.empty);
+      when(() => mockTrackingRepo.addResponseList(any())).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
       when(
-        () => mockTrackNumberRepo.updateTrackNumberServices(
-          [expectedDisabledService],
-        ),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackingRepo.addResponseList(any()),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackingRepo.getTrackingInfoByTrack(
-          any(),
-          oldestFirst: true,
-        ),
+        () => mockTrackingRepo.getTrackingInfoByTrack(any(), oldestFirst: true),
       ).thenAnswer((_) async => const StorageResult([]));
       when(
-        () => mockShipmentRepo.replaceShipmentInfoByTrack(
-          successShipmentInfo,
-        ),
+        () => mockShipmentRepo.replaceShipmentInfoByTrack(successShipmentInfo),
       ).thenAnswer((_) async => const StorageResult(1));
       when(
         () => mockShipmentRepo.replaceActivitiesByTrack(
@@ -185,19 +175,20 @@ void main() {
       ).thenAnswer((_) async => StorageResult.empty);
 
       when(() => mockPref.trackingHistorySize).thenReturn(5);
-      when(() => mockPlatformInfo.currentAsLocale)
-          .thenAnswer((_) async => const Locale('en', 'US'));
-
-      when(() => mockTask.run(
-            Set.from(trackServices),
-            params: any(named: 'params'),
-          )).thenAnswer(
-        (_) async* {
-          for (final state in expectedTaskStates) {
-            yield state;
-          }
-        },
+      when(() => mockPlatformInfo.currentAsLocale).thenAnswer(
+        (_) async => const Locale('en', 'US'),
       );
+
+      when(
+        () => mockTask.run(
+          Set.from(trackServices),
+          params: any(named: 'params'),
+        ),
+      ).thenAnswer((_) async* {
+        for (final state in expectedTaskStates) {
+          yield state;
+        }
+      });
 
       when(
         () => mockNotifyTask.show(
@@ -209,9 +200,7 @@ void main() {
       when(() => mockPref.locale).thenReturn(const AppLocaleType.system());
 
       for (final trackInfo in trackList) {
-        when(
-          () => mockLimiter.check(trackInfo.trackNumber),
-        ).thenAnswer(
+        when(() => mockLimiter.check(trackInfo.trackNumber)).thenAnswer(
           (_) async => TrackingLimiterState.allowed(
             trackNumber: trackInfo.trackNumber,
           ),
@@ -219,43 +208,28 @@ void main() {
       }
 
       final inputData = WorkData({
-        TrackingWorker.tagTrackNumberServiceList: trackServices
-            .map(
-              (info) => jsonEncode(info.toJson()),
-            )
-            .toList(),
+        TrackingWorker.tagTrackNumberServiceList:
+            trackServices.map((info) => jsonEncode(info.toJson())).toList(),
       });
       expect(await worker.doWork(inputData), const WorkResult.success());
 
+      verify(() => mockTrackingRepo.insertTrackingInfoList([init])).called(1);
+      verify(() => mockTrackingRepo.insertTrackingInfoList([complete])).called(
+        1,
+      );
       verify(
-        () => mockTrackingRepo.insertTrackingInfoList([init]),
+        () => mockTrackNumberRepo.deleteTrackNumberServices([trackServices[1]]),
       ).called(1);
       verify(
-        () => mockTrackingRepo.insertTrackingInfoList([complete]),
+        () => mockTrackNumberRepo
+            .updateTrackNumberServices([expectedDisabledService]),
+      ).called(1);
+      verify(() => mockTrackingRepo.addResponseList([success])).called(1);
+      verify(
+        () => mockTrackingRepo.getTrackingInfoByTrack(any(), oldestFirst: true),
       ).called(1);
       verify(
-        () => mockTrackNumberRepo.deleteTrackNumberServices(
-          [trackServices[1]],
-        ),
-      ).called(1);
-      verify(
-        () => mockTrackNumberRepo.updateTrackNumberServices(
-          [expectedDisabledService],
-        ),
-      ).called(1);
-      verify(
-        () => mockTrackingRepo.addResponseList([success]),
-      ).called(1);
-      verify(
-        () => mockTrackingRepo.getTrackingInfoByTrack(
-          any(),
-          oldestFirst: true,
-        ),
-      ).called(1);
-      verify(
-        () => mockShipmentRepo.replaceShipmentInfoByTrack(
-          successShipmentInfo,
-        ),
+        () => mockShipmentRepo.replaceShipmentInfoByTrack(successShipmentInfo),
       ).called(1);
       verify(
         () => mockShipmentRepo.replaceActivitiesByTrack(
@@ -318,9 +292,7 @@ void main() {
         activity: [activity],
       );
       final expectedTaskStates = [
-        TrackingTaskState.loading(
-          trackingInfoList: [init],
-        ),
+        TrackingTaskState.loading(trackingInfoList: [init]),
         TrackingTaskState.loaded(
           result: [expectedResult],
           trackingInfoList: [complete],
@@ -330,54 +302,45 @@ void main() {
         ),
       ];
 
+      when(() => mockTrackingRepo.insertTrackingInfoList(any())).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
+      when(() => mockTrackNumberRepo.deleteTrackNumberServices([])).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
       when(
-        () => mockTrackingRepo.insertTrackingInfoList(any()),
+        () => mockTrackNumberRepo
+            .updateTrackNumberServices([expectedDisabledService]),
       ).thenAnswer((_) async => StorageResult.empty);
+      when(() => mockTrackingRepo.addResponseList(any())).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
       when(
-        () => mockTrackNumberRepo.deleteTrackNumberServices([]),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackNumberRepo.updateTrackNumberServices(
-          [expectedDisabledService],
-        ),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackingRepo.addResponseList(any()),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackingRepo.getTrackingInfoByTrack(
-          any(),
-          oldestFirst: true,
-        ),
+        () => mockTrackingRepo.getTrackingInfoByTrack(any(), oldestFirst: true),
       ).thenAnswer((_) async => const StorageResult([]));
+      when(() => mockShipmentRepo.replaceShipmentInfoByTrack(shipmentInfo))
+          .thenAnswer((_) async => const StorageResult(1));
       when(
-        () => mockShipmentRepo.replaceShipmentInfoByTrack(
-          shipmentInfo,
-        ),
-      ).thenAnswer((_) async => const StorageResult(1));
-      when(
-        () => mockShipmentRepo.replaceActivitiesByTrack(
-          trackNumberInfo.trackNumber,
-          [activity],
-        ),
+        () => mockShipmentRepo
+            .replaceActivitiesByTrack(trackNumberInfo.trackNumber, [activity]),
       ).thenAnswer((_) async => StorageResult.empty);
 
       when(() => mockPref.trackingHistorySize).thenReturn(5);
 
-      when(() => mockPlatformInfo.currentAsLocale)
-          .thenAnswer((_) async => null);
+      when(() => mockPlatformInfo.currentAsLocale).thenAnswer(
+        (_) async => null,
+      );
 
       const locale = Locale('ru', 'RU');
-      when(() => mockTask.run(
-            {trackService},
-            params: const TrackingTaskParams(locale: locale),
-          )).thenAnswer(
-        (_) async* {
-          for (final state in expectedTaskStates) {
-            yield state;
-          }
-        },
-      );
+      when(
+        () => mockTask.run({
+          trackService,
+        }, params: const TrackingTaskParams(locale: locale)),
+      ).thenAnswer((_) async* {
+        for (final state in expectedTaskStates) {
+          yield state;
+        }
+      });
 
       when(
         () => mockNotifyTask.show(
@@ -387,14 +350,10 @@ void main() {
       ).thenAnswer((_) async => {});
 
       when(() => mockPref.locale).thenReturn(
-        const AppLocaleType.inner(
-          locale: locale,
-        ),
+        const AppLocaleType.inner(locale: locale),
       );
 
-      when(
-        () => mockLimiter.check(trackNumberInfo.trackNumber),
-      ).thenAnswer(
+      when(() => mockLimiter.check(trackNumberInfo.trackNumber)).thenAnswer(
         (_) async => TrackingLimiterState.allowed(
           trackNumber: trackNumberInfo.trackNumber,
         ),
@@ -470,9 +429,7 @@ void main() {
         activity: [successActivity],
       );
       final expectedTaskStates = [
-        TrackingTaskState.loading(
-          trackingInfoList: [init],
-        ),
+        TrackingTaskState.loading(trackingInfoList: [init]),
         TrackingTaskState.loaded(
           result: [expectedResult],
           trackingInfoList: [complete],
@@ -482,28 +439,23 @@ void main() {
         ),
       ];
 
+      when(() => mockTrackingRepo.insertTrackingInfoList(any())).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
+      when(() => mockTrackNumberRepo.deleteTrackNumberServices([])).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
+      when(() => mockTrackNumberRepo.updateTrackNumberServices([])).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
+      when(() => mockTrackingRepo.addResponseList(any())).thenAnswer(
+        (_) async => StorageResult.empty,
+      );
       when(
-        () => mockTrackingRepo.insertTrackingInfoList(any()),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackNumberRepo.deleteTrackNumberServices([]),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackNumberRepo.updateTrackNumberServices([]),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackingRepo.addResponseList(any()),
-      ).thenAnswer((_) async => StorageResult.empty);
-      when(
-        () => mockTrackingRepo.getTrackingInfoByTrack(
-          any(),
-          oldestFirst: true,
-        ),
+        () => mockTrackingRepo.getTrackingInfoByTrack(any(), oldestFirst: true),
       ).thenAnswer((_) async => const StorageResult([]));
       when(
-        () => mockShipmentRepo.replaceShipmentInfoByTrack(
-          successShipmentInfo,
-        ),
+        () => mockShipmentRepo.replaceShipmentInfoByTrack(successShipmentInfo),
       ).thenAnswer((_) async => const StorageResult(1));
       when(
         () => mockShipmentRepo.replaceActivitiesByTrack(
@@ -514,19 +466,16 @@ void main() {
 
       when(() => mockPref.trackingHistorySize).thenReturn(5);
 
-      when(() => mockPlatformInfo.currentAsLocale)
-          .thenAnswer((_) async => const Locale('en', 'US'));
-
-      when(() => mockTask.run(
-            {trackServices[0]},
-            params: any(named: 'params'),
-          )).thenAnswer(
-        (_) async* {
-          for (final state in expectedTaskStates) {
-            yield state;
-          }
-        },
+      when(() => mockPlatformInfo.currentAsLocale).thenAnswer(
+        (_) async => const Locale('en', 'US'),
       );
+
+      when(() => mockTask.run({trackServices[0]}, params: any(named: 'params')))
+          .thenAnswer((_) async* {
+            for (final state in expectedTaskStates) {
+              yield state;
+            }
+          });
 
       when(
         () => mockNotifyTask.show(
@@ -537,24 +486,18 @@ void main() {
 
       when(() => mockPref.locale).thenReturn(const AppLocaleType.system());
 
-      when(
-        () => mockLimiter.check(trackList[0].trackNumber),
-      ).thenAnswer(
+      when(() => mockLimiter.check(trackList[0].trackNumber)).thenAnswer(
         (_) async => TrackingLimiterState.allowed(
           trackNumber: trackList[0].trackNumber,
         ),
       );
-      when(
-        () => mockLimiter.check(trackList[1].trackNumber),
-      ).thenAnswer(
+      when(() => mockLimiter.check(trackList[1].trackNumber)).thenAnswer(
         (_) async => TrackingLimiterState.dissalowed(
           trackNumber: trackList[1].trackNumber,
           remainingTime: const Duration(minutes: 5),
         ),
       );
-      when(
-        () => mockLimiter.check(trackList[2].trackNumber),
-      ).thenAnswer(
+      when(() => mockLimiter.check(trackList[2].trackNumber)).thenAnswer(
         (_) async => TrackingLimiterState.dissalowed(
           trackNumber: trackList[2].trackNumber,
           remainingTime: const Duration(minutes: 10),
@@ -562,11 +505,8 @@ void main() {
       );
 
       final inputData = WorkData({
-        TrackingWorker.tagTrackNumberServiceList: trackServices
-            .map(
-              (info) => jsonEncode(info.toJson()),
-            )
-            .toList(),
+        TrackingWorker.tagTrackNumberServiceList:
+            trackServices.map((info) => jsonEncode(info.toJson())).toList(),
       });
       expect(await worker.doWork(inputData), const WorkResult.success());
     });
@@ -577,19 +517,17 @@ void main() {
         trackNumber: trackNumberInfo.trackNumber,
         serviceType: PostalServiceType.ups,
       );
-      final oldTrackingInfoList = range(4)
-          .map(
-            (i) => TrackingInfo(
-              id: TrackingId('$i'),
-              trackNumber: trackNumberInfo.trackNumber,
-              dateTime: DateTime.now(),
-              status: TrackingStatus.complete,
-              hasNewInfo: false,
-              hasNonRetryableError: false,
-              invalidTrackNumber: false,
-            ),
-          )
-          .toList();
+      final oldTrackingInfoList = range(4).map(
+        (i) => TrackingInfo(
+          id: TrackingId('$i'),
+          trackNumber: trackNumberInfo.trackNumber,
+          dateTime: DateTime.now(),
+          status: TrackingStatus.complete,
+          hasNewInfo: false,
+          hasNonRetryableError: false,
+          invalidTrackNumber: false,
+        ),
+      ).toList();
       final initTrackingInfo = TrackingInfo(
         id: const TrackingId('5'),
         trackNumber: trackNumberInfo.trackNumber,
@@ -604,9 +542,7 @@ void main() {
       );
       final allTrackingInfo = [...oldTrackingInfoList, trackingInfo];
       final expectedTaskStates = [
-        TrackingTaskState.loading(
-          trackingInfoList: [initTrackingInfo],
-        ),
+        TrackingTaskState.loading(trackingInfoList: [initTrackingInfo]),
         TrackingTaskState.loaded(
           result: [],
           trackingInfoList: [trackingInfo],
@@ -620,40 +556,33 @@ void main() {
       });
 
       setUpAll(() {
-        when(
-          () => mockTrackingRepo.insertTrackingInfoList(any()),
-        ).thenAnswer((_) async => StorageResult.empty);
+        when(() => mockTrackingRepo.insertTrackingInfoList(any())).thenAnswer(
+          (_) async => StorageResult.empty,
+        );
         when(
           () => mockTrackingRepo.getTrackingInfoByTrack(
             trackNumberInfo.trackNumber,
             oldestFirst: true,
           ),
         ).thenAnswer((_) async => StorageResult(allTrackingInfo));
-        when(
-          () => mockTrackNumberRepo.deleteTrackNumberServices([]),
-        ).thenAnswer((_) async => StorageResult.empty);
-        when(
-          () => mockTrackNumberRepo.updateTrackNumberServices([]),
-        ).thenAnswer((_) async => StorageResult.empty);
-        when(
-          () => mockTrackingRepo.addResponseList([]),
-        ).thenAnswer((_) async => StorageResult.empty);
-        when(
-          () => mockPlatformInfo.currentAsLocale,
-        ).thenAnswer((_) async => const Locale('en', 'US'));
-        when(
-          () => mockTask.run({trackService}, params: any(named: 'params')),
-        ).thenAnswer(
-          (_) async* {
-            for (final state in expectedTaskStates) {
-              yield state;
-            }
-          },
+        when(() => mockTrackNumberRepo.deleteTrackNumberServices([]))
+            .thenAnswer((_) async => StorageResult.empty);
+        when(() => mockTrackNumberRepo.updateTrackNumberServices([]))
+            .thenAnswer((_) async => StorageResult.empty);
+        when(() => mockTrackingRepo.addResponseList([])).thenAnswer(
+          (_) async => StorageResult.empty,
         );
+        when(() => mockPlatformInfo.currentAsLocale).thenAnswer(
+          (_) async => const Locale('en', 'US'),
+        );
+        when(() => mockTask.run({trackService}, params: any(named: 'params')))
+            .thenAnswer((_) async* {
+              for (final state in expectedTaskStates) {
+                yield state;
+              }
+            });
         when(() => mockPref.locale).thenReturn(const AppLocaleType.system());
-        when(
-          () => mockLimiter.check(trackNumberInfo.trackNumber),
-        ).thenAnswer(
+        when(() => mockLimiter.check(trackNumberInfo.trackNumber)).thenAnswer(
           (_) async => TrackingLimiterState.allowed(
             trackNumber: trackNumberInfo.trackNumber,
           ),
@@ -667,37 +596,27 @@ void main() {
       });
 
       test('Normal case', () async {
+        when(() => mockPref.trackingHistorySize).thenReturn(
+          allTrackingInfo.length - 1,
+        );
         when(
-          () => mockPref.trackingHistorySize,
-        ).thenReturn(allTrackingInfo.length - 1);
-        when(
-          () => mockTrackingRepo.deleteTrackingInfoByList(
-            [allTrackingInfo[0]],
-          ),
+          () => mockTrackingRepo.deleteTrackingInfoByList([allTrackingInfo[0]]),
         ).thenAnswer((_) async => StorageResult.empty);
 
         expect(await worker.doWork(inputData), const WorkResult.success());
         verify(
-          () => mockTrackingRepo.deleteTrackingInfoByList(
-            [allTrackingInfo[0]],
-          ),
+          () => mockTrackingRepo.deleteTrackingInfoByList([allTrackingInfo[0]]),
         ).called(1);
       });
 
       test('History size == 0', () async {
         when(() => mockPref.trackingHistorySize).thenReturn(0);
-        when(
-          () => mockTrackingRepo.deleteTrackingInfoByList(
-            allTrackingInfo,
-          ),
-        ).thenAnswer((_) async => StorageResult.empty);
+        when(() => mockTrackingRepo.deleteTrackingInfoByList(allTrackingInfo))
+            .thenAnswer((_) async => StorageResult.empty);
 
         expect(await worker.doWork(inputData), const WorkResult.success());
-        verify(
-          () => mockTrackingRepo.deleteTrackingInfoByList(
-            allTrackingInfo,
-          ),
-        ).called(1);
+        verify(() => mockTrackingRepo.deleteTrackingInfoByList(allTrackingInfo))
+            .called(1);
       });
 
       test('History size is negative', () async {
@@ -715,9 +634,7 @@ void main() {
         );
         final allTrackingInfo = [...oldTrackingInfoList, trackingInfo];
         final expectedTaskStates = [
-          TrackingTaskState.loading(
-            trackingInfoList: [initTrackingInfo],
-          ),
+          TrackingTaskState.loading(trackingInfoList: [initTrackingInfo]),
           TrackingTaskState.loaded(
             result: [],
             trackingInfoList: [trackingInfo],
@@ -730,15 +647,12 @@ void main() {
             oldestFirst: true,
           ),
         ).thenAnswer((_) async => StorageResult(allTrackingInfo));
-        when(
-          () => mockTask.run({trackService}, params: any(named: 'params')),
-        ).thenAnswer(
-          (_) async* {
-            for (final state in expectedTaskStates) {
-              yield state;
-            }
-          },
-        );
+        when(() => mockTask.run({trackService}, params: any(named: 'params')))
+            .thenAnswer((_) async* {
+              for (final state in expectedTaskStates) {
+                yield state;
+              }
+            });
         when(
           () => mockNotifyTask.show(
             trackingInfo: [trackingInfo],
@@ -747,28 +661,24 @@ void main() {
         ).thenAnswer((_) async => {});
 
         when(() => mockPref.trackingHistorySize).thenReturn(0);
-        when(
-          () => mockTrackingRepo.deleteTrackingInfoByList([]),
-        ).thenAnswer((_) async => StorageResult.empty);
+        when(() => mockTrackingRepo.deleteTrackingInfoByList([])).thenAnswer(
+          (_) async => StorageResult.empty,
+        );
 
         expect(await worker.doWork(inputData), const WorkResult.success());
-        verify(
-          () => mockTrackingRepo.deleteTrackingInfoByList([]),
-        ).called(1);
+        verify(() => mockTrackingRepo.deleteTrackingInfoByList([])).called(1);
       });
 
       test('History size less than the maximum value', () async {
-        when(
-          () => mockPref.trackingHistorySize,
-        ).thenReturn(allTrackingInfo.length + 1);
-        when(
-          () => mockTrackingRepo.deleteTrackingInfoByList([]),
-        ).thenAnswer((_) async => StorageResult.empty);
+        when(() => mockPref.trackingHistorySize).thenReturn(
+          allTrackingInfo.length + 1,
+        );
+        when(() => mockTrackingRepo.deleteTrackingInfoByList([])).thenAnswer(
+          (_) async => StorageResult.empty,
+        );
 
         expect(await worker.doWork(inputData), const WorkResult.success());
-        verify(
-          () => mockTrackingRepo.deleteTrackingInfoByList([]),
-        ).called(1);
+        verify(() => mockTrackingRepo.deleteTrackingInfoByList([])).called(1);
       });
     });
   });

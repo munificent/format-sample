@@ -31,11 +31,14 @@ class ChatMessageListItem extends StatelessWidget {
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            new Text(messageSnapshot.value['senderName'],
-                style: new TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold)),
+            new Text(
+              messageSnapshot.value['senderName'],
+              style: new TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             new Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null
@@ -52,11 +55,12 @@ class ChatMessageListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           new Container(
-              margin: const EdgeInsets.only(left: 8.0),
-              child: new CircleAvatar(
-                backgroundImage:
-                    new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
-              )),
+            margin: const EdgeInsets.only(left: 8.0),
+            child: new CircleAvatar(
+              backgroundImage:
+                  new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
+            ),
+          ),
         ],
       ),
     ];
@@ -68,22 +72,26 @@ class ChatMessageListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Container(
-              margin: const EdgeInsets.only(right: 8.0),
-              child: new CircleAvatar(
-                backgroundImage:
-                    new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
-              )),
+            margin: const EdgeInsets.only(right: 8.0),
+            child: new CircleAvatar(
+              backgroundImage:
+                  new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
+            ),
+          ),
         ],
       ),
       new Expanded(
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Text(messageSnapshot.value['senderName'],
-                style: new TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold)),
+            new Text(
+              messageSnapshot.value['senderName'],
+              style: new TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             new Container(
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null

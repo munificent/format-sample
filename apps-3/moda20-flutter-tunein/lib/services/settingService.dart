@@ -31,7 +31,7 @@ class settingService {
   BehaviorSubject<Map<SettingsIds, String>> _settings$;
 
   List<MapEntry<SettingsIds, BehaviorSubject<String>>>
-      activeSingleSettingListeners = List();
+  activeSingleSettingListeners = List();
   Map<SettingsIds, String> activeSingleSettingOldValues = Map();
   BehaviorSubject<Map<SettingsIds, String>> get settings$ => _settings$;
 
@@ -67,9 +67,12 @@ class settingService {
   }
 
   MapEntry<SettingsIds, BehaviorSubject<String>> addSinglSettingStream(
-      SettingsIds setting) {
-    MapEntry<SettingsIds, BehaviorSubject<String>> newStream =
-        MapEntry(setting, new BehaviorSubject<String>.seeded(null));
+    SettingsIds setting,
+  ) {
+    MapEntry<SettingsIds, BehaviorSubject<String>> newStream = MapEntry(
+      setting,
+      new BehaviorSubject<String>.seeded(null),
+    );
     activeSingleSettingListeners.add(newStream);
     return newStream;
   }
@@ -79,18 +82,21 @@ class settingService {
         .where((element) => element.key == setting)
         .toList()
         .forEach((activeListener) {
-      !activeListener.value.isClosed ? activeListener.value.close() : null;
-    });
-    activeSingleSettingListeners
-        .removeWhere((element) => element.key == setting);
+          !activeListener.value.isClosed ? activeListener.value.close() : null;
+        });
+    activeSingleSettingListeners.removeWhere(
+      (element) => element.key == setting,
+    );
   }
 
   BehaviorSubject<String> getOrCreateSingleSettingStream(SettingsIds setting) {
     MapEntry<SettingsIds, BehaviorSubject<String>> existingStream =
-        activeSingleSettingListeners
-            .firstWhere((element) => element.key == setting, orElse: () {
-      return null;
-    });
+        activeSingleSettingListeners.firstWhere(
+          (element) => element.key == setting,
+          orElse: () {
+            return null;
+          },
+        );
     if (existingStream != null &&
         existingStream.value != null &&
         !existingStream.value.isClosed) {
@@ -101,7 +107,8 @@ class settingService {
   }
 
   BehaviorSubject<Map<SettingsIds, String>> createSettingStreamOfASettingId(
-      SettingsIds setting) {
+    SettingsIds setting,
+  ) {
     return _settings$.distinct((prev, next) {
       if (prev[setting] != next[setting]) {
         return true;
@@ -116,8 +123,9 @@ class settingService {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     try {
       SettingsIds.values.toList().forEach((setting) {
-        String storedSettingValue =
-            _prefs.getString(getEnumValue(setting).toString());
+        String storedSettingValue = _prefs.getString(
+          getEnumValue(setting).toString(),
+        );
         if (storedSettingValue == null) {
           settingsMap[setting] = getDefaultSetting(setting);
         } else {
@@ -232,13 +240,15 @@ class settingService {
   }
 
   Map<LIST_PAGE_SettingsIds, String> DeserializeUISettings(
-      String uiSettingsString) {
+    String uiSettingsString,
+  ) {
     if (uiSettingsString != null) {
       Map<String, dynamic> TempMap = json.decode(uiSettingsString);
       Map<LIST_PAGE_SettingsIds, String> finalMap = Map();
       LIST_PAGE_SettingsIds.values.forEach((element) {
-        int indexOfElementInAlbumSettingIDList =
-            TempMap.keys.toList().indexOf(getAlbumListEnumValue(element));
+        int indexOfElementInAlbumSettingIDList = TempMap.keys.toList().indexOf(
+          getAlbumListEnumValue(element),
+        );
         if (indexOfElementInAlbumSettingIDList != -1) {
           finalMap[element] = TempMap[getAlbumListEnumValue(element)];
         } else {

@@ -9,9 +9,9 @@ class ItemUI {
   ItemEntity itemEntity;
 
   ItemUI.fromEntity(ItemEntity item)
-      : name = item.name,
-        description = item.description,
-        price = item.price,
-        image = item.picture,
-        itemEntity = item;
+    : name = item.name,
+      description = item.description,
+      price = item.price,
+      image = item.picture,
+      itemEntity = item;
 }

@@ -41,19 +41,16 @@ class ChangelogParser with HarpyLogger {
       }
 
       final headerString = changelogString.substring(0, entryStart);
-      final headerLines = _cleanEmptyLines(
-        headerString.split('\n'),
-      );
+      final headerLines = _cleanEmptyLines(headerString.split('\n'));
 
       for (var i = 0; i < headerLines.length; i++) {
         final line = headerLines[i].trim();
 
         if (dateRegex.hasMatch(line)) {
           // localize date format
-          data.headerLines.add(
-            DateFormat.yMMMd(Localizations.localeOf(context!).languageCode)
-                .format(DateTime.parse(line)),
-          );
+          data.headerLines.add(DateFormat.yMMMd(
+            Localizations.localeOf(context!).languageCode,
+          ).format(DateTime.parse(line)));
         } else if (line.isNotEmpty || i != 0 || i != headerLines.length - 1) {
           // only add empty lines if they are not the first or last line
           data.headerLines.add(line);
@@ -137,9 +134,7 @@ class ChangelogParser with HarpyLogger {
 
 /// Represents the data of a changelog for one version.
 class ChangelogData {
-  ChangelogData({
-    this.versionCode,
-  });
+  ChangelogData({this.versionCode});
 
   final String? versionCode;
 
@@ -172,18 +167,10 @@ class ChangelogData {
 /// Most entries consist of a single [line] but can have multiple additional
 /// lines in [additionalInfo].
 class ChangelogEntry {
-  ChangelogEntry({
-    required this.line,
-  });
+  ChangelogEntry({required this.line});
 
   final String line;
   final List<String> additionalInfo = [];
 }
 
-enum ChangelogType {
-  addition,
-  change,
-  fix,
-  removal,
-  other,
-}
+enum ChangelogType { addition, change, fix, removal, other }

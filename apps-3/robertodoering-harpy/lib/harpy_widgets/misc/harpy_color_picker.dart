@@ -52,38 +52,27 @@ class _HarpyColorPickerState extends State<HarpyColorPicker> {
     final children = {
       const HarpyTab(icon: Text('hue')): Padding(
         padding: config.edgeInsetsSymmetric(horizontal: true),
-        child: PaletteHuePicker(
-          color: _hsvColor,
-          onChanged: _onHsvColorChanged,
-        ),
+        child:
+            PaletteHuePicker(color: _hsvColor, onChanged: _onHsvColorChanged),
       ),
       const HarpyTab(icon: Text('wheel')): Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: config.paddingValue * 2,
-        ),
-        child: WheelPicker(
-          color: _hsvColor,
-          onChanged: _onHsvColorChanged,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: config.paddingValue * 2),
+        child: WheelPicker(color: _hsvColor, onChanged: _onHsvColorChanged),
       ),
       const HarpyTab(icon: Text('rgb')): Padding(
         padding: config.edgeInsetsSymmetric(horizontal: true),
-        child: RGBPicker(
-          color: _color,
-          onChanged: _onColorChanged,
-        ),
+        child: RGBPicker(color: _color, onChanged: _onColorChanged),
       ),
       const HarpyTab(icon: Text('hsv')): Padding(
         padding: config.edgeInsetsSymmetric(horizontal: true),
-        child: HSVPicker(
-          color: _hsvColor,
-          onChanged: _onHsvColorChanged,
-        ),
+        child: HSVPicker(color: _hsvColor, onChanged: _onHsvColorChanged),
       ),
     };
 
-    final initialIndex =
-        app<LayoutPreferences>().colorPickerTab.clamp(0, children.length - 1);
+    final initialIndex = app<LayoutPreferences>().colorPickerTab.clamp(
+      0,
+      children.length - 1,
+    );
 
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
@@ -128,10 +117,7 @@ class _HarpyColorPickerState extends State<HarpyColorPicker> {
 }
 
 class _ColorPickerHeader extends StatelessWidget {
-  const _ColorPickerHeader({
-    required this.color,
-    required this.onColorChanged,
-  });
+  const _ColorPickerHeader({required this.color, required this.onColorChanged});
 
   final Color color;
   final ValueChanged<Color> onColorChanged;
@@ -159,10 +145,7 @@ class _ColorPickerHeader extends StatelessWidget {
             data: theme.copyWith(
               inputDecorationTheme: const InputDecorationTheme(),
             ),
-            child: HexPicker(
-              color: color,
-              onChanged: onColorChanged,
-            ),
+            child: HexPicker(color: color, onChanged: onColorChanged),
           ),
         ),
       ],
@@ -173,9 +156,7 @@ class _ColorPickerHeader extends StatelessWidget {
 /// Listens to the default tab controller and updates the color picker tab
 /// preferences on change.
 class _ColorPickerTabListener extends StatefulWidget {
-  const _ColorPickerTabListener({
-    required this.child,
-  });
+  const _ColorPickerTabListener({required this.child});
 
   final Widget child;
 

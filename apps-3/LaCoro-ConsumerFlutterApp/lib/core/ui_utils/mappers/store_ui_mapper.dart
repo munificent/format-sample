@@ -27,8 +27,9 @@ class StoreUIMapper extends UIModelMapper<StoreUI, StoreEntity> {
     // var hasAPromo = false;
     storeUI.id = item.id;
     storeUI.deliveryCost = item.deliveryCost;
-    storeUI.isDeliveryFree =
-        item.deliveryCost == null || item.deliveryCost == 0 ? true : false;
+    storeUI.isDeliveryFree = item.deliveryCost == null || item.deliveryCost == 0
+        ? true
+        : false;
     storeUI.isStoreClosed = item.state == "closed" ||
         !isInOperatingHours(item.openAt, item.closeAt, item.daysOpen);
     storeUI.hasAPromo = false;

@@ -26,9 +26,7 @@ class SmoothProductCardError extends StatelessWidget {
               Text(barcode, style: Theme.of(context).textTheme.subtitle1),
             ],
           ),
-          const SizedBox(
-            height: 12.0,
-          ),
+          const SizedBox(height: 12.0),
           ProductDialogHelper.getErrorMessage(
             AppLocalizations.of(context)!.product_internet_error,
           ),

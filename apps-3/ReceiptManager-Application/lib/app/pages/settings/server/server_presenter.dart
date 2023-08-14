@@ -25,11 +25,13 @@ class ServerSettingsPresenter extends Presenter {
 
   final GetReceiptUseCase getReceiptUseCase;
   ServerSettingsPresenter(usersRepo)
-      : getReceiptUseCase = GetReceiptUseCase(usersRepo);
+    : getReceiptUseCase = GetReceiptUseCase(usersRepo);
 
   void getReceipts() {
     getReceiptUseCase.execute(
-        GetReceiptUseCaseObserver(this), GetReceiptUseCaseParams());
+      GetReceiptUseCaseObserver(this),
+      GetReceiptUseCaseParams(),
+    );
   }
 
   @override

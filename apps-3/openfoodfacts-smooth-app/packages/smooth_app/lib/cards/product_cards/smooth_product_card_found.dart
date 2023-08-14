@@ -65,12 +65,9 @@ class SmoothProductCardFound extends StatelessWidget {
     }
     return GestureDetector(
       onTap: () async {
-        await Navigator.push<Widget>(
-          context,
-          MaterialPageRoute<Widget>(
-            builder: (BuildContext context) => ProductPage(product: product),
-          ),
-        );
+        await Navigator.push<Widget>(context, MaterialPageRoute<Widget>(
+          builder: (BuildContext context) => ProductPage(product: product),
+        ));
         refresh?.call();
       },
       onLongPress: () {
@@ -95,13 +92,12 @@ class SmoothProductCardFound extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: SmoothProductImage(
-                      product: product,
-                      width: screenSize.width * 0.20,
-                      height: screenSize.width * 0.20),
+                    product: product,
+                    width: screenSize.width * 0.20,
+                    height: screenSize.width * 0.20,
+                  ),
                 ),
-                const SizedBox(
-                  width: 8.0,
-                ),
+                const SizedBox(width: 8.0),
                 Expanded(
                   flex: 2,
                   child: Column(
@@ -150,109 +146,102 @@ class SmoothProductCardFound extends StatelessWidget {
   }
 
   Widget _getOldStyle(final BuildContext context) => GestureDetector(
-        onTap: () {
-          //_openSneakPeek(context);
-          Navigator.push<Widget>(
-            context,
-            MaterialPageRoute<Widget>(
-              builder: (BuildContext context) => ProductPage(
-                product: product,
-              ),
-            ),
-          );
-        },
-        child: Hero(
-          tag: heroTag,
-          child: Material(
-            elevation: elevation,
-            borderRadius: const BorderRadius.all(Radius.circular(15.0)),
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15.0)),
-              ),
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
+    onTap: () {
+      //_openSneakPeek(context);
+      Navigator.push<Widget>(context, MaterialPageRoute<Widget>(
+        builder: (BuildContext context) => ProductPage(product: product),
+      ));
+    },
+    child: Hero(
+      tag: heroTag,
+      child: Material(
+        elevation: elevation,
+        borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      SmoothProductImage(
-                        product: product,
-                        width: MediaQuery.of(context).size.width * 0.25,
-                        height: MediaQuery.of(context).size.width * 0.25,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 10.0),
-                        padding: const EdgeInsets.only(top: 7.5),
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        height: 140.0,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  SmoothProductImage(
+                    product: product,
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    height: MediaQuery.of(context).size.width * 0.25,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 10.0),
+                    padding: const EdgeInsets.only(top: 7.5),
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    height: 140.0,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
                           children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                Flexible(
-                                  child: Text(
-                                    product.productName ?? 'Unknown',
-                                    maxLines: 3,
-                                    overflow: TextOverflow.fade,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                            Flexible(
+                              child: Text(
+                                product.productName ?? 'Unknown',
+                                maxLines: 3,
+                                overflow: TextOverflow.fade,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Flexible(
-                                  child: Text(
-                                    product.brands ??
-                                        AppLocalizations.of(context)!
-                                            .unknownBrand,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.fade,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        fontStyle: FontStyle.italic),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 100.0,
-                                  child: product.nutriscore != null
-                                      ? SvgPicture.network(
-                                          'https://static.openfoodfacts.org/images/misc/nutriscore-${product.nutriscore}.svg',
-                                          fit: BoxFit.contain,
-                                        )
-                                      : Center(
-                                          child: Text(
-                                            AppLocalizations.of(context)!
-                                                .nutri_score_unavailable,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1,
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
+                            const SizedBox(height: 4.0),
+                            Flexible(
+                              child: Text(
+                                product.brands ??
+                                    AppLocalizations.of(context)!.unknownBrand,
+                                maxLines: 1,
+                                overflow: TextOverflow.fade,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontStyle: FontStyle.italic,
                                 ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
-                      )
-                    ],
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 100.0,
+                              child: product.nutriscore != null
+                                  ? SvgPicture.network(
+                                      'https://static.openfoodfacts.org/images/misc/nutriscore-${product.nutriscore}.svg',
+                                      fit: BoxFit.contain,
+                                    )
+                                  : Center(
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .nutri_score_unavailable,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle1,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
-      );
+      ),
+    ),
+  );
 }

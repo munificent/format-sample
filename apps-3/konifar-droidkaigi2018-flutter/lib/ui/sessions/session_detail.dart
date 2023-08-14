@@ -17,10 +17,10 @@ class SessionDetail extends StatefulWidget {
     @required this.favorite,
     @required this.googleSignIn,
     @required this.onFavoriteChanged,
-  })  : assert(session != null),
-        assert(favorite != null),
-        assert(onFavoriteChanged != null),
-        super(key: key);
+  }) : assert(session != null),
+       assert(favorite != null),
+       assert(onFavoriteChanged != null),
+       super(key: key);
 
   final Session session;
   final GoogleSignIn googleSignIn;
@@ -71,7 +71,9 @@ class _SessionDetailState extends State<SessionDetail> {
   }
 
   List<Widget> _buildSpeakerRows(
-      List<Speaker> speakers, TextStyle speakerNameStyle) {
+    List<Speaker> speakers,
+    TextStyle speakerNameStyle,
+  ) {
     return speakers.map((speaker) {
       return new Container(
         padding: new EdgeInsets.only(top: 8.0),
@@ -85,8 +87,9 @@ class _SessionDetailState extends State<SessionDetail> {
               ),
             ),
             new Container(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: new Text(speaker.fullName, style: speakerNameStyle)),
+              padding: const EdgeInsets.only(left: 8.0),
+              child: new Text(speaker.fullName, style: speakerNameStyle),
+            ),
           ],
         ),
       );
@@ -101,20 +104,21 @@ class _SessionDetailState extends State<SessionDetail> {
       pinned: true,
       expandedHeight: _kAppBarHeight,
       flexibleSpace: new LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-        final Size size = constraints.biggest;
-        final double appBarHeight = size.height - statusBarHeight;
-        final double t =
-            (appBarHeight - kToolbarHeight) / (_kAppBarHeight - kToolbarHeight);
+        builder: (BuildContext context, BoxConstraints constraints) {
+          final Size size = constraints.biggest;
+          final double appBarHeight = size.height - statusBarHeight;
+          final double t = (appBarHeight - kToolbarHeight) /
+              (_kAppBarHeight - kToolbarHeight);
 
-        return new Stack(
-          children: [
-            _buildBackgroundImage(statusBarHeight, t),
-            _buildHeaderContents(size, t, theme),
-            _buildAppBarFixedTitle(statusBarHeight, t, theme),
-          ],
-        );
-      }),
+          return new Stack(
+            children: [
+              _buildBackgroundImage(statusBarHeight, t),
+              _buildHeaderContents(size, t, theme),
+              _buildAppBarFixedTitle(statusBarHeight, t, theme),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -122,13 +126,19 @@ class _SessionDetailState extends State<SessionDetail> {
    * When the user scroll up, this appbar title is shown with fade animation.
    */
   Widget _buildAppBarFixedTitle(
-      double statusBarHeight, double t, ThemeData theme) {
-    final TextStyle titleStyle = theme.textTheme.title.merge(new TextStyle(
-      color: Colors.white,
-    ));
+    double statusBarHeight,
+    double t,
+    ThemeData theme,
+  ) {
+    final TextStyle titleStyle = theme.textTheme.title.merge(
+      new TextStyle(color: Colors.white),
+    );
 
-    final Curve _textOpacity =
-        const Interval(0.4, 1.0, curve: Curves.easeInOut);
+    final Curve _textOpacity = const Interval(
+      0.4,
+      1.0,
+      curve: Curves.easeInOut,
+    );
 
     final Size screenSize = MediaQuery.of(context).size;
     // kToolbarHeight equals the left icon width
@@ -168,27 +178,28 @@ class _SessionDetailState extends State<SessionDetail> {
       ),
       label: new Text(
         widget.session.level.name,
-        style: new TextStyle(
-          color: theme.accentColor,
-        ),
+        style: new TextStyle(color: theme.accentColor),
       ),
       backgroundColor: Colors.white,
     );
   }
 
   Widget _buildHeaderContents(Size size, double t, ThemeData theme) {
-    final TextStyle titleStyle = theme.textTheme.title.merge(new TextStyle(
-      color: Colors.white,
-    ));
-    final subheadStyle = theme.textTheme.body1.merge(new TextStyle(
-      color: Colors.white,
-    ));
-    final speakerNameStyle = theme.textTheme.subhead.merge(new TextStyle(
-      color: Colors.white,
-    ));
+    final TextStyle titleStyle = theme.textTheme.title.merge(
+      new TextStyle(color: Colors.white),
+    );
+    final subheadStyle = theme.textTheme.body1.merge(
+      new TextStyle(color: Colors.white),
+    );
+    final speakerNameStyle = theme.textTheme.subhead.merge(
+      new TextStyle(color: Colors.white),
+    );
 
-    final Curve _textOpacity =
-        const Interval(0.4, 1.0, curve: Curves.easeInOut);
+    final Curve _textOpacity = const Interval(
+      0.4,
+      1.0,
+      curve: Curves.easeInOut,
+    );
 
     return new Positioned(
       bottom: 0.0,
@@ -197,25 +208,23 @@ class _SessionDetailState extends State<SessionDetail> {
         opacity: _textOpacity.transform(t.clamp(0.0, 1.0)),
         child: new Container(
           margin: const EdgeInsets.only(
-              left: 16.0, right: 16.0, top: 16.0, bottom: 24.0),
+            left: 16.0,
+            right: 16.0,
+            top: 16.0,
+            bottom: 24.0,
+          ),
           child: new Column(
             children: [
               // Title
               new Container(
                 alignment: Alignment.centerLeft,
-                child: new Text(
-                  widget.session.title,
-                  style: titleStyle,
-                ),
+                child: new Text(widget.session.title, style: titleStyle),
               ),
               // Topic
               new Container(
                 margin: new EdgeInsets.only(top: 16.0),
                 alignment: Alignment.centerLeft,
-                child: new Text(
-                  widget.session.topic.name,
-                  style: subheadStyle,
-                ),
+                child: new Text(widget.session.topic.name, style: subheadStyle),
               ),
               // Level
               new Container(
@@ -231,7 +240,7 @@ class _SessionDetailState extends State<SessionDetail> {
                     speakerNameStyle,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -240,11 +249,15 @@ class _SessionDetailState extends State<SessionDetail> {
   }
 
   Widget _buildBackgroundImage(double statusBarHeight, double t) {
-    final Curve _textOpacity =
-        const Interval(0.4, 1.0, curve: Curves.easeInOut);
-    final double parallax =
-        new Tween<double>(begin: _kAppBarHeight / 2.5, end: 0.0)
-            .lerp(t.clamp(0.0, 1.0));
+    final Curve _textOpacity = const Interval(
+      0.4,
+      1.0,
+      curve: Curves.easeInOut,
+    );
+    final double parallax = new Tween<double>(
+      begin: _kAppBarHeight / 2.5,
+      end: 0.0,
+    ).lerp(t.clamp(0.0, 1.0));
 
     return new Positioned(
       top: -parallax,
@@ -256,9 +269,7 @@ class _SessionDetailState extends State<SessionDetail> {
         child: new Container(
           decoration: const BoxDecoration(
             image: const DecorationImage(
-              image: const AssetImage(
-                _imgHeader,
-              ),
+              image: const AssetImage(_imgHeader),
               fit: BoxFit.cover,
             ),
           ),
@@ -275,10 +286,7 @@ class _SessionDetailState extends State<SessionDetail> {
         key: _scaffoldKey,
         body: new CustomScrollView(
           controller: _hideFabController,
-          slivers: [
-            _buildAppBar(context),
-            _buildBody(),
-          ],
+          slivers: [_buildAppBar(context), _buildBody()],
         ),
         floatingActionButton: !_isFabVisible
             ? null
@@ -304,9 +312,9 @@ class _SessionDetailState extends State<SessionDetail> {
 
   Widget _buildBody() {
     final ThemeData theme = Theme.of(context);
-    final textStyle = theme.textTheme.body1.merge(new TextStyle(
-      color: Colors.grey[600],
-    ));
+    final textStyle = theme.textTheme.body1.merge(
+      new TextStyle(color: Colors.grey[600]),
+    );
     final descriptionStyle = theme.textTheme.body1;
 
     return new SliverPadding(
@@ -316,22 +324,18 @@ class _SessionDetailState extends State<SessionDetail> {
           _buildDate(textStyle),
           new Container(
             margin: const EdgeInsets.only(top: 8.0),
-            child: new Text(
-              widget.session.room.name,
-              style: textStyle,
-            ),
+            child: new Text(widget.session.room.name, style: textStyle),
           ),
           new Container(
             constraints: new BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top -
-                    kToolbarHeight -
-                    100),
-            margin: const EdgeInsets.only(top: 16.0),
-            child: new Text(
-              widget.session.description,
-              style: descriptionStyle,
+              minHeight: MediaQuery.of(context).size.height -
+                  MediaQuery.of(context).padding.top -
+                  kToolbarHeight -
+                  100,
             ),
+            margin: const EdgeInsets.only(top: 16.0),
+            child:
+                new Text(widget.session.description, style: descriptionStyle),
           ),
         ]),
       ),
@@ -339,15 +343,18 @@ class _SessionDetailState extends State<SessionDetail> {
   }
 
   Widget _buildDate(TextStyle textStyle) {
-    final formatter =
-        new DateFormat.Hm(Localizations.localeOf(context).languageCode);
+    final formatter = new DateFormat.Hm(
+      Localizations.localeOf(context).languageCode,
+    );
     final startAt = formatter.format(widget.session.startsAt);
     final endAt = formatter.format(widget.session.endsAt);
 
     return new Container(
       margin: const EdgeInsets.only(top: 8.0),
       child: new Text(
-        "${Strings.of(context).day(widget.session.getDay())} / $startAt - $endAt",
+        "${Strings.of(context).day(
+          widget.session.getDay(),
+        )} / $startAt - $endAt",
         style: textStyle,
       ),
     );

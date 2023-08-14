@@ -33,12 +33,14 @@ class _PlayingFromState extends State<PlayingFrom> {
                     Navigator.pop(context);
                   },
                 ),
-                Text('Playing From\n${controller.playlistName}',
-                    style: TextStyle(
-                      fontSize: Config.textSize(context, 5),
-                      fontWeight: FontWeight.w400,
-                    ),
-                    textAlign: TextAlign.center),
+                Text(
+                  'Playing From\n${controller.playlistName}',
+                  style: TextStyle(
+                    fontSize: Config.textSize(context, 5),
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   height: isPotrait ? 250 : 100,
@@ -100,8 +102,9 @@ class _PlayingFromState extends State<PlayingFrom> {
                             if (controller.nowPlaying.path == nowPlaying.path) {
                               Navigator.pop(context);
                             } else {
-                              await controller
-                                  .playlistControlOptions(nowPlaying);
+                              await controller.playlistControlOptions(
+                                nowPlaying,
+                              );
                             }
                             controller.isPlaying
                                 ? padding = 10.0
@@ -136,8 +139,9 @@ class _PlayingFromState extends State<PlayingFrom> {
                                 : Icons.play_arrow,
                             onPressed: () async {
                               nowPlaying = songList[index];
-                              await controller
-                                  .playlistControlOptions(nowPlaying);
+                              await controller.playlistControlOptions(
+                                nowPlaying,
+                              );
                               controller.isPlaying
                                   ? padding = 10.0
                                   : padding = 0.0;

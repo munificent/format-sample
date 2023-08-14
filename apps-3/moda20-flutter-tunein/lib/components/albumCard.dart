@@ -15,8 +15,8 @@ class AlbumCard extends StatelessWidget {
   final VoidCallback onTap;
 
   AlbumCard({Key key, @required Album album, this.onTap})
-      : _album = album,
-        super(key: key);
+    : _album = album,
+      super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,59 +31,60 @@ class AlbumCard extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Padding(
-                  padding: EdgeInsets.all(paddingOnSide),
-                  child: FadeInImage(
-                    placeholder: AssetImage('images/track.png'),
-                    fadeInDuration: Duration(milliseconds: 200),
-                    fadeOutDuration: Duration(milliseconds: 100),
-                    image: _album.albumArt != null
-                        ? FileImage(
-                            new File(_album.albumArt),
-                          )
-                        : AssetImage('images/track.png'),
-                    height: cardHeight,
-                    fit: BoxFit.cover,
-                  )),
+                padding: EdgeInsets.all(paddingOnSide),
+                child: FadeInImage(
+                  placeholder: AssetImage('images/track.png'),
+                  fadeInDuration: Duration(milliseconds: 200),
+                  fadeOutDuration: Duration(milliseconds: 100),
+                  image: _album.albumArt != null
+                      ? FileImage(new File(_album.albumArt))
+                      : AssetImage('images/track.png'),
+                  height: cardHeight,
+                  fit: BoxFit.cover,
+                ),
+              ),
               Positioned(
                 child: Container(
                   width: (MediaQuery.of(context).size.width / 3) -
                       (paddingOnSide * 2),
                   child: Padding(
-                      padding: EdgeInsets.all(3),
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              (_album.title == null)
-                                  ? "Unknon Title"
-                                  : _album.title,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white70,
-                              ),
-                              maxLines: 1,
-                            ),
-                          ),
-                          Text(
-                            (_album.artist == null)
-                                ? "Unknon Artist"
-                                : _album.artist,
+                    padding: EdgeInsets.all(3),
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            (_album.title == null)
+                                ? "Unknon Title"
+                                : _album.title,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w400,
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w900,
                               color: Colors.white70,
                             ),
+                            maxLines: 1,
                           ),
-                        ],
-                      )),
+                        ),
+                        Text(
+                          (_album.artist == null)
+                              ? "Unknon Artist"
+                              : _album.artist,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   alignment: Alignment.bottomCenter,
                   decoration: BoxDecoration(
-                      backgroundBlendMode: BlendMode.darken,
-                      color: Colors.black87),
+                    backgroundBlendMode: BlendMode.darken,
+                    color: Colors.black87,
+                  ),
                 ),
                 bottom: 0,
               ),

@@ -39,10 +39,10 @@ class InfoViewState extends State<InfoView> {
   @override
   Widget build(BuildContext context) {
     return DefaultTextStyle(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-              child: Column(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,12 +51,14 @@ class InfoViewState extends State<InfoView> {
               buildAppUrl(),
               buildHorizontalDivider(context, height: 0.0),
               buildTmdbAttribution(),
-              buildLauncherIconAttribution()
+              buildLauncherIconAttribution(),
             ],
-          )),
+          ),
         ),
-        style: defaultStyle,
-        textAlign: TextAlign.center);
+      ),
+      style: defaultStyle,
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget buildTmdbAttribution() {
@@ -65,9 +67,12 @@ class InfoViewState extends State<InfoView> {
       children: <Widget>[
         Expanded(flex: 1, child: buildTmdbLogo()),
         Expanded(
-            flex: 4,
-            child: Text("This product uses the TMDb API but is not endorsed or "
-                "certified by TMDb")),
+          flex: 4,
+          child: Text(
+            "This product uses the TMDb API but is not endorsed or "
+            "certified by TMDb",
+          ),
+        ),
       ],
     );
   }
@@ -81,21 +86,27 @@ class InfoViewState extends State<InfoView> {
 
   Widget buildAppUrl() {
     return RichText(
-        textAlign: TextAlign.center,
-        overflow: TextOverflow.clip,
-        text: TextSpan(style: defaultStyle.copyWith(fontSize: 16.0), children: [
+      textAlign: TextAlign.center,
+      overflow: TextOverflow.clip,
+      text: TextSpan(
+        style: defaultStyle.copyWith(fontSize: 16.0),
+        children: [
           TextSpan(
-              text:
-                  "This app is free as in freedom and you can check out the source code "
-                  "on github \n"),
+            text:
+                "This app is free as in freedom and you can check out the source code "
+                "on github \n",
+          ),
           TextSpan(
-              style: defaultStyle.copyWith(color: Colors.blue, fontSize: 14.0),
-              text: "https://github.com/kserko/CineReel",
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  launchURL("https://github.com/kserko/CineReel");
-                })
-        ]));
+            style: defaultStyle.copyWith(color: Colors.blue, fontSize: 14.0),
+            text: "https://github.com/kserko/CineReel",
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                launchURL("https://github.com/kserko/CineReel");
+              },
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildAppTitle() {
@@ -103,9 +114,10 @@ class InfoViewState extends State<InfoView> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         SizedBox(
-            height: 40.0,
-            width: 40.0,
-            child: Image.asset("assets/film_reel.png")),
+          height: 40.0,
+          width: 40.0,
+          child: Image.asset("assets/film_reel.png"),
+        ),
         Text(
           "$APP_NAME ${_packageInfo.version}",
           style: defaultStyle.copyWith(fontSize: 22.0),
@@ -116,34 +128,43 @@ class InfoViewState extends State<InfoView> {
 
   Widget buildLauncherIconAttribution() {
     var attributionWidget = RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(children: [
-          TextSpan(text: 'Launcher icon made by', children: [
-            TextSpan(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: 'Launcher icon made by',
+            children: [
+              TextSpan(
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     launchURL("http://www.freepik.com");
                   },
                 text: ' by Freepik',
-                style: defaultStyle.copyWith(color: Colors.blue)),
-            TextSpan(text: ' from '),
-            TextSpan(
+                style: defaultStyle.copyWith(color: Colors.blue),
+              ),
+              TextSpan(text: ' from '),
+              TextSpan(
                 text: 'Flaticon',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     launchURL("https://www.flaticon.com");
                   },
-                style: defaultStyle.copyWith(color: Colors.blue)),
-            TextSpan(text: ' is licensed by'),
-            TextSpan(
+                style: defaultStyle.copyWith(color: Colors.blue),
+              ),
+              TextSpan(text: ' is licensed by'),
+              TextSpan(
                 text: ' CC 3.0 BY',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     launchURL("http://creativecommons.org/licenses/by/3.0/");
                   },
-                style: defaultStyle.copyWith(color: Colors.blue))
-          ])
-        ]));
+                style: defaultStyle.copyWith(color: Colors.blue),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
 
     return attributionWidget;
   }

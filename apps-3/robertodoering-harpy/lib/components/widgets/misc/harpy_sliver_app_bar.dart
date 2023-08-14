@@ -67,10 +67,7 @@ class HarpySliverAppBar extends StatelessWidget {
       centerTitle: true,
       title: _buildTitle(theme),
       background: background,
-      stretchModes: const [
-        StretchMode.zoomBackground,
-        StretchMode.fadeTitle,
-      ],
+      stretchModes: const [StretchMode.zoomBackground, StretchMode.fadeTitle],
     );
   }
 
@@ -135,8 +132,11 @@ class HarpySliverAppBar extends StatelessWidget {
     final expandedHeight = min<double>(200, mediaQuery.size.height * .25);
 
     return CustomSliverAppBar(
-      decorationBuilder: (minExtend, maxExtend) =>
-          _buildDecoration(harpyTheme, mediaQuery, minExtend),
+      decorationBuilder: (minExtend, maxExtend) => _buildDecoration(
+            harpyTheme,
+            mediaQuery,
+            minExtend,
+          ),
       elevation: 0,
       centerTitle: true,
       backgroundColor: Colors.transparent,

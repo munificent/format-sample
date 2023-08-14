@@ -34,10 +34,7 @@ void main() {
   });
 
   group('USPS service info |', () {
-    const rpData = USPSAuthData(
-      username: 'foo',
-      companyName: 'Free Software',
-    );
+    const rpData = USPSAuthData(username: 'foo', companyName: 'Free Software');
 
     test('Build service info', () {
       final authData = rpData.toAuthData();
@@ -48,10 +45,9 @@ void main() {
 
   group('USPS postal service type |', () {
     test('Get postal service type', () {
-      expect(
-        TrackingServiceType.usps.getSupportedPostalServices(),
-        {PostalServiceType.usps},
-      );
+      expect(TrackingServiceType.usps.getSupportedPostalServices(), {
+        PostalServiceType.usps,
+      });
     });
   });
 }

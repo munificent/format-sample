@@ -9,8 +9,9 @@ abstract class TransactionEvent extends Equatable {
 class SaveTransaction extends TransactionEvent {
   final TransactionEditDto transactionEditDto;
 
-  const SaveTransaction({@required this.transactionEditDto})
-      : assert(transactionEditDto != null);
+  const SaveTransaction({
+    @required this.transactionEditDto,
+  }) : assert(transactionEditDto != null);
 
   @override
   List<Object> get props => [transactionEditDto];
@@ -19,8 +20,9 @@ class SaveTransaction extends TransactionEvent {
 class DoTransfer extends TransactionEvent {
   final TransferInput transferInput;
 
-  const DoTransfer({@required this.transferInput})
-      : assert(transferInput != null);
+  const DoTransfer({
+    @required this.transferInput,
+  }) : assert(transferInput != null);
 
   @override
   List<Object> get props => [transferInput];

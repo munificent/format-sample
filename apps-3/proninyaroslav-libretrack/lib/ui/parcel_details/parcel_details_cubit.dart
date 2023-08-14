@@ -34,9 +34,8 @@ part 'parcel_details_cubit.freezed.dart';
 class ParcelDetailsState with _$ParcelDetailsState {
   const factory ParcelDetailsState.initial() = ParcelDetailsStateInitial;
 
-  const factory ParcelDetailsState.notFound({
-    required String trackNumber,
-  }) = ParcelDetailsStateNotFound;
+  const factory ParcelDetailsState.notFound({required String trackNumber}) =
+      ParcelDetailsStateNotFound;
 
   const factory ParcelDetailsState.loadingFailed({
     required String trackNumber,
@@ -55,86 +54,71 @@ class ParcelDetailsCubit extends Cubit<ParcelDetailsState> {
   final ShipmentRepository _shipmentRepo;
   final TrackingRepository _trackingRepo;
 
-  ParcelDetailsCubit(
-    this._trackRepo,
-    this._shipmentRepo,
-    this._trackingRepo,
-  ) : super(const ParcelDetailsState.initial());
+  ParcelDetailsCubit(this._trackRepo, this._shipmentRepo, this._trackingRepo)
+    : super(const ParcelDetailsState.initial());
 
   Future<void> observeParcel(String trackNumber) async {
     emit(const ParcelDetailsState.initial());
 
     final group = StreamGroup.mergeBroadcast([
       _trackRepo.observeTrack(trackNumber).asyncMap(
-            (res) => res.when(
-              (info) async {
-                if (info == null) {
-                  return const _BuildResult.notFound();
-                } else {
-                  return _buildParcelInfo(
-                    trackNumber: trackNumber,
-                    trackInfo: info,
-                  );
-                }
-              },
-              error: (e) async => _BuildResult.failed(error: e),
-            ),
-          ),
+        (res) => res.when((info) async {
+          if (info == null) {
+            return const _BuildResult.notFound();
+          } else {
+            return _buildParcelInfo(trackNumber: trackNumber, trackInfo: info);
+          }
+        }, error: (e) async => _BuildResult.failed(error: e)),
+      ),
       _trackRepo.observeTrackNumberServices(trackNumber).asyncMap(
-            (res) => res.when(
-              (list) => _buildParcelInfo(
-                trackNumber: trackNumber,
-                trackServices: list,
-              ),
-              error: (e) async => _BuildResult.failed(error: e),
-            ),
+        (res) => res.when(
+          (list) => _buildParcelInfo(
+            trackNumber: trackNumber,
+            trackServices: list,
           ),
+          error: (e) async => _BuildResult.failed(error: e),
+        ),
+      ),
       _shipmentRepo.observeShipmentInfoByTrack(trackNumber).asyncMap(
-            (res) => res.when(
-              (list) => _buildParcelInfo(
-                trackNumber: trackNumber,
-                shipmentInfoList: list,
-              ),
-              error: (e) async => _BuildResult.failed(error: e),
-            ),
+        (res) => res.when(
+          (list) => _buildParcelInfo(
+            trackNumber: trackNumber,
+            shipmentInfoList: list,
           ),
+          error: (e) async => _BuildResult.failed(error: e),
+        ),
+      ),
       _shipmentRepo.observeActivitiesByTrack(trackNumber).asyncMap(
-            (res) => res.when(
-              (list) => _buildParcelInfo(
-                trackNumber: trackNumber,
-                activities: list,
-              ),
-              error: (e) async => _BuildResult.failed(error: e),
-            ),
+        (res) => res.when(
+          (list) => _buildParcelInfo(
+            trackNumber: trackNumber,
+            activities: list,
           ),
+          error: (e) async => _BuildResult.failed(error: e),
+        ),
+      ),
       _trackingRepo.observeTrackingInfoByTrack(trackNumber).asyncMap(
-            (res) => res.when(
-              (list) => _buildParcelInfo(
-                trackNumber: trackNumber,
-                trackingList: list,
-              ),
-              error: (e) async => _BuildResult.failed(error: e),
-            ),
+        (res) => res.when(
+          (list) => _buildParcelInfo(
+            trackNumber: trackNumber,
+            trackingList: list,
           ),
+          error: (e) async => _BuildResult.failed(error: e),
+        ),
+      ),
     ]);
 
     await for (final result in group) {
       result.when(
         (info) => emit(
-          ParcelDetailsState.loaded(
-            trackNumber: trackNumber,
-            info: info,
-          ),
+          ParcelDetailsState.loaded(trackNumber: trackNumber, info: info),
         ),
-        notFound: () => emit(
-          ParcelDetailsState.notFound(trackNumber: trackNumber),
-        ),
-        failed: (error) => emit(
-          ParcelDetailsState.loadingFailed(
-            trackNumber: trackNumber,
-            error: error,
-          ),
-        ),
+        notFound:
+            () => emit(ParcelDetailsState.notFound(trackNumber: trackNumber)),
+        failed: (error) => emit(ParcelDetailsState.loadingFailed(
+          trackNumber: trackNumber,
+          error: error,
+        )),
       );
 
       if (result is _BuildResultFailed) {
@@ -154,68 +138,50 @@ class ParcelDetailsCubit extends Cubit<ParcelDetailsState> {
     try {
       final TrackNumberInfo? _trackInfo = trackInfo ??
           await _trackRepo.getTrackByTrackNumber(trackNumber).then(
-                (res) => res.when(
-                  (value) => value,
-                  error: (e) => throw e,
-                ),
-              );
+            (res) => res.when((value) => value, error: (e) => throw e),
+          );
       if (_trackInfo == null) {
         return const _BuildResult.notFound();
       }
       final List<TrackNumberService> _trackServices = trackServices ??
           await _trackRepo.getTrackNumberServices(trackNumber).then(
-                (res) => res.when(
-                  (value) => value,
-                  error: (e) => throw e,
-                ),
-              );
+            (res) => res.when((value) => value, error: (e) => throw e),
+          );
       final List<ShipmentInfo> _shipmentInfoList = shipmentInfoList ??
           await _shipmentRepo.getShipmentInfoByTrack(trackNumber).then(
-                (res) => res.when(
-                  (value) => value,
-                  error: (e) => throw e,
-                ),
-              );
+            (res) => res.when((value) => value, error: (e) => throw e),
+          );
       final List<ShipmentActivityInfo> _activities = activities ??
           await _shipmentRepo.getActivitiesByTrack(trackNumber).then(
-                (res) => res.when(
-                  (value) => value,
-                  error: (e) => throw e,
-                ),
-              );
+            (res) => res.when((value) => value, error: (e) => throw e),
+          );
       final List<TrackingInfo> _trackingList = trackingList ??
           await _trackingRepo.getTrackingInfoByTrack(trackNumber).then(
-                (res) => res.when(
-                  (value) => value,
-                  error: (e) => throw e,
-                ),
-              );
-      final trackingHistory = await Future.wait(
-        _trackingList.map((info) async {
-          final res = await _trackingRepo.getResponseByTrackingId(info.id);
-          final List<TrackingResponseInfo> responseList = res.when(
-            (value) => value,
-            error: (e) => throw e,
+            (res) => res.when((value) => value, error: (e) => throw e),
           );
-          return TrackingHistoryEntry(
-            trackingInfo: info,
-            responseList: responseList,
-          );
-        }),
-      );
-      final shipmentInfoEntries = await Future.wait(
-        _shipmentInfoList.map((info) async {
-          final res = await _shipmentRepo.getAlternateTracksById(info.id!);
-          final List<AlternateTrackNumber> alternateTrackNumbers = res.when(
-            (value) => value,
-            error: (e) => throw e,
-          );
-          return ShipmentInfoEntry(
-            shipmentInfo: info,
-            alternateTrackNumbers: alternateTrackNumbers,
-          );
-        }),
-      );
+      final trackingHistory = await Future.wait(_trackingList.map((info) async {
+        final res = await _trackingRepo.getResponseByTrackingId(info.id);
+        final List<TrackingResponseInfo> responseList = res.when(
+          (value) => value,
+          error: (e) => throw e,
+        );
+        return TrackingHistoryEntry(
+          trackingInfo: info,
+          responseList: responseList,
+        );
+      }));
+      final shipmentInfoEntries =
+          await Future.wait(_shipmentInfoList.map((info) async {
+            final res = await _shipmentRepo.getAlternateTracksById(info.id!);
+            final List<AlternateTrackNumber> alternateTrackNumbers = res.when(
+              (value) => value,
+              error: (e) => throw e,
+            );
+            return ShipmentInfoEntry(
+              shipmentInfo: info,
+              alternateTrackNumbers: alternateTrackNumbers,
+            );
+          }));
 
       return _BuildResult(
         info: ParcelInfo(
@@ -234,13 +200,10 @@ class ParcelDetailsCubit extends Cubit<ParcelDetailsState> {
 
 @freezed
 class _BuildResult with _$_BuildResult {
-  const factory _BuildResult({
-    required ParcelInfo info,
-  }) = _BuildResultData;
+  const factory _BuildResult({required ParcelInfo info}) = _BuildResultData;
 
   const factory _BuildResult.notFound() = _BuildResultNotFound;
 
-  const factory _BuildResult.failed({
-    required StorageError error,
-  }) = _BuildResultFailed;
+  const factory _BuildResult.failed({required StorageError error}) =
+      _BuildResultFailed;
 }

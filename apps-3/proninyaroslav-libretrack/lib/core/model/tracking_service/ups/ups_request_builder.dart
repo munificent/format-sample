@@ -50,8 +50,10 @@ abstract class BaseUPSRequestBuilder implements RequestBuilder {
     try {
       localeStr = _validateLocale(locale);
     } on _InvalidLanguageCodeException {
-      log(withStack: false).w('[${trackService.trackNumber}] UPS request: '
-          'invalid locale $locale; use default locale');
+      log(withStack: false).w(
+        '[${trackService.trackNumber}] UPS request: '
+        'invalid locale $locale; use default locale',
+      );
     }
     final body = {
       'UPSSecurity': _makeUPSSecurity(_authData),
@@ -60,9 +62,7 @@ abstract class BaseUPSRequestBuilder implements RequestBuilder {
           'SubVersion': '1909',
           'RequestAction': 'Track',
           'RequestOption': 'activity',
-          'TransactionReference': {
-            'CustomerContext': transactionId,
-          },
+          'TransactionReference': {'CustomerContext': transactionId},
         },
         if (localeStr != null) 'Locale': localeStr,
         'InquiryNumber': trackService.trackNumber,

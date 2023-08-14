@@ -12,19 +12,14 @@ class CollectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        PageNavHeader(
-          pageIndex: 1,
-        ),
+        PageNavHeader(pageIndex: 1),
         Flexible(
           child: PageView(
             physics: AlwaysScrollableScrollPhysics(),
             controller: layoutService.pageServices[1].pageViewController,
-            children: [
-              PlaylistsPage(),
-              FavoritesPage(),
-            ],
+            children: [PlaylistsPage(), FavoritesPage()],
           ),
-        )
+        ),
       ],
     );
   }

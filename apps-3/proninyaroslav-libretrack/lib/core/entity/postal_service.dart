@@ -32,10 +32,7 @@ enum PostalServiceType {
   usps,
 }
 
-@TypeConverters([
-  PostalServiceTypeConverter,
-  TrackingServiceTypeConverter,
-])
+@TypeConverters([PostalServiceTypeConverter, TrackingServiceTypeConverter])
 @Entity(
   primaryKeys: ['type', 'trackingServiceType'],
   foreignKeys: [

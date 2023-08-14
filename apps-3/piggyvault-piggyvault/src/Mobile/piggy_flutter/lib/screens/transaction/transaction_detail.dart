@@ -17,9 +17,11 @@ class TransactionDetailPage extends StatefulWidget {
   final TransactionDetailBloc transactionDetailBloc;
   final Transaction transaction;
 
-  TransactionDetailPage(
-      {Key key, this.transaction, @required this.transactionDetailBloc})
-      : super(key: key);
+  TransactionDetailPage({
+    Key key,
+    this.transaction,
+    @required this.transactionDetailBloc,
+  }) : super(key: key);
 
   @override
   TransactionDetailPageState createState() {
@@ -37,11 +39,13 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
   @override
   void initState() {
     transactionCommentsBloc = TransactionCommentsBloc(
-        transactionRepository:
-            RepositoryProvider.of<TransactionRepository>(context));
+      transactionRepository:
+          RepositoryProvider.of<TransactionRepository>(context),
+    );
 
-    transactionCommentsBloc
-        .add(LoadTransactionComments(transactionId: widget.transaction.id));
+    transactionCommentsBloc.add(
+      LoadTransactionComments(transactionId: widget.transaction.id),
+    );
     super.initState();
   }
 
@@ -51,9 +55,7 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Transaction Details'),
-      ),
+      appBar: AppBar(title: Text('Transaction Details')),
       body: BlocListener<TransactionDetailBloc, TransactionDetailState>(
         listener: (context, state) {
           if (state is TransactionDeleting) {
@@ -85,8 +87,9 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
   }
 
   Widget _bottomNavigationBar(ThemeData theme) {
-    final TextStyle dialogTextStyle = theme.textTheme.subtitle1
-        .copyWith(color: theme.textTheme.caption.color);
+    final TextStyle dialogTextStyle = theme.textTheme.subtitle1.copyWith(
+      color: theme.textTheme.caption.color,
+    );
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         if (state is AuthAuthenticated) {
@@ -98,64 +101,64 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  TransactionFormPage(
-                                transactionsBloc:
-                                    BlocProvider.of<TransactionBloc>(context),
-                                transaction: widget.transaction,
-                                title: 'Edit Transaction',
-                              ),
-                              fullscreenDialog: true,
-                            ),
-                          );
+                          Navigator.push(context, MaterialPageRoute(
+                            builder:
+                                (BuildContext context) => TransactionFormPage(
+                                  transactionsBloc:
+                                      BlocProvider.of<TransactionBloc>(context),
+                                  transaction: widget.transaction,
+                                  title: 'Edit Transaction',
+                                ),
+                            fullscreenDialog: true,
+                          ));
                         },
                       ),
                       IconButton(
                         icon: const Icon(Icons.content_copy),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  TransactionFormPage(
-                                transactionsBloc:
-                                    BlocProvider.of<TransactionBloc>(context),
-                                transaction: widget.transaction,
-                                title: 'Copy Transaction',
-                                isCopy: true,
-                              ),
-                              fullscreenDialog: true,
-                            ),
-                          );
+                          Navigator.push(context, MaterialPageRoute(
+                            builder:
+                                (BuildContext context) => TransactionFormPage(
+                                  transactionsBloc:
+                                      BlocProvider.of<TransactionBloc>(context),
+                                  transaction: widget.transaction,
+                                  title: 'Copy Transaction',
+                                  isCopy: true,
+                                ),
+                            fullscreenDialog: true,
+                          ));
                         },
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete_forever),
                         onPressed: () {
                           showDeleteConfirmationDialog<DialogAction>(
-                              context: context,
-                              child: AlertDialog(
-                                  title: const Text('Delete Transaction?'),
-                                  content: Text(
-                                      'Are you sure you want to delete transaction "${widget.transaction.description}" of ${widget.transaction.amount.toMoney()}${widget.transaction.accountCurrencySymbol}',
-                                      style: dialogTextStyle),
-                                  actions: <Widget>[
-                                    TextButton(
-                                        child: const Text('CANCEL'),
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context, DialogAction.disagree);
-                                        }),
-                                    TextButton(
-                                        child: const Text('DELETE'),
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context, DialogAction.agree);
-                                        })
-                                  ]));
+                            context: context,
+                            child: AlertDialog(
+                              title: const Text('Delete Transaction?'),
+                              content: Text(
+                                'Are you sure you want to delete transaction "${widget.transaction.description}" of ${widget.transaction.amount.toMoney()}${widget.transaction.accountCurrencySymbol}',
+                                style: dialogTextStyle,
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text('CANCEL'),
+                                  onPressed: () {
+                                    Navigator.pop(
+                                      context,
+                                      DialogAction.disagree,
+                                    );
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text('DELETE'),
+                                  onPressed: () {
+                                    Navigator.pop(context, DialogAction.agree);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
                     ],
@@ -175,16 +178,15 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
   }
 
   void showDeleteConfirmationDialog<T>({BuildContext context, Widget child}) {
-    showDialog<T>(
-      context: context,
-      builder: (BuildContext context) => child,
-    ).then<void>((T value) {
-      // The value passed to Navigator.pop() or null.
-      if (value == DialogAction.agree) {
-        widget.transactionDetailBloc
-            .add(DeleteTransaction(transactionId: widget.transaction.id));
-      }
-    });
+    showDialog<T>(context: context, builder: (BuildContext context) => child)
+        .then<void>((T value) {
+          // The value passed to Navigator.pop() or null.
+          if (value == DialogAction.agree) {
+            widget.transactionDetailBloc.add(
+              DeleteTransaction(transactionId: widget.transaction.id),
+            );
+          }
+        });
   }
 
   Widget _commentTile() {
@@ -201,8 +203,9 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
       trailing: new OutlinedButton(
         onPressed: (() {
           transactionCommentsBloc.add(PostTransactionComment(
-              transactionId: widget.transaction.id,
-              comment: _commentController.text));
+            transactionId: widget.transaction.id,
+            comment: _commentController.text,
+          ));
           _commentController.clear();
         }),
         style: OutlinedButton.styleFrom(side: BorderSide.none),
@@ -213,27 +216,32 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
 
   Widget _transactionComments() {
     return BlocBuilder(
-        cubit: transactionCommentsBloc,
-        builder: (context, state) {
-          if (state is TransactionCommentsLoaded) {
-            return Card(
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: state.comments.map((comment) {
-                    return ListTile(
-                      leading: const CircleAvatar(),
-                      title: Text(comment.creatorUserName),
-                      subtitle: Text(comment.content),
-                      trailing: Text(
-                          '${_commentTimeFormatter.format(DateTime.parse(comment.creationTime))}'),
-                    );
-                  }).toList()),
-            );
-          } else {
-            return LinearProgressIndicator();
-          }
-          // TODO: handle transaction comments error
-        });
+      cubit: transactionCommentsBloc,
+      builder: (context, state) {
+        if (state is TransactionCommentsLoaded) {
+          return Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: state.comments.map((comment) {
+                return ListTile(
+                  leading: const CircleAvatar(),
+                  title: Text(comment.creatorUserName),
+                  subtitle: Text(comment.content),
+                  trailing: Text(
+                    '${_commentTimeFormatter.format(DateTime.parse(
+                          comment.creationTime,
+                        ))}',
+                  ),
+                );
+              }).toList(),
+            ),
+          );
+        } else {
+          return LinearProgressIndicator();
+        }
+        // TODO: handle transaction comments error
+      },
+    );
   }
 
   Widget _transactionDetails() {
@@ -248,7 +256,8 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
           ListTile(
             leading: const Icon(Icons.attach_money),
             title: Text(
-                '${widget.transaction.amount.toMoney()} ${widget.transaction.accountCurrencySymbol}'),
+              '${widget.transaction.amount.toMoney()} ${widget.transaction.accountCurrencySymbol}',
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.event_note),
@@ -258,7 +267,10 @@ class TransactionDetailPageState extends State<TransactionDetailPage> {
           ListTile(
             leading: const Icon(Icons.access_time),
             title: Text(
-                '${_formatter.format(DateTime.parse(widget.transaction.transactionTime))}'),
+              '${_formatter.format(DateTime.parse(
+                    widget.transaction.transactionTime,
+                  ))}',
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.account_balance_wallet),

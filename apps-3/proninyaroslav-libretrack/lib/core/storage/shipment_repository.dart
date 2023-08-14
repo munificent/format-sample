@@ -32,9 +32,7 @@ abstract class ShipmentRepository {
     List<ShipmentActivityInfo> activities,
   );
 
-  Future<StorageResult<void>> deleteActivitiesByTrack(
-    String trackNumber,
-  );
+  Future<StorageResult<void>> deleteActivitiesByTrack(String trackNumber);
 
   Future<StorageResult<List<ShipmentActivityInfo>>> getActivitiesByTrack(
     String trackNumber, {
@@ -60,9 +58,7 @@ abstract class ShipmentRepository {
     List<String>? alternateTracks,
   });
 
-  Future<StorageResult<void>> deleteShipmentInfoByTrack(
-    String trackNumber,
-  );
+  Future<StorageResult<void>> deleteShipmentInfoByTrack(String trackNumber);
 
   Future<StorageResult<List<ShipmentInfo>>> getShipmentInfoByTrack(
     String trackNumber,
@@ -170,9 +166,7 @@ class ShipmentRepositoryImpl extends ShipmentRepository {
   @override
   Future<StorageResult<List<ShipmentActivityInfo>>> getAllActivities() async {
     try {
-      return StorageResult(
-        await _db.shipmentDao.getAllActivities(),
-      );
+      return StorageResult(await _db.shipmentDao.getAllActivities());
     } on Exception catch (e, stackTrace) {
       return StorageResult.error(
         StorageError.database(exception: e, stackTrace: stackTrace),
@@ -182,7 +176,7 @@ class ShipmentRepositoryImpl extends ShipmentRepository {
 
   @override
   Stream<StorageResult<List<ShipmentActivityInfo>>>
-      observeAllActivities() async* {
+  observeAllActivities() async* {
     try {
       await for (final value in _db.shipmentDao.observeAllActivities()) {
         yield StorageResult(value);
@@ -235,14 +229,12 @@ class ShipmentRepositoryImpl extends ShipmentRepository {
     List<String> alternateTracks,
   ) async {
     await _db.shipmentDao.addAlternateTrackList(
-      alternateTracks
-          .map(
-            (track) => AlternateTrackNumber(
-              trackNumber: track,
-              shipmentId: shipmentId,
-            ),
-          )
-          .toList(),
+      alternateTracks.map(
+        (track) => AlternateTrackNumber(
+          trackNumber: track,
+          shipmentId: shipmentId,
+        ),
+      ).toList(),
     );
     return StorageResult.empty;
   }
@@ -281,9 +273,8 @@ class ShipmentRepositoryImpl extends ShipmentRepository {
     String trackNumber,
   ) async* {
     try {
-      await for (final list in _db.shipmentDao.observeShipmentInfoByTrack(
-        trackNumber,
-      )) {
+      await for (final list
+          in _db.shipmentDao.observeShipmentInfoByTrack(trackNumber)) {
         yield StorageResult(list);
       }
     } on Exception catch (e, stackTrace) {

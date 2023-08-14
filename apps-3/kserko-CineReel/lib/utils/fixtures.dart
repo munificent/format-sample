@@ -5,9 +5,7 @@ List<GenrePill> createListOfGenresPills() {
   List<GenrePill> list = [];
   for (int i = 0; i < 10; i++) {
     TMDBGenre genre = TMDBGenre(i, " genre $i");
-    list.add(GenrePill(
-      genre: genre,
-    ));
+    list.add(GenrePill(genre: genre));
   }
   return list;
 }

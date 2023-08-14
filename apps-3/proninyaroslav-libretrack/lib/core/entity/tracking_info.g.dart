@@ -6,29 +6,27 @@ part of 'tracking_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TrackingError _$$_TrackingErrorFromJson(Map<String, dynamic> json) =>
-    _$_TrackingError(
-      type: _$enumDecode(_$TrackingErrorTypeEnumMap, json['type']),
-      isRetryable: json['isRetryable'] as bool,
-      message: json['message'] as String?,
-      code: json['code'] as String?,
-      stackTrace: json['stackTrace'] as String?,
-    );
+_$_TrackingError _$$_TrackingErrorFromJson(
+  Map<String, dynamic> json,
+) => _$_TrackingError(
+  type: _$enumDecode(_$TrackingErrorTypeEnumMap, json['type']),
+  isRetryable: json['isRetryable'] as bool,
+  message: json['message'] as String?,
+  code: json['code'] as String?,
+  stackTrace: json['stackTrace'] as String?,
+);
 
-Map<String, dynamic> _$$_TrackingErrorToJson(_$_TrackingError instance) =>
-    <String, dynamic>{
-      'type': _$TrackingErrorTypeEnumMap[instance.type],
-      'isRetryable': instance.isRetryable,
-      'message': instance.message,
-      'code': instance.code,
-      'stackTrace': instance.stackTrace,
-    };
+Map<String, dynamic> _$$_TrackingErrorToJson(
+  _$_TrackingError instance,
+) => <String, dynamic>{
+  'type': _$TrackingErrorTypeEnumMap[instance.type],
+  'isRetryable': instance.isRetryable,
+  'message': instance.message,
+  'code': instance.code,
+  'stackTrace': instance.stackTrace,
+};
 
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
+K _$enumDecode<K, V>(Map<K, V> enumValues, Object? source, {K? unknownValue}) {
   if (source == null) {
     throw ArgumentError(
       'A value must be provided. Supported values: '

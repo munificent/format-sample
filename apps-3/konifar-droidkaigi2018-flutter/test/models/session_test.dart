@@ -50,7 +50,9 @@ void main() {
       expect(session.id, '17028');
       expect(session.title, "コードで見るFlutterアプリの実装");
       expect(
-          session.description, "FlutterはAndroid、iOS両方のアプリをDartで書けるフレームワークです。");
+        session.description,
+        "FlutterはAndroid、iOS両方のアプリをDartで書けるフレームワークです。",
+      );
       expect(session.startsAt.minute, 40);
       expect(session.endsAt.minute, 10);
       expect(session.isServiceSession, isFalse);

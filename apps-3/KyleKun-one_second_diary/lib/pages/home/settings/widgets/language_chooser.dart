@@ -30,19 +30,18 @@ class LanguageChooser extends StatelessWidget {
                 onChanged: (symbol) {
                   _languageController.changeLanguage = symbol!;
                 },
-                items: TranslationService.languages.map(
-                  (LanguageModel _language) {
-                    return DropdownMenuItem<String>(
-                      child: Text(
-                        _language.language,
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                items:
+                    TranslationService.languages.map((LanguageModel _language) {
+                      return DropdownMenuItem<String>(
+                        child: Text(
+                          _language.language,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
+                          ),
                         ),
-                      ),
-                      value: _language.symbol,
-                    );
-                  },
-                ).toList(),
+                        value: _language.symbol,
+                      );
+                    }).toList(),
               ),
             ],
           ),

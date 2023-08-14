@@ -21,9 +21,7 @@ import 'package:floor/floor.dart';
 class DurationConverter extends TypeConverter<Duration, int> {
   @override
   Duration decode(int databaseValue) {
-    return Duration(
-      milliseconds: databaseValue,
-    );
+    return Duration(milliseconds: databaseValue);
   }
 
   @override
@@ -35,11 +33,7 @@ class DurationConverter extends TypeConverter<Duration, int> {
 class NullableDurationConverter extends TypeConverter<Duration?, int?> {
   @override
   Duration? decode(int? databaseValue) {
-    return databaseValue == null
-        ? null
-        : Duration(
-            milliseconds: databaseValue,
-          );
+    return databaseValue == null ? null : Duration(milliseconds: databaseValue);
   }
 
   @override

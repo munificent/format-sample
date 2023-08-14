@@ -22,10 +22,7 @@ class AddCustomThemeCard extends StatelessWidget {
       title: const Text('add custom theme'),
       trailing: isFree ? const FlareIcon.shiningStar(size: 28) : null,
       border: Border.all(color: theme.dividerColor),
-      onTap: () => _pushCustomTheme(
-        context,
-        state: bloc.state,
-      ),
+      onTap: () => _pushCustomTheme(context, state: bloc.state),
     );
   }
 }
@@ -45,8 +42,5 @@ Future<void> _pushCustomTheme(
   // use the next available custom theme id
   final themeId = state.customThemesData.length + 10;
 
-  app<HarpyNavigator>().pushCustomTheme(
-    themeData: themeData,
-    themeId: themeId,
-  );
+  app<HarpyNavigator>().pushCustomTheme(themeData: themeData, themeId: themeId);
 }

@@ -14,7 +14,9 @@ class CurrenciesLoading extends CurrenciesState {}
 class CurrenciesLoaded extends CurrenciesState {
   final List<Currency> currencies;
 
-  CurrenciesLoaded({@required this.currencies}) : assert(currencies != null);
+  CurrenciesLoaded({
+    @required this.currencies,
+  }) : assert(currencies != null);
 }
 
 class CurrenciesError extends CurrenciesState {}

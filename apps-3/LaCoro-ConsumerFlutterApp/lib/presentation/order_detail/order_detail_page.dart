@@ -19,8 +19,9 @@ class OrderDetailPage extends StatefulWidget {
   static const ORDER_DETAIL_ROUTE = '/order_detail_route';
 
   @override
-  State<StatefulWidget> createState() =>
-      _OrderDetailPageState(Injector.getInjector().get());
+  State<StatefulWidget> createState() => _OrderDetailPageState(
+    Injector.getInjector().get(),
+  );
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
@@ -41,102 +42,128 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context);
 
-    _bloc.store =
-        (ModalRoute.of(context).settings.arguments as List).elementAt(0);
-    _bloc.products =
-        (ModalRoute.of(context).settings.arguments as List).elementAt(1);
+    _bloc.store = (ModalRoute.of(context).settings.arguments as List).elementAt(
+      0,
+    );
+    _bloc.products = (ModalRoute.of(context).settings.arguments as List)
+        .elementAt(1);
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         elevation: 0,
-        title: Text(strings.yourOrder,
-            style: AppTextStyle.section.copyWith(color: Colors.black)),
+        title: Text(
+          strings.yourOrder,
+          style: AppTextStyle.section.copyWith(color: Colors.black),
+        ),
       ),
       body: BlocBuilder(
-          bloc: _bloc,
-          builder: (context, state) {
-            double cartTotal = 0;
-            int deliveryCost = 0;
+        bloc: _bloc,
+        builder: (context, state) {
+          double cartTotal = 0;
+          int deliveryCost = 0;
 
-            if (state is InitialState) _bloc.add(GetOrderSummaryEvent());
+          if (state is InitialState) _bloc.add(GetOrderSummaryEvent());
 
-            if (state is OrderSummarySate) {
-              cartTotal = state.cartTotal;
-              deliveryCost = state.deliveryCost;
-            }
+          if (state is OrderSummarySate) {
+            cartTotal = state.cartTotal;
+            deliveryCost = state.deliveryCost;
+          }
 
-            return Column(children: [
+          return Column(
+            children: [
               Expanded(
                 child: ListView(
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 4.0, horizontal: 12.0),
+                        vertical: 4.0,
+                        horizontal: 12.0,
+                      ),
                       child: StoreItemSmall(_bloc.store),
                     ),
                     Divider(thickness: 10, height: 24),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 4.0, horizontal: 12.0),
+                        vertical: 4.0,
+                        horizontal: 12.0,
+                      ),
                       child: buildItemList(_bloc.products),
                     ),
                     Divider(thickness: 10, height: 24),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 24.0),
+                        vertical: 12.0,
+                        horizontal: 24.0,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(strings.order, style: AppTextStyle.black16),
-                          Text(cartTotal?.currencyFormat() ?? '',
-                              style: AppTextStyle.black16),
+                          Text(
+                            cartTotal?.currencyFormat() ?? '',
+                            style: AppTextStyle.black16,
+                          ),
                         ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 12.0, left: 24.0, right: 24.0),
+                        bottom: 12.0,
+                        left: 24.0,
+                        right: 24.0,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(strings.delivery, style: AppTextStyle.black16),
-                          Text(deliveryCost?.currencyFormat() ?? '',
-                              style: AppTextStyle.black16),
+                          Text(
+                            deliveryCost?.currencyFormat() ?? '',
+                            style: AppTextStyle.black16,
+                          ),
                         ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 24.0),
+                        vertical: 12.0,
+                        horizontal: 24.0,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(strings.total, style: AppTextStyle.section),
                           Text(
-                              (cartTotal + deliveryCost)?.currencyFormat() ??
-                                  '',
-                              style: AppTextStyle.section),
+                            (cartTotal + deliveryCost)?.currencyFormat() ?? '',
+                            style: AppTextStyle.section,
+                          ),
                         ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 40.0, left: 24.0, right: 24.0),
+                        top: 40.0,
+                        left: 24.0,
+                        right: 24.0,
+                      ),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           strings.comments,
                           style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: AppColors.boldTextColor),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: AppColors.boldTextColor,
+                          ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 12.0, left: 24.0, right: 24.0),
+                        top: 12.0,
+                        left: 24.0,
+                        right: 24.0,
+                      ),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: TextFormField(
@@ -147,16 +174,19 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                           decoration: InputDecoration(
                             isDense: true,
                             hintStyle: TextStyle(
-                                color: AppColors.greyMedium,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 16),
+                              color: AppColors.greyMedium,
+                              fontWeight: FontWeight.w300,
+                              fontSize: 16,
+                            ),
                             hintText: strings.comments,
                             enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: AppColors.greyMedium)),
+                              borderSide:
+                                  BorderSide(color: AppColors.greyMedium),
+                            ),
                             focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: AppColors.accentColor)),
+                              borderSide:
+                                  BorderSide(color: AppColors.accentColor),
+                            ),
                           ),
                         ),
                       ),
@@ -169,19 +199,23 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 onPressed: cartTotal == 0
                     ? null
                     : () async {
-                        final order =
-                            _bloc.createOrder(_commentController.value.text);
+                        final order = _bloc.createOrder(
+                          _commentController.value.text,
+                        );
                         Navigator.pushNamed(
-                            context,
-                            await _bloc.isUserValidated()
-                                ? CheckoutPage.CHECKOUT_ORDER_ROUTE
-                                : RegisterPage.REGISTER_ROUTE,
-                            arguments: order);
+                          context,
+                          await _bloc.isUserValidated()
+                              ? CheckoutPage.CHECKOUT_ORDER_ROUTE
+                              : RegisterPage.REGISTER_ROUTE,
+                          arguments: order,
+                        );
                       },
                 buttonText: strings.continu,
               ),
-            ]);
-          }),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -194,8 +228,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ProductItem(
                   itemUI: element,
-                  onQuantityChange: (value) =>
-                      _bloc.add(UpdateProductEvent(element, value)),
+                  onQuantityChange:
+                      (value) => _bloc.add(UpdateProductEvent(element, value)),
                   quantity: items[element],
                   quantityVisible: true,
                   divider: false,

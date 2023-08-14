@@ -25,5 +25,7 @@ TMDBMovieDetails movieDetails = TMDBMovieDetails()
   ..posterPath = ""
   ..movieBasic = movieOne;
 
-MovieDetailsState movieDetailsState =
-    MovieDetailsState(movieDetails: TMDBMovieDetails(), movieBasic: movieOne);
+MovieDetailsState movieDetailsState = MovieDetailsState(
+  movieDetails: TMDBMovieDetails(),
+  movieBasic: movieOne,
+);

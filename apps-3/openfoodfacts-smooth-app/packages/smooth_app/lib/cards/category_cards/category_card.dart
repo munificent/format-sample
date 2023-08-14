@@ -49,7 +49,9 @@ class CategoryCard extends StatelessWidget {
                   Text(
                     title,
                     style: Theme.of(context).textTheme.headline4!.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.normal),
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ],
               ),

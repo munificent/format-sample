@@ -13,24 +13,22 @@ class AddTransactionFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        key: ValueKey<Color>(Theme.of(context).primaryColor),
-        tooltip: 'Add new transaction',
-        backgroundColor: PiggyAppTheme.nearlyDarkBlue,
-        child: Icon(
-          Icons.add,
-          color: PiggyAppTheme.buildLightTheme().indicatorColor,
-        ),
-        onPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute<DismissDialogAction>(
-              builder: (BuildContext context) => TransactionFormPage(
+      key: ValueKey<Color>(Theme.of(context).primaryColor),
+      tooltip: 'Add new transaction',
+      backgroundColor: PiggyAppTheme.nearlyDarkBlue,
+      child: Icon(
+        Icons.add,
+        color: PiggyAppTheme.buildLightTheme().indicatorColor,
+      ),
+      onPressed: () async {
+        await Navigator.push(context, MaterialPageRoute<DismissDialogAction>(
+          builder: (BuildContext context) => TransactionFormPage(
                 transactionsBloc: BlocProvider.of<TransactionBloc>(context),
                 account: account,
               ),
-              fullscreenDialog: true,
-            ),
-          );
-        });
+          fullscreenDialog: true,
+        ));
+      },
+    );
   }
 }

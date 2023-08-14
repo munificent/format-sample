@@ -32,12 +32,10 @@ void main() {
 
 Future<Null> enterText(WidgetTester tester, String text) async {
   return TestAsyncUtils.guard(() async {
-    tester.testTextInput.updateEditingValue(
-      TextEditingValue(
-        text: text,
-        selection: TextSelection.collapsed(offset: 6),
-      ),
-    );
+    tester.testTextInput.updateEditingValue(TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: 6),
+    ));
     await tester.idle();
   });
 }

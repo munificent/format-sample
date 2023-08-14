@@ -57,10 +57,10 @@ class HarpyMediaGallery extends StatelessWidget {
     return AnimatedBuilder(
       animation: animation,
       builder: (_, __) => ClipRRect(
-        clipBehavior: Clip.hardEdge,
-        borderRadius: tween.evaluate(animation),
-        child: hero.child,
-      ),
+            clipBehavior: Clip.hardEdge,
+            borderRadius: tween.evaluate(animation),
+            child: hero.child,
+          ),
     );
   }
 
@@ -77,14 +77,13 @@ class HarpyMediaGallery extends StatelessWidget {
           flightDirection,
           fromHeroContext,
           toHeroContext,
-        ) =>
-            _flightShuttleBuilder(
-          index,
-          animation,
-          flightDirection,
-          fromHeroContext,
-          toHeroContext,
-        ),
+        ) => _flightShuttleBuilder(
+              index,
+              animation,
+              flightDirection,
+              fromHeroContext,
+              toHeroContext,
+            ),
         child: builder(context, index),
       );
     } else {
@@ -100,19 +99,17 @@ class HarpyMediaGallery extends StatelessWidget {
       backgroundDecoration: const BoxDecoration(color: Colors.transparent),
       onPageChanged: onPageChanged,
       builder: (_, index) => PhotoViewGalleryPageOptions.customChild(
-        initialScale: PhotoViewComputedScale.covered,
-        minScale: PhotoViewComputedScale.contained,
-        maxScale: PhotoViewComputedScale.covered * 3,
-        gestureDetectorBehavior: HitTestBehavior.opaque,
-        child: Stack(
-          children: [
-            GestureDetector(
-              onTap: Navigator.of(context).pop,
+            initialScale: PhotoViewComputedScale.covered,
+            minScale: PhotoViewComputedScale.contained,
+            maxScale: PhotoViewComputedScale.covered * 3,
+            gestureDetectorBehavior: HitTestBehavior.opaque,
+            child: Stack(
+              children: [
+                GestureDetector(onTap: Navigator.of(context).pop),
+                Center(child: _buildChild(context, index)),
+              ],
             ),
-            Center(child: _buildChild(context, index)),
-          ],
-        ),
-      ),
+          ),
     );
   }
 }

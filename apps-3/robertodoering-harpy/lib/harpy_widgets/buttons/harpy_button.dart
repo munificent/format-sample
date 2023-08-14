@@ -9,10 +9,7 @@ import 'package:provider/provider.dart';
 /// Uses an [AnimatedScale] to have the button appear pressed down while it is
 /// tapped.
 class _HarpyButtonBase extends StatefulWidget {
-  const _HarpyButtonBase({
-    required this.child,
-    this.onTap,
-  });
+  const _HarpyButtonBase({required this.child, this.onTap});
 
   final Widget child;
   final VoidCallback? onTap;
@@ -81,9 +78,9 @@ class HarpyButton extends StatelessWidget {
     this.foregroundColor,
     this.style,
     double? elevation,
-  })  : materialType = MaterialType.canvas,
-        elevation = elevation ?? 8,
-        assert(text != null || icon != null);
+  }) : materialType = MaterialType.canvas,
+       elevation = elevation ?? 8,
+       assert(text != null || icon != null);
 
   /// A flat button that has a transparent background and no shadow.
   ///
@@ -98,19 +95,15 @@ class HarpyButton extends StatelessWidget {
     this.betweenPadding,
     this.foregroundColor,
     this.style,
-  })  : backgroundColor = null,
-        materialType = MaterialType.transparency,
-        elevation = 0,
-        assert(text != null || icon != null);
+  }) : backgroundColor = null,
+       materialType = MaterialType.transparency,
+       elevation = 0,
+       assert(text != null || icon != null);
 
   static _HarpyButtonBase custom({
     required Widget child,
     required VoidCallback? onTap,
-  }) =>
-      _HarpyButtonBase(
-        onTap: onTap,
-        child: child,
-      );
+  }) => _HarpyButtonBase(onTap: onTap, child: child);
 
   /// The text widget of the button.
   ///
@@ -265,11 +258,11 @@ class HarpyButton extends StatelessWidget {
             // use a builder so the context can reference the animated theme
             child: Builder(
               builder: (context) => DefaultTextStyle(
-                style: Theme.of(context).textTheme.button!.merge(style),
-                overflow: TextOverflow.fade,
-                softWrap: false,
-                child: _buildContent(),
-              ),
+                    style: Theme.of(context).textTheme.button!.merge(style),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                    child: _buildContent(),
+                  ),
             ),
           ),
         ),

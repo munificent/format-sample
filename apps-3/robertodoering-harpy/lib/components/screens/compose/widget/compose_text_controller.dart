@@ -124,18 +124,11 @@ class ComposeTextController extends TextEditingController {
         caseSensitive: false,
       ),
       onMatch: (match) {
-        final regExp = textStyleMap.entries
-            .singleWhere(
-              (element) => element.key.allMatches(match[0]!).isNotEmpty,
-            )
-            .key;
+        final regExp = textStyleMap.entries.singleWhere(
+          (element) => element.key.allMatches(match[0]!).isNotEmpty,
+        ).key;
 
-        children.add(
-          TextSpan(
-            text: match[0],
-            style: textStyleMap[regExp],
-          ),
-        );
+        children.add(TextSpan(text: match[0], style: textStyleMap[regExp]));
 
         return match[0]!;
       },

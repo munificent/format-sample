@@ -17,7 +17,7 @@ import 'package:piggy_flutter/widgets/primary_color_override.dart';
 
 class AccountFormScreen extends StatefulWidget {
   const AccountFormScreen({Key key, this.title, this.account})
-      : super(key: key);
+    : super(key: key);
 
   final String title;
   final Account account;
@@ -42,8 +42,9 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
   void initState() {
     super.initState();
     accountFormBloc = AccountFormBloc(
-        accountsBloc: BlocProvider.of<AccountsBloc>(context),
-        accountRepository: RepositoryProvider.of<AccountRepository>(context));
+      accountsBloc: BlocProvider.of<AccountsBloc>(context),
+      accountRepository: RepositoryProvider.of<AccountRepository>(context),
+    );
 
     accountFormModel = AccountFormModel(id: widget.account?.id);
     accountFormBloc.add(AccountFormLoad(accountId: widget.account?.id));
@@ -55,11 +56,13 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
     }
 
     currenciesBloc = CurrenciesBloc(
-        accountRepository: RepositoryProvider.of<AccountRepository>(context));
+      accountRepository: RepositoryProvider.of<AccountRepository>(context),
+    );
     currenciesBloc.add(LoadCurrencies());
 
     accountTypesBloc = AccountTypesBloc(
-        accountRepository: RepositoryProvider.of<AccountRepository>(context));
+      accountRepository: RepositoryProvider.of<AccountRepository>(context),
+    );
     accountTypesBloc.add(AccountTypesLoad());
   }
 
@@ -71,9 +74,7 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          actions: <Widget>[
-            submitButton(theme),
-          ],
+          actions: <Widget>[submitButton(theme)],
         ),
         body: BlocListener<AccountFormBloc, AccountFormState>(
           cubit: accountFormBloc,
@@ -85,9 +86,10 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
             if (state is AccountFormSaved) {
               hideProgress(context);
               showSuccess(
-                  context: context,
-                  message: UIData.success,
-                  icon: MaterialCommunityIcons.check);
+                context: context,
+                message: UIData.success,
+                icon: MaterialCommunityIcons.check,
+              );
             }
           },
           child: BlocBuilder<AccountFormBloc, AccountFormState>(
@@ -109,40 +111,46 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
                       children: <Widget>[
                         _nameField(theme),
                         BlocBuilder<CurrenciesBloc, CurrenciesState>(
-                            cubit: currenciesBloc,
-                            builder: (BuildContext context,
-                                CurrenciesState currenciesState) {
-                              if (currenciesState is CurrenciesLoaded) {
-                                return InputDecorator(
-                                    decoration: const InputDecoration(
-                                      labelText: 'Currency',
-                                      hintText: 'Choose a currency',
-                                    ),
-                                    isEmpty:
-                                        accountFormModel.currencyId == null,
-                                    child: DropdownButton<int>(
-                                      value: accountFormModel.currencyId,
-                                      onChanged: (int value) {
-                                        setState(() {
-                                          accountFormModel.currencyId = value;
-                                        });
-                                      },
-                                      items: currenciesState.currencies
-                                          .map((Currency currency) {
-                                        return DropdownMenuItem<int>(
-                                          value: currency.id,
-                                          child: Text(currency.name),
-                                        );
-                                      }).toList(),
-                                    ));
-                              } else {
-                                return const LinearProgressIndicator();
-                              }
-                            }),
+                          cubit: currenciesBloc,
+                          builder: (
+                            BuildContext context,
+                            CurrenciesState currenciesState,
+                          ) {
+                            if (currenciesState is CurrenciesLoaded) {
+                              return InputDecorator(
+                                decoration: const InputDecoration(
+                                  labelText: 'Currency',
+                                  hintText: 'Choose a currency',
+                                ),
+                                isEmpty: accountFormModel.currencyId == null,
+                                child: DropdownButton<int>(
+                                  value: accountFormModel.currencyId,
+                                  onChanged: (int value) {
+                                    setState(() {
+                                      accountFormModel.currencyId = value;
+                                    });
+                                  },
+                                  items: currenciesState.currencies.map(
+                                    (Currency currency) {
+                                      return DropdownMenuItem<int>(
+                                        value: currency.id,
+                                        child: Text(currency.name),
+                                      );
+                                    },
+                                  ).toList(),
+                                ),
+                              );
+                            } else {
+                              return const LinearProgressIndicator();
+                            }
+                          },
+                        ),
                         BlocBuilder<AccountTypesBloc, AccountTypesState>(
                           cubit: accountTypesBloc,
-                          builder: (BuildContext context,
-                              AccountTypesState accountTypestate) {
+                          builder: (
+                            BuildContext context,
+                            AccountTypesState accountTypestate,
+                          ) {
                             if (accountTypestate is AccountTypesLoaded) {
                               return InputDecorator(
                                 decoration: const InputDecoration(
@@ -157,13 +165,14 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
                                       accountFormModel.accountTypeId = value;
                                     });
                                   },
-                                  items: accountTypestate.accountTypes
-                                      .map((AccountType type) {
-                                    return DropdownMenuItem<int>(
-                                      value: type.id,
-                                      child: Text(type.name),
-                                    );
-                                  }).toList(),
+                                  items: accountTypestate.accountTypes.map(
+                                    (AccountType type) {
+                                      return DropdownMenuItem<int>(
+                                        value: type.id,
+                                        child: Text(type.name),
+                                      );
+                                    },
+                                  ).toList(),
                                 ),
                               );
                             } else {
@@ -172,8 +181,10 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
                           },
                         ),
                         const SizedBox(height: 24.0),
-                        Text('* all fields are mandatory',
-                            style: Theme.of(context).textTheme.caption),
+                        Text(
+                          '* all fields are mandatory',
+                          style: Theme.of(context).textTheme.caption,
+                        ),
                       ],
                     ),
                   ),
@@ -192,8 +203,9 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
     }
 
     final ThemeData theme = Theme.of(context);
-    final TextStyle dialogTextStyle = theme.textTheme.subtitle1
-        .copyWith(color: theme.textTheme.caption.color);
+    final TextStyle dialogTextStyle = theme.textTheme.subtitle1.copyWith(
+      color: theme.textTheme.caption.color,
+    );
 
     return await showDialog<bool>(
           context: context,
@@ -202,17 +214,21 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
               content: Text('Discard unsaved changes?', style: dialogTextStyle),
               actions: <Widget>[
                 TextButton(
-                    child: const Text('CANCEL'),
-                    onPressed: () {
-                      Navigator.of(context).pop(
-                          false); // Pops the confirmation dialog but not the page.
-                    }),
+                  child: const Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop(
+                      false,
+                    ); // Pops the confirmation dialog but not the page.
+                  },
+                ),
                 TextButton(
-                    child: const Text('DISCARD'),
-                    onPressed: () {
-                      Navigator.of(context).pop(
-                          true); // Returning true to _onWillPop will pop again.
-                    })
+                  child: const Text('DISCARD'),
+                  onPressed: () {
+                    Navigator.of(context).pop(
+                      true,
+                    ); // Returning true to _onWillPop will pop again.
+                  },
+                ),
               ],
             );
           },
@@ -266,9 +282,8 @@ class _AccountFormScreenState extends State<AccountFormScreen> {
   }
 
   void showInSnackBar(String value) {
-    scaffoldMessengerKey.currentState.showSnackBar(SnackBar(
-      content: Text(value),
-      backgroundColor: Colors.red,
-    ));
+    scaffoldMessengerKey.currentState.showSnackBar(
+      SnackBar(content: Text(value), backgroundColor: Colors.red),
+    );
   }
 }

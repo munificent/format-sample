@@ -41,19 +41,13 @@ class ErrorBanner extends StatelessWidget {
       switchOutCurve: Curves.ease,
       duration: const Duration(milliseconds: 200),
       transitionBuilder: (child, animation) {
-        return SizeTransition(
-          sizeFactor: animation,
-          child: child,
-        );
+        return SizeTransition(sizeFactor: animation, child: child);
       },
       child: _buildBanner(context, expanded: expanded),
     );
   }
 
-  Widget _buildBanner(
-    BuildContext context, {
-    required bool expanded,
-  }) {
+  Widget _buildBanner(BuildContext context, {required bool expanded}) {
     if (expanded) {
       return Card(
         elevation: 1.0,
@@ -62,9 +56,7 @@ class ErrorBanner extends StatelessWidget {
           leading: CircleAvatar(
             backgroundColor: Theme.of(context).errorColor,
             foregroundColor: Theme.of(context).colorScheme.onError,
-            child: const Icon(
-              Icons.error_outline,
-            ),
+            child: const Icon(Icons.error_outline),
           ),
           content: Text(message),
           forceActionsBelow: true,
@@ -72,10 +64,7 @@ class ErrorBanner extends StatelessWidget {
             ...customActions,
             TextButton(
               onPressed: onShowErrors,
-              child: Text(
-                S.of(context).showErrors,
-                textAlign: TextAlign.end,
-              ),
+              child: Text(S.of(context).showErrors, textAlign: TextAlign.end),
             ),
           ],
         ),

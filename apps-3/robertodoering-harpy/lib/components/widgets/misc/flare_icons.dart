@@ -21,23 +21,21 @@ class FlareIcon extends StatelessWidget {
     double size = 18,
     Color? color,
   }) : this(
-          fileName: '$_path/favorite.flr',
-          size: size,
-          sizeDifference: -0.5,
-          animation: animation,
-          color: color,
-        );
+         fileName: '$_path/favorite.flr',
+         size: size,
+         sizeDifference: -0.5,
+         animation: animation,
+         color: color,
+       );
 
   /// An animated shining star icon.
-  const FlareIcon.shiningStar({
-    double size = 18,
-    Offset offset = Offset.zero,
-  }) : this(
-          fileName: '$_path/shining_star.flr',
-          size: size,
-          offset: offset,
-          animation: 'shining',
-        );
+  const FlareIcon.shiningStar({double size = 18, Offset offset = Offset.zero})
+    : this(
+        fileName: '$_path/shining_star.flr',
+        size: size,
+        offset: offset,
+        animation: 'shining',
+      );
 
   /// The harpy logo.
   const FlareIcon.harpyLogo({
@@ -45,12 +43,12 @@ class FlareIcon extends StatelessWidget {
     bool animate = false,
     Offset offset = Offset.zero,
   }) : this(
-          fileName: '$_path/harpy_logo.flr',
-          size: size,
-          sizeDifference: 14,
-          offset: offset,
-          animation: animate ? 'show' : null,
-        );
+         fileName: '$_path/harpy_logo.flr',
+         size: size,
+         sizeDifference: 14,
+         offset: offset,
+         animation: animate ? 'show' : null,
+       );
 
   /// The path of the flare asset file.
   final String fileName;
@@ -78,12 +76,10 @@ class FlareIcon extends StatelessWidget {
   /// using a [FlareIcon] doesn't appear blank for a few frames when it
   /// builds for the first time.
   static void cacheIcons(BuildContext context) {
-    cachedActor(
-      AssetFlare(
-        bundle: DefaultAssetBundle.of(context),
-        name: '$_path/shining_star.flr',
-      ),
-    );
+    cachedActor(AssetFlare(
+      bundle: DefaultAssetBundle.of(context),
+      name: '$_path/shining_star.flr',
+    ));
   }
 
   @override
@@ -93,11 +89,7 @@ class FlareIcon extends StatelessWidget {
       child: SizedBox(
         width: _calculatedSize,
         height: _calculatedSize,
-        child: FlareActor(
-          fileName,
-          animation: animation,
-          color: color,
-        ),
+        child: FlareActor(fileName, animation: animation, color: color),
       ),
     );
   }

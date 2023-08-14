@@ -36,27 +36,24 @@ class _MySchedulePageState extends State<MySchedulePage> {
         .getFavoriteRepository()
         .findAll(user.id)
         .then((favorites) {
-      List<int> favoriteSessionIds = new List();
-      favorites.forEach((String id, bool value) {
-        if (value == true) {
-          favoriteSessionIds.add(int.parse(id));
-        }
-      });
-      return favoriteSessionIds;
-    });
+          List<int> favoriteSessionIds = new List();
+          favorites.forEach((String id, bool value) {
+            if (value == true) {
+              favoriteSessionIds.add(int.parse(id));
+            }
+          });
+          return favoriteSessionIds;
+        });
 
-    new RepositoryFactory()
-        .getSessionRepository()
-        .findByIds(favoriteIds)
-        .then((s) => setSessions(s));
+    new RepositoryFactory().getSessionRepository().findByIds(favoriteIds).then(
+      (s) => setSessions(s),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     if (_sessions.isEmpty) {
-      return new Center(
-        child: const CircularProgressIndicator(),
-      );
+      return new Center(child: const CircularProgressIndicator());
     }
 
     return new ListView(
@@ -64,10 +61,7 @@ class _MySchedulePageState extends State<MySchedulePage> {
       children: _sessions.map((Session session) {
         return new Padding(
           padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: new SessionsItem(
-            session: session,
-            googleSignIn: googleSignIn,
-          ),
+          child: new SessionsItem(session: session, googleSignIn: googleSignIn),
         );
       }).toList(),
     );

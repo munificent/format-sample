@@ -90,10 +90,7 @@ class _StaticVideoPlayerOverlayState extends State<StaticVideoPlayerOverlay> {
         Positioned.fill(
           child: Align(
             alignment: Alignment.bottomCenter,
-            child: OverlayActionRow(
-              widget.model,
-              compact: widget.compact,
-            ),
+            child: OverlayActionRow(widget.model, compact: widget.compact),
           ),
         ),
         if (widget.model.finished)

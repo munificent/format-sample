@@ -115,9 +115,7 @@ class Utils {
       backgroundColor: Colors.black54,
       duration: const Duration(seconds: 3),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(25),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
       content: Text(
         (numberOfVideos != 1)

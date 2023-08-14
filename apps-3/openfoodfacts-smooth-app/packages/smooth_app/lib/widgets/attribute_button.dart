@@ -14,10 +14,7 @@ import 'package:smooth_ui_library/dialogs/smooth_alert_dialog.dart';
 
 /// Colored button for attribute importance, with corresponding action
 class AttributeButton extends StatelessWidget {
-  const AttributeButton(
-    this.attribute,
-    this.productPreferences,
-  );
+  const AttributeButton(this.attribute, this.productPreferences);
 
   final Attribute attribute;
   final ProductPreferences productPreferences;
@@ -47,15 +44,17 @@ class AttributeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    String importanceId =
-        productPreferences.getImportanceIdForAttributeId(attribute.id!);
+    String importanceId = productPreferences.getImportanceIdForAttributeId(
+      attribute.id!,
+    );
     // We switch from 4 to 3 choices: very important is downgraded to important
     if (importanceId == PreferenceImportance.ID_VERY_IMPORTANT) {
       importanceId = PreferenceImportance.ID_IMPORTANT;
     }
     final ThemeProvider themeProvider = context.watch<ThemeProvider>();
-    final MaterialColor materialColor =
-        SmoothTheme.getMaterialColor(themeProvider);
+    final MaterialColor materialColor = SmoothTheme.getMaterialColor(
+      themeProvider,
+    );
     final Color? strongBackgroundColor = SmoothTheme.getColor(
       colorScheme,
       materialColor,
@@ -66,19 +65,21 @@ class AttributeButton extends StatelessWidget {
       materialColor,
       ColorDestination.SURFACE_FOREGROUND,
     );
-    final Color? foregroundColor =
-        _getForegroundColor(strongForegroundColor!, importanceId);
+    final Color? foregroundColor = _getForegroundColor(
+      strongForegroundColor!,
+      importanceId,
+    );
     return ListTile(
       tileColor: _getBackgroundColor(strongBackgroundColor!, importanceId),
       title: Text(attribute.name!, style: TextStyle(color: foregroundColor)),
       leading: SvgCache(attribute.iconUrl, width: 40),
       trailing: _getIcon(importanceId, foregroundColor),
       onTap: () async => onTap(
-        context: context,
-        attributeId: attribute.id!,
-        productPreferences: productPreferences,
-        themeProvider: themeProvider,
-      ),
+            context: context,
+            attributeId: attribute.id!,
+            productPreferences: productPreferences,
+            themeProvider: themeProvider,
+          ),
     );
   }
 
@@ -88,14 +89,16 @@ class AttributeButton extends StatelessWidget {
     required final ProductPreferences productPreferences,
     required final ThemeProvider themeProvider,
   }) async {
-    final Attribute? attribute =
-        productPreferences.getReferenceAttribute(attributeId);
+    final Attribute? attribute = productPreferences.getReferenceAttribute(
+      attributeId,
+    );
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final AppLocalizations appLocalizations = AppLocalizations.of(context)!;
-    final String importanceId =
-        productPreferences.getImportanceIdForAttributeId(attributeId);
-    final MaterialColor materialColor =
-        SmoothTheme.getMaterialColor(themeProvider);
+    final String importanceId = productPreferences
+        .getImportanceIdForAttributeId(attributeId);
+    final MaterialColor materialColor = SmoothTheme.getMaterialColor(
+      themeProvider,
+    );
     final Color? strongBackgroundColor = SmoothTheme.getColor(
       colorScheme,
       materialColor,
@@ -112,66 +115,65 @@ class AttributeButton extends StatelessWidget {
         title: Text(attribute.settingName!),
       ),
     ];
-    final AttributeGroup attributeGroup =
-        productPreferences.getAttributeGroup(attributeId);
+    final AttributeGroup attributeGroup = productPreferences.getAttributeGroup(
+      attributeId,
+    );
     if (attributeGroup.warning != null) {
-      children.add(
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          color: SmoothTheme.getColor(
-            colorScheme,
-            WARNING_COLOR,
-            ColorDestination.BUTTON_BACKGROUND,
-          ),
-          width: double.infinity,
-          child: Text(
-            attributeGroup.warning!,
-            style: TextStyle(
-              color: SmoothTheme.getColor(
-                colorScheme,
-                WARNING_COLOR,
-                ColorDestination.BUTTON_FOREGROUND,
-              ),
+      children.add(Container(
+        padding: const EdgeInsets.all(8.0),
+        color: SmoothTheme.getColor(
+          colorScheme,
+          WARNING_COLOR,
+          ColorDestination.BUTTON_BACKGROUND,
+        ),
+        width: double.infinity,
+        child: Text(
+          attributeGroup.warning!,
+          style: TextStyle(
+            color: SmoothTheme.getColor(
+              colorScheme,
+              WARNING_COLOR,
+              ColorDestination.BUTTON_FOREGROUND,
             ),
           ),
         ),
-      );
+      ));
     }
     for (final String item in _importanceIds) {
-      final Color? foregroundColor =
-          _getForegroundColor(strongForegroundColor!, item);
-      children.add(
-        ListTile(
-          tileColor: _getBackgroundColor(strongBackgroundColor!, item),
-          leading: importanceId == item
-              ? Icon(Icons.radio_button_checked, color: foregroundColor)
-              : Icon(Icons.radio_button_unchecked, color: foregroundColor),
-          title: Text(
-            productPreferences
-                .getPreferenceImportanceFromImportanceId(item)!
-                .name!,
-            style: TextStyle(color: foregroundColor),
-          ),
-          onTap: () => Navigator.pop<String>(context, item),
-          trailing: _getIcon(item, foregroundColor),
-        ),
+      final Color? foregroundColor = _getForegroundColor(
+        strongForegroundColor!,
+        item,
       );
+      children.add(ListTile(
+        tileColor: _getBackgroundColor(strongBackgroundColor!, item),
+        leading: importanceId == item
+            ? Icon(Icons.radio_button_checked, color: foregroundColor)
+            : Icon(Icons.radio_button_unchecked, color: foregroundColor),
+        title: Text(
+          productPreferences.getPreferenceImportanceFromImportanceId(
+            item,
+          )!.name!,
+          style: TextStyle(color: foregroundColor),
+        ),
+        onTap: () => Navigator.pop<String>(context, item),
+        trailing: _getIcon(item, foregroundColor),
+      ));
     }
     final String? result = await showDialog<String>(
       context: context,
       builder: (final BuildContext context) => SmoothAlertDialog(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: children,
-        ),
-        actions: <SmoothSimpleButton>[
-          SmoothSimpleButton(
-            text: appLocalizations.cancel,
-            onPressed: () => Navigator.pop(context),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: children,
+            ),
+            actions: <SmoothSimpleButton>[
+              SmoothSimpleButton(
+                text: appLocalizations.cancel,
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
           ),
-        ],
-      ),
     );
     if (result == null) {
       return;
@@ -201,8 +203,7 @@ class AttributeButton extends StatelessWidget {
   static Color? _getForegroundColor(
     final Color strongForegroundColor,
     final String importanceId,
-  ) =>
-      importanceId == PreferenceImportance.ID_NOT_IMPORTANT
-          ? null
-          : strongForegroundColor;
+  ) => importanceId == PreferenceImportance.ID_NOT_IMPORTANT
+      ? null
+      : strongForegroundColor;
 }

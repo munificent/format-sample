@@ -28,10 +28,7 @@ class DialogCrashHandler implements CrashHandler {
   final GlobalKey<NavigatorState> navigatorKey;
   final CrashHandler? fallbackHandler;
 
-  DialogCrashHandler({
-    required this.navigatorKey,
-    this.fallbackHandler,
-  });
+  DialogCrashHandler({required this.navigatorKey, this.fallbackHandler});
 
   @override
   Future<void> handle(Object error, StackTrace? stackTrace) async {
@@ -47,11 +44,7 @@ class DialogCrashHandler implements CrashHandler {
         return CrashReportDialog(
           error: error,
           stackTrace: stackTrace,
-          onReport: (message) => _onReport(
-            error,
-            stackTrace,
-            message,
-          ),
+          onReport: (message) => _onReport(error, stackTrace, message),
         );
       },
     );
@@ -63,11 +56,7 @@ class DialogCrashHandler implements CrashHandler {
     String? message,
   ) async {
     final res = await getIt<CrashReportManager>().sendReport(
-      CrashInfo(
-        error: error,
-        stackTrace: stackTrace,
-        message: message,
-      ),
+      CrashInfo(error: error, stackTrace: stackTrace, message: message),
     );
     final context = _getContext();
     if (context == null) {

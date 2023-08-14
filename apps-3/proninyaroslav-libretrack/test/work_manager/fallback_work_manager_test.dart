@@ -49,8 +49,9 @@ void main() {
 
     setUp(() {
       mockWorker = MockWorker();
-      when(() => mockWorkersProvider.getWorkerByName(workerName))
-          .thenReturn(mockWorker);
+      when(() => mockWorkersProvider.getWorkerByName(workerName)).thenReturn(
+        mockWorker,
+      );
       workManager = FallbackWorkManager(
         repo: mockRepo,
         constraintsManager: mockConstraintsManager,
@@ -69,24 +70,25 @@ void main() {
           inputData: inputData,
         );
 
-        when(() => mockConstraintsManager.isWorkAllowed(any()))
-            .thenAnswer((_) async => true);
-        when(() => mockConstraintsManager.defferedCheck(any()))
-            .thenAnswer((_) async => true);
-        when(() => mockWorker.doWork(inputData))
-            .thenAnswer((_) async => const WorkResult.success());
+        when(() => mockConstraintsManager.isWorkAllowed(any())).thenAnswer(
+          (_) async => true,
+        );
+        when(() => mockConstraintsManager.defferedCheck(any())).thenAnswer(
+          (_) async => true,
+        );
+        when(() => mockWorker.doWork(inputData)).thenAnswer(
+          (_) async => const WorkResult.success(),
+        );
         when(() => mockRepo.addWork(expectedInfo)).thenAnswer((_) async {});
         when(() => mockRepo.deleteWork(expectedInfo)).thenAnswer((_) async {});
-        when(
-          () => mockRepo.getWorkById(expectedInfo.id),
-        ).thenAnswer((_) async => expectedInfo);
+        when(() => mockRepo.getWorkById(expectedInfo.id)).thenAnswer(
+          (_) async => expectedInfo,
+        );
 
         await workManager.registerOneTime(
           workId: '1',
           workerName: workerName,
-          params: const WorkParams(
-            inputData: inputData,
-          ),
+          params: const WorkParams(inputData: inputData),
         );
         await workManager.execute(expectedInfo.id);
 
@@ -108,28 +110,26 @@ void main() {
             .thenAnswer((_) async => false);
         when(() => mockConstraintsManager.defferedCheck(constraints))
             .thenAnswer((_) async {
-          await Future.delayed(const Duration(seconds: 1));
-          return true;
-        });
+              await Future.delayed(const Duration(seconds: 1));
+              return true;
+            });
         when(() => mockWorker.doWork(any())).thenAnswer((_) async {
           workerCompleter.complete(true);
           return const WorkResult.success();
         });
-        when(
-          () => mockRepo.getWorkById(expectedInfo.id),
-        ).thenAnswer((_) async => expectedInfo);
+        when(() => mockRepo.getWorkById(expectedInfo.id)).thenAnswer(
+          (_) async => expectedInfo,
+        );
         when(() => mockRepo.addWork(expectedInfo)).thenAnswer((_) async {});
         when(() => mockRepo.deleteWork(expectedInfo)).thenAnswer((_) async {});
-        when(
-          () => mockRepo.getWorkById(expectedInfo.id),
-        ).thenAnswer((_) async => expectedInfo);
+        when(() => mockRepo.getWorkById(expectedInfo.id)).thenAnswer(
+          (_) async => expectedInfo,
+        );
 
         await workManager.registerOneTime(
           workId: '1',
           workerName: workerName,
-          params: const WorkParams(
-            constraints: constraints,
-          ),
+          params: const WorkParams(constraints: constraints),
         );
         await workManager.execute(expectedInfo.id);
 
@@ -150,24 +150,25 @@ void main() {
           initialDelay: initialDelay,
         );
 
-        when(() => mockConstraintsManager.isWorkAllowed(any()))
-            .thenAnswer((_) async => true);
-        when(() => mockConstraintsManager.defferedCheck(any()))
-            .thenAnswer((_) async => true);
-        when(() => mockWorker.doWork(inputData))
-            .thenAnswer((_) async => const WorkResult.success());
+        when(() => mockConstraintsManager.isWorkAllowed(any())).thenAnswer(
+          (_) async => true,
+        );
+        when(() => mockConstraintsManager.defferedCheck(any())).thenAnswer(
+          (_) async => true,
+        );
+        when(() => mockWorker.doWork(inputData)).thenAnswer(
+          (_) async => const WorkResult.success(),
+        );
         when(() => mockRepo.addWork(expectedInfo)).thenAnswer((_) async {});
         when(() => mockRepo.deleteWork(expectedInfo)).thenAnswer((_) async {});
-        when(
-          () => mockRepo.getWorkById(expectedInfo.id),
-        ).thenAnswer((_) async => expectedInfo);
+        when(() => mockRepo.getWorkById(expectedInfo.id)).thenAnswer(
+          (_) async => expectedInfo,
+        );
 
         await workManager.registerOneTime(
           workId: '1',
           workerName: workerName,
-          params: const WorkParams(
-            inputData: inputData,
-          ),
+          params: const WorkParams(inputData: inputData),
           initialDelay: initialDelay,
         );
         await workManager.execute(expectedInfo.id);
@@ -183,19 +184,17 @@ void main() {
           id: '1',
           workerName: workerName,
           type: WorkType.periodic,
-          inputData: const WorkData(
-            {'foo': 'bar'},
-          ),
+          inputData: const WorkData({'foo': 'bar'}),
         );
 
-        when(() => mockConstraintsManager.isWorkAllowed(any()))
-            .thenAnswer((_) async => true);
-        when(() => mockWorker.doWork(expectedInfo.inputData))
-            .thenAnswer((_) async => const WorkResult.success());
+        when(() => mockConstraintsManager.isWorkAllowed(any())).thenAnswer(
+          (_) async => true,
+        );
+        when(() => mockWorker.doWork(expectedInfo.inputData)).thenAnswer(
+          (_) async => const WorkResult.success(),
+        );
         when(() => mockRepo.addWork(expectedInfo)).thenAnswer((_) async {});
-        when(
-          () => mockRepo.getAll(),
-        ).thenAnswer((_) async => [expectedInfo]);
+        when(() => mockRepo.getAll()).thenAnswer((_) async => [expectedInfo]);
         when(
           () => mockRepo.updateWork(
             expectedInfo.copyWith(lastRunning: DateTime(2021)),
@@ -206,9 +205,7 @@ void main() {
         await workManager.registerPeriodic(
           workId: expectedInfo.id,
           workerName: expectedInfo.workerName,
-          params: WorkParams(
-            inputData: expectedInfo.inputData,
-          ),
+          params: WorkParams(inputData: expectedInfo.inputData),
         );
 
         await workManager.executeAll();
@@ -220,30 +217,24 @@ void main() {
           id: '1',
           workerName: workerName,
           type: WorkType.periodic,
-          constraints: const WorkConstraints(
-            networkType: NetworkType.connected,
-          ),
+          constraints:
+              const WorkConstraints(networkType: NetworkType.connected),
         );
 
         when(
-          () => mockConstraintsManager.isWorkAllowed(
-            expectedInfo.constraints,
-          ),
+          () => mockConstraintsManager.isWorkAllowed(expectedInfo.constraints),
         ).thenAnswer((_) async => false);
         when(
-          () => mockConstraintsManager.defferedCheck(
-            expectedInfo.constraints,
-          ),
+          () => mockConstraintsManager.defferedCheck(expectedInfo.constraints),
         ).thenAnswer((_) async => false);
-        when(() => mockWorker.doWork(any()))
-            .thenAnswer((_) async => const WorkResult.success());
+        when(() => mockWorker.doWork(any())).thenAnswer(
+          (_) async => const WorkResult.success(),
+        );
         when(() => mockRepo.addWork(expectedInfo)).thenAnswer((_) async {});
-        when(
-          () => mockRepo.getAll(),
-        ).thenAnswer((_) async => [expectedInfo]);
-        when(
-          () => mockRepo.getWorkById(expectedInfo.id),
-        ).thenAnswer((_) async => expectedInfo);
+        when(() => mockRepo.getAll()).thenAnswer((_) async => [expectedInfo]);
+        when(() => mockRepo.getWorkById(expectedInfo.id)).thenAnswer(
+          (_) async => expectedInfo,
+        );
 
         await workManager.registerPeriodic(
           workId: expectedInfo.id,
@@ -263,9 +254,8 @@ void main() {
           id: '1',
           workerName: workerName,
           type: WorkType.periodic,
-          constraints: const WorkConstraints(
-            networkType: NetworkType.connected,
-          ),
+          constraints:
+              const WorkConstraints(networkType: NetworkType.connected),
         );
 
         when(
@@ -274,22 +264,21 @@ void main() {
         when(
           () => mockConstraintsManager.defferedCheck(expectedInfo.constraints),
         ).thenAnswer((_) async => false);
-        when(() => mockWorker.doWork(any()))
-            .thenAnswer((_) async => const WorkResult.success());
+        when(() => mockWorker.doWork(any())).thenAnswer(
+          (_) async => const WorkResult.success(),
+        );
         when(() => mockRepo.addWork(expectedInfo)).thenAnswer((_) async {});
         when(() => mockRepo.deleteWork(expectedInfo)).thenAnswer((_) async {});
-        when(
-          () => mockRepo.getAll(),
-        ).thenAnswer((_) async => [expectedInfo]);
+        when(() => mockRepo.getAll()).thenAnswer((_) async => [expectedInfo]);
         when(
           () => mockRepo.updateWork(
             expectedInfo.copyWith(lastRunning: DateTime(2021)),
           ),
         ).thenAnswer((_) async {});
         when(() => mockDateTimeProvider.now()).thenReturn(DateTime(2021));
-        when(
-          () => mockRepo.getWorkById(expectedInfo.id),
-        ).thenAnswer((_) async => expectedInfo);
+        when(() => mockRepo.getWorkById(expectedInfo.id)).thenAnswer(
+          (_) async => expectedInfo,
+        );
 
         await workManager.registerPeriodic(
           workId: expectedInfo.id,
@@ -318,14 +307,18 @@ void main() {
           frequency: const Duration(hours: 1),
         );
 
-        when(() => mockConstraintsManager.isWorkAllowed(
-            expectedWorkInfo.constraints)).thenAnswer((_) async => true);
-        when(() => mockWorker.doWork(any()))
-            .thenAnswer((_) async => const WorkResult.success());
-        when(() => mockRepo.addWork(expectedWorkInfo)).thenAnswer((_) async {});
         when(
-          () => mockRepo.getAll(),
-        ).thenAnswer((_) async => [expectedWorkInfo]);
+          () => mockConstraintsManager.isWorkAllowed(
+            expectedWorkInfo.constraints,
+          ),
+        ).thenAnswer((_) async => true);
+        when(() => mockWorker.doWork(any())).thenAnswer(
+          (_) async => const WorkResult.success(),
+        );
+        when(() => mockRepo.addWork(expectedWorkInfo)).thenAnswer((_) async {});
+        when(() => mockRepo.getAll()).thenAnswer(
+          (_) async => [expectedWorkInfo],
+        );
         when(
           () => mockRepo.updateWork(
             expectedWorkInfo.copyWith(lastRunning: DateTime(2021)),
@@ -337,19 +330,13 @@ void main() {
           workId: expectedWorkInfo.id,
           workerName: expectedWorkInfo.workerName,
           frequency: expectedWorkInfo.frequency,
-          params: WorkParams(
-            inputData: expectedWorkInfo.inputData,
-          ),
+          params: WorkParams(inputData: expectedWorkInfo.inputData),
         );
 
         expect(await workManager.executeAll(), isTrue);
         verify(() => mockWorker.doWork(any())).called(1);
-        when(
-          () => mockRepo.getAll(),
-        ).thenAnswer(
-          (_) async => [
-            expectedWorkInfo.copyWith(lastRunning: DateTime(2021)),
-          ],
+        when(() => mockRepo.getAll()).thenAnswer(
+          (_) async => [expectedWorkInfo.copyWith(lastRunning: DateTime(2021))],
         );
         expect(await workManager.executeAll(), isTrue);
         verifyNever(() => mockWorker.doWork(any()));

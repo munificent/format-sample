@@ -30,9 +30,11 @@ class _OverviewScreenState extends State<OverviewScreen>
   @override
   void initState() {
     topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: widget.animationController,
-            curve: Interval(0, 0.5, curve: Curves.fastOutSlowIn)));
+      CurvedAnimation(
+        parent: widget.animationController,
+        curve: Interval(0, 0.5, curve: Curves.fastOutSlowIn),
+      ),
+    );
     addAllListData();
 
     scrollController.addListener(() {
@@ -63,47 +65,39 @@ class _OverviewScreenState extends State<OverviewScreen>
   void addAllListData() {
     const int count = 9;
 
-    listViews.add(
-      TitleView(
-        titleTxt: monthformatter.format(DateTime.now()),
-        subTxt: 'This month',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController,
-            curve:
-                Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-      ),
-    );
-    listViews.add(
-      TransactionSummaryView(
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController,
-            curve:
-                Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-      ),
-    );
-    listViews.add(
-      TitleView(
-        titleTxt: 'Overall',
-        subTxt: 'Recent',
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController,
-            curve:
-                Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-      ),
-    );
+    listViews.add(TitleView(
+      titleTxt: monthformatter.format(DateTime.now()),
+      subTxt: 'This month',
+      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+        parent: widget.animationController,
+        curve: Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn),
+      )),
+      animationController: widget.animationController,
+    ));
+    listViews.add(TransactionSummaryView(
+      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+        parent: widget.animationController,
+        curve: Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn),
+      )),
+      animationController: widget.animationController,
+    ));
+    listViews.add(TitleView(
+      titleTxt: 'Overall',
+      subTxt: 'Recent',
+      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+        parent: widget.animationController,
+        curve: Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn),
+      )),
+      animationController: widget.animationController,
+    ));
 
-    listViews.add(
-      OverallView(
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController,
-            curve:
-                Interval((1 / count) * 5, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-      ),
-    );
+    listViews.add(OverallView(
+      animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+        parent: widget.animationController,
+        curve: Interval((1 / count) * 5, 1.0, curve: Curves.fastOutSlowIn),
+      )),
+      animationController: widget.animationController,
+    ));
   }
 
   Future<bool> getData() async {
@@ -123,9 +117,7 @@ class _OverviewScreenState extends State<OverviewScreen>
           children: <Widget>[
             getMainListViewUI(),
             getAppBarUI(),
-            SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
-            )
+            SizedBox(height: MediaQuery.of(context).padding.bottom),
           ],
         ),
       ),
@@ -169,7 +161,10 @@ class _OverviewScreenState extends State<OverviewScreen>
               opacity: topBarAnimation,
               child: Transform(
                 transform: Matrix4.translationValues(
-                    0.0, 30 * (1.0 - topBarAnimation.value), 0.0),
+                  0.0,
+                  30 * (1.0 - topBarAnimation.value),
+                  0.0,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     color: PiggyAppTheme.white.withOpacity(topBarOpacity),
@@ -178,23 +173,23 @@ class _OverviewScreenState extends State<OverviewScreen>
                     ),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: PiggyAppTheme.grey
-                              .withOpacity(0.4 * topBarOpacity),
-                          offset: const Offset(1.1, 1.1),
-                          blurRadius: 10.0),
+                        color:
+                            PiggyAppTheme.grey.withOpacity(0.4 * topBarOpacity),
+                        offset: const Offset(1.1, 1.1),
+                        blurRadius: 10.0,
+                      ),
                     ],
                   ),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
-                        height: MediaQuery.of(context).padding.top,
-                      ),
+                      SizedBox(height: MediaQuery.of(context).padding.top),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: 16,
-                            right: 16,
-                            top: 16 - 8.0 * topBarOpacity,
-                            bottom: 12 - 8.0 * topBarOpacity),
+                          left: 16,
+                          right: 16,
+                          top: 16 - 8.0 * topBarOpacity,
+                          bottom: 12 - 8.0 * topBarOpacity,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -231,10 +226,7 @@ class _OverviewScreenState extends State<OverviewScreen>
                             //   ),
                             // ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                left: 8,
-                                right: 8,
-                              ),
+                              padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Row(
                                 children: <Widget>[
                                   Padding(
@@ -277,14 +269,14 @@ class _OverviewScreenState extends State<OverviewScreen>
                             // ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
             );
           },
-        )
+        ),
       ],
     );
   }

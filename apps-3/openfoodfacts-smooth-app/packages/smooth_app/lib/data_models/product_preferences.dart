@@ -81,10 +81,12 @@ class ProductPreferences extends ProductPreferencesManager with ChangeNotifier {
   ///
   /// May throw an exception.
   Future<void> loadReferenceFromNetwork(String languageCode) async {
-    final String importanceUrl =
-        AvailablePreferenceImportances.getUrl(languageCode);
-    final String attributeGroupUrl =
-        AvailableAttributeGroups.getUrl(languageCode);
+    final String importanceUrl = AvailablePreferenceImportances.getUrl(
+      languageCode,
+    );
+    final String attributeGroupUrl = AvailableAttributeGroups.getUrl(
+      languageCode,
+    );
     http.Response response;
     response = await http.get(Uri.parse(importanceUrl));
     if (response.statusCode != 200) {
@@ -109,15 +111,13 @@ class ProductPreferences extends ProductPreferencesManager with ChangeNotifier {
   Future<void> resetImportances() async {
     await clearImportances(notifyListeners: false);
     // Execute all network calls in parallel.
-    await Future.wait(
-      _DEFAULT_ATTRIBUTES.map(
-        (String attributeId) => setImportance(
-          attributeId,
-          PreferenceImportance.ID_IMPORTANT,
-          notifyListeners: false,
-        ),
+    await Future.wait(_DEFAULT_ATTRIBUTES.map(
+      (String attributeId) => setImportance(
+        attributeId,
+        PreferenceImportance.ID_IMPORTANT,
+        notifyListeners: false,
       ),
-    );
+    ));
     notify();
   }
 

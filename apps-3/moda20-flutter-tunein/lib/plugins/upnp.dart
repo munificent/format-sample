@@ -16,16 +16,16 @@ class upnp {
     return await service.invokeAction("Pause", {"InstanceID": "0"});
   }
 
-  Future<Map<String, dynamic>> playCurrentMedia(
-      {Service service, String Speed}) async {
+  Future<Map<String, dynamic>> playCurrentMedia({
+    Service service,
+    String Speed,
+  }) async {
     return await service
         .invokeAction("Play", {"InstanceID": "0", "Speed": Speed ?? "1"});
   }
 
   Future<Map<String, dynamic>> stopCurrentMedia({Service service}) async {
-    return await service.invokeAction("Stop", {
-      "InstanceID": "0",
-    });
+    return await service.invokeAction("Stop", {"InstanceID": "0"});
   }
 
   Future<Map<String, dynamic>> getTransportSettings({Service service}) async {
@@ -100,10 +100,14 @@ class upnp {
   /// INTRO : Will only play 1à seconds of each track then stop after playing (the 10 seconds) all of the tracks
   ///
   ///
-  Future<Map<String, dynamic>> setPlayMode(
-      {Service service, String playmode}) async {
-    return await service.invokeAction("GetCurrentTransportActions",
-        {"InstanceID": "0", "NewPlayMode": playmode ?? "NORMAL"});
+  Future<Map<String, dynamic>> setPlayMode({
+    Service service,
+    String playmode,
+  }) async {
+    return await service.invokeAction("GetCurrentTransportActions", {
+      "InstanceID": "0",
+      "NewPlayMode": playmode ?? "NORMAL",
+    });
   }
 
   ///Will set the next item in the playlist To be early buffered
@@ -142,17 +146,18 @@ class upnp {
   ///
   ///
   /// [uri] is the uri for the file, it should be public and accessible over http ( this is not a final version )
-  Future<Map<String, dynamic>> setNextURI(
-      {Service service,
-      String uri,
-      String title,
-      String creator,
-      String Objectclass}) async {
+  Future<Map<String, dynamic>> setNextURI({
+    Service service,
+    String uri,
+    String title,
+    String creator,
+    String Objectclass,
+  }) async {
     return await service.invokeAction("SetNextAVTransportURI", {
       "InstanceID": "0",
       "NextURI": uri ?? "",
       "NextURIMetaData":
-          '<CurrentURIMetaData>&lt;DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sec="http://www.sec.co.kr/"&gt;&lt;item id="f-0" parentID="0" restricted="0"&gt;&lt;dc:title&gt;${title ?? "Untitled"}&lt;/dc:title&gt;&lt;dc:creator&gt;${creator ?? "NoCreator"}&lt;/dc:creator&gt;&lt;upnp:class&gt;${Objectclass ?? "object.item.videoItem"}&lt;/upnp:class&gt;&lt;res protocolInfo="*:*:audio:*" sec:URIType="public"&gt;${uri ?? ""}&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</CurrentURIMetaData>'
+          '<CurrentURIMetaData>&lt;DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sec="http://www.sec.co.kr/"&gt;&lt;item id="f-0" parentID="0" restricted="0"&gt;&lt;dc:title&gt;${title ?? "Untitled"}&lt;/dc:title&gt;&lt;dc:creator&gt;${creator ?? "NoCreator"}&lt;/dc:creator&gt;&lt;upnp:class&gt;${Objectclass ?? "object.item.videoItem"}&lt;/upnp:class&gt;&lt;res protocolInfo="*:*:audio:*" sec:URIType="public"&gt;${uri ?? ""}&lt;/res&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</CurrentURIMetaData>',
     });
   }
 
@@ -193,40 +198,42 @@ class upnp {
   ///
   ///
   /// [uri] is the uri for the file, it should be public and accessible over http ( this is not a final version )
-  Future<Map<String, dynamic>> setCurrentURI(
-      {Service service,
-      String uri,
-      String artUri,
-      String title,
-      String creator,
-      String Objectclass,
-      String Duration,
-      String Album,
-      int Size,
-      String region,
-      String genre,
-      int trackNumber}) async {
+  Future<Map<String, dynamic>> setCurrentURI({
+    Service service,
+    String uri,
+    String artUri,
+    String title,
+    String creator,
+    String Objectclass,
+    String Duration,
+    String Album,
+    int Size,
+    String region,
+    String genre,
+    int trackNumber,
+  }) async {
     HtmlEscape htmlEscape = const HtmlEscape();
 
     return await service.invokeAction("SetAVTransportURI", {
       "InstanceID": "0",
       "CurrentURI": uri ?? "",
-      "CurrentURIMetaData": (htmlEscape.convert(xml
-          .parse(
-              '<DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sec="http://www.sec.co.kr/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/">'
-              '<item id="0" parentID="-1" restricted="false">'
-              '<upnp:class>${Objectclass ?? "object.item.audioItem.musicTrack"}</upnp:class>'
-              '<dc:title>${title ?? "Unknown Title"}</dc:title>'
-              '<dc:creator>${creator ?? "Unknown creator"}</dc:creator>'
-              '<upnp:artist>${creator ?? "Unknown Artist"}</upnp:artist>'
-              '<upnp:album>${Album}</upnp:album>'
-              '<upnp:originalTrackNumber>${trackNumber ?? 1}</upnp:originalTrackNumber>'
-              '<dc:genre>${genre}</dc:genre>'
-              '<upnp:albumArtURI dlna:profileID="JPEG_TN" xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/">${artUri}</upnp:albumArtURI>'
-              '<res duration="${Duration}" size="${Size}" protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01700000000000000000000000000000">${uri}</res>'
-              '</item>'
-              '</DIDL-Lite>')
-          .toString()))
+      "CurrentURIMetaData": (htmlEscape.convert(
+        xml.parse(
+          '<DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sec="http://www.sec.co.kr/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/">'
+          '<item id="0" parentID="-1" restricted="false">'
+          '<upnp:class>${Objectclass ?? "object.item.audioItem.musicTrack"}</upnp:class>'
+          '<dc:title>${title ?? "Unknown Title"}</dc:title>'
+          '<dc:creator>${creator ?? "Unknown creator"}</dc:creator>'
+          '<upnp:artist>${creator ?? "Unknown Artist"}</upnp:artist>'
+          '<upnp:album>${Album}</upnp:album>'
+          '<upnp:originalTrackNumber>${trackNumber ?? 1}</upnp:originalTrackNumber>'
+          '<dc:genre>${genre}</dc:genre>'
+          '<upnp:albumArtURI dlna:profileID="JPEG_TN" xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/">${artUri}</upnp:albumArtURI>'
+          '<res duration="${Duration}" size="${Size}" protocolInfo="http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01700000000000000000000000000000">${uri}</res>'
+          '</item>'
+          '</DIDL-Lite>',
+        ).toString(),
+      )),
     });
   }
 
@@ -242,12 +249,14 @@ class upnp {
   ///[position] is an absolute value and needs to be in this format : HH:MM:SS
   ///where HH is hours, MM is minutes and SS is seconds
   ///Example : 00:01:00
-  Future<Map<String, dynamic>> seekPostion(
-      {Service service, String position}) async {
+  Future<Map<String, dynamic>> seekPostion({
+    Service service,
+    String position,
+  }) async {
     return await service.invokeAction("Seek", {
       "InstanceID": "0",
       "Unit": "REL_TIME",
-      "Target": position ?? "00:01:00"
+      "Target": position ?? "00:01:00",
     });
   }
 
@@ -264,8 +273,10 @@ class upnp {
   ///
   ///
   /// When set to true [newSub] will NEED a MANUAL un-subscription in order to free cpu and memory
-  Future<BehaviorSubject<Map<String, String>>> subscribeToService(
-      {Service service, bool newSub = false}) async {
+  Future<BehaviorSubject<Map<String, String>>> subscribeToService({
+    Service service,
+    bool newSub = false,
+  }) async {
     var sub;
     int subIndex;
     BehaviorSubject<Map<String, String>> returnedBehaviorSubject =
@@ -286,15 +297,18 @@ class upnp {
 
     Map<String, String> eventDataMap = Map();
     eventDataMap["subscriptionID"] = subIndex.toString();
-    sub.subscribeToService(service).listen((value) {
-      value.keys.forEach((elem) {
-        var eventData = value[elem];
-        eventDataMap[elem] = eventData;
-      });
-      returnedBehaviorSubject.add(eventDataMap);
-    }, onError: (e, stack) {
-      print("Error while subscribing to ${service.type} : ${e}");
-    });
+    sub.subscribeToService(service).listen(
+      (value) {
+        value.keys.forEach((elem) {
+          var eventData = value[elem];
+          eventDataMap[elem] = eventData;
+        });
+        returnedBehaviorSubject.add(eventDataMap);
+      },
+      onError: (e, stack) {
+        print("Error while subscribing to ${service.type} : ${e}");
+      },
+    );
 
     return returnedBehaviorSubject;
   }

@@ -5,11 +5,17 @@ class TweetVisibilityPreferences {
   const TweetVisibilityPreferences();
 
   /// The id of the list visible tweet in the home timeline.
-  int get lastVisibleTweet =>
-      app<HarpyPreferences>().getInt('lastVisibleTweet', 0, prefix: true);
+  int get lastVisibleTweet => app<HarpyPreferences>().getInt(
+    'lastVisibleTweet',
+    0,
+    prefix: true,
+  );
 
-  set lastVisibleTweet(int value) =>
-      app<HarpyPreferences>().setInt('lastVisibleTweet', value, prefix: true);
+  set lastVisibleTweet(int value) => app<HarpyPreferences>().setInt(
+    'lastVisibleTweet',
+    value,
+    prefix: true,
+  );
 
   /// Updates tweet visibility based on the home timeline position behavior
   /// setting.
@@ -31,8 +37,14 @@ class TweetVisibilityPreferences {
   }
 
   /// The id of the last viewed mention for the mentions timeline.
-  int get lastViewedMention =>
-      app<HarpyPreferences>().getInt('lastViewedMention', 0, prefix: true);
-  set lastViewedMention(int value) =>
-      app<HarpyPreferences>().setInt('lastViewedMention', value, prefix: true);
+  int get lastViewedMention => app<HarpyPreferences>().getInt(
+    'lastViewedMention',
+    0,
+    prefix: true,
+  );
+  set lastViewedMention(int value) => app<HarpyPreferences>().setInt(
+    'lastViewedMention',
+    value,
+    prefix: true,
+  );
 }

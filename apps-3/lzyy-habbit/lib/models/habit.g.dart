@@ -15,41 +15,55 @@ class _$HabitSerializer implements StructuredSerializer<Habit> {
   final String wireName = 'Habit';
 
   @override
-  Iterable serialize(Serializers serializers, Habit object,
-      {FullType specifiedType = FullType.unspecified}) {
+  Iterable serialize(
+    Serializers serializers,
+    Habit object, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     final result = <Object>[
       'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
+      serializers.serialize(
+        object.title,
+        specifiedType: const FullType(String),
+      ),
       'created',
       serializers.serialize(object.created, specifiedType: const FullType(int)),
     ];
     if (object.habitID != null) {
       result
         ..add('habitID')
-        ..add(serializers.serialize(object.habitID,
-            specifiedType: const FullType(int)));
+        ..add(serializers.serialize(
+          object.habitID,
+          specifiedType: const FullType(int),
+        ));
     }
     if (object.isSelected != null) {
       result
         ..add('isSelected')
-        ..add(serializers.serialize(object.isSelected,
-            specifiedType: const FullType(bool)));
+        ..add(serializers.serialize(
+          object.isSelected,
+          specifiedType: const FullType(bool),
+        ));
     }
     if (object.tasks != null) {
       result
         ..add('tasks')
-        ..add(serializers.serialize(object.tasks,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(DailyTask)])));
+        ..add(serializers.serialize(
+          object.tasks,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(DailyTask)]),
+        ));
     }
 
     return result;
   }
 
   @override
-  Habit deserialize(Serializers serializers, Iterable serialized,
-      {FullType specifiedType = FullType.unspecified}) {
+  Habit deserialize(
+    Serializers serializers,
+    Iterable serialized, {
+    FullType specifiedType = FullType.unspecified,
+  }) {
     final result = new HabitBuilder();
 
     final iterator = serialized.iterator;
@@ -59,25 +73,37 @@ class _$HabitSerializer implements StructuredSerializer<Habit> {
       final dynamic value = iterator.current;
       switch (key) {
         case 'habitID':
-          result.habitID = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+          result.habitID = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
           break;
         case 'title':
-          result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+          result.title = serializers.deserialize(
+            value,
+            specifiedType: const FullType(String),
+          ) as String;
           break;
         case 'created':
-          result.created = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+          result.created = serializers.deserialize(
+            value,
+            specifiedType: const FullType(int),
+          ) as int;
           break;
         case 'isSelected':
-          result.isSelected = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+          result.isSelected = serializers.deserialize(
+            value,
+            specifiedType: const FullType(bool),
+          ) as bool;
           break;
         case 'tasks':
-          result.tasks.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(DailyTask)])) as BuiltList);
+          result.tasks.replace(
+            serializers.deserialize(
+              value,
+              specifiedType:
+                  const FullType(BuiltList, const [const FullType(DailyTask)]),
+            ) as BuiltList,
+          );
           break;
       }
     }
@@ -101,9 +127,13 @@ class _$Habit extends Habit {
   factory _$Habit([void updates(HabitBuilder b)]) =>
       (new HabitBuilder()..update(updates)).build();
 
-  _$Habit._(
-      {this.habitID, this.title, this.created, this.isSelected, this.tasks})
-      : super._() {
+  _$Habit._({
+    this.habitID,
+    this.title,
+    this.created,
+    this.isSelected,
+    this.tasks,
+  }) : super._() {
     if (title == null) {
       throw new BuiltValueNullFieldError('Habit', 'title');
     }
@@ -132,12 +162,10 @@ class _$Habit extends Habit {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc($jc($jc(0, habitID.hashCode), title.hashCode),
-                created.hashCode),
-            isSelected.hashCode),
-        tasks.hashCode));
+    return $jf($jc($jc(
+      $jc($jc($jc(0, habitID.hashCode), title.hashCode), created.hashCode),
+      isSelected.hashCode,
+    ), tasks.hashCode));
   }
 
   @override
@@ -209,11 +237,12 @@ class HabitBuilder implements Builder<Habit, HabitBuilder> {
     try {
       _$result = _$v ??
           new _$Habit._(
-              habitID: habitID,
-              title: title,
-              created: created,
-              isSelected: isSelected,
-              tasks: _tasks?.build());
+            habitID: habitID,
+            title: title,
+            created: created,
+            isSelected: isSelected,
+            tasks: _tasks?.build(),
+          );
     } catch (_) {
       String _$failedField;
       try {
@@ -221,7 +250,10 @@ class HabitBuilder implements Builder<Habit, HabitBuilder> {
         _tasks?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Habit', _$failedField, e.toString());
+          'Habit',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

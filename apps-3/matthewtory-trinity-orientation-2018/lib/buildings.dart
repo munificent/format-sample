@@ -7,13 +7,13 @@ import 'package:url_launcher/url_launcher.dart';
 import 'utils.dart';
 
 class BuildingMapMarker extends StatefulWidget {
-  BuildingMapMarker(
-      {Key key,
-      @required this.building,
-      @required this.selectionController,
-      @required this.tapDelegate,
-      this.vsync})
-      : super(key: key);
+  BuildingMapMarker({
+    Key key,
+    @required this.building,
+    @required this.selectionController,
+    @required this.tapDelegate,
+    this.vsync,
+  }) : super(key: key);
 
   final DocumentSnapshot building;
   final MarkerSelectionController selectionController;
@@ -38,16 +38,18 @@ class _BuildingMapMarkerState extends State<BuildingMapMarker> {
     super.initState();
 
     controller = new AnimationController(
-        vsync: widget.vsync, duration: const Duration(milliseconds: 300));
+      vsync: widget.vsync,
+      duration: const Duration(milliseconds: 300),
+    );
 
     _buildingSelectionSub =
         widget.selectionController.eventSelectionOutputStream.listen((title) {
-      if (title == widget.building['name']) {
-        controller.forward();
-      } else {
-        controller.reverse();
-      }
-    });
+          if (title == widget.building['name']) {
+            controller.forward();
+          } else {
+            controller.reverse();
+          }
+        });
   }
 
   @override
@@ -56,12 +58,12 @@ class _BuildingMapMarkerState extends State<BuildingMapMarker> {
 
     _buildingSelectionSub =
         widget.selectionController.eventSelectionOutputStream.listen((title) {
-      if (title == widget.building['name']) {
-        controller.forward();
-      } else {
-        controller.reverse();
-      }
-    });
+          if (title == widget.building['name']) {
+            controller.forward();
+          } else {
+            controller.reverse();
+          }
+        });
   }
 
   @override
@@ -77,52 +79,51 @@ class _BuildingMapMarkerState extends State<BuildingMapMarker> {
     //print('${controller.value} for ${widget.building['name']}');
 
     return new BuildingMapMarkerGrowTransition(
-        child: new IgnorePointer(
-          ignoring: true,
-          child: new RawMaterialButton(
-            fillColor: colorForBuildingCode('A'),
-            shape: const CircleBorder(),
-            constraints: new BoxConstraints(
-                minHeight: kMarkerIndicatorSize,
-                minWidth: kMarkerIndicatorSize),
-            child: _CrossFadeTransition(
-              progress: controller,
-              child1: new Icon(
-                Icons.domain,
-                color: Colors.white,
-                size: 18.0,
-              ),
-              child0: new Icon(
-                Icons.arrow_forward,
-                color: Colors.white,
-                size: 18.0,
-              ),
-            ),
-            onPressed: () {},
+      child: new IgnorePointer(
+        ignoring: true,
+        child: new RawMaterialButton(
+          fillColor: colorForBuildingCode('A'),
+          shape: const CircleBorder(),
+          constraints: new BoxConstraints(
+            minHeight: kMarkerIndicatorSize,
+            minWidth: kMarkerIndicatorSize,
           ),
+          child: _CrossFadeTransition(
+            progress: controller,
+            child1: new Icon(Icons.domain, color: Colors.white, size: 18.0),
+            child0:
+                new Icon(Icons.arrow_forward, color: Colors.white, size: 18.0),
+          ),
+          onPressed: () {},
         ),
-        animation: controller,
-        building: widget.building,
-        selectionController: widget.selectionController);
+      ),
+      animation: controller,
+      building: widget.building,
+      selectionController: widget.selectionController,
+    );
   }
 }
 
 class BuildingMapMarkerGrowTransition extends AnimatedWidget {
-  BuildingMapMarkerGrowTransition(
-      {@required this.child,
-      @required this.animation,
-      @required this.building,
-      @required this.selectionController})
-      : scaleAnimation = new Tween(begin: 1.0, end: 1.5).animate(
-            new CurvedAnimation(parent: animation, curve: Curves.ease)),
-        opacityAnimation = new Tween(begin: 0.0, end: 1.0).animate(
-            new CurvedAnimation(
-                parent: animation,
-                curve: new Interval(0.75, 1.0, curve: Curves.easeInOut))),
-        slideAnimation = new Tween<Offset>(
-                begin: new Offset(0.0, 0.0), end: new Offset(0.0, -0.7))
-            .animate(animation),
-        super(listenable: animation);
+  BuildingMapMarkerGrowTransition({
+    @required this.child,
+    @required this.animation,
+    @required this.building,
+    @required this.selectionController,
+  }) : scaleAnimation = new Tween(begin: 1.0, end: 1.5).animate(
+         new CurvedAnimation(parent: animation, curve: Curves.ease),
+       ),
+       opacityAnimation = new Tween(begin: 0.0, end: 1.0).animate(
+         new CurvedAnimation(
+           parent: animation,
+           curve: new Interval(0.75, 1.0, curve: Curves.easeInOut),
+         ),
+       ),
+       slideAnimation = new Tween<Offset>(
+         begin: new Offset(0.0, 0.0),
+         end: new Offset(0.0, -0.7),
+       ).animate(animation),
+       super(listenable: animation);
 
   final Widget child;
   final Animation<double> animation;
@@ -136,18 +137,17 @@ class BuildingMapMarkerGrowTransition extends AnimatedWidget {
   Widget build(BuildContext context) {
     List<Widget> children = [
       Transform.scale(
-          scale: scaleAnimation.value,
-          alignment: Alignment.bottomCenter,
-          child: child),
+        scale: scaleAnimation.value,
+        alignment: Alignment.bottomCenter,
+        child: child,
+      ),
       Padding(
         padding: new EdgeInsets.only(top: scaleAnimation.value * 2.0),
         child: Container(
           width: 5.0,
           height: 5.0,
-          decoration: new BoxDecoration(
-            color: Colors.grey,
-            shape: BoxShape.circle,
-          ),
+          decoration:
+              new BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
         ),
       ),
     ];
@@ -174,9 +174,7 @@ class BuildingMapMarkerGrowTransition extends AnimatedWidget {
                     padding: const EdgeInsets.all(3.0),
                     child: new Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        new Text(building['name']),
-                      ],
+                      children: <Widget>[new Text(building['name'])],
                     ),
                   ),
                 ),
@@ -184,16 +182,14 @@ class BuildingMapMarkerGrowTransition extends AnimatedWidget {
             ),
           ),
         ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: children,
-        ),
+        Column(mainAxisSize: MainAxisSize.min, children: children),
         GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
             if (animation.status == AnimationStatus.dismissed) {
-              selectionController.markerSelectionInputSink
-                  .add(building['location']);
+              selectionController.markerSelectionInputSink.add(
+                building['location'],
+              );
               selectionController.eventSelectionInputSink.add(building['name']);
             } else {
               openMaps(context, building['location'], building['name']);
@@ -204,7 +200,7 @@ class BuildingMapMarkerGrowTransition extends AnimatedWidget {
             height: 200.0,
             constraints: const BoxConstraints(minWidth: 50.0, minHeight: 200.0),
           ),
-        )
+        ),
       ],
     );
   }

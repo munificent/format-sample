@@ -36,9 +36,7 @@ void defaultOnUrlLongPress(BuildContext context, UrlData url) {
     context,
     hapticFeedback: true,
     children: [
-      BottomSheetHeader(
-        child: Text(url.expandedUrl),
-      ),
+      BottomSheetHeader(child: Text(url.expandedUrl)),
       HarpyListTile(
         leading: const Icon(CupertinoIcons.square_arrow_left),
         title: const Text('open url externally'),
@@ -186,17 +184,11 @@ class _TwitterTextState extends State<TwitterText> {
   void _addTextSpan(int start, int end, {bool trimEnd = false}) {
     if (start < end && end <= widget.text.length) {
       final text = parseHtmlEntities(
-        trimOne(
-          widget.text.substring(start, end),
-          begin: false,
-          end: trimEnd,
-        ),
+        trimOne(widget.text.substring(start, end), begin: false, end: trimEnd),
       )!;
 
       if (text.isNotEmpty) {
-        _textSpans.add(
-          TwitterTextSpan(text),
-        );
+        _textSpans.add(TwitterTextSpan(text));
       }
     }
   }
@@ -227,10 +219,7 @@ class _TwitterTextState extends State<TwitterText> {
 
       recognizer = MultiTapGestureRecognizer(longTapDelay: kLongPressTimeout)
         ..onTap = ((_) => widget.onUrlTap?.call(context, value))
-        ..onLongTapDown = (_, __) => widget.onUrlLongPress.call(
-              context,
-              value,
-            );
+        ..onLongTapDown = (_, __) => widget.onUrlLongPress.call(context, value);
 
       text = value.displayUrl;
     } else if (value is UserMentionData) {
@@ -246,11 +235,7 @@ class _TwitterTextState extends State<TwitterText> {
 
     if (text != null) {
       _textSpans.add(
-        TwitterTextSpan(
-          text,
-          recognizer: recognizer,
-          entity: true,
-        ),
+        TwitterTextSpan(text, recognizer: recognizer, entity: true),
       );
     }
   }
@@ -282,7 +267,7 @@ class _TwitterTextState extends State<TwitterText> {
               text: textSpan.text,
               recognizer: textSpan.recognizer,
               style: textSpan.entity ? entityStyle : null,
-            )
+            ),
         ],
       ),
       style: widget.style,
@@ -336,10 +321,7 @@ List<TwitterTextEntity> _initializeEntities(
     final indices = _findIndices(text, '@${userMention.handle}', indexStart);
     indexStart = indices != null ? indices.last : indexStart;
 
-    _addEntity(
-      TwitterTextEntity(indices, userMention),
-      twitterTextEntities,
-    );
+    _addEntity(TwitterTextEntity(indices, userMention), twitterTextEntities);
   }
 
   // media
@@ -364,9 +346,9 @@ List<TwitterTextEntity> _initializeEntities(
 List<int>? _findIndices(String text, String entityText, int indexStart) {
   try {
     final start = text.toLowerCase().indexOf(
-          entityText.toLowerCase(),
-          indexStart,
-        );
+      entityText.toLowerCase(),
+      indexStart,
+    );
 
     if (start != -1) {
       final end = start + entityText.length;
@@ -423,11 +405,7 @@ class TwitterTextEntity {
 
 /// A class that represents a text span for the [TwitterText].
 class TwitterTextSpan {
-  const TwitterTextSpan(
-    this.text, {
-    this.recognizer,
-    this.entity = false,
-  });
+  const TwitterTextSpan(this.text, {this.recognizer, this.entity = false});
 
   /// The text for this text span.
   final String text;

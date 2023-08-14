@@ -51,10 +51,7 @@ void main() {
       );
     });
 
-    blocTest(
-      'Initial state',
-      build: () => cubit,
-    );
+    blocTest('Initial state', build: () => cubit);
 
     blocTest(
       'Delete',
@@ -69,9 +66,9 @@ void main() {
         verify(() => mockTrackNumberRepo.deleteTrack(trackInfo)).called(1);
       },
       expect: () => [
-        const DetailsActionsState.deleting(),
-        const DetailsActionsState.deleteSuccess(),
-      ],
+            const DetailsActionsState.deleting(),
+            const DetailsActionsState.deleteSuccess(),
+          ],
     );
 
     blocTest(
@@ -81,21 +78,21 @@ void main() {
         const trackInfo = TrackNumberInfo('123');
         const parcelInfo = ParcelInfo(trackInfo: trackInfo);
         when(
-          () => mockTrackNumberRepo
-              .updateTrack(trackInfo.copyWith(isArchived: true)),
-        ).thenAnswer(
-          (_) async => StorageResult.empty,
-        );
+          () => mockTrackNumberRepo.updateTrack(
+            trackInfo.copyWith(isArchived: true),
+          ),
+        ).thenAnswer((_) async => StorageResult.empty);
         await cubit.moveToArchive(parcelInfo);
         verify(
-          () => mockTrackNumberRepo
-              .updateTrack(trackInfo.copyWith(isArchived: true)),
+          () => mockTrackNumberRepo.updateTrack(
+            trackInfo.copyWith(isArchived: true),
+          ),
         ).called(1);
       },
       expect: () => [
-        const DetailsActionsState.movingToArchive(),
-        const DetailsActionsState.moveToArchiveSuccess(),
-      ],
+            const DetailsActionsState.movingToArchive(),
+            const DetailsActionsState.moveToArchiveSuccess(),
+          ],
     );
 
     blocTest(
@@ -108,9 +105,7 @@ void main() {
           () => mockTrackNumberRepo.updateTrack(
             trackInfo.copyWith(isArchived: false),
           ),
-        ).thenAnswer(
-          (_) async => StorageResult.empty,
-        );
+        ).thenAnswer((_) async => StorageResult.empty);
         await cubit.moveToActive(parcelInfo);
         verify(
           () => mockTrackNumberRepo.updateTrack(
@@ -119,9 +114,9 @@ void main() {
         ).called(1);
       },
       expect: () => [
-        const DetailsActionsState.movingToActive(),
-        const DetailsActionsState.moveToActiveSuccess(),
-      ],
+            const DetailsActionsState.movingToActive(),
+            const DetailsActionsState.moveToActiveSuccess(),
+          ],
     );
 
     blocTest(
@@ -137,63 +132,55 @@ void main() {
             serviceType: PostalServiceType.ups,
           ),
         ];
-        when(
-          () => mockTrackNumberRepo.getTrackNumberServices(trackNumber),
-        ).thenAnswer(
-          (_) async => const StorageResult(trackNumberServiceList),
-        );
+        when(() => mockTrackNumberRepo.getTrackNumberServices(trackNumber))
+            .thenAnswer(
+              (_) async => const StorageResult(trackNumberServiceList),
+            );
 
-        when(
-          () => mockTrackingScheduler.enqueueOneshot([trackNumber]),
-        ).thenAnswer(
-          (_) async => const [
-            EnqueueOneshotResult.dissalowed(
-              trackNumber: trackNumber,
-              remainingLimitTime: Duration(minutes: 10),
-            )
-          ],
-        );
-        await cubit.refresh(parcelInfo);
-
-        when(
-          () => mockTrackingScheduler.enqueueOneshot([trackNumber]),
-        ).thenAnswer(
-          (_) async => [
-            const EnqueueOneshotResult.error(
-              trackNumber: trackNumber,
-              error: EnqueueOneshotError.limiter(
-                TrackingLimiterError.storage(
-                  StorageError.database(),
+        when(() => mockTrackingScheduler.enqueueOneshot([trackNumber]))
+            .thenAnswer(
+              (_) async => const [
+                EnqueueOneshotResult.dissalowed(
+                  trackNumber: trackNumber,
+                  remainingLimitTime: Duration(minutes: 10),
                 ),
-              ),
-            )
-          ],
-        );
+              ],
+            );
         await cubit.refresh(parcelInfo);
 
-        when(
-          () => mockTrackingScheduler.enqueueOneshot([trackNumber]),
-        ).thenAnswer(
-          (_) async => const [
-            EnqueueOneshotResult.success(
-              trackNumber: trackNumber,
-            )
-          ],
-        );
+        when(() => mockTrackingScheduler.enqueueOneshot([trackNumber]))
+            .thenAnswer(
+              (_) async => [
+                const EnqueueOneshotResult.error(
+                  trackNumber: trackNumber,
+                  error: EnqueueOneshotError.limiter(
+                    TrackingLimiterError.storage(StorageError.database()),
+                  ),
+                ),
+              ],
+            );
+        await cubit.refresh(parcelInfo);
+
+        when(() => mockTrackingScheduler.enqueueOneshot([trackNumber]))
+            .thenAnswer(
+              (_) async => const [
+                EnqueueOneshotResult.success(trackNumber: trackNumber),
+              ],
+            );
         await cubit.refresh(parcelInfo);
       },
       expect: () => [
-        const DetailsActionsState.refreshing(),
-        const DetailsActionsState.refreshFreqLimited(
-          remainingTime: Duration(minutes: 10),
-        ),
-        const DetailsActionsState.refreshing(),
-        const DetailsActionsState.refreshFailed(
-          error: StorageError.database(),
-        ),
-        const DetailsActionsState.refreshing(),
-        const DetailsActionsState.refreshSuccess(),
-      ],
+            const DetailsActionsState.refreshing(),
+            const DetailsActionsState.refreshFreqLimited(
+              remainingTime: Duration(minutes: 10),
+            ),
+            const DetailsActionsState.refreshing(),
+            const DetailsActionsState.refreshFailed(
+              error: StorageError.database(),
+            ),
+            const DetailsActionsState.refreshing(),
+            const DetailsActionsState.refreshSuccess(),
+          ],
     );
 
     blocTest(
@@ -205,9 +192,9 @@ void main() {
         cubit.copyTrackNumber(parcelInfo);
       },
       expect: () => [
-        const DetailsActionsState.copyingTrack(),
-        const DetailsActionsState.copyTrackSuccess(trackNumber: '123'),
-      ],
+            const DetailsActionsState.copyingTrack(),
+            const DetailsActionsState.copyTrackSuccess(trackNumber: '123'),
+          ],
     );
 
     blocTest(
@@ -215,14 +202,10 @@ void main() {
       build: () => cubit,
       act: (DetailsActionsCubit cubit) async {
         cubit.buildShareString(
-          const ParcelInfo(
-            trackInfo: TrackNumberInfo('123'),
-          ),
+          const ParcelInfo(trackInfo: TrackNumberInfo('123')),
         );
         cubit.buildShareString(
-          const ParcelInfo(
-            trackInfo: TrackNumberInfo('123'),
-          ),
+          const ParcelInfo(trackInfo: TrackNumberInfo('123')),
         );
         cubit.buildShareString(
           const ParcelInfo(
@@ -231,22 +214,20 @@ void main() {
         );
       },
       expect: () => [
-        const DetailsActionsState.sharingString(),
-        const DetailsActionsState.shareStringSuccess(text: '123'),
-        const DetailsActionsState.sharingString(),
-        const DetailsActionsState.shareStringSuccess(text: '123'),
-        const DetailsActionsState.sharingString(),
-        const DetailsActionsState.shareStringSuccess(text: 'Test: 123'),
-      ],
+            const DetailsActionsState.sharingString(),
+            const DetailsActionsState.shareStringSuccess(text: '123'),
+            const DetailsActionsState.sharingString(),
+            const DetailsActionsState.shareStringSuccess(text: '123'),
+            const DetailsActionsState.sharingString(),
+            const DetailsActionsState.shareStringSuccess(text: 'Test: 123'),
+          ],
     );
 
     blocTest(
       'Mark as read',
       build: () => cubit,
       act: (DetailsActionsCubit cubit) async {
-        when(
-          () => mockTrackingRepo.updateTrackingInfo(any()),
-        ).thenAnswer(
+        when(() => mockTrackingRepo.updateTrackingInfo(any())).thenAnswer(
           (_) async => StorageResult.empty,
         );
 
@@ -294,18 +275,16 @@ void main() {
         await cubit.markAsRead(info);
         verifyNever(() => mockTrackingRepo.updateTrackingInfo(any()));
 
-        info = const ParcelInfo(
-          trackInfo: TrackNumberInfo('123'),
-        );
+        info = const ParcelInfo(trackInfo: TrackNumberInfo('123'));
         await cubit.markAsRead(info);
         verifyNever(() => mockTrackingRepo.updateTrackingInfo(any()));
       },
       expect: () => [
-        const DetailsActionsState.markingAsRead(),
-        const DetailsActionsState.markAsReadSuccess(),
-        const DetailsActionsState.markingAsRead(),
-        const DetailsActionsState.markAsReadSuccess(),
-      ],
+            const DetailsActionsState.markingAsRead(),
+            const DetailsActionsState.markAsReadSuccess(),
+            const DetailsActionsState.markingAsRead(),
+            const DetailsActionsState.markAsReadSuccess(),
+          ],
     );
 
     blocTest(
@@ -339,21 +318,21 @@ void main() {
           ),
         ];
         when(
-          () => mockTrackNumberRepo
-              .updateTrackNumberServices(expectedTrackServices),
-        ).thenAnswer(
-          (_) async => StorageResult.empty,
-        );
+          () => mockTrackNumberRepo.updateTrackNumberServices(
+            expectedTrackServices,
+          ),
+        ).thenAnswer((_) async => StorageResult.empty);
         await cubit.activateTracking(parcelInfo);
         verify(
-          () => mockTrackNumberRepo
-              .updateTrackNumberServices(expectedTrackServices),
+          () => mockTrackNumberRepo.updateTrackNumberServices(
+            expectedTrackServices,
+          ),
         ).called(1);
       },
       expect: () => [
-        const DetailsActionsState.activating(),
-        const DetailsActionsState.activateSuccess(),
-      ],
+            const DetailsActionsState.activating(),
+            const DetailsActionsState.activateSuccess(),
+          ],
     );
   });
 }

@@ -15,11 +15,11 @@ class RenderEmbedProxy extends RenderProxyBox implements RenderContentProxyBox {
       final left = selection.extentOffset == 0 ? 0.0 : size.width;
       final right = selection.extentOffset == 0 ? 0.0 : size.width;
       return <TextBox>[
-        TextBox.fromLTRBD(left, 0.0, right, size.height, TextDirection.ltr)
+        TextBox.fromLTRBD(left, 0.0, right, size.height, TextDirection.ltr),
       ];
     }
     return <TextBox>[
-      TextBox.fromLTRBD(0.0, 0.0, size.width, size.height, TextDirection.ltr)
+      TextBox.fromLTRBD(0.0, 0.0, size.width, size.height, TextDirection.ltr),
     ];
   }
 

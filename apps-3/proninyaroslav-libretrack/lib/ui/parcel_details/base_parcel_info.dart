@@ -32,10 +32,7 @@ import 'parcel_info.dart';
 class BaseParcelInfo extends StatelessWidget {
   final ParcelInfo info;
 
-  const BaseParcelInfo({
-    Key? key,
-    required this.info,
-  }) : super(key: key);
+  const BaseParcelInfo({Key? key, required this.info}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +48,14 @@ class BaseParcelInfo extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
-                  child: _ClickableTrackNumber(info: info),
-                ),
+                Flexible(child: _ClickableTrackNumber(info: info)),
                 _BarcodeGenButton(trackNumber: info.trackInfo.trackNumber),
               ],
             ),
             if (info.trackInfo.dateAdded != null)
               _ParcelDateAdded(dateAdded: info.trackInfo.dateAdded!),
             if (lastTrackingInfo != null)
-              _ParcelTrackingDate(
-                trackingDate: lastTrackingInfo.dateTime,
-              ),
+              _ParcelTrackingDate(trackingDate: lastTrackingInfo.dateTime),
             const Divider(),
             _Status(info: info),
           ],
@@ -75,10 +68,7 @@ class BaseParcelInfo extends StatelessWidget {
 class _ClickableTrackNumber extends StatelessWidget {
   final ParcelInfo info;
 
-  const _ClickableTrackNumber({
-    Key? key,
-    required this.info,
-  }) : super(key: key);
+  const _ClickableTrackNumber({Key? key, required this.info}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +87,9 @@ class _ClickableTrackNumber extends StatelessWidget {
               Flexible(
                 child: Text(
                   info.trackInfo.trackNumber,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               const SizedBox(width: 8.0),
@@ -127,10 +116,8 @@ class _ClickableTrackNumber extends StatelessWidget {
 class _BarcodeGenButton extends StatelessWidget {
   final String trackNumber;
 
-  const _BarcodeGenButton({
-    Key? key,
-    required this.trackNumber,
-  }) : super(key: key);
+  const _BarcodeGenButton({Key? key, required this.trackNumber})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,9 +128,7 @@ class _BarcodeGenButton extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
-            return GenerateBarcodeDialog(
-              trackNumber: trackNumber,
-            );
+            return GenerateBarcodeDialog(trackNumber: trackNumber);
           },
         );
       },
@@ -154,33 +139,26 @@ class _BarcodeGenButton extends StatelessWidget {
 class _ParcelDateAdded extends StatelessWidget {
   final DateTime dateAdded;
 
-  const _ParcelDateAdded({
-    Key? key,
-    required this.dateAdded,
-  }) : super(key: key);
+  const _ParcelDateAdded({Key? key, required this.dateAdded}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text.rich(
-        TextSpan(
-          children: [
-            const WidgetSpan(
-              alignment: PlaceholderAlignment.middle,
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(end: 8.0),
-                child: Icon(MdiIcons.calendar, size: 18.0),
-              ),
+      child: Text.rich(TextSpan(
+        children: [
+          const WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(end: 8.0),
+              child: Icon(MdiIcons.calendar, size: 18.0),
             ),
-            TextSpan(
-              text: S.of(context).trackingStartedDate(
-                    Jiffy(dateAdded).yMMMdjm,
-                  ),
-            ),
-          ],
-        ),
-      ),
+          ),
+          TextSpan(
+            text: S.of(context).trackingStartedDate(Jiffy(dateAdded).yMMMdjm),
+          ),
+        ],
+      )),
     );
   }
 }
@@ -188,33 +166,27 @@ class _ParcelDateAdded extends StatelessWidget {
 class _ParcelTrackingDate extends StatelessWidget {
   final DateTime trackingDate;
 
-  const _ParcelTrackingDate({
-    Key? key,
-    required this.trackingDate,
-  }) : super(key: key);
+  const _ParcelTrackingDate({Key? key, required this.trackingDate})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text.rich(
-        TextSpan(
-          children: [
-            const WidgetSpan(
-              alignment: PlaceholderAlignment.middle,
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(end: 8.0),
-                child: Icon(Icons.refresh, size: 18.0),
-              ),
+      child: Text.rich(TextSpan(
+        children: [
+          const WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(end: 8.0),
+              child: Icon(Icons.refresh, size: 18.0),
             ),
-            TextSpan(
-              text: S.of(context).lastTrackingDate(
-                    Jiffy(trackingDate).yMMMdjm,
-                  ),
-            ),
-          ],
-        ),
-      ),
+          ),
+          TextSpan(
+            text: S.of(context).lastTrackingDate(Jiffy(trackingDate).yMMMdjm),
+          ),
+        ],
+      )),
     );
   }
 }
@@ -222,10 +194,7 @@ class _ParcelTrackingDate extends StatelessWidget {
 class _Status extends StatelessWidget {
   final ParcelInfo info;
 
-  const _Status({
-    Key? key,
-    required this.info,
-  }) : super(key: key);
+  const _Status({Key? key, required this.info}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -238,11 +207,9 @@ class _Status extends StatelessWidget {
         : info.trackingHistory.first.trackingInfo;
     final lastActivity = info.activities.isEmpty ? null : info.activities.first;
     final trackServices = info.trackServices;
-    final deliveryShipmentInfo = info.shipmentInfoList
-        .firstWhereOrNull(
-          (entry) => entry.shipmentInfo.deliveryDate != null,
-        )
-        ?.shipmentInfo;
+    final deliveryShipmentInfo = info.shipmentInfoList.firstWhereOrNull(
+      (entry) => entry.shipmentInfo.deliveryDate != null,
+    )?.shipmentInfo;
     final deliveryDate = deliveryShipmentInfo?.deliveryDate;
     final signedForByName = deliveryShipmentInfo?.signedForByName;
 
@@ -255,8 +222,8 @@ class _Status extends StatelessWidget {
     } else if (deliveryDate != null) {
       statusIcon = StatusIconsData.delivered;
       statusText = S.of(context).parcelDeliveredStatus(
-            Jiffy(deliveryDate).yMMMMd,
-          );
+        Jiffy(deliveryDate).yMMMMd,
+      );
     } else if (lastTrackingInfo != null &&
         lastTrackingInfo.invalidTrackNumber) {
       statusIcon = StatusIconsData.invalidTrackNumber;
@@ -271,8 +238,8 @@ class _Status extends StatelessWidget {
     } else if (lastActivity.statusType == ShipmentStatusType.delivered) {
       statusIcon = StatusIconsData.delivered;
       statusText = S.of(context).parcelDeliveredStatus(
-            Jiffy(lastActivity.dateTime).yMMMMd,
-          );
+        Jiffy(lastActivity.dateTime).yMMMMd,
+      );
     } else {
       statusIcon = StatusIconsData.inTransit;
       final firstActivity = info.activities.last;
@@ -292,12 +259,13 @@ class _Status extends StatelessWidget {
               Flexible(
                 child: Text(
                   signedForByName != null
-                      ? '$statusText\n${S.of(context).parcelSignedBy(signedForByName)}'
+                      ? '$statusText\n${S.of(context).parcelSignedBy(
+                          signedForByName,
+                        )}'
                       : statusText,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2!
-                      .copyWith(fontSize: 15.0),
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                    fontSize: 15.0,
+                  ),
                 ),
               ),
             ],
@@ -306,10 +274,7 @@ class _Status extends StatelessWidget {
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             transitionBuilder: (child, animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
+              return FadeTransition(opacity: animation, child: child);
             },
             child: showActivateButton
                 ? _ActivateAndRefreshButton(info: info)
@@ -324,10 +289,8 @@ class _Status extends StatelessWidget {
 class _ActivateAndRefreshButton extends StatelessWidget {
   final ParcelInfo info;
 
-  const _ActivateAndRefreshButton({
-    Key? key,
-    required this.info,
-  }) : super(key: key);
+  const _ActivateAndRefreshButton({Key? key, required this.info})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {

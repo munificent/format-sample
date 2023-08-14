@@ -54,34 +54,43 @@ class HomeController extends Controller {
   DataReceiptRepository appRepository;
 
   HomeController(DataReceiptRepository appRepository)
-      : _homePresenter = HomePresenter(),
-        this.appRepository = DataReceiptRepository(),
-        super();
+    : _homePresenter = HomePresenter(),
+      this.appRepository = DataReceiptRepository(),
+      super();
 
   Future<void> getImageResult(File image) async {
     await FlutterUploader().cancelAll();
     await FlutterUploader().clearUploads();
 
     Navigator.of(getContext()).push(MaterialPageRoute(
-        builder: (BuildContext context) => ImageUploadPage(image)));
+      builder: (BuildContext context) => ImageUploadPage(image),
+    ));
 
     bool updated = false;
-    FlutterUploader().result.listen((result) {
-      if (result.statusCode == 200 && result.response != null && !updated) {
-        Map<String, dynamic> r = jsonDecode(result.response!);
+    FlutterUploader().result.listen(
+      (result) {
+        if (result.statusCode == 200 && result.response != null && !updated) {
+          Map<String, dynamic> r = jsonDecode(result.response!);
 
-        _storeNameController.text = r['storeName'] ?? "";
-        _receiptTotalController.text = r['receiptTotal'] ?? "";
-        if (r['receiptTotal'] != null) {}
+          _storeNameController.text = r['storeName'] ?? "";
+          _receiptTotalController.text = r['receiptTotal'] ?? "";
+          if (r['receiptTotal'] != null) {}
 
-        UserNotifier.msg(S.of(getContext()).receiptIsReady,
-            S.of(getContext()).receiptSuccessfullyAnalyzed, getContext());
-        updated = true;
-      }
-    }, onError: (ex, stacktrace) {
-      UserNotifier.fail(
-          S.of(getContext()).failedUploadImage, this.getContext());
-    });
+          UserNotifier.msg(
+            S.of(getContext()).receiptIsReady,
+            S.of(getContext()).receiptSuccessfullyAnalyzed,
+            getContext(),
+          );
+          updated = true;
+        }
+      },
+      onError: (ex, stacktrace) {
+        UserNotifier.fail(
+          S.of(getContext()).failedUploadImage,
+          this.getContext(),
+        );
+      },
+    );
   }
 
   Future<void> galleryPicker() async {
@@ -123,10 +132,9 @@ class HomeController extends Controller {
       if (!storeNames.contains(store.storeName))
         storeNames.add(store.storeName);
     }
-    return storeNames
-        .where((element) =>
-            element.toUpperCase().startsWith(pattern.toUpperCase()))
-        .toList();
+    return storeNames.where(
+      (element) => element.toUpperCase().startsWith(pattern.toUpperCase()),
+    ).toList();
   }
 
   Future<List<String>> getTagNames(String pattern) async {
@@ -136,10 +144,9 @@ class HomeController extends Controller {
       if (!tagNames.contains(tag.tagName) && tag.tagName.isNotEmpty)
         tagNames.add(tag.tagName);
     }
-    return tagNames
-        .where((element) =>
-            element.toUpperCase().startsWith(pattern.toUpperCase()))
-        .toList();
+    return tagNames.where(
+      (element) => element.toUpperCase().startsWith(pattern.toUpperCase()),
+    ).toList();
   }
 
   Future<List<String>> getCategoryNames(String pattern) async {
@@ -149,10 +156,9 @@ class HomeController extends Controller {
       if (!categoryNames.contains(category.categoryName))
         categoryNames.add(category.categoryName);
     }
-    return categoryNames
-        .where((element) =>
-            element.toUpperCase().startsWith(pattern.toUpperCase()))
-        .toList();
+    return categoryNames.where(
+      (element) => element.toUpperCase().startsWith(pattern.toUpperCase()),
+    ).toList();
   }
 
   String? validateCategory(value) {
@@ -209,14 +215,19 @@ class HomeController extends Controller {
     String _categoryString = _receiptCategoryController.text.trim();
 
     ReceiptLogger.logger(
-        _storeNameString, _totalString, _dateString, _tagString);
+      _storeNameString,
+      _totalString,
+      _dateString,
+      _tagString,
+    );
 
     StoresCompanion store = StoresCompanion(storeName: Value(_storeNameString));
 
     TagsCompanion tag = TagsCompanion(tagName: Value(_tagString));
 
-    CategoriesCompanion categoriesCompanion =
-        CategoriesCompanion(categoryName: Value(_categoryString));
+    CategoriesCompanion categoriesCompanion = CategoriesCompanion(
+      categoryName: Value(_categoryString),
+    );
 
     ReceiptsCompanion receipt = ReceiptsCompanion(
       date: Value(_receiptDate!),
@@ -225,10 +236,11 @@ class HomeController extends Controller {
     );
 
     InsertReceiptHolder receiptHolder = InsertReceiptHolder(
-        tag: tag,
-        store: store,
-        category: categoriesCompanion,
-        receipt: receipt);
+      tag: tag,
+      store: store,
+      category: categoriesCompanion,
+      receipt: receipt,
+    );
 
     await appRepository.insertReceipt(receiptHolder);
 
@@ -303,21 +315,24 @@ class HomeController extends Controller {
   sendTestNotification() {}
 
   Future<void> getFileResult(PlatformFile file) async {
-    Map results = await Navigator.of(this.getContext())
-        .push(new MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) {
-        return new FileUploadPage(file);
-      },
-    ));
+    Map results = await Navigator.of(this.getContext()).push(
+      new MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) {
+          return new FileUploadPage(file);
+        },
+      ),
+    );
 
     if (results.containsKey('receipt')) {
       InsertReceiptHolder holder = results['receipt'];
 
       _storeNameController.text = holder.store.storeName.value;
-      _receiptTotalController.text =
-          holder.receipt.total.value.toStringAsFixed(2);
-      _receiptDateController.text =
-          DateFormat.yMMMd().format(holder.receipt.date.value);
+      _receiptTotalController.text = holder.receipt.total.value.toStringAsFixed(
+        2,
+      );
+      _receiptDateController.text = DateFormat.yMMMd().format(
+        holder.receipt.date.value,
+      );
 
       print(results['receipt']);
     }

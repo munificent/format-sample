@@ -73,14 +73,12 @@ class ParcelsFilterBatch extends Equatable with IterableMixin<ParcelsFilter?> {
   Iterator<ParcelsFilter?> get iterator => _filters.values.iterator;
 
   ParcelsFilterBatch.fromJson(Map<String, dynamic> json)
-      : _filters = Map.fromEntries(
-          json.entries.map(
-            (entry) => MapEntry(
-              entry.key,
-              ParcelsFilter.fromJson(entry.value as Map<String, dynamic>),
-            ),
-          ),
-        );
+    : _filters = Map.fromEntries(json.entries.map(
+        (entry) => MapEntry(
+          entry.key,
+          ParcelsFilter.fromJson(entry.value as Map<String, dynamic>),
+        ),
+      ));
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
