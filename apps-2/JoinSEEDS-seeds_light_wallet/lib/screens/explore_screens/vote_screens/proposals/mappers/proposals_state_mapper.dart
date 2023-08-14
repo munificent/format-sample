@@ -23,13 +23,18 @@ class ProposalsStateMapper extends StateMapper {
     bool isScroll = false,
   }) {
     if (areAllResultsError(results)) {
-      return currentState.copyWith(pageState: PageState.failure, errorMessage: 'Error loading proposals'.i18n);
+      return currentState.copyWith(
+          pageState: PageState.failure,
+          errorMessage: 'Error loading proposals'.i18n);
     } else {
       results.retainWhere((Result i) => i.isValue);
       final values = results.map((Result i) => i.asValue!.value).toList();
-      final ProfileModel? profile = values.firstWhereOrNull((i) => i is ProfileModel);
-      final List<ProposalModel> proposalsModel = values.firstWhereOrNull((i) => i is List<ProposalModel>);
-      final List<List<ReferendumModel>> referendumsLists = values.whereType<List<ReferendumModel>>().toList();
+      final ProfileModel? profile =
+          values.firstWhereOrNull((i) => i is ProfileModel);
+      final List<ProposalModel> proposalsModel =
+          values.firstWhereOrNull((i) => i is List<ProposalModel>);
+      final List<List<ReferendumModel>> referendumsLists =
+          values.whereType<List<ReferendumModel>>().toList();
       List<ReferendumModel> referendumsModel = [];
       // For History section referendums need 2 request for passed and failed (2 lists)
       if (referendumsLists.length > oneReferendumList) {
@@ -37,8 +42,12 @@ class ProposalsStateMapper extends StateMapper {
       } else {
         referendumsModel = referendumsLists.first;
       }
-      final List<ProposalViewModel> proposals = proposalsModel.map((i) => ProposalViewModel.fromProposal(i)).toList() +
-          referendumsModel.map((i) => ProposalViewModel.fromReferendum(i)).toList();
+      final List<ProposalViewModel> proposals = proposalsModel
+              .map((i) => ProposalViewModel.fromProposal(i))
+              .toList() +
+          referendumsModel
+              .map((i) => ProposalViewModel.fromReferendum(i))
+              .toList();
       List<ProposalViewModel> newProposals;
 
       if (isScroll) {
@@ -49,7 +58,8 @@ class ProposalsStateMapper extends StateMapper {
       }
 
       // Add pass values to proposals by campaing type
-      final List<List<SupportLevelModel>> supportLevels = values.whereType<List<SupportLevelModel>>().toList();
+      final List<List<SupportLevelModel>> supportLevels =
+          values.whereType<List<SupportLevelModel>>().toList();
       final SupportLevelModel allianceLevel = supportLevels[0].first;
       final SupportLevelModel campaingLevel = supportLevels[1].first;
       final SupportLevelModel milestoneLevel = supportLevels[2].first;
@@ -57,7 +67,8 @@ class ProposalsStateMapper extends StateMapper {
       final updatedProposals = newProposals.map((i) {
         if (i.campaignType == _alliance) {
           i = i.copyWith(allianceLevel.voiceNeeded);
-        } else if (i.campaignType == _cmp_funding || i.campaignType == _cmp_invite) {
+        } else if (i.campaignType == _cmp_funding ||
+            i.campaignType == _cmp_invite) {
           i = i.copyWith(campaingLevel.voiceNeeded);
         } else if (i.campaignType == _milestone) {
           i = i.copyWith(milestoneLevel.voiceNeeded);

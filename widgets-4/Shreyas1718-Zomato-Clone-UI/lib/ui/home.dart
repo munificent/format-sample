@@ -33,7 +33,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -46,7 +45,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.whiteColor,
-        items:  <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(FontAwesome.shopping_bag),
             title: Text('Order'),
@@ -77,69 +76,73 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         onTap: _onItemTapped,
       ),
       body: SafeArea(
-        child: _selectedIndex==2||_selectedIndex==4?Container(child:_widgetOptions.elementAt(_selectedIndex),) :Container(
-          color: AppColors.whiteColor,
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 15.0, right: 10),
-                      child: Icon(
-                        SimpleLineIcons.location_pin,
-                        size: 35,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Home',
-                            textAlign: TextAlign.left,
-                            style: TextStyles.actionTitle,
+        child: _selectedIndex == 2 || _selectedIndex == 4
+            ? Container(
+                child: _widgetOptions.elementAt(_selectedIndex),
+              )
+            : Container(
+                color: AppColors.whiteColor,
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 15.0, right: 10),
+                            child: Icon(
+                              SimpleLineIcons.location_pin,
+                              size: 35,
+                            ),
                           ),
-                          Text(
-                            'MG Road Bangalore',
-                            textAlign: TextAlign.left,
-                            style: TextStyles.subText,
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'Home',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyles.actionTitle,
+                                ),
+                                Text(
+                                  'MG Road Bangalore',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyles.subText,
+                                ),
+                                Divider(
+                                  color: AppColors.blackColor,
+                                )
+                              ],
+                            ),
                           ),
-                          Divider(
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Icon(
+                            Icons.payment,
                             color: AppColors.blackColor,
-                          )
-                        ],
-                      ),
+                            size: 25,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: Container(),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Icon(
-                      Icons.payment,
-                      color: AppColors.blackColor,
-                      size: 25,
-                    ),
-                  ),
-                ],
+                    SearchBar('Search for restaurants, Cusines...'),
+                    _widgetOptions.elementAt(_selectedIndex),
+                  ],
+                ),
               ),
-              SearchBar('Search for restaurants, Cusines...'),
-              _widgetOptions.elementAt(_selectedIndex),
-
-            ],
-          ),
-        ),
       ),
     );
   }

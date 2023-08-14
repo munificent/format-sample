@@ -62,7 +62,7 @@ class MyLogin extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   TrackingHelper.logEvent(event: "Login");
-                  if(username!="" && password!="") {
+                  if (username != "" && password != "") {
                     // synchronousError();
                     TrackingHelper.logEvent(event: "LoginSuccess");
                     FlutterLinkIdMMP().setUserInfo(UserInfo(

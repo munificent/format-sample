@@ -2,7 +2,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ZwapStorage {
-
   ZwapStorage._();
 
   static final ZwapStorage _instance = ZwapStorage._();
@@ -28,7 +27,7 @@ class ZwapStorage {
   }
 
   /// It removes a value from the localStorage
-  void removeValue(String key) async{
+  void removeValue(String key) async {
     _prefs.then((SharedPreferences prefs) {
       prefs.remove(key);
     });

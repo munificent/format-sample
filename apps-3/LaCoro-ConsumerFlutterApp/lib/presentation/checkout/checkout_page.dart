@@ -53,7 +53,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
               setState(() => isLoading = state is LoadingState);
 
               if (state is SuccessState<OrderEntity>) {
-                Navigator.pushNamedAndRemoveUntil(context, OrderStatusPage.ORDER_STATUS_ROUTE, ModalRoute.withName(StoreListPage.STORE_LIST_ROUTE));
+                Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    OrderStatusPage.ORDER_STATUS_ROUTE,
+                    ModalRoute.withName(StoreListPage.STORE_LIST_ROUTE));
               }
             },
             child: Column(
@@ -61,17 +64,24 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      CurrentAddress(_bloc.getUserAddress(), onEditPressed: () async {
-                        await Navigator.pushNamed(context, MyAddressPage.MY_ADDRESS_ROUTE, arguments: [true, false]);
+                      CurrentAddress(_bloc.getUserAddress(),
+                          onEditPressed: () async {
+                        await Navigator.pushNamed(
+                            context, MyAddressPage.MY_ADDRESS_ROUTE,
+                            arguments: [true, false]);
                         setState(() {});
                       }),
                       Divider(endIndent: 24, indent: 24, thickness: 2),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 12),
                         child: Row(
                           children: <Widget>[
-                            Expanded(child: Text(strings.estimatedDelivery, style: AppTextStyle.grey16)),
-                            Text("$deliveryTime min", style: AppTextStyle.grey16)
+                            Expanded(
+                                child: Text(strings.estimatedDelivery,
+                                    style: AppTextStyle.grey16)),
+                            Text("$deliveryTime min",
+                                style: AppTextStyle.grey16)
                           ],
                         ),
                       ),

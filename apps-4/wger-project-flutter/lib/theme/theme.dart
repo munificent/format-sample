@@ -30,8 +30,10 @@ const Color wgerTextMuted = Colors.black38;
 const Color wgerBackground = Color(0xfff4f4f6);
 
 // Chart colors
-const charts.Color wgerChartPrimaryColor = charts.Color(r: 0x2a, g: 0x4c, b: 0x7d);
-const charts.Color wgerChartSecondaryColor = charts.Color(r: 0xe6, g: 0x39, b: 0x46);
+const charts.Color wgerChartPrimaryColor =
+    charts.Color(r: 0x2a, g: 0x4c, b: 0x7d);
+const charts.Color wgerChartSecondaryColor =
+    charts.Color(r: 0xe6, g: 0x39, b: 0x46);
 
 /// Original sizes for the material text theme
 /// https://api.flutter.dev/flutter/material/TextTheme-class.html
@@ -66,8 +68,10 @@ final ThemeData wgerTheme = ThemeData(
      * Text theme
      */
     textTheme: TextTheme(
-      headline1: const TextStyle(fontFamily: 'OpenSansLight', color: Colors.black),
-      headline2: const TextStyle(fontFamily: 'OpenSansLight', color: Colors.black),
+      headline1:
+          const TextStyle(fontFamily: 'OpenSansLight', color: Colors.black),
+      headline2:
+          const TextStyle(fontFamily: 'OpenSansLight', color: Colors.black),
       headline3: TextStyle(
         fontSize: materialSizes['h3']! * 0.8,
         fontFamily: 'OpenSansBold',
@@ -118,7 +122,8 @@ final ThemeData wgerTheme = ThemeData(
       activeTrackColor: wgerPrimaryButtonColor,
       thumbColor: wgerPrimaryColor,
     ),
-    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: wgerSecondaryColor));
+    colorScheme:
+        ColorScheme.fromSwatch().copyWith(secondary: wgerSecondaryColor));
 
 const wgerCalendarStyle = CalendarStyle(
 // Use `CalendarStyle` to customize the UI

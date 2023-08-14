@@ -86,7 +86,7 @@ class Board extends StatelessWidget {
   //
   // Builds a checker board
   //
-  void _buildChecker(){
+  void _buildChecker() {
     if (_checker != null) return;
 
     _checker = Array2d<Color>(rows, cols);
@@ -111,7 +111,9 @@ class Board extends StatelessWidget {
     gameBloc = BlocProvider.of<GameBloc>(context);
     final Size screenSize = MediaQuery.of(context).size;
     final double maxDimension = math.min(screenSize.width, screenSize.height);
-    final double maxTileWidth = math.min(maxDimension / GameBloc.kMaxTilesPerRowAndColumn, GameBloc.kMaxTilesSize);
+    final double maxTileWidth = math.min(
+        maxDimension / GameBloc.kMaxTilesPerRowAndColumn,
+        GameBloc.kMaxTilesSize);
 
     WidgetsBinding.instance.addPostFrameCallback((_) => _afterBuild());
 
@@ -157,8 +159,7 @@ class Board extends StatelessWidget {
         //
         // Use the decoration from bottom up during this build
         //
-        return Container(
-            decoration: _decorations[rows - row][col]);
+        return Container(decoration: _decorations[rows - row][col]);
       },
     );
   }
@@ -176,7 +177,7 @@ class Board extends StatelessWidget {
         padding: const EdgeInsets.all(0.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: cols,
-          childAspectRatio: 1.01,   // 1.01 solves an issue with floating numbers
+          childAspectRatio: 1.01, // 1.01 solves an issue with floating numbers
         ),
         itemCount: cols * rows,
         itemBuilder: (BuildContext context, int index) {
@@ -205,8 +206,7 @@ class Board extends StatelessWidget {
   Rect _getDimensionsFromContext(BuildContext context) {
     final RenderBox box = context.findRenderObject() as RenderBox;
 
-    final Offset topLeft =
-        box.size.topLeft(box.localToGlobal(Offset.zero));
+    final Offset topLeft = box.size.topLeft(box.localToGlobal(Offset.zero));
     final Offset bottomRight =
         box.size.bottomRight(box.localToGlobal(Offset.zero));
     return Rect.fromLTRB(
@@ -221,19 +221,21 @@ class Board extends StatelessWidget {
     //
     // Let's get the dimensions and position of the exact position of the board
     //
-    if (_keyChecker.currentContext != null){
-      final Rect rectBoard = _getDimensionsFromContext(_keyChecker.currentContext);
+    if (_keyChecker.currentContext != null) {
+      final Rect rectBoard =
+          _getDimensionsFromContext(_keyChecker.currentContext);
 
       //
       // Save the position of the board
       //
-        level.boardLeft = rectBoard.left;
-        level.boardTop = rectBoard.top;
+      level.boardLeft = rectBoard.left;
+      level.boardTop = rectBoard.top;
 
       //
       // Let's get the dimensions of one cell of the board
       //
-      final Rect rectBoardSquare = _getDimensionsFromContext(_keyCheckerCell.currentContext);
+      final Rect rectBoardSquare =
+          _getDimensionsFromContext(_keyCheckerCell.currentContext);
 
       //
       // Save it for later reuse

@@ -32,7 +32,8 @@ class CreateAccountUseCase {
     if (result.isValue && !phoneNumber.isNullOrEmpty) {
       try {
         // Add phone number
-        await _firebaseUserRepository.saveUserPhoneNumber(userId: username, phoneNumber: phoneNumber ?? '');
+        await _firebaseUserRepository.saveUserPhoneNumber(
+            userId: username, phoneNumber: phoneNumber ?? '');
       } catch (error) {
         print('Failed to save the phone number: $error');
       }

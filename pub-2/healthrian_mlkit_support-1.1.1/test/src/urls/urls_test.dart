@@ -18,7 +18,7 @@ void main() {
 
   test(
     'urls get v0 delineator',
-        () {
+    () {
       final url = Urls.getUrlString(
         apiVersions: ApiVersions.v0,
         applications: Applications.analyzer,

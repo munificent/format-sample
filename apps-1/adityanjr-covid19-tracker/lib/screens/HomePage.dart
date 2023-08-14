@@ -132,14 +132,15 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.lightbulb_outline),
-              onPressed: () {
-                isLight ? AdaptiveTheme.of(context).setDark() : AdaptiveTheme.of(context).setLight();
-                setState(() {
-                  isLight = !isLight;
-                });
-              }
-            )
+                icon: Icon(Icons.lightbulb_outline),
+                onPressed: () {
+                  isLight
+                      ? AdaptiveTheme.of(context).setDark()
+                      : AdaptiveTheme.of(context).setLight();
+                  setState(() {
+                    isLight = !isLight;
+                  });
+                })
           ],
         ),
         drawer: ClipPath(

@@ -34,7 +34,8 @@ class ImageSlideshowWidgetState extends State<ImageSlideshowWidget> {
           itemCount: widget.images.length - 1,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
-            String imagePath = widget.images[index + 1].filePath; //index+1 to ignore first image as
+            String imagePath = widget
+                .images[index + 1].filePath; //index+1 to ignore first image as
             return Center(
               child: Hero(
                 child: ImageLoader(

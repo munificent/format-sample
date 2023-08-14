@@ -29,7 +29,8 @@ class _SettingSheetState extends State<SettingSheet> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) => InkWell(
-        borderRadius: index == 0 ? BorderRadius.vertical(top: Radius.circular(20)) : null,
+        borderRadius:
+            index == 0 ? BorderRadius.vertical(top: Radius.circular(20)) : null,
         child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
@@ -53,6 +54,8 @@ class _SettingSheetState extends State<SettingSheet> {
         onTap: () => widget.featureList[index].onPressFeature.call(),
       );
 
-  Widget _separatorBuilder(BuildContext context, int index) =>
-      Container(margin: EdgeInsets.symmetric(horizontal: 16), height: 1, color: Colors.black12);
+  Widget _separatorBuilder(BuildContext context, int index) => Container(
+      margin: EdgeInsets.symmetric(horizontal: 16),
+      height: 1,
+      color: Colors.black12);
 }

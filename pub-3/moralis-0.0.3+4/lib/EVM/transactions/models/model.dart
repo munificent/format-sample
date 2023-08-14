@@ -66,7 +66,6 @@ class Transaction {
   }
 }
 
-
 class ApiResponse {
   final int? total;
   final int pageSize;
@@ -88,7 +87,8 @@ class ApiResponse {
       pageSize: json['page_size'],
       page: json['page'],
       cursor: json['cursor'],
-      result: List<Transaction>.from(json['result'].map((x) => Transaction.fromJson(x))),
+      result: List<Transaction>.from(
+          json['result'].map((x) => Transaction.fromJson(x))),
     );
   }
 }

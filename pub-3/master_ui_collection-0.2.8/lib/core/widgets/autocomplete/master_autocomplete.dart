@@ -18,7 +18,6 @@ typedef CustomSearchFilter = bool Function(
   AutocompleteItem item,
 );
 
-
 class MasterAutoComplete extends StatelessWidget {
   final List<AutocompleteItem> items;
   final Function(AutocompleteItem)? onSelected;

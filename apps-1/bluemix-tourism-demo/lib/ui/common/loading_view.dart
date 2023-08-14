@@ -98,7 +98,6 @@ class LoadingViewState extends State<LoadingView>
           break;
       }
 
-
       reverseAnimation().then<TickerFuture>((_) {
         switch (widget.status) {
           case LoadingStatus.idle:

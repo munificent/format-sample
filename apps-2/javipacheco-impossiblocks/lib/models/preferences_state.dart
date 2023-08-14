@@ -50,19 +50,20 @@ class PreferencesState extends Equatable {
         userChangedEntering: false,
         userVisitedStore: false,
         userRemoveAnims: false,
-        locale: null, 
+        locale: null,
         sizeScreen: null);
   }
 
-  PreferencesState copyWith(
-      {soundVolume,
-      musicVolume,
-      boardSelected,
-      userChangedEntering,
-      userVisitedStore,
-      userRemoveAnims,
-      locale,
-      sizeScreen,}) {
+  PreferencesState copyWith({
+    soundVolume,
+    musicVolume,
+    boardSelected,
+    userChangedEntering,
+    userVisitedStore,
+    userRemoveAnims,
+    locale,
+    sizeScreen,
+  }) {
     return PreferencesState(
       soundVolume: soundVolume ?? this.soundVolume,
       musicVolume: musicVolume ?? this.musicVolume,

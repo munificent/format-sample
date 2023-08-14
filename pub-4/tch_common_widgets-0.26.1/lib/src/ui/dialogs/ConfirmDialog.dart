@@ -56,13 +56,19 @@ class ConfirmDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final commonTheme = CommonTheme.of(context);
 
-    final dialogContainerStyle =
-        style?.dialogContainerStyle ?? commonTheme?.dialogsStyle.confirmDialogStyle.dialogContainerStyle ?? const DialogContainerStyle();
-    final dialogHeaderStyle = style?.dialogHeaderStyle ?? commonTheme?.dialogsStyle.confirmDialogStyle.dialogHeaderStyle ?? const DialogHeaderStyle();
-    final dialogFooterStyle = style?.dialogFooterStyle ?? commonTheme?.dialogsStyle.confirmDialogStyle.dialogFooterStyle ?? const DialogFooterStyle();
+    final dialogContainerStyle = style?.dialogContainerStyle ??
+        commonTheme?.dialogsStyle.confirmDialogStyle.dialogContainerStyle ??
+        const DialogContainerStyle();
+    final dialogHeaderStyle = style?.dialogHeaderStyle ??
+        commonTheme?.dialogsStyle.confirmDialogStyle.dialogHeaderStyle ??
+        const DialogHeaderStyle();
+    final dialogFooterStyle = style?.dialogFooterStyle ??
+        commonTheme?.dialogsStyle.confirmDialogStyle.dialogFooterStyle ??
+        const DialogFooterStyle();
 
     final theText = text;
-    TextStyle? textStyle = style?.textStyle ?? commonTheme?.dialogsStyle.confirmDialogStyle.textStyle;
+    TextStyle? textStyle = style?.textStyle ??
+        commonTheme?.dialogsStyle.confirmDialogStyle.textStyle;
     if (textStyle != null && commonTheme != null) {
       textStyle = commonTheme.preProcessTextStyle(textStyle);
     }

@@ -11,4 +11,5 @@ class MockFile extends Mock implements File {}
 class MockFinnkinoApi extends Mock implements FinnkinoApi {}
 
 class MockStore extends Mock implements Store<AppState> {}
+
 class MockKeyValueStore extends Mock implements KeyValueStore {}

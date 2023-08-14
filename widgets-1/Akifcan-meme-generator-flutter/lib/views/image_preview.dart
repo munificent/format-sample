@@ -19,7 +19,8 @@ class ImagePreview extends StatelessWidget {
   deleteImage(context) async {
     var result = await uploadService.deleteMeme(this.memeId);
     if (result) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyMemes()));
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => MyMemes()));
       Fluttertoast.showToast(
           msg: 'deletedMeme'.tr(),
           toastLength: Toast.LENGTH_SHORT,

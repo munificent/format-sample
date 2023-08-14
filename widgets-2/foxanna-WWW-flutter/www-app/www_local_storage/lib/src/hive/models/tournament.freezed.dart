@@ -17,16 +17,12 @@ class _$TournamentHiveModelTearOff {
   const _$TournamentHiveModelTearOff();
 
   _TournamentHiveModel call(
-      {@HiveField(TournamentHiveFieldsIds.id)
-          String? id,
-      @HiveField(TournamentHiveFieldsIds.id2)
-          String? id2,
-      @HiveField(TournamentHiveFieldsIds.info)
-          TournamentInfoHiveModel? info,
+      {@HiveField(TournamentHiveFieldsIds.id) String? id,
+      @HiveField(TournamentHiveFieldsIds.id2) String? id2,
+      @HiveField(TournamentHiveFieldsIds.info) TournamentInfoHiveModel? info,
       @HiveField(TournamentHiveFieldsIds.status)
-          TournamentStatusHiveModel? status,
-      @HiveField(TournamentHiveFieldsIds.tours)
-          List<TourHiveModel>? tours}) {
+      TournamentStatusHiveModel? status,
+      @HiveField(TournamentHiveFieldsIds.tours) List<TourHiveModel>? tours}) {
     return _TournamentHiveModel(
       id: id,
       id2: id2,
@@ -64,16 +60,12 @@ abstract class $TournamentHiveModelCopyWith<$Res> {
           TournamentHiveModel value, $Res Function(TournamentHiveModel) then) =
       _$TournamentHiveModelCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(TournamentHiveFieldsIds.id)
-          String? id,
-      @HiveField(TournamentHiveFieldsIds.id2)
-          String? id2,
-      @HiveField(TournamentHiveFieldsIds.info)
-          TournamentInfoHiveModel? info,
+      {@HiveField(TournamentHiveFieldsIds.id) String? id,
+      @HiveField(TournamentHiveFieldsIds.id2) String? id2,
+      @HiveField(TournamentHiveFieldsIds.info) TournamentInfoHiveModel? info,
       @HiveField(TournamentHiveFieldsIds.status)
-          TournamentStatusHiveModel? status,
-      @HiveField(TournamentHiveFieldsIds.tours)
-          List<TourHiveModel>? tours});
+      TournamentStatusHiveModel? status,
+      @HiveField(TournamentHiveFieldsIds.tours) List<TourHiveModel>? tours});
 
   $TournamentInfoHiveModelCopyWith<$Res>? get info;
   $TournamentStatusHiveModelCopyWith<$Res>? get status;
@@ -151,16 +143,12 @@ abstract class _$TournamentHiveModelCopyWith<$Res>
       __$TournamentHiveModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(TournamentHiveFieldsIds.id)
-          String? id,
-      @HiveField(TournamentHiveFieldsIds.id2)
-          String? id2,
-      @HiveField(TournamentHiveFieldsIds.info)
-          TournamentInfoHiveModel? info,
+      {@HiveField(TournamentHiveFieldsIds.id) String? id,
+      @HiveField(TournamentHiveFieldsIds.id2) String? id2,
+      @HiveField(TournamentHiveFieldsIds.info) TournamentInfoHiveModel? info,
       @HiveField(TournamentHiveFieldsIds.status)
-          TournamentStatusHiveModel? status,
-      @HiveField(TournamentHiveFieldsIds.tours)
-          List<TourHiveModel>? tours});
+      TournamentStatusHiveModel? status,
+      @HiveField(TournamentHiveFieldsIds.tours) List<TourHiveModel>? tours});
 
   @override
   $TournamentInfoHiveModelCopyWith<$Res>? get info;
@@ -278,16 +266,13 @@ class _$_TournamentHiveModel implements _TournamentHiveModel {
 
 abstract class _TournamentHiveModel implements TournamentHiveModel {
   const factory _TournamentHiveModel(
-      {@HiveField(TournamentHiveFieldsIds.id)
-          String? id,
-      @HiveField(TournamentHiveFieldsIds.id2)
-          String? id2,
-      @HiveField(TournamentHiveFieldsIds.info)
-          TournamentInfoHiveModel? info,
+      {@HiveField(TournamentHiveFieldsIds.id) String? id,
+      @HiveField(TournamentHiveFieldsIds.id2) String? id2,
+      @HiveField(TournamentHiveFieldsIds.info) TournamentInfoHiveModel? info,
       @HiveField(TournamentHiveFieldsIds.status)
-          TournamentStatusHiveModel? status,
+      TournamentStatusHiveModel? status,
       @HiveField(TournamentHiveFieldsIds.tours)
-          List<TourHiveModel>? tours}) = _$_TournamentHiveModel;
+      List<TourHiveModel>? tours}) = _$_TournamentHiveModel;
 
   @override
   @HiveField(TournamentHiveFieldsIds.id)

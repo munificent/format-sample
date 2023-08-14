@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 // creating Stateless Wideget for buttons
 class MyButton extends StatelessWidget {
-
 // declaring variables
   final color;
   final textColor;

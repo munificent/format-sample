@@ -9,20 +9,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:Tunein/pages/single/singleAlbum.page.dart';
 
 import '../globals.dart';
-class AlbumCard extends StatelessWidget {
 
+class AlbumCard extends StatelessWidget {
   final Album _album;
   final VoidCallback onTap;
 
-  AlbumCard({Key key,@required Album album, this.onTap}):
-        _album=album,
+  AlbumCard({Key key, @required Album album, this.onTap})
+      : _album = album,
         super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
-    double paddingOnSide =4;
-    double cardHeight=120;
+    double paddingOnSide = 4;
+    double cardHeight = 120;
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -39,15 +38,16 @@ class AlbumCard extends StatelessWidget {
                     fadeOutDuration: Duration(milliseconds: 100),
                     image: _album.albumArt != null
                         ? FileImage(
-                      new File(_album.albumArt),
-                    )
+                            new File(_album.albumArt),
+                          )
                         : AssetImage('images/track.png'),
                     height: cardHeight,
                     fit: BoxFit.cover,
                   )),
               Positioned(
                 child: Container(
-                  width: (MediaQuery.of(context).size.width/3)-(paddingOnSide*2),
+                  width: (MediaQuery.of(context).size.width / 3) -
+                      (paddingOnSide * 2),
                   child: Padding(
                       padding: EdgeInsets.all(3),
                       child: Column(
@@ -79,13 +79,11 @@ class AlbumCard extends StatelessWidget {
                             ),
                           ),
                         ],
-                      )
-                  ),
+                      )),
                   alignment: Alignment.bottomCenter,
                   decoration: BoxDecoration(
                       backgroundBlendMode: BlendMode.darken,
-                      color: Colors.black87
-                  ),
+                      color: Colors.black87),
                 ),
                 bottom: 0,
               ),
@@ -94,20 +92,18 @@ class AlbumCard extends StatelessWidget {
           ),
         ),
         enableFeedback: false,
-        onTap: (){
-          if(onTap!=null){
+        onTap: () {
+          if (onTap != null) {
             onTap();
-          }else{
-            gotoFullAlbumPage(context,_album.songs[0]);
+          } else {
+            gotoFullAlbumPage(context, _album.songs[0]);
           }
         },
       ),
     );
-
   }
 
-
-  gotoFullAlbumPage(context,Tune song){
-    MyUtils.createDelayedPageroute(context, SingleAlbumPage(song),this);
+  gotoFullAlbumPage(context, Tune song) {
+    MyUtils.createDelayedPageroute(context, SingleAlbumPage(song), this);
   }
 }

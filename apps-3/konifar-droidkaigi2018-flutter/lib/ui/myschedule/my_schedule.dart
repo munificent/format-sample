@@ -83,8 +83,7 @@ class SessionPageRoute<Session> extends MaterialPageRoute {
     @required this.session,
     WidgetBuilder builder,
     RouteSettings settings: const RouteSettings(),
-  })
-      : super(builder: builder, settings: settings);
+  }) : super(builder: builder, settings: settings);
 
   Session session;
 

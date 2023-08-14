@@ -11,7 +11,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   bool _isLoggedIn = false;
 
   @override
@@ -22,7 +21,7 @@ class _MyAppState extends State<MyApp> {
 
   _getUserLoggedInStatus() async {
     await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
-      if(value != null) {
+      if (value != null) {
         setState(() {
           _isLoggedIn = value;
         });

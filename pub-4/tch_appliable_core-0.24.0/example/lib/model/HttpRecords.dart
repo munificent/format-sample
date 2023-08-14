@@ -8,9 +8,12 @@ class HttpRecords extends DataModel {
 
   /// HttpRecords initialization from JSON map
   HttpRecords.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
-    final List<Map<String, dynamic>> list = List<Map<String, dynamic>>.from(json['list']);
+    final List<Map<String, dynamic>> list =
+        List<Map<String, dynamic>>.from(json['list']);
 
-    records = list.map((Map<String, dynamic> item) => HttpRecord.fromJson(item)).toList();
+    records = list
+        .map((Map<String, dynamic> item) => HttpRecord.fromJson(item))
+        .toList();
   }
 
   /// Covert the object into JSON map

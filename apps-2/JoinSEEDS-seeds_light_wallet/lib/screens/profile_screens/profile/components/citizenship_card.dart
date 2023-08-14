@@ -31,7 +31,8 @@ class CitizenshipCard extends StatelessWidget {
               return Container(
                 decoration: const BoxDecoration(
                   color: AppColors.lightGreen2,
-                  borderRadius: BorderRadius.all(Radius.circular(defaultCardBorderRadius)),
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(defaultCardBorderRadius)),
                 ),
                 child: Stack(
                   children: [
@@ -44,7 +45,8 @@ class CitizenshipCard extends StatelessWidget {
                             const SizedBox(height: 24.0),
                             ClipRRect(
                               borderRadius: const BorderRadius.only(
-                                bottomRight: Radius.circular(defaultCardBorderRadius),
+                                bottomRight:
+                                    Radius.circular(defaultCardBorderRadius),
                               ),
                               child: SvgPicture.asset(
                                 "assets/images/profile/lotus.svg",
@@ -66,18 +68,23 @@ class CitizenshipCard extends StatelessWidget {
                                   children: [
                                     Text(
                                       'You are on the way from'.i18n,
-                                      style: Theme.of(context).textTheme.subtitle2,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle2,
                                     ),
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Row(
                                     children: [
                                       Text(state.profile!.statusString,
-                                          style: Theme.of(context).textTheme.headline6Green),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6Green),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5.0),
                                         child: Container(
                                           width: 32,
                                           height: 32,
@@ -91,17 +98,21 @@ class CitizenshipCard extends StatelessWidget {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headline7
-                                                  .copyWith(color: AppColors.primary),
+                                                  .copyWith(
+                                                      color: AppColors.primary),
                                             ),
                                           ),
                                         ),
                                       ),
                                       Flexible(
                                         child: Text(
-                                            state.profile!.status == ProfileStatus.visitor
+                                            state.profile!.status ==
+                                                    ProfileStatus.visitor
                                                 ? 'Resident'.i18n
                                                 : 'Citizen'.i18n,
-                                            style: Theme.of(context).textTheme.headline6Green),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline6Green),
                                       ),
                                     ],
                                   ),
@@ -110,30 +121,45 @@ class CitizenshipCard extends StatelessWidget {
                                   children: [
                                     MaterialButton(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                       color: AppColors.green1,
                                       padding: const EdgeInsets.all(8.0),
-                                      onPressed: () => NavigationService.of(context).navigateTo(
+                                      onPressed: () =>
+                                          NavigationService.of(context)
+                                              .navigateTo(
                                         Routes.citizenship,
                                         ProfileValuesArguments(
-                                          profile: BlocProvider.of<ProfileBloc>(context).state.profile!,
+                                          profile: BlocProvider.of<ProfileBloc>(
+                                                  context)
+                                              .state
+                                              .profile!,
                                         ),
                                       ),
                                       child: Text(
                                         'View your progress'.i18n,
-                                        style: Theme.of(context).textTheme.subtitle3,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .subtitle3,
                                       ),
                                     ),
                                     const Expanded(child: SizedBox(width: 6)),
                                     CitizenshipUpgradeButton(
-                                      citizenshipUpgradeStatus: state.citizenshipUpgradeStatus,
+                                      citizenshipUpgradeStatus:
+                                          state.citizenshipUpgradeStatus,
                                       onPressed: () {
-                                        state.citizenshipUpgradeStatus == CitizenshipUpgradeStatus.canResident
-                                            ? BlocProvider.of<ProfileBloc>(context)
-                                                .add(const OnActivateResidentButtonTapped())
-                                            : BlocProvider.of<ProfileBloc>(context)
-                                                .add(const OnActivateCitizenButtonTapped());
+                                        state.citizenshipUpgradeStatus ==
+                                                CitizenshipUpgradeStatus
+                                                    .canResident
+                                            ? BlocProvider.of<ProfileBloc>(
+                                                    context)
+                                                .add(
+                                                    const OnActivateResidentButtonTapped())
+                                            : BlocProvider.of<ProfileBloc>(
+                                                    context)
+                                                .add(
+                                                    const OnActivateCitizenButtonTapped());
                                       },
                                     ),
                                   ],

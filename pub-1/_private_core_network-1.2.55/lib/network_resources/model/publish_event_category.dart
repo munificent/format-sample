@@ -1,5 +1,3 @@
- 
-
 /// id : 0
 /// thumbnail : "string"
 /// colorCode : "string"

@@ -7,5 +7,4 @@ class LocalPromoRepository implements PromoRepository {
     // TODO: implement getPromoList
     return null;
   }
-  
 }

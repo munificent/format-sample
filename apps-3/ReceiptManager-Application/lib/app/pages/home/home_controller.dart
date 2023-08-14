@@ -180,8 +180,7 @@ class HomeController extends Controller {
   }
 
   @override
-  void initListeners() {
-  }
+  void initListeners() {}
 
   TextEditingController get storeNameController => _storeNameController;
 
@@ -301,9 +300,7 @@ class HomeController extends Controller {
     super.onDisposed();
   }
 
-  sendTestNotification() {
-
-  }
+  sendTestNotification() {}
 
   Future<void> getFileResult(PlatformFile file) async {
     Map results = await Navigator.of(this.getContext())

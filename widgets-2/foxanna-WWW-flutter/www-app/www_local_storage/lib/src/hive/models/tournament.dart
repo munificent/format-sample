@@ -16,7 +16,7 @@ class TournamentHiveModel with _$TournamentHiveModel {
     @HiveField(TournamentHiveFieldsIds.id2) String? id2,
     @HiveField(TournamentHiveFieldsIds.info) TournamentInfoHiveModel? info,
     @HiveField(TournamentHiveFieldsIds.status)
-        TournamentStatusHiveModel? status,
+    TournamentStatusHiveModel? status,
     @HiveField(TournamentHiveFieldsIds.tours) List<TourHiveModel>? tours,
   }) = _TournamentHiveModel;
 }

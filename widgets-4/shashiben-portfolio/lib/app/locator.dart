@@ -9,5 +9,3 @@ GetIt locator = GetIt.instance;
 Future setupLocator() async {
   $initGetIt(locator);
 }
-
-

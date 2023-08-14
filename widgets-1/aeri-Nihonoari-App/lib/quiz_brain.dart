@@ -246,14 +246,14 @@ class QuizBrain {
     currentQuestion = _quiz[_questionNumber];
   }
 
-  static void clearList(){
+  static void clearList() {
     _quiz.clear();
     _passed.clear();
     _failed.clear();
   }
 
-  static void setList(
-      bool h, Map<String, dynamic> hv, bool k, Map<String, dynamic> kv, bool re) {
+  static void setList(bool h, Map<String, dynamic> hv, bool k,
+      Map<String, dynamic> kv, bool re) {
     QuizBrain.h = h;
     QuizBrain.k = k;
     QuizBrain.re = re;
@@ -268,7 +268,7 @@ class QuizBrain {
               _quiz.add(Question(v, k, "hiragana"));
             else
               _quiz.add(Question(k, v, "hiragana"));
-            },
+          },
         ),
       );
     }
@@ -278,7 +278,7 @@ class QuizBrain {
 
       kv.forEach(
         (k, v) => _katakana[k].forEach(
-              (k, v) {
+          (k, v) {
             if (re)
               _quiz.add(Question(v, k, "katakana"));
             else

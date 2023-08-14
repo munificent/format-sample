@@ -19,7 +19,8 @@ class ListenableBloc<Event, State> extends Bloc<Event, State> {
     this.customLogOutput,
   }) : super(initialState);
 
-  final StreamController<Event> _eventStreamController = StreamController.broadcast();
+  final StreamController<Event> _eventStreamController =
+      StreamController.broadcast();
 
   @override
   @mustCallSuper

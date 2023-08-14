@@ -134,7 +134,6 @@ main() {
       expect(result, equals(false));
     });
 
-
     test('evaluateExpr() test in operator', () {
       final expr = {
         'in': [
@@ -146,13 +145,13 @@ main() {
       var result = JsonExpr().evaluateExpr(expr, vars);
       expect(result, equals(true));
 
-
-      vars = {"value" : {"am" : "name"}};
+      vars = {
+        "value": {"am": "name"}
+      };
       result = JsonExpr().evaluateExpr(expr, vars);
 
       expect(result, equals(true));
     });
-
 
     test('evaluateExpr() test null operator', () {
       final expr = {
@@ -162,7 +161,6 @@ main() {
       var result = JsonExpr().evaluateExpr(expr, vars);
       expect(result, equals(true));
     });
-
 
     test('evaluateExpr() test match operator', () {
       final expr = {
@@ -176,9 +174,6 @@ main() {
       expect(result, equals(false));
     });
 
-
-
-
     test('evaluateExpr() test value operator', () {
       final expr = {
         'null': [
@@ -191,17 +186,13 @@ main() {
       expect(result, equals(false));
     });
 
-
     test('evaluateExpr() test var operator', () {
       final expr = {
-        'var': {
-          "path" : "path"
-        },
+        'var': {"path": "path"},
       };
       var vars = {'path': true};
       var result = JsonExpr().evaluateExpr(expr, vars);
       expect(result, equals(true));
     });
-
   });
 }

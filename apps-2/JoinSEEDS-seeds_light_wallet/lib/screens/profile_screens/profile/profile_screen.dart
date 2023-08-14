@@ -19,7 +19,8 @@ class ProfileScreen extends StatefulWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveClientMixin {
+class _ProfileScreenState extends State<ProfileScreen>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -27,12 +28,15 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
   Widget build(BuildContext context) {
     super.build(context);
     return BlocProvider(
-      create: (_) => ProfileBloc(remoteConfigurations.featureFlagImportAccountEnabled)..add(LoadProfileValues()),
+      create: (_) =>
+          ProfileBloc(remoteConfigurations.featureFlagImportAccountEnabled)
+            ..add(LoadProfileValues()),
       child: BlocConsumer<ProfileBloc, ProfileState>(
         listenWhen: (_, current) => current.pageCommand != null,
         listener: (context, state) {
           final pageCommand = state.pageCommand;
-          BlocProvider.of<ProfileBloc>(context).add(const ClearProfilePageCommand());
+          BlocProvider.of<ProfileBloc>(context)
+              .add(const ClearProfilePageCommand());
           if (pageCommand is ShowSwitchAccount) {
             const SwithAccountBottomSheet().show(context);
           }
@@ -41,32 +45,41 @@ class _ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCl
           return Scaffold(
             appBar: AppBar(
               title: InkWell(
-                onTap: () => BlocProvider.of<ProfileBloc>(context).add(const OnSwitchAccountButtonTapped()),
+                onTap: () => BlocProvider.of<ProfileBloc>(context)
+                    .add(const OnSwitchAccountButtonTapped()),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [Text(settingsStorage.accountName), const Icon(Icons.keyboard_arrow_down)],
+                    children: [
+                      Text(settingsStorage.accountName),
+                      const Icon(Icons.keyboard_arrow_down)
+                    ],
                   ),
                 ),
               ),
               actions: [
                 IconButton(
-                  icon: SvgPicture.asset('assets/images/wallet/app_bar/scan_qr_code_icon.svg'),
-                  onPressed: () => NavigationService.of(context).navigateTo(Routes.scanQRCode),
+                  icon: SvgPicture.asset(
+                      'assets/images/wallet/app_bar/scan_qr_code_icon.svg'),
+                  onPressed: () => NavigationService.of(context)
+                      .navigateTo(Routes.scanQRCode),
                 ),
               ],
             ),
             body: BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, _) {
                 return RefreshIndicator(
-                  onRefresh: () async => BlocProvider.of<ProfileBloc>(context).add(LoadProfileValues()),
+                  onRefresh: () async => BlocProvider.of<ProfileBloc>(context)
+                      .add(LoadProfileValues()),
                   child: ListView(
                     children: [
                       const ProfileHeader(),
                       const DividerJungle(thickness: 2),
                       const ProfileMiddle(),
-                      const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: DividerJungle(thickness: 2)),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: DividerJungle(thickness: 2)),
                       const ProfileBottom(),
                     ],
                   ),

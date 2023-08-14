@@ -108,7 +108,7 @@ class TopInfoLevelLayout extends StatelessWidget {
                   bgColor: ResColors.colorTile1,
                   counter: scoreCounterColorsLevel.color1),
             TopInfo(
-              sizeScreen: sizeScreen,
+                sizeScreen: sizeScreen,
                 name: ImpossiblocksLocalizations.of(context).text("moves"),
                 data: boardStatus.typeLevel == TypeBoardLevel.COLOR_COUNTER
                     ? boardStatus.allMoves
@@ -206,8 +206,11 @@ class TopInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color c =
-        color != null ? color : highlight ? ResColors.colorTile1 : Colors.white;
+    Color c = color != null
+        ? color
+        : highlight
+            ? ResColors.colorTile1
+            : Colors.white;
     double size = Dimensions.getSizeIcon(sizeScreen, 70);
     return Container(
       constraints: BoxConstraints.expand(width: size, height: size),

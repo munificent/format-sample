@@ -214,8 +214,8 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
           children:
               List.generate(viewModel.board.columns, (i) => i).map((column) {
         return TableCell(
-          child: _tile(viewModel, (row * viewModel.board.columns) + column,
-              noAnimation),
+          child: _tile(
+              viewModel, (row * viewModel.board.columns) + column, noAnimation),
         );
       }).toList());
     }).toList();
@@ -246,11 +246,8 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
         distinct: true,
         converter: (store) => BoardViewModel.build(store, widget.playersGame),
         onInitialBuild: (viewModel) {
-          _resetTileSize(
-              viewModel.sizeScreen,
-              viewModel.columns,
-              viewModel.board.typeBoard,
-              viewModel.board.assistance != null);
+          _resetTileSize(viewModel.sizeScreen, viewModel.columns,
+              viewModel.board.typeBoard, viewModel.board.assistance != null);
           setState(() {
             _animation.addStatusListener((status) {
               if (status == AnimationStatus.completed) {
@@ -265,11 +262,8 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
           });
         },
         onWillChange: (viewModel) {
-          _resetTileSize(
-              viewModel.sizeScreen,
-              viewModel.columns,
-              viewModel.board.typeBoard,
-              viewModel.board.assistance != null);
+          _resetTileSize(viewModel.sizeScreen, viewModel.columns,
+              viewModel.board.typeBoard, viewModel.board.assistance != null);
         },
         builder: (context, viewModel) {
           return BoardTranslate(
@@ -314,9 +308,8 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
                       padding: EdgeInsets.all(Dimensions.paddingTile),
                       child: Table(
                         defaultColumnWidth: FixedColumnWidth(_tileSize),
-                        children: viewModel.board != null
-                            ? _board(viewModel)
-                            : null,
+                        children:
+                            viewModel.board != null ? _board(viewModel) : null,
                       ),
                     ),
                   ),

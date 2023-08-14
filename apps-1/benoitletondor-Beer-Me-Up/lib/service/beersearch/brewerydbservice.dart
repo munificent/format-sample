@@ -8,34 +8,37 @@ import 'dart:io';
 
 class BreweryDBService implements BeerSearchService {
   static const _BREWERY_DB_API_ENDPOINT = "api.brewerydb.com";
-  
+
   static Uri _buildBreweryDBServiceURI({
     @required String path,
     Map<String, String> queryParameters,
   }) {
     final Map<String, String> queryParams = queryParameters ?? Map();
     queryParams.addAll({"key": BREWERY_DB_API_KEY});
-    
+
     return Uri.https(_BREWERY_DB_API_ENDPOINT, "/v2/$path", queryParams);
   }
 
   @override
-  Future<List<Beer>> findBeersMatching(HttpClient httpClient, String pattern) async {
-    if( pattern == null || pattern.trim().isEmpty ) {
+  Future<List<Beer>> findBeersMatching(
+      HttpClient httpClient, String pattern) async {
+    if (pattern == null || pattern.trim().isEmpty) {
       return List(0);
     }
 
-    var uri = _buildBreweryDBServiceURI(path: "search", queryParameters: {'q': pattern, 'type': 'beer'});
+    var uri = _buildBreweryDBServiceURI(
+        path: "search", queryParameters: {'q': pattern, 'type': 'beer'});
     HttpClientRequest request = await httpClient.getUrl(uri);
     HttpClientResponse response = await request.close();
-    if( response.statusCode <200 || response.statusCode>299 ) {
-      throw Exception("Bad response: ${response.statusCode} (${response.reasonPhrase})");
+    if (response.statusCode < 200 || response.statusCode > 299) {
+      throw Exception(
+          "Bad response: ${response.statusCode} (${response.reasonPhrase})");
     }
 
     String responseBody = await response.transform(utf8.decoder).join();
     Map data = json.decode(responseBody);
     int totalResults = data["totalResults"] ?? 0;
-    if( totalResults == 0 ) {
+    if (totalResults == 0) {
       return List(0);
     }
 
@@ -43,7 +46,7 @@ class BreweryDBService implements BeerSearchService {
       BeerStyle style;
 
       final Map<dynamic, dynamic> styleData = beerJson["style"];
-      if( styleData != null ) {
+      if (styleData != null) {
         style = BeerStyle(
           id: (styleData["id"] as int).toString(),
           name: styleData["shortname"] ?? styleData["name"],
@@ -51,24 +54,24 @@ class BreweryDBService implements BeerSearchService {
       }
 
       double abv;
-      if( beerJson["abv"] != null ) {
+      if (beerJson["abv"] != null) {
         abv = double.parse(beerJson["abv"] as String);
-      } else if( styleData != null ) {
+      } else if (styleData != null) {
         final String abvMin = styleData["abvMin"];
         final String abvMax = styleData["abvMax"];
 
-        if( abvMax != null && abvMin != null ) {
+        if (abvMax != null && abvMin != null) {
           abv = (double.parse(abvMax) + double.parse(abvMin)) / 2.0;
-        } else if( abvMin != null ) {
+        } else if (abvMin != null) {
           abv = double.parse(abvMin);
-        } else if( abvMax != null ) {
+        } else if (abvMax != null) {
           abv = double.parse(abvMax);
         }
       }
 
       BeerLabel label;
       final labelJson = beerJson["labels"];
-      if( labelJson != null && labelJson is Map ) {
+      if (labelJson != null && labelJson is Map) {
         label = BeerLabel(
           iconUrl: labelJson["icon"],
           mediumUrl: labelJson["medium"],
@@ -86,6 +89,4 @@ class BreweryDBService implements BeerSearchService {
       );
     }).toList(growable: false);
   }
-
-
 }

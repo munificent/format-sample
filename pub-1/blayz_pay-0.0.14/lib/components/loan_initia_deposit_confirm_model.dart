@@ -4,7 +4,6 @@ import '/backend/api_requests/api_calls.dart';
 
 import 'package:flutter/material.dart';
 
-
 class LoanInitiaDepositConfirmModel extends GajModel {
   ///  State fields for stateful widgets in this component.
 
@@ -22,5 +21,4 @@ class LoanInitiaDepositConfirmModel extends GajModel {
   void dispose() {}
 
   /// Additional helper methods are added here.
-
 }

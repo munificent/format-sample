@@ -56,7 +56,7 @@ class PicturePuzzleView extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 40,
-                    child: Container(   
+                    child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),

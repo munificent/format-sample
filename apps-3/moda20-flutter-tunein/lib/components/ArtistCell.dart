@@ -13,8 +13,14 @@ class ArtistGridCell extends StatelessWidget {
   final void Function(ContextMenuOptions) onContextSelect;
   final void Function(ContextMenuOptions) onContextCancel;
   List<ContextMenuOptions> choices;
-  ArtistGridCell(this.artist, this.imageHeight, this.panelHeight,{this.onContextCancel, this.onContextSelect, this.choices,
-    this.Screensize, this.StaticContextMenuFromBottom, this.useAnimation, this.animationDelay});
+  ArtistGridCell(this.artist, this.imageHeight, this.panelHeight,
+      {this.onContextCancel,
+      this.onContextSelect,
+      this.choices,
+      this.Screensize,
+      this.StaticContextMenuFromBottom,
+      this.useAnimation,
+      this.animationDelay});
   final musicService = locator<MusicService>();
   final themeService = locator<ThemeService>();
   @required
@@ -27,22 +33,32 @@ class ArtistGridCell extends StatelessWidget {
   int animationDelay;
   @override
   Widget build(BuildContext context) {
-    List<int> songColors=(artist.colors!=null && artist.colors.length!=0)?artist.colors:null;
-    int numberOfSongsPresentForThisArtist =countSongsInAlbums(artist.albums);
-    Widget  shallowWidget;
-    shallowWidget= Container(height: imageHeight+40, color: MyTheme.darkgrey.withOpacity(.01),);
-    int animationDelayComputed = useAnimation?((animationDelay??0).isNegative?0:(animationDelay??0)):0;
+    List<int> songColors = (artist.colors != null && artist.colors.length != 0)
+        ? artist.colors
+        : null;
+    int numberOfSongsPresentForThisArtist = countSongsInAlbums(artist.albums);
+    Widget shallowWidget;
+    shallowWidget = Container(
+      height: imageHeight + 40,
+      color: MyTheme.darkgrey.withOpacity(.01),
+    );
+    int animationDelayComputed = useAnimation
+        ? ((animationDelay ?? 0).isNegative ? 0 : (animationDelay ?? 0))
+        : 0;
 
     return StreamBuilder(
-      stream: Future.delayed(Duration(milliseconds: 200), ()=>true).asStream(),
-      builder: (context, AsyncSnapshot snapshot){
-        Widget cellWidget =  Padding(
+      stream:
+          Future.delayed(Duration(milliseconds: 200), () => true).asStream(),
+      builder: (context, AsyncSnapshot snapshot) {
+        Widget cellWidget = Padding(
             padding: EdgeInsets.only(),
-            child:Container(
+            child: Container(
                 decoration: BoxDecoration(
-                    color: (songColors!=null?new Color(songColors[0]).withAlpha(100):MyTheme.darkBlack).withOpacity(.7),
-                    backgroundBlendMode: BlendMode.colorBurn
-                ),
+                    color: (songColors != null
+                            ? new Color(songColors[0]).withAlpha(100)
+                            : MyTheme.darkBlack)
+                        .withOpacity(.7),
+                    backgroundBlendMode: BlendMode.colorBurn),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
@@ -57,23 +73,29 @@ class ArtistGridCell extends StatelessWidget {
                         placeholder: AssetImage('images/artist.jpg'),
                         fadeInDuration: Duration(milliseconds: 300),
                         fadeOutDuration: Duration(milliseconds: 100),
-                        height: imageHeight+2,
+                        height: imageHeight + 2,
                         repeat: ImageRepeat.noRepeat,
-                        fit: artist.coverArt != null?BoxFit.fill:BoxFit.cover,
+                        fit: artist.coverArt != null
+                            ? BoxFit.fill
+                            : BoxFit.cover,
                         image: artist.coverArt != null
                             ? FileImage(
-                          new File(artist.coverArt),
-                        )
+                                new File(artist.coverArt),
+                              )
                             : AssetImage('images/artist.jpg'),
                       ),
-                      constraints: BoxConstraints.expand(height: imageHeight+2),
+                      constraints:
+                          BoxConstraints.expand(height: imageHeight + 2),
                     ),
                     Expanded(
                       child: Container(
                         height: panelHeight,
-                        padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                         width: double.infinity,
-                        color: songColors!=null?new Color(songColors[0]).withAlpha(225):MyTheme.darkgrey.withAlpha(70),
+                        color: songColors != null
+                            ? new Color(songColors[0]).withAlpha(225)
+                            : MyTheme.darkgrey.withAlpha(70),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -82,53 +104,63 @@ class ArtistGridCell extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 4),
                               child: Text(
-                                artist.name!=null?artist.name:"Unknown Name",
+                                artist.name != null
+                                    ? artist.name
+                                    : "Unknown Name",
                                 overflow: TextOverflow.ellipsis,
                                 strutStyle: StrutStyle(
-                                    height: 1.1,
-                                    forceStrutHeight: true
-                                ),
+                                    height: 1.1, forceStrutHeight: true),
                                 style: TextStyle(
                                     fontSize: 13.5,
-                                    color: (songColors!=null?new Color(songColors[1]):Color(0xffffffff)).withOpacity(.7),
-                                    fontWeight: FontWeight.w700
-                                ),
+                                    color: (songColors != null
+                                            ? new Color(songColors[1])
+                                            : Color(0xffffffff))
+                                        .withOpacity(.7),
+                                    fontWeight: FontWeight.w700),
                               ),
                             ),
                             Row(
                               children: <Widget>[
                                 Expanded(
-                                  flex:9,
+                                  flex: 9,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Padding(
                                         child: Text(
-                                          artist.albums.length!=0?"${artist.albums.length} ${artist.albums.length>1?"Albums":"Album"}":"No Albums",
+                                          artist.albums.length != 0
+                                              ? "${artist.albums.length} ${artist.albums.length > 1 ? "Albums" : "Album"}"
+                                              : "No Albums",
                                           overflow: TextOverflow.ellipsis,
                                           strutStyle: StrutStyle(
                                               height: 0.8,
-                                              forceStrutHeight: true
-                                          ),
+                                              forceStrutHeight: true),
                                           style: TextStyle(
                                               fontSize: 12.5,
-                                              color: (songColors!=null?new Color(songColors[1]):Color(0xffffffff)).withOpacity(.7)
-                                          ),
+                                              color: (songColors != null
+                                                      ? new Color(songColors[1])
+                                                      : Color(0xffffffff))
+                                                  .withOpacity(.7)),
                                         ),
                                         padding: EdgeInsets.only(bottom: 2),
                                       ),
                                       Text(
-                                        artist.albums.length!=0?"${numberOfSongsPresentForThisArtist} ${numberOfSongsPresentForThisArtist>1?"Songs":"Song"}":"No Songs",
+                                        artist.albums.length != 0
+                                            ? "${numberOfSongsPresentForThisArtist} ${numberOfSongsPresentForThisArtist > 1 ? "Songs" : "Song"}"
+                                            : "No Songs",
                                         overflow: TextOverflow.ellipsis,
                                         strutStyle: StrutStyle(
                                             height: 0.8,
-                                            forceStrutHeight: true
-                                        ),
+                                            forceStrutHeight: true),
                                         style: TextStyle(
                                           fontSize: 12.5,
-                                          color: (songColors!=null?new Color(songColors[1]):Color(0xffffffff)).withOpacity(.7),
+                                          color: (songColors != null
+                                                  ? new Color(songColors[1])
+                                                  : Color(0xffffffff))
+                                              .withOpacity(.7),
                                         ),
                                       )
                                     ],
@@ -136,13 +168,19 @@ class ArtistGridCell extends StatelessWidget {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child:  choices!=null?ThreeDotPopupMenu(
-                                    IconColor: (songColors!=null?new Color(songColors[1]):Color(0xffffffff)).withOpacity(.7)  ,
-                                    choices: choices,
-                                    onContextSelect: onContextSelect,
-                                    screenSize: Screensize,
-                                    staticOffsetFromBottom: StaticContextMenuFromBottom,
-                                  ):Container(),
+                                  child: choices != null
+                                      ? ThreeDotPopupMenu(
+                                          IconColor: (songColors != null
+                                                  ? new Color(songColors[1])
+                                                  : Color(0xffffffff))
+                                              .withOpacity(.7),
+                                          choices: choices,
+                                          onContextSelect: onContextSelect,
+                                          screenSize: Screensize,
+                                          staticOffsetFromBottom:
+                                              StaticContextMenuFromBottom,
+                                        )
+                                      : Container(),
                                 )
                               ],
                             ),
@@ -151,29 +189,25 @@ class ArtistGridCell extends StatelessWidget {
                       ),
                     )
                   ],
-                ))
-        );
+                )));
 
-        if(animationDelayComputed==0){
+        if (animationDelayComputed == 0) {
           return cellWidget;
         }
         return AnimatedSwitcher(
             reverseDuration: Duration(milliseconds: animationDelayComputed),
             duration: Duration(milliseconds: animationDelayComputed),
             switchInCurve: Curves.easeInToLinear,
-            child: !snapshot.hasData?shallowWidget:cellWidget);
+            child: !snapshot.hasData ? shallowWidget : cellWidget);
       },
     );
-
   }
 
-  int countSongsInAlbums(List<Album> albums){
-    int count=0;
-    albums.forEach((elem){
-      count+=elem.songs.length;
+  int countSongsInAlbums(List<Album> albums) {
+    int count = 0;
+    albums.forEach((elem) {
+      count += elem.songs.length;
     });
     return count;
   }
-
 }
-

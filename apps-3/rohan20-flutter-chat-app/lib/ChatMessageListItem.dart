@@ -13,7 +13,7 @@ class ChatMessageListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return new SizeTransition(
       sizeFactor:
-      new CurvedAnimation(parent: animation, curve: Curves.decelerate),
+          new CurvedAnimation(parent: animation, curve: Curves.decelerate),
       child: new Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: new Row(
@@ -40,9 +40,9 @@ class ChatMessageListItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null
                   ? new Image.network(
-                messageSnapshot.value['imageUrl'],
-                width: 250.0,
-              )
+                      messageSnapshot.value['imageUrl'],
+                      width: 250.0,
+                    )
                   : new Text(messageSnapshot.value['text']),
             ),
           ],
@@ -55,7 +55,7 @@ class ChatMessageListItem extends StatelessWidget {
               margin: const EdgeInsets.only(left: 8.0),
               child: new CircleAvatar(
                 backgroundImage:
-                new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
+                    new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
               )),
         ],
       ),
@@ -71,7 +71,7 @@ class ChatMessageListItem extends StatelessWidget {
               margin: const EdgeInsets.only(right: 8.0),
               child: new CircleAvatar(
                 backgroundImage:
-                new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
+                    new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
               )),
         ],
       ),
@@ -88,9 +88,9 @@ class ChatMessageListItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 5.0),
               child: messageSnapshot.value['imageUrl'] != null
                   ? new Image.network(
-                messageSnapshot.value['imageUrl'],
-                width: 250.0,
-              )
+                      messageSnapshot.value['imageUrl'],
+                      width: 250.0,
+                    )
                   : new Text(messageSnapshot.value['text']),
             ),
           ],

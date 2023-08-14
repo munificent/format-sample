@@ -27,22 +27,23 @@ class HomePage extends StatefulWidget {
     @required this.model,
   }) : super(key: key);
 
-  factory HomePage({Key key,
-    HomeIntent intent,
-    HomeViewModel model,
-    AuthenticationService authService,
-    UserDataService dataService}) {
-
+  factory HomePage(
+      {Key key,
+      HomeIntent intent,
+      HomeViewModel model,
+      AuthenticationService authService,
+      UserDataService dataService}) {
     final _intent = intent ?? HomeIntent();
-    final _model = model ?? HomeViewModel(
-      authService ?? AuthenticationService.instance,
-      dataService ?? UserDataService.instance,
-      _intent.showProfile,
-      _intent.showHistory,
-      _intent.retry,
-      _intent.beerCheckIn,
-      _intent.showSettingsPage,
-    );
+    final _model = model ??
+        HomeViewModel(
+          authService ?? AuthenticationService.instance,
+          dataService ?? UserDataService.instance,
+          _intent.showProfile,
+          _intent.showHistory,
+          _intent.retry,
+          _intent.beerCheckIn,
+          _intent.showSettingsPage,
+        );
 
     return HomePage._(key: key, intent: _intent, model: _model);
   }
@@ -51,23 +52,21 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState(intent: intent, model: model);
 }
 
-class _HomePageState extends ViewState<HomePage, HomeViewModel, HomeIntent, HomeState> {
-
+class _HomePageState
+    extends ViewState<HomePage, HomeViewModel, HomeIntent, HomeState> {
   static const _TAB_PROFILE_INDEX = 0;
   static const _TAB_FAKE_INDEX = 1;
   static const _TAB_HISTORY_INDEX = 2;
 
-  _HomePageState({
-    @required HomeIntent intent,
-    @required HomeViewModel model
-  }): super(intent, model);
+  _HomePageState({@required HomeIntent intent, @required HomeViewModel model})
+      : super(intent, model);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: stream,
       builder: (BuildContext context, AsyncSnapshot<HomeState> snapshot) {
-        if( !snapshot.hasData ) {
+        if (!snapshot.hasData) {
           return Container();
         }
 
@@ -76,7 +75,7 @@ class _HomePageState extends ViewState<HomePage, HomeViewModel, HomeIntent, Home
           (loading) => _buildLoadingWidget(),
           (tabProfile) => _buildContentWidget(_TAB_PROFILE_INDEX),
           (tabHistory) => _buildContentWidget(_TAB_HISTORY_INDEX),
-          (error) =>  _buildErrorWidget(error: error.error),
+          (error) => _buildErrorWidget(error: error.error),
         );
       },
     );
@@ -135,9 +134,9 @@ class _HomePageState extends ViewState<HomePage, HomeViewModel, HomeIntent, Home
           onTap: (int index) {
             performSelectionHaptic(context);
 
-            if( index == _TAB_PROFILE_INDEX ) {
+            if (index == _TAB_PROFILE_INDEX) {
               intent.showProfile();
-            } else if( index == _TAB_FAKE_INDEX ) {
+            } else if (index == _TAB_FAKE_INDEX) {
               intent.beerCheckIn();
             } else {
               intent.showHistory();
@@ -153,7 +152,8 @@ class _HomePageState extends ViewState<HomePage, HomeViewModel, HomeIntent, Home
                 ),
               ),
             ),
-            const BottomNavigationBarItem( // Fake item
+            const BottomNavigationBarItem(
+              // Fake item
               icon: SizedBox(),
               title: SizedBox(),
             ),
@@ -191,30 +191,32 @@ class _HomePageState extends ViewState<HomePage, HomeViewModel, HomeIntent, Home
 
   AppBar _buildAppBar(bool authenticated) {
     final List<Widget> actions = List();
-    if( authenticated ) {
-      actions.add(PopupMenuButton<String>( // overflow menu
-        icon: const Icon(Icons.more_vert),
-        onSelected: (menu) {
-          performSelectionHaptic(context);
+    if (authenticated) {
+      actions.add(PopupMenuButton<String>(
+          // overflow menu
+          icon: const Icon(Icons.more_vert),
+          onSelected: (menu) {
+            performSelectionHaptic(context);
 
-          switch (menu) {
-            case "settings" :
-              intent.showSettingsPage();
-              break;
-          }
-        },
-        itemBuilder: (BuildContext context) {
-          return [PopupMenuItem<String>(
-            value: "settings",
-            child: Text(
-              Localization.of(context).settings,
-              style: const TextStyle(
-                fontFamily: "Google Sans",
-              ),
-            ),
-          )];
-        })
-      );
+            switch (menu) {
+              case "settings":
+                intent.showSettingsPage();
+                break;
+            }
+          },
+          itemBuilder: (BuildContext context) {
+            return [
+              PopupMenuItem<String>(
+                value: "settings",
+                child: Text(
+                  Localization.of(context).settings,
+                  style: const TextStyle(
+                    fontFamily: "Google Sans",
+                  ),
+                ),
+              )
+            ];
+          }));
     }
 
     return AppBar(
@@ -231,7 +233,9 @@ class _CenterBottomNavBarFloatFabLocation extends FloatingActionButtonLocation {
   @override
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
     // Compute the x-axis offset.
-    final double fabX = (scaffoldGeometry.scaffoldSize.width - scaffoldGeometry.floatingActionButtonSize.width) / 2.0;
+    final double fabX = (scaffoldGeometry.scaffoldSize.width -
+            scaffoldGeometry.floatingActionButtonSize.width) /
+        2.0;
 
     // Compute the y-axis offset.
     final double contentBottom = scaffoldGeometry.contentBottom;
@@ -240,9 +244,15 @@ class _CenterBottomNavBarFloatFabLocation extends FloatingActionButtonLocation {
     final double snackBarHeight = scaffoldGeometry.snackBarSize.height;
     double fabY = contentBottom - fabHeight - kFloatingActionButtonMargin;
     if (snackBarHeight > 0.0)
-      fabY = math.min(fabY, contentBottom - snackBarHeight - fabHeight - kFloatingActionButtonMargin);
+      fabY = math.min(
+          fabY,
+          contentBottom -
+              snackBarHeight -
+              fabHeight -
+              kFloatingActionButtonMargin);
     if (bottomSheetHeight > 0.0)
-      fabY = math.min(fabY, contentBottom - bottomSheetHeight - fabHeight / 2.0);
+      fabY =
+          math.min(fabY, contentBottom - bottomSheetHeight - fabHeight / 2.0);
 
     fabY += (scaffoldGeometry.floatingActionButtonSize.height / 1.3);
 

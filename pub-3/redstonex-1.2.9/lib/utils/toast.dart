@@ -21,7 +21,8 @@ class rToast {
     Color? backgroundColor,
     double radius = 10.0,
     VoidCallback? onDismiss,
-    EdgeInsetsGeometry? textPadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+    EdgeInsetsGeometry? textPadding =
+        const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
     EdgeInsetsGeometry? margin = const EdgeInsets.all(50),
     TextAlign? textAlign,
     TextStyle? textStyle,

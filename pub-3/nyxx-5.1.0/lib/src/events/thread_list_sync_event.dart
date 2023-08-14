@@ -36,21 +36,25 @@ class ThreadListSyncEvent implements IThreadListSyncEvent {
   ThreadListSyncEvent(RawApiMap raw, INyxx client) {
     guild = GuildCacheable(client, Snowflake(raw['guild_id']));
     channels = [
-      for (final channelId in (raw['channel_ids'] ?? []) as RawApiList) ChannelCacheable(client, Snowflake(channelId)),
+      for (final channelId in (raw['channel_ids'] ?? []) as RawApiList)
+        ChannelCacheable(client, Snowflake(channelId)),
     ];
 
     threads = [
-      for (final rawThread in raw['threads'] as RawApiList) ThreadChannel(client, rawThread as RawApiMap),
+      for (final rawThread in raw['threads'] as RawApiList)
+        ThreadChannel(client, rawThread as RawApiMap),
     ];
 
     for (final thread in threads) {
-      if (client.cacheOptions.channelCachePolicyLocation.event && client.cacheOptions.channelCachePolicy.canCache(thread)) {
+      if (client.cacheOptions.channelCachePolicyLocation.event &&
+          client.cacheOptions.channelCachePolicy.canCache(thread)) {
         client.channels[thread.id] = thread;
       }
     }
 
     threadMembers = [
-      for (final rawMember in raw['members'] as RawApiList) ThreadMember(client, rawMember as RawApiMap, guild),
+      for (final rawMember in raw['members'] as RawApiList)
+        ThreadMember(client, rawMember as RawApiMap, guild),
     ];
   }
 }

@@ -51,7 +51,7 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     int militaryMight = 0;
     for (final shipType in ships.keys.toList()) {
       militaryMight =
-          kAttackShipsData[shipType]!.point * militaryShipCount(shipType) ;
+          kAttackShipsData[shipType]!.point * militaryShipCount(shipType);
     }
     return (militaryMight * (1 + (statValue(StatsType.military) * 0.0025)))
         .toInt();
@@ -84,8 +84,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     // For Each new planet add around 15
     // Culture doesn't positively affect morale
     // Although if it falls short, it will negatively affect it
-    final _culturalEffect = min<int>(0,
-            statValue(StatsType.culture) - min<int>(100, planets.length * (Random().nextInt(5) + 10))) *
+    final _culturalEffect = min<int>(
+            0,
+            statValue(StatsType.culture) -
+                min<int>(100, planets.length * (Random().nextInt(5) + 10))) *
         5;
     final _baseMorale = _militaryEffect +
         _luxuryGains +

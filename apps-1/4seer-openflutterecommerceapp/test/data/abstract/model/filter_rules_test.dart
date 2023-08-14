@@ -9,7 +9,8 @@ import 'package:openflutterecommerce/data/woocommerce/repositories/woocommerce_w
 
 import '../../../fixtures/fixture_reader.dart';
 
-class MockWoocommerceWrapper extends Mock implements WoocommercWrapperAbstract { }
+class MockWoocommerceWrapper extends Mock
+    implements WoocommercWrapperAbstract {}
 
 void main() {
   MockWoocommerceWrapper woocommerce;
@@ -24,9 +25,8 @@ void main() {
       'should return list of categories when findProductsByFilterUseCase.execute is successful',
       () async {
         // arrange
-        when(woocommerce.getProductList(any))
-          .thenAnswer((_) async => json.decode(fixture('woocommerce/products.json'))
-        );
+        when(woocommerce.getProductList(any)).thenAnswer(
+            (_) async => json.decode(fixture('woocommerce/products.json')));
         // act
         List<Product> products =
             await remoteProductRepository.getProducts(categoryId: 1);
@@ -41,4 +41,3 @@ void main() {
     );
   });
 }
-    

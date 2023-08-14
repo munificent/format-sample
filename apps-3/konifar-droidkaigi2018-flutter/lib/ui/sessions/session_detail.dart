@@ -17,8 +17,7 @@ class SessionDetail extends StatefulWidget {
     @required this.favorite,
     @required this.googleSignIn,
     @required this.onFavoriteChanged,
-  })
-      : assert(session != null),
+  })  : assert(session != null),
         assert(favorite != null),
         assert(onFavoriteChanged != null),
         super(key: key);

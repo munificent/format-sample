@@ -23,24 +23,27 @@ class _LoadingState extends State<Loading> {
         "http://api.openweathermap.org/data/2.5/weather?units=metric&lat=$latitude&lon=$longitude&appid=$apiKey");
     Map data = jsonDecode(response.body);
 
-    Navigator.pushReplacementNamed(context, "/weather",
-        arguments: {
-          "weatherData": WeatherData.fromJson(data),
-          "selectedLocation": arguments
-        });
+    Navigator.pushReplacementNamed(context, "/weather", arguments: {
+      "weatherData": WeatherData.fromJson(data),
+      "selectedLocation": arguments
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     arguments = ModalRoute.of(context).settings.arguments;
-    Future.delayed(Duration(seconds: 1), () => {
-      arguments != null ? getData(lat: arguments.latitude, lon: arguments.longitude) :  getData()
-    });
+    Future.delayed(
+        Duration(seconds: 1),
+        () => {
+              arguments != null
+                  ? getData(lat: arguments.latitude, lon: arguments.longitude)
+                  : getData()
+            });
     return Scaffold(
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [LottieBuilder.asset("assets/loading.json")],
-        ));
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [LottieBuilder.asset("assets/loading.json")],
+    ));
   }
 }

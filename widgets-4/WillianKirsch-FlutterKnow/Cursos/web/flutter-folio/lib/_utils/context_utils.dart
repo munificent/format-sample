@@ -14,7 +14,8 @@ class ContextUtils {
 
   static Offset localToGlobal(BuildContext c, {Offset local = Offset.zero}) {
     try {
-      return (c.findRenderObject() as RenderBox)?.localToGlobal(local) ?? Offset.zero;
+      return (c.findRenderObject() as RenderBox)?.localToGlobal(local) ??
+          Offset.zero;
     } catch (e) {
       //print(e);
     }
@@ -23,7 +24,8 @@ class ContextUtils {
 
   static Offset globalToLocal(BuildContext c, Offset global) {
     try {
-      return (c.findRenderObject() as RenderBox)?.globalToLocal(global) ?? Offset.zero;
+      return (c.findRenderObject() as RenderBox)?.globalToLocal(global) ??
+          Offset.zero;
     } catch (e) {
       //print(e);
     }

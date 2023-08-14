@@ -6,18 +6,18 @@ part 'account_info_request.g.dart';
 
 @JsonSerializable()
 class AccountInfoRequest extends BaseRequest {
-  @JsonKey(name:'action')
+  @JsonKey(name: 'action')
   String action;
 
-  @JsonKey(name:'account')
+  @JsonKey(name: 'account')
   String account;
 
-
-  AccountInfoRequest({String action, String account}):super() {
+  AccountInfoRequest({String action, String account}) : super() {
     this.action = Actions.INFO;
     this.account = account;
   }
 
-  factory AccountInfoRequest.fromJson(Map<String, dynamic> json) => _$AccountInfoRequestFromJson(json);
+  factory AccountInfoRequest.fromJson(Map<String, dynamic> json) =>
+      _$AccountInfoRequestFromJson(json);
   Map<String, dynamic> toJson() => _$AccountInfoRequestToJson(this);
 }

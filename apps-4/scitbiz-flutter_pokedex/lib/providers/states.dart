@@ -1,6 +1,7 @@
 part of 'providers.dart';
 
-final currentPokemonStateProvider = ChangeNotifierProvider<CurrentPokemonState>((ref) {
+final currentPokemonStateProvider =
+    ChangeNotifierProvider<CurrentPokemonState>((ref) {
   final getPokemonUseCase = ref.watch(getPokemonUseCaseProvider);
 
   return CurrentPokemonState(getPokemonUseCase);

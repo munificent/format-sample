@@ -27,8 +27,10 @@ class StoreUIMapper extends UIModelMapper<StoreUI, StoreEntity> {
     // var hasAPromo = false;
     storeUI.id = item.id;
     storeUI.deliveryCost = item.deliveryCost;
-    storeUI.isDeliveryFree = item.deliveryCost == null || item.deliveryCost == 0 ? true : false;
-    storeUI.isStoreClosed = item.state == "closed" || !isInOperatingHours(item.openAt, item.closeAt, item.daysOpen);
+    storeUI.isDeliveryFree =
+        item.deliveryCost == null || item.deliveryCost == 0 ? true : false;
+    storeUI.isStoreClosed = item.state == "closed" ||
+        !isInOperatingHours(item.openAt, item.closeAt, item.daysOpen);
     storeUI.hasAPromo = false;
 
     var randomTag = "";
@@ -55,7 +57,10 @@ bool isInOperatingHours(String openAt, String closeAt, List<int> daysOpen) {
   var hourCloseTime = int.parse(closeTime[0]);
   var minCloseTime = int.parse(closeTime[1]);
 
-  if (hourNow >= hourOpenTime && minNow >= minOpenTime && hourNow <= hourCloseTime && minNow <= minCloseTime) {
+  if (hourNow >= hourOpenTime &&
+      minNow >= minOpenTime &&
+      hourNow <= hourCloseTime &&
+      minNow <= minCloseTime) {
     return true;
   }
 

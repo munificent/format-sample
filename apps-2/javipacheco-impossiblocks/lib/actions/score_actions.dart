@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:impossiblocks/models/models.dart';
 
 class AddPointToScoreAction {
-
   final PlayersGame playersGame;
 
   AddPointToScoreAction({@required this.playersGame});
@@ -14,7 +13,6 @@ class AddPointToScoreAction {
 }
 
 class RemovePointToScoreAction {
-
   final PlayersGame playersGame;
 
   RemovePointToScoreAction({@required this.playersGame});
@@ -26,7 +24,6 @@ class RemovePointToScoreAction {
 }
 
 class AddTimeToScoreAction {
-  
   final int time;
 
   AddTimeToScoreAction({this.time = 2});
@@ -41,7 +38,6 @@ class AddTimeToScoreAction {
 Actualiza los puntos del modo Arcade con los segundos que han sobrado
 */
 class UpdateScoreForUpgradingLevelAction {
-  
   UpdateScoreForUpgradingLevelAction();
 
   @override
@@ -51,7 +47,6 @@ class UpdateScoreForUpgradingLevelAction {
 }
 
 class ReduceTimeToScoreAction {
-
   ReduceTimeToScoreAction();
 
   @override
@@ -61,7 +56,6 @@ class ReduceTimeToScoreAction {
 }
 
 class ResetScoreAction {
-
   ResetScoreAction();
 
   @override
@@ -71,7 +65,6 @@ class ResetScoreAction {
 }
 
 class PauseAction {
-
   PauseAction();
 
   @override
@@ -81,7 +74,6 @@ class PauseAction {
 }
 
 class ResumeAction {
-
   ResumeAction();
 
   @override

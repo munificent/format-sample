@@ -9,7 +9,7 @@ class BannerPlaceholder extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 400.0,
-      margin: const EdgeInsets.only(left: 16,right: 16),
+      margin: const EdgeInsets.only(left: 16, right: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         color: Colors.white,
@@ -71,9 +71,8 @@ class FiledPlaceholder extends StatelessWidget {
             width: width,
             height: 50.0,
             decoration: BoxDecoration(
-              color: white,
-              borderRadius: BorderRadius.circular(kBorderRadius)
-            ),
+                color: white,
+                borderRadius: BorderRadius.circular(kBorderRadius)),
           ),
           const SizedBox(height: 12.0),
           Container(
@@ -81,8 +80,7 @@ class FiledPlaceholder extends StatelessWidget {
             height: 50.0,
             decoration: BoxDecoration(
                 color: white,
-                borderRadius: BorderRadius.circular(kBorderRadius)
-            ),
+                borderRadius: BorderRadius.circular(kBorderRadius)),
           ),
         ],
       ),

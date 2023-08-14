@@ -28,7 +28,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
   int bookColor = DataModel.currentBook.bookcolor;
   int boxSetBookIcon = DataModel.currentBook.bookicon;
   int boxSetBookColor = DataModel.currentBook.bookcolor;
-  
+
   int bookfont = DataModel.currentBook.bookFont;
   int boxSetBookFont = DataModel.currentBook.bookFont;
   UserModel userModel = UserModel();
@@ -60,7 +60,8 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
   @override
   Widget build(BuildContext context) {
     Query query = Query();
-    final formIconKey = GlobalKey<FormState>();   final formFontFamilyKey = GlobalKey<FormState>();
+    final formIconKey = GlobalKey<FormState>();
+    final formFontFamilyKey = GlobalKey<FormState>();
     final formColorKey = GlobalKey<FormState>();
     final formTitleKey = GlobalKey<FormState>();
     final formSubtitleKey = GlobalKey<FormState>();
@@ -74,7 +75,6 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
       '${DataModel.currentBook.bookId}' = bookid
       ''';
     _perfomSetCategory() async {
-      
       Query.currentTimeString = query.datetimefucntion();
       String bookUpdate = ''' 
       UPDATE books
@@ -82,7 +82,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
       WHERE
       bookid = ${DataModel.currentBook.bookId}  
       ''';
-      
+
       Query.currentTimeString = query.datetimefucntion();
       String bookNotesUpdate = ''' 
       UPDATE notes
@@ -115,7 +115,6 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
     }
 
     _perfomchangeSubtitle() async {
-      
       Query.currentTimeString = query.datetimefucntion();
       String bookUpdate = ''' 
       UPDATE books
@@ -369,7 +368,6 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
     }
 
     _perfomchangeColor(int bookColor) async {
-      
       Query.currentTimeString = query.datetimefucntion();
       String bookUpdate = ''' 
       UPDATE books
@@ -496,7 +494,6 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
     }
 
     _perfomchangeIcon() async {
-      
       Query.currentTimeString = query.datetimefucntion();
       String bookUpdate = ''' 
       UPDATE books
@@ -620,6 +617,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
         },
       );
     }
+
     _perfomSetBookFontFamily() async {
       print('called set username $bookfont');
 
@@ -647,9 +645,8 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
         form.save();
         setState(() {
           bookfont = boxSetBookFont;
-          
-       
-        }); DataModel.currentBook.bookFont = bookfont;
+        });
+        DataModel.currentBook.bookFont = bookfont;
         _perfomSetBookFontFamily();
         Navigator.of(context).pop();
       }
@@ -680,8 +677,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                                     EdgeInsets.only(top: 10.0, right: 25.0),
                                 child: Align(
                                   alignment: Alignment.topCenter,
-                                  child:
-                                      listFontFamily[bookfont].child,
+                                  child: listFontFamily[bookfont].child,
                                 ),
                               ),
                               new FormField(
@@ -758,12 +754,11 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
             //   _bannerAdBookSettingsScreen.dispose();
             // }
             Navigator.pushReplacement(
-                context,SlideRightRoute(
-              widget:NotesPage(
-                          dataModel: DataModel(),
-                        )
-            )
-               );
+                context,
+                SlideRightRoute(
+                    widget: NotesPage(
+                  dataModel: DataModel(),
+                )));
           },
         ),
         actions: <Widget>[
@@ -991,7 +986,8 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                     ),
                   ),
                 ),
-              ), GestureDetector(
+              ),
+              GestureDetector(
                 onTap: () {
                   _changeBookFontFamily();
                 },
@@ -1023,7 +1019,9 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                               Container(
                                 width: 90.0,
                                 height: 30.0,
-                                child: listFontFamily[DataModel.currentBook.bookFont].child,
+                                child: listFontFamily[
+                                        DataModel.currentBook.bookFont]
+                                    .child,
                               )
                             ],
                           ),

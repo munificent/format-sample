@@ -11,7 +11,7 @@ abstract class DataSource {
 
   // connect to database
   Future<void> open() async {
-    if ( SQLiteDbProvider.db==null || !SQLiteDbProvider.db.isOpen ) {
+    if (SQLiteDbProvider.db == null || !SQLiteDbProvider.db.isOpen) {
       await SQLiteDbProvider.open();
     }
     db = await SQLiteDbProvider.db;

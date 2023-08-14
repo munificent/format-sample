@@ -27,12 +27,8 @@ class NewDetailState extends State<NewsPageDetail> {
         .toString());
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text('News detail'),

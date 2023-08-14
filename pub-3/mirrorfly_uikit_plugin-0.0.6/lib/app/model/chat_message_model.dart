@@ -300,7 +300,8 @@ class MediaChatMessage {
                 : json["mediaFileType"].toString().toUpperCase(),
         mediaFileWidth: json["mediaFileWidth"] ?? 0,
         mediaLocalStoragePath: json["mediaLocalStoragePath"],
-        mediaProgressStatus: int.parse(json["mediaProgressStatus"].toString()).obs,
+        mediaProgressStatus:
+            int.parse(json["mediaProgressStatus"].toString()).obs,
         mediaThumbImage: json["mediaThumbImage"]
             .toString()
             .replaceAll("\\\\n", "\\n")

@@ -24,8 +24,6 @@ class HomePage extends StatefulWidget {
 enum search { enable, disable }
 
 class _HomePageState extends State<HomePage> {
-
-  
   int currentIndex;
   var queryResultSet = [];
   var tempSearchStore = [];
@@ -152,55 +150,56 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: <Widget>[
                         Container(
-                      child: IconButton(
-                        
-                        icon: _search == search.enable
-                            ? Icon(Icons.menu)
-                            : Icon(Icons.menu),
-                        iconSize: 30.0,
-                        color: _search == search.enable
-                            ? Colors.grey[800]
-                            : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            _controller.clear();
-                            _search = _search == search.enable
-                                ? search.disable
-                                : search.enable;
-                          });
-                        },
-                      ),
-                    ),
-                    _search == search.enable
-                        ? GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              _dismissKeyboard(context);
+                          child: IconButton(
+                            icon: _search == search.enable
+                                ? Icon(Icons.menu)
+                                : Icon(Icons.menu),
+                            iconSize: 30.0,
+                            color: _search == search.enable
+                                ? Colors.grey[800]
+                                : Colors.white,
+                            onPressed: () {
+                              setState(() {
+                                _controller.clear();
+                                _search = _search == search.enable
+                                    ? search.disable
+                                    : search.enable;
+                              });
                             },
-                            child: Container(
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              width: SizeConfig.blockSizeHorizontal * 100 - 150,
-                              child: TextField(
-                                onChanged: (val) {
-                                  initiateSearch(val);
+                          ),
+                        ),
+                        _search == search.enable
+                            ? GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  _dismissKeyboard(context);
                                 },
-                                controller: _controller,
-                                decoration: InputDecoration(
-                                  hintText: 'Search Here',
-                                  border: InputBorder.none,
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 20, right: 20),
+                                  width: SizeConfig.blockSizeHorizontal * 100 -
+                                      150,
+                                  child: TextField(
+                                    onChanged: (val) {
+                                      initiateSearch(val);
+                                    },
+                                    controller: _controller,
+                                    decoration: InputDecoration(
+                                      hintText: 'Search Here',
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ))
+                            : Container(
+                                child: Text(
+                                  'Welcome! ' + _name,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        SizeConfig.safeBlockHorizontal * 6,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ))
-                        : Container(
-                            child: Text(
-                              'Welcome! ' + _name,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: SizeConfig.safeBlockHorizontal * 6,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            /* Text(
+                                /* Text(
                               authNotifier.user != null
                                   ? 'Welcome! ${authNotifier.user.displayName}'
                                   : 'Welcome! to PreArticle',
@@ -210,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ), */
-                          ),
+                              ),
                       ],
                     ),
                     Container(

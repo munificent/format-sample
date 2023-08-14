@@ -31,7 +31,7 @@ class _FAQScreenState extends State<FAQScreen> {
           ),
           actions: <Widget>[
             IconButton(
-              icon:  Theme.of(context).brightness == Brightness.dark
+              icon: Theme.of(context).brightness == Brightness.dark
                   ? Icon(FontAwesomeIcons.sun)
                   : Icon(FontAwesomeIcons.moon),
               onPressed: () {
@@ -74,7 +74,7 @@ class _FAQScreenState extends State<FAQScreen> {
                     );
                   },
                 );
-              }else{
+              } else {
                 return CircularProgressIndicator();
               }
             }));

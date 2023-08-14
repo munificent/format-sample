@@ -12,13 +12,11 @@ class Actor {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Actor &&
-              runtimeType == other.runtimeType &&
-              name == other.name &&
-              avatarUrl == other.avatarUrl;
+      other is Actor &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          avatarUrl == other.avatarUrl;
 
   @override
-  int get hashCode =>
-      name.hashCode ^
-      avatarUrl.hashCode;
+  int get hashCode => name.hashCode ^ avatarUrl.hashCode;
 }

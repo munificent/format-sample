@@ -5,7 +5,6 @@ import 'package:aerium/presentation/pages/home/home_page.dart';
 import 'package:aerium/presentation/routes/routes.dart';
 import 'package:aerium/values/values.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching = false;

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_reader/core/model/News.dart';
 import 'package:news_reader/presentation/views/detail/NewsDetailPage.dart';
 
-
 class NewsRow extends StatefulWidget {
   final News news;
 
@@ -13,7 +12,6 @@ class NewsRow extends StatefulWidget {
 }
 
 class _NewsRowState extends State<NewsRow> {
-
   @override
   void initState() {
     super.initState();
@@ -75,7 +73,7 @@ class _NewsRowState extends State<NewsRow> {
         Padding(
           padding: const EdgeInsets.only(top: 8.0, right: 4.0, left: 4.0),
           child: Text(
-           widget. news.name,
+            widget.news.name,
             maxLines: 1,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -94,8 +92,8 @@ class _NewsRowState extends State<NewsRow> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      NewsDetailPage(id: widget.news.id, channel: widget.news.name)),
+                  builder: (context) => NewsDetailPage(
+                      id: widget.news.id, channel: widget.news.name)),
             );
           }
         },

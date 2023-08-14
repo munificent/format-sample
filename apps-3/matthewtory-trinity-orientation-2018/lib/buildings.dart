@@ -7,8 +7,13 @@ import 'package:url_launcher/url_launcher.dart';
 import 'utils.dart';
 
 class BuildingMapMarker extends StatefulWidget {
-
-  BuildingMapMarker({Key key, @required this.building, @required this.selectionController, @required this.tapDelegate, this.vsync}) : super(key: key);
+  BuildingMapMarker(
+      {Key key,
+      @required this.building,
+      @required this.selectionController,
+      @required this.tapDelegate,
+      this.vsync})
+      : super(key: key);
 
   final DocumentSnapshot building;
   final MarkerSelectionController selectionController;
@@ -32,9 +37,11 @@ class _BuildingMapMarkerState extends State<BuildingMapMarker> {
   void initState() {
     super.initState();
 
-    controller = new AnimationController(vsync: widget.vsync, duration: const Duration(milliseconds: 300));
+    controller = new AnimationController(
+        vsync: widget.vsync, duration: const Duration(milliseconds: 300));
 
-    _buildingSelectionSub = widget.selectionController.eventSelectionOutputStream.listen((title) {
+    _buildingSelectionSub =
+        widget.selectionController.eventSelectionOutputStream.listen((title) {
       if (title == widget.building['name']) {
         controller.forward();
       } else {
@@ -47,7 +54,8 @@ class _BuildingMapMarkerState extends State<BuildingMapMarker> {
   void didUpdateWidget(BuildingMapMarker oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    _buildingSelectionSub = widget.selectionController.eventSelectionOutputStream.listen((title) {
+    _buildingSelectionSub =
+        widget.selectionController.eventSelectionOutputStream.listen((title) {
       if (title == widget.building['name']) {
         controller.forward();
       } else {
@@ -74,7 +82,9 @@ class _BuildingMapMarkerState extends State<BuildingMapMarker> {
           child: new RawMaterialButton(
             fillColor: colorForBuildingCode('A'),
             shape: const CircleBorder(),
-            constraints: new BoxConstraints(minHeight: kMarkerIndicatorSize, minWidth: kMarkerIndicatorSize),
+            constraints: new BoxConstraints(
+                minHeight: kMarkerIndicatorSize,
+                minWidth: kMarkerIndicatorSize),
             child: _CrossFadeTransition(
               progress: controller,
               child1: new Icon(
@@ -99,12 +109,19 @@ class _BuildingMapMarkerState extends State<BuildingMapMarker> {
 
 class BuildingMapMarkerGrowTransition extends AnimatedWidget {
   BuildingMapMarkerGrowTransition(
-      {@required this.child, @required this.animation, @required this.building, @required this.selectionController})
-      : scaleAnimation =
-            new Tween(begin: 1.0, end: 1.5).animate(new CurvedAnimation(parent: animation, curve: Curves.ease)),
-        opacityAnimation = new Tween(begin: 0.0, end: 1.0)
-            .animate(new CurvedAnimation(parent: animation, curve: new Interval(0.75, 1.0, curve: Curves.easeInOut))),
-        slideAnimation = new Tween<Offset>(begin: new Offset(0.0, 0.0), end: new Offset(0.0, -0.7)).animate(animation),
+      {@required this.child,
+      @required this.animation,
+      @required this.building,
+      @required this.selectionController})
+      : scaleAnimation = new Tween(begin: 1.0, end: 1.5).animate(
+            new CurvedAnimation(parent: animation, curve: Curves.ease)),
+        opacityAnimation = new Tween(begin: 0.0, end: 1.0).animate(
+            new CurvedAnimation(
+                parent: animation,
+                curve: new Interval(0.75, 1.0, curve: Curves.easeInOut))),
+        slideAnimation = new Tween<Offset>(
+                begin: new Offset(0.0, 0.0), end: new Offset(0.0, -0.7))
+            .animate(animation),
         super(listenable: animation);
 
   final Widget child;
@@ -118,7 +135,10 @@ class BuildingMapMarkerGrowTransition extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
-      Transform.scale(scale: scaleAnimation.value, alignment: Alignment.bottomCenter, child: child),
+      Transform.scale(
+          scale: scaleAnimation.value,
+          alignment: Alignment.bottomCenter,
+          child: child),
       Padding(
         padding: new EdgeInsets.only(top: scaleAnimation.value * 2.0),
         child: Container(
@@ -172,11 +192,11 @@ class BuildingMapMarkerGrowTransition extends AnimatedWidget {
           behavior: HitTestBehavior.opaque,
           onTap: () {
             if (animation.status == AnimationStatus.dismissed) {
-              selectionController.markerSelectionInputSink.add(building['location']);
+              selectionController.markerSelectionInputSink
+                  .add(building['location']);
               selectionController.eventSelectionInputSink.add(building['name']);
             } else {
               openMaps(context, building['location'], building['name']);
-
             }
           },
           child: Container(

@@ -10,7 +10,7 @@ class RapidinhoDatabase {
   factory RapidinhoDatabase() => _instance;
 
   Future<Database> get database async {
-    if(db != null){
+    if (db != null) {
       return db;
     }
     db = await initDB();
@@ -25,6 +25,7 @@ class RapidinhoDatabase {
     var thDB = await openDatabase(path, version: 1, onCreate: _onCreate);
     return thDB;
   }
+
   _onCreate(Database db, int version) async {
     PlacedOrderTable.createTable(db);
   }

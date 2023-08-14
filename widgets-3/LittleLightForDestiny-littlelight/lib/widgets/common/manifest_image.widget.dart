@@ -41,8 +41,7 @@ class ManifestImageState<T> extends State<ManifestImageWidget<T>> {
   }
 
   Future<void> loadDefinition() async {
-    definition =
-        await widget._manifest.getDefinition<T>(widget.hash);
+    definition = await widget._manifest.getDefinition<T>(widget.hash);
     if (mounted) {
       setState(() {});
     }
@@ -51,7 +50,7 @@ class ManifestImageState<T> extends State<ManifestImageWidget<T>> {
   @override
   Widget build(BuildContext context) {
     Shimmer shimmer = ShimmerHelper.getDefaultShimmer(context);
-    if(definition == null) return shimmer;
+    if (definition == null) return shimmer;
     String url = "";
     try {
       if (widget.urlExtractor == null) {
@@ -62,7 +61,7 @@ class ManifestImageState<T> extends State<ManifestImageWidget<T>> {
     } catch (e) {
       print(e);
     }
-    if(url == null || url.length == 0){
+    if (url == null || url.length == 0) {
       return shimmer;
     }
     return QueuedNetworkImage(

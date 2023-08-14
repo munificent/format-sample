@@ -18,7 +18,8 @@ class StoreDetailsPage extends StatefulWidget {
   static const STORE_DETAILS_ROUTE = '/store_details';
 
   @override
-  _StoreDetailsPageState createState() => _StoreDetailsPageState(Injector.getInjector().get());
+  _StoreDetailsPageState createState() =>
+      _StoreDetailsPageState(Injector.getInjector().get());
 }
 
 class _StoreDetailsPageState extends State<StoreDetailsPage> {
@@ -41,7 +42,8 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
     Map<ItemUI, List<ItemUI>> itemList;
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(elevation: 0, backgroundColor: Theme.of(context).dividerColor),
+        appBar: AppBar(
+            elevation: 0, backgroundColor: Theme.of(context).dividerColor),
         body: SafeArea(
           child: BlocBuilder(
               bloc: _bloc,
@@ -71,24 +73,33 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                     Container(
                         padding: EdgeInsets.only(bottom: 16),
                         color: Theme.of(context).dividerColor,
-                        child: Hero(tag: store.name, child: StoreItem(storeItem: store))),
+                        child: Hero(
+                            tag: store.name,
+                            child: StoreItem(storeItem: store))),
                     Expanded(
                         flex: 1,
                         child: CategoryTabs(
                           onCategorySelected: (category, position) {
-                            _controller.scrollToIndex(position, duration: Duration(milliseconds: 500), preferPosition: AutoScrollPosition.begin);
+                            _controller.scrollToIndex(position,
+                                duration: Duration(milliseconds: 500),
+                                preferPosition: AutoScrollPosition.begin);
                           },
-                          categories: itemList?.keys?.map((e) => e.name)?.toList(),
+                          categories:
+                              itemList?.keys?.map((e) => e.name)?.toList(),
                         )),
                     Divider(thickness: 8),
                     Expanded(
                       flex: 10,
-                      child: state is LoadingState ? Center(child: CircularProgressIndicator()) : buildItemList(itemList),
+                      child: state is LoadingState
+                          ? Center(child: CircularProgressIndicator())
+                          : buildItemList(itemList),
                     ),
                     InkWell(
                       onTap: () {
                         if (orderQuantity > 0) {
-                          Navigator.pushNamed(context, OrderDetailPage.ORDER_DETAIL_ROUTE, arguments: [store, products]);
+                          Navigator.pushNamed(
+                              context, OrderDetailPage.ORDER_DETAIL_ROUTE,
+                              arguments: [store, products]);
                         }
                       },
                       child: CartTotalBottom(orderQuantity, cartTotal),
@@ -119,14 +130,19 @@ class _StoreDetailsPageState extends State<StoreDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(padding: const EdgeInsets.all(16.0), child: Text(category.name, style: AppTextStyle.section)),
+                    Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child:
+                            Text(category.name, style: AppTextStyle.section)),
                     Column(
                         children: items[category]
                             .map((e) => Padding(
-                                  padding: const EdgeInsets.only(left: 24, top: 8, right: 24),
+                                  padding: const EdgeInsets.only(
+                                      left: 24, top: 8, right: 24),
                                   child: ProductItem(
                                     itemUI: e,
-                                    onQuantityChange: (value) => _bloc.add(UpdateProductEvent(e, value)),
+                                    onQuantityChange: (value) =>
+                                        _bloc.add(UpdateProductEvent(e, value)),
                                     divider: e != items[category]?.last,
                                   ),
                                 ))

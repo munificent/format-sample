@@ -11,12 +11,18 @@ class SearchUserStateMapper extends StateMapper {
     required Result<List<MemberModel>> fullNameResult,
     List<String>? noShowUsers,
   }) {
-    if (seedsMembersResult.isError && telosResult.isError && fullNameResult.isError) {
-      return currentState.copyWith(pageState: PageState.failure, errorMessage: 'Error Searching for User');
+    if (seedsMembersResult.isError &&
+        telosResult.isError &&
+        fullNameResult.isError) {
+      return currentState.copyWith(
+          pageState: PageState.failure,
+          errorMessage: 'Error Searching for User');
     } else {
-      final List<MemberModel> seedsUsers = seedsMembersResult.asValue?.value ?? [];
+      final List<MemberModel> seedsUsers =
+          seedsMembersResult.asValue?.value ?? [];
       final List<MemberModel> telosUsers = telosResult.asValue?.value ?? [];
-      final List<MemberModel> fullNameUsers = fullNameResult.asValue?.value ?? [];
+      final List<MemberModel> fullNameUsers =
+          fullNameResult.asValue?.value ?? [];
 
       final existingSet = <String>{};
       final noShowSet = Set.from(noShowUsers ?? []);
@@ -30,17 +36,21 @@ class SearchUserStateMapper extends StateMapper {
       final uniqueUsers = <MemberModel>[];
 
       for (final member in users) {
-        if (!(existingSet.contains(member.account) || noShowSet.contains(member.account))) {
+        if (!(existingSet.contains(member.account) ||
+            noShowSet.contains(member.account))) {
           uniqueUsers.add(member);
           existingSet.add(member.account);
         }
       }
 
       if (currentState.showOnlyCitizenshipStatus != null) {
-        uniqueUsers.removeWhere((element) => element.citizenshipStatus != currentState.showOnlyCitizenshipStatus);
+        uniqueUsers.removeWhere((element) =>
+            element.citizenshipStatus !=
+            currentState.showOnlyCitizenshipStatus);
       }
 
-      return currentState.copyWith(pageState: PageState.success, users: uniqueUsers);
+      return currentState.copyWith(
+          pageState: PageState.success, users: uniqueUsers);
     }
   }
 }

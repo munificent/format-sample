@@ -1,10 +1,9 @@
-void main(){
+void main() {
+  int a = 2;
+  var b = 3;
+  print(a + b);
 
-  int a =2;
-  var b =3;
-  print(a+b);
-
-  double p =3.14;
+  double p = 3.14;
   print('\n$p');
 
   bool s = true;
@@ -18,5 +17,4 @@ void main(){
   print('Week: $week');
   week = 'Dart Programming';
   print('$week');
-
 }

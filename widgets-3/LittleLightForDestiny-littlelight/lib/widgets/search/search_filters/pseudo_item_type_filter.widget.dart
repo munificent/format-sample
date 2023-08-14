@@ -17,7 +17,6 @@ class PseudoItemTypeFilterWidget
 
 class _PseudoItemTypeFilterWidgetState extends BaseSearchFilterWidgetState<
     PseudoItemTypeFilterWidget, PseudoItemTypeFilter, PseudoItemType> {
-
   @override
   Widget build(BuildContext context) {
     double paddingBottom = MediaQuery.of(context).padding.bottom;
@@ -33,7 +32,7 @@ class _PseudoItemTypeFilterWidgetState extends BaseSearchFilterWidgetState<
 
   @override
   Widget buildButtons(BuildContext context) {
-    if((filter?.availableValues?.length ?? 0) <= 1) return Container();
+    if ((filter?.availableValues?.length ?? 0) <= 1) return Container();
     return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -66,14 +65,14 @@ class _PseudoItemTypeFilterWidgetState extends BaseSearchFilterWidgetState<
             onTap: () {
               if (isSelected && filter.value.length <= 1) return;
               if (!isSelected) {
-                if(filter.value.length <= 1) filter.value.clear();
+                if (filter.value.length <= 1) filter.value.clear();
                 filter.value.add(value);
-              }else{
+              } else {
                 filter.value.remove(value);
               }
               widget.controller.update();
             },
-            onLongPress: (){
+            onLongPress: () {
               filter.value.add(value);
               widget.controller.update();
             },

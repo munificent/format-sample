@@ -5,7 +5,6 @@ import 'package:image/image.dart' as img;
 import 'package:dart_image/dart_image.dart' as dimg;
 import 'dart:math' as math;
 
-
 class _ImageCompressionMessage {
   SendPort sendPort;
   File file;
@@ -14,7 +13,7 @@ class _ImageCompressionMessage {
 class ImageUtil {
   static const int MAX = 1920;
 
-  static List<int> compressImage(File file)  {
+  static List<int> compressImage(File file) {
     return __compressImage(file);
   }
 
@@ -22,7 +21,7 @@ class ImageUtil {
     message.sendPort.send(__compressImage(message.file));
   }
 
-  static List<int> __compressImage(File file){
+  static List<int> __compressImage(File file) {
     print("Compressing image $file");
     print("Decoding image...");
     img.Image image = img.decodeImage(file.readAsBytesSync());
@@ -72,8 +71,7 @@ class ImageUtil {
       } else {
         return image.width;
       }
-    }
-    else {
+    } else {
       if (image.height > ImageUtil.MAX) {
         double shrinkage = ImageUtil.MAX.toDouble() / image.height.toDouble();
         return (image.width.toDouble() * shrinkage).floor();

@@ -10,7 +10,8 @@ import '../request_api_helper.dart';
 HttpClient getHttpClient({Duration? duration}) {
   HttpClient httpClient = HttpClient()
     ..connectionTimeout = duration ?? const Duration(seconds: 120)
-    ..badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+    ..badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
 
   return httpClient;
 }
@@ -24,7 +25,8 @@ Future<String> readResponseAsString(HttpClientResponse response) {
   return completer.future;
 }
 
-Future<Response> requestfile(RequestApiHelperData config, {Function(int uploaded, int total)? onProgress}) async {
+Future<Response> requestfile(RequestApiHelperData config,
+    {Function(int uploaded, int total)? onProgress}) async {
   final httpClients = getHttpClient();
   Uri _http = Uri.parse(config.baseUrl!);
   final response = await httpClients.postUrl(_http);
@@ -37,11 +39,17 @@ Future<Response> requestfile(RequestApiHelperData config, {Function(int uploaded
     });
   }
 
-  for (int counterfile = 0; counterfile < (config.file?.path ?? []).length; counterfile++) {
-    if (config.file!.path[counterfile] == '' || config.file!.path[counterfile] == 'null') {
+  for (int counterfile = 0;
+      counterfile < (config.file?.path ?? []).length;
+      counterfile++) {
+    if (config.file!.path[counterfile] == '' ||
+        config.file!.path[counterfile] == 'null') {
       request.fields[config.file!.requestName[counterfile]] = 'null';
     } else {
-      request.files.add(await MultipartFile.fromPath(config.file!.requestName[counterfile], config.file!.path[counterfile], contentType: MediaType('application', config.file!.path[counterfile].split('.').last)));
+      request.files.add(await MultipartFile.fromPath(
+          config.file!.requestName[counterfile], config.file!.path[counterfile],
+          contentType: MediaType(
+              'application', config.file!.path[counterfile].split('.').last)));
     }
   }
 
@@ -59,7 +67,8 @@ Future<Response> requestfile(RequestApiHelperData config, {Function(int uploaded
     });
     response.headers.set(HttpHeaders.contentTypeHeader, {decodes});
 
-    getSize('Header ', response.headers.toString(), debug: config.debug ?? false);
+    getSize('Header ', response.headers.toString(),
+        debug: config.debug ?? false);
     streamUpload = msStream.transform(
       StreamTransformer.fromHandlers(
         handleData: (data, sink) {
@@ -84,7 +93,8 @@ Future<Response> requestfile(RequestApiHelperData config, {Function(int uploaded
     return Response(getResponse, res.statusCode);
   } else {
     final getResponse = await request.send();
-    return Response(await getResponse.stream.bytesToString(), getResponse.statusCode);
+    return Response(
+        await getResponse.stream.bytesToString(), getResponse.statusCode);
   }
 }
 
@@ -95,7 +105,8 @@ class DownloadAdd {
   Api type;
   RequestApiHelperDownloadData? download;
   Function(int uploaded, int total)? onProgress;
-  DownloadAdd(this.data, {this.download, this.onProgress, required this.type, this.url}) {
+  DownloadAdd(this.data,
+      {this.download, this.onProgress, required this.type, this.url}) {
     id = DateTime.now().millisecondsSinceEpoch;
   }
 }
@@ -112,7 +123,8 @@ class DownloadQueue {
   Api type;
   RequestApiHelperDownloadData? download;
   Function(int uploaded, int total)? onProgress;
-  DownloadQueue(this.data, {this.download, this.onProgress, required this.type, this.url}) {
+  DownloadQueue(this.data,
+      {this.download, this.onProgress, required this.type, this.url}) {
     id = DateTime.now().millisecondsSinceEpoch;
   }
 }

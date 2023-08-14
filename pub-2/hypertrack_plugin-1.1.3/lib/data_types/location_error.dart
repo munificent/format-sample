@@ -11,11 +11,11 @@ class LocationError {
   @override
   String toString() {
     final instance = this;
-    if(instance is NotRunning) {
+    if (instance is NotRunning) {
       return "notRunning";
-    } else if(instance is Starting) {
+    } else if (instance is Starting) {
       return "starting";
-    } else if(instance is Errors) {
+    } else if (instance is Errors) {
       return "[${instance.errors}]";
     } else {
       return super.toString();
@@ -48,7 +48,7 @@ class LocationError {
 }
 
 class NotRunning extends LocationError {
-  NotRunning(): super._();
+  NotRunning() : super._();
 
   /// @nodoc
   @override
@@ -82,7 +82,7 @@ class NotRunning extends LocationError {
 }
 
 class Starting extends LocationError {
-  Starting(): super._();
+  Starting() : super._();
 
   /// @nodoc
   @override
@@ -118,7 +118,7 @@ class Starting extends LocationError {
 class Errors extends LocationError {
   Set<HyperTrackError> errors;
 
-  Errors(this.errors): super._();
+  Errors(this.errors) : super._();
 
   /// @nodoc
   @override

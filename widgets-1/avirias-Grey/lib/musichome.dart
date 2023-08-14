@@ -42,7 +42,6 @@ class BodySelection extends StatelessWidget {
 }
 
 class MusicHome extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     return new _MusicState();
@@ -157,7 +156,7 @@ class _MusicState extends State<MusicHome> {
     var db = new DatabaseClient();
     await MusicFinder.allSongs().then((songs) {
       List<Song> newSongs = List.from(songs);
-      for (Song song in newSongs)  db.insertOrUpdateSong(song);
+      for (Song song in newSongs) db.insertOrUpdateSong(song);
     }).then((val) {
       scaffoldState.currentState.showSnackBar(new SnackBar(
         content: Text(

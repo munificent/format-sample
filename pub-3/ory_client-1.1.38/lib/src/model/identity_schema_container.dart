@@ -15,7 +15,8 @@ part 'identity_schema_container.g.dart';
 /// * [id] - The ID of the Identity JSON Schema
 /// * [schema] - The actual Identity JSON Schema
 @BuiltValue()
-abstract class IdentitySchemaContainer implements Built<IdentitySchemaContainer, IdentitySchemaContainerBuilder> {
+abstract class IdentitySchemaContainer
+    implements Built<IdentitySchemaContainer, IdentitySchemaContainerBuilder> {
   /// The ID of the Identity JSON Schema
   @BuiltValueField(wireName: r'id')
   String? get id;
@@ -26,18 +27,25 @@ abstract class IdentitySchemaContainer implements Built<IdentitySchemaContainer,
 
   IdentitySchemaContainer._();
 
-  factory IdentitySchemaContainer([void updates(IdentitySchemaContainerBuilder b)]) = _$IdentitySchemaContainer;
+  factory IdentitySchemaContainer(
+          [void updates(IdentitySchemaContainerBuilder b)]) =
+      _$IdentitySchemaContainer;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(IdentitySchemaContainerBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<IdentitySchemaContainer> get serializer => _$IdentitySchemaContainerSerializer();
+  static Serializer<IdentitySchemaContainer> get serializer =>
+      _$IdentitySchemaContainerSerializer();
 }
 
-class _$IdentitySchemaContainerSerializer implements PrimitiveSerializer<IdentitySchemaContainer> {
+class _$IdentitySchemaContainerSerializer
+    implements PrimitiveSerializer<IdentitySchemaContainer> {
   @override
-  final Iterable<Type> types = const [IdentitySchemaContainer, _$IdentitySchemaContainer];
+  final Iterable<Type> types = const [
+    IdentitySchemaContainer,
+    _$IdentitySchemaContainer
+  ];
 
   @override
   final String wireName = r'IdentitySchemaContainer';
@@ -69,7 +77,9 @@ class _$IdentitySchemaContainerSerializer implements PrimitiveSerializer<Identit
     IdentitySchemaContainer object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -126,4 +136,3 @@ class _$IdentitySchemaContainerSerializer implements PrimitiveSerializer<Identit
     return result.build();
   }
 }
-

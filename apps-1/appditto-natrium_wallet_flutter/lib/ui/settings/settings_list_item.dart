@@ -79,12 +79,8 @@ class AppSettings {
   }
 
   //Settings item with direct functionality and two lines
-  static Widget buildSettingsListItemDoubleLineTwo(
-      BuildContext context,
-      String heading,
-      String text,
-      IconData icon,
-      Function onPressed,
+  static Widget buildSettingsListItemDoubleLineTwo(BuildContext context,
+      String heading, String text, IconData icon, Function onPressed,
       {bool disabled = false}) {
     return IgnorePointer(
       ignoring: disabled,
@@ -185,7 +181,9 @@ class AppSettings {
                           ? 0
                           : settingIcon == AppIcons.backupseed
                               ? 1
-                              : settingIcon == AppIcons.transferfunds ? 2 : 3,
+                              : settingIcon == AppIcons.transferfunds
+                                  ? 2
+                                  : 3,
                   bottom: 3,
                   end: settingIcon == AppIcons.logout
                       ? 0
@@ -193,7 +191,9 @@ class AppSettings {
                           ? 6
                           : settingIcon == AppIcons.backupseed
                               ? 5
-                              : settingIcon == AppIcons.transferfunds ? 4 : 3,
+                              : settingIcon == AppIcons.transferfunds
+                                  ? 4
+                                  : 3,
                 ),
               ),
             ),

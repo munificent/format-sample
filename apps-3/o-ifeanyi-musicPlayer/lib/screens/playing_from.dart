@@ -97,8 +97,7 @@ class _PlayingFromState extends State<PlayingFrom> {
                         child: ListTile(
                           onTap: () async {
                             nowPlaying = songList[index];
-                            if (controller.nowPlaying.path ==
-                                nowPlaying.path) {
+                            if (controller.nowPlaying.path == nowPlaying.path) {
                               Navigator.pop(context);
                             } else {
                               await controller

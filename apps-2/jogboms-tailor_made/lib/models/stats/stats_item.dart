@@ -8,7 +8,8 @@ part 'stats_item.g.dart';
 abstract class StatsItemModel<T extends num>
     with ModelInterface
     implements Built<StatsItemModel<T>, StatsItemModelBuilder<T>> {
-  factory StatsItemModel([void updates(StatsItemModelBuilder<T> b)]) = _$StatsItemModel<T>;
+  factory StatsItemModel([void updates(StatsItemModelBuilder<T> b)]) =
+      _$StatsItemModel<T>;
 
   StatsItemModel._();
 
@@ -26,10 +27,12 @@ abstract class StatsItemModel<T extends num>
   T get completed;
 
   @override
-  Map<String, dynamic> toMap() => serializers.serializeWith(StatsItemModel.serializer, this);
+  Map<String, dynamic> toMap() =>
+      serializers.serializeWith(StatsItemModel.serializer, this);
 
   static StatsItemModel fromJson(Map<String, dynamic> map) =>
       serializers.deserializeWith(StatsItemModel.serializer, map);
 
-  static Serializer<StatsItemModel> get serializer => _$statsItemModelSerializer;
+  static Serializer<StatsItemModel> get serializer =>
+      _$statsItemModelSerializer;
 }

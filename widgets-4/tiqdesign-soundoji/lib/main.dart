@@ -13,12 +13,10 @@ class Soundoji extends StatelessWidget {
   uiColors _colors = uiColors();
   @override
   Widget build(BuildContext context) {
-
     //Status Bar and Text Color
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: _colors.defaultWhite,
-        statusBarBrightness: Brightness.dark
-    ));
+        statusBarBrightness: Brightness.dark));
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -42,23 +40,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   uiColors _colors;
   @override
   void initState() {
     _colors = uiColors();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: _colors.defaultWhite,
         body: HomePage(),
-        appBar: SoundojiBar(height: 80,),
+        appBar: SoundojiBar(
+          height: 80,
+        ),
         extendBodyBehindAppBar: true,
       ),
     );
   }
 }
-

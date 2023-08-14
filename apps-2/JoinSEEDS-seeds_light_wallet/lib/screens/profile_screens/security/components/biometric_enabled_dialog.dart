@@ -13,7 +13,8 @@ class BiometricEnabledDialog extends StatelessWidget {
       icon: const Icon(Icons.fingerprint, size: 52, color: AppColors.green1),
       singleLargeButtonTitle: 'Got it, thanks!'.i18n,
       children: [
-        Text('Touch ID/ Face ID'.i18n, style: Theme.of(context).textTheme.button1),
+        Text('Touch ID/ Face ID'.i18n,
+            style: Theme.of(context).textTheme.button1),
         const SizedBox(height: 24.0),
         Text(
           'When Touch ID/Face ID has been set up, any biometric saved in your device will be able to login into the Seeds Light Wallet. You will not be able to use this feature for transactions.'

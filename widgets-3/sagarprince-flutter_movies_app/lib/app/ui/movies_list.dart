@@ -29,7 +29,7 @@ class _MoviesListState extends State<MoviesList> {
 
   Widget _loader() {
     return new Center(
-      child:  new CircularProgressIndicator(
+      child: new CircularProgressIndicator(
         strokeWidth: 3.0,
         valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
       ),
@@ -40,19 +40,23 @@ class _MoviesListState extends State<MoviesList> {
     return new Container(
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: new Center(
-        child: new Text(message, textAlign: TextAlign.center, style: new TextStyle(fontSize: 20.0, color: color)),
+        child: new Text(message,
+            textAlign: TextAlign.center,
+            style: new TextStyle(fontSize: 20.0, color: color)),
       ),
     );
   }
 
   Widget _moviesScrollList(MoviesBlocWidgetState blocState) {
-    return (blocState.movies.length > 0) ? new MoviesCardFlipper(
-        movies: blocState.movies
-    ) : _message('No Movies Found');
+    return (blocState.movies.length > 0)
+        ? new MoviesCardFlipper(movies: blocState.movies)
+        : _message('No Movies Found');
   }
 
   Widget _moviesList(MoviesBlocWidgetState blocState) {
-    return (!blocState.isError) ? _moviesScrollList(blocState) : _message(blocState.errorMessage);
+    return (!blocState.isError)
+        ? _moviesScrollList(blocState)
+        : _message(blocState.errorMessage);
   }
 
   @override
@@ -63,7 +67,8 @@ class _MoviesListState extends State<MoviesList> {
 
     return new Container(
       alignment: Alignment.topCenter,
-      padding: new EdgeInsets.only(top: topPadding, left: 0.0, right: 0.0, bottom: 35.0),
+      padding: new EdgeInsets.only(
+          top: topPadding, left: 0.0, right: 0.0, bottom: 35.0),
       child: blocState.isLoading ? _loader() : _moviesList(blocState),
     );
   }

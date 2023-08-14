@@ -25,7 +25,8 @@ class ReceiveDetailQrCodeScreen extends StatelessWidget {
             Container(
               height: height,
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: horizontalEdgePadding),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: horizontalEdgePadding),
                 child: Column(
                   children: [
                     const SizedBox(height: 30),
@@ -59,7 +60,10 @@ class ReceiveDetailQrCodeScreen extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: RichText(
                           text: TextSpan(
-                              text: 'Memo: '.i18n, children: <TextSpan>[TextSpan(text: arguments.description)]),
+                              text: 'Memo: '.i18n,
+                              children: <TextSpan>[
+                                TextSpan(text: arguments.description)
+                              ]),
                         ),
                       )
                     else

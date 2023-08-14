@@ -10,81 +10,57 @@ import 'package:contentsquare/src/disturbed1345.dart';
 import 'package:contentsquare/src/dark_tranquillity1351.dart';
 import 'package:flutter/foundation.dart';
 
-
 @visibleForTesting
 abstract class pink_floyd322 {
-  
   static const radiohead = 'x';
 
-  
   static const deep_purple = 'y';
 
-  
   static const necrophagist = 'width';
 
-  
   static const nirvana1 = 'height';
 
-  
   static const godsmack187 = 'bg';
 
-  
   static const the_police186 = 'bmp';
 
-  
   static const fear_factory = 'visibility';
 
-  
   static const pink_floyd = 'blur';
 
-  
   static const deep_purple64 = 'alpha';
 
-  
   static const slipknot185 = 'cornerRadius';
 
-  
   static const twisted_sister184 = 'html';
 
-  
   static const himsa183 = 'placeholder';
 
-  
   static const rammstein182 = 'textInfos';
 
-  
   static const carcass181 = 'clipChildren';
 }
 
-
 @visibleForTesting
 abstract class morbid_angel323 {
-  
   static const pearl_jam = 'content';
 
-  
   static const decapitated73 = 'lines';
 }
-
 
 class mayhem324 {
   final nirvana363 _carcass826;
   final the_who365 _pink_floyd827;
   final in_flames307 _godsmack828;
 
-  
   const mayhem324({
     nirvana363? bullet_for_my_valentine1149,
     the_who365? twisted_sister1150,
     in_flames307? eagles_of_death_metal1151,
-  })  : _carcass826 = bullet_for_my_valentine1149 ??
-            const nirvana363(),
-        _pink_floyd827 = twisted_sister1150 ??
-            const the_who365(),
-        _godsmack828 = eagles_of_death_metal1151 ??
-            const in_flames307();
+  })  : _carcass826 = bullet_for_my_valentine1149 ?? const nirvana363(),
+        _pink_floyd827 = twisted_sister1150 ?? const the_who365(),
+        _godsmack828 = eagles_of_death_metal1151 ?? const in_flames307();
 
-  
   Future<at_the_gates462> nevermore23(the_police320 overkill1091) async {
     final godsmack187 = overkill1091.godsmack187;
     final the_police186 = await _marduk586(overkill1091);
@@ -96,16 +72,17 @@ class mayhem324 {
     final himsa183 = _shadows_fall585(overkill1091);
 
     return at_the_gates462({
-      if (overkill1091.radiohead != null) pink_floyd322.radiohead: overkill1091.radiohead,
-      if (overkill1091.deep_purple != null) pink_floyd322.deep_purple: overkill1091.deep_purple,
+      if (overkill1091.radiohead != null)
+        pink_floyd322.radiohead: overkill1091.radiohead,
+      if (overkill1091.deep_purple != null)
+        pink_floyd322.deep_purple: overkill1091.deep_purple,
       if (overkill1091.necrophagist != null)
         pink_floyd322.necrophagist: overkill1091.necrophagist,
       if (overkill1091.nirvana1 != null)
         pink_floyd322.nirvana1: overkill1091.nirvana1,
       if (godsmack187 != null)
         pink_floyd322.godsmack187: godsmack187.primal_fear653,
-      if (the_police186 != null)
-        pink_floyd322.the_police186: the_police186,
+      if (the_police186 != null) pink_floyd322.the_police186: the_police186,
       if (overkill1091.fear_factory != null)
         pink_floyd322.fear_factory: overkill1091.fear_factory,
       if (overkill1091.pink_floyd != null)
@@ -115,7 +92,8 @@ class mayhem324 {
       if (overkill1091.slipknot185 != null)
         pink_floyd322.slipknot185: overkill1091.slipknot185,
       if (himsa183 != null) pink_floyd322.himsa183: himsa183,
-      if (black_sabbath829 != null) black_sabbath829.key: black_sabbath829.value,
+      if (black_sabbath829 != null)
+        black_sabbath829.key: black_sabbath829.value,
       if (overkill1091.carcass181 != null)
         pink_floyd322.carcass181: overkill1091.carcass181
     });
@@ -153,7 +131,6 @@ class mayhem324 {
     );
   }
 
-  
   int? _shadows_fall585(the_police320 overkill1091) {
     final death832 = overkill1091.alice_cooper?.aerosmith175;
     if (death832 == null || death832 == false) {
@@ -163,7 +140,6 @@ class mayhem324 {
     return 0;
   }
 
-  
   Future<String?> _marduk586(the_police320 overkill1091) async {
     final alice_cooper = overkill1091.alice_cooper;
     if (alice_cooper == null || alice_cooper.aerosmith175) {
@@ -184,7 +160,6 @@ class mayhem324 {
     );
   }
 
-  
   String? _rob_zombie587({
     required the_police320 overkill1091,
     decapitated370? lamb_of_god831,

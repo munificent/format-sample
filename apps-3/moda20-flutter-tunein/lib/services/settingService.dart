@@ -7,9 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'locator.dart';
 
-
-
-enum SettingsIds{
+enum SettingsIds {
   SET_LANG,
   SET_ARTIST_THUMB_UPDATE,
   SET_DISCOG_API_KEY,
@@ -22,158 +20,162 @@ enum SettingsIds{
   SET_OUT_GOING_HTTP_SERVER_PORT,
 }
 
-
-
-enum LIST_PAGE_SettingsIds{
+enum LIST_PAGE_SettingsIds {
   ALBUMS_PAGE_BOX_FADE_IN_DURATION,
   ALBUMS_PAGE_GRID_ROW_ITEM_COUNT,
   ARTISTS_PAGE_BOX_FADE_IN_DURATION,
   ARTISTS_PAGE_GRID_ROW_ITEM_COUNT,
 }
 
+class settingService {
+  BehaviorSubject<Map<SettingsIds, String>> _settings$;
 
-class settingService{
-
-  BehaviorSubject<Map<SettingsIds,String>> _settings$;
-
-  List<MapEntry<SettingsIds, BehaviorSubject<String>>> activeSingleSettingListeners =List();
+  List<MapEntry<SettingsIds, BehaviorSubject<String>>>
+      activeSingleSettingListeners = List();
   Map<SettingsIds, String> activeSingleSettingOldValues = Map();
   BehaviorSubject<Map<SettingsIds, String>> get settings$ => _settings$;
 
-
-  settingService(){
+  settingService() {
     _initStreams();
   }
 
-  _initStreams(){
-    _settings$ = BehaviorSubject<Map<SettingsIds,String>>.seeded(Map());
+  _initStreams() {
+    _settings$ = BehaviorSubject<Map<SettingsIds, String>>.seeded(Map());
     SettingsIds.values.forEach((element) {
       addSinglSettingStream(element);
     });
     _startSingleSettingStreams();
   }
 
-  _startSingleSettingStreams(){
+  _startSingleSettingStreams() {
     _settings$.listen((value) {
       activeSingleSettingListeners.forEach((activeListenerMap) {
-        if(activeSingleSettingOldValues[activeListenerMap.key]!=null){
-          if(value[activeListenerMap.key] !=activeSingleSettingOldValues[activeListenerMap.key]){
+        if (activeSingleSettingOldValues[activeListenerMap.key] != null) {
+          if (value[activeListenerMap.key] !=
+              activeSingleSettingOldValues[activeListenerMap.key]) {
             activeListenerMap.value.add(value[activeListenerMap.key]);
-            activeSingleSettingOldValues[activeListenerMap.key] = value[activeListenerMap.key];
+            activeSingleSettingOldValues[activeListenerMap.key] =
+                value[activeListenerMap.key];
           }
-        }else{
+        } else {
           activeListenerMap.value.add(value[activeListenerMap.key]);
-          activeSingleSettingOldValues[activeListenerMap.key] = value[activeListenerMap.key];
+          activeSingleSettingOldValues[activeListenerMap.key] =
+              value[activeListenerMap.key];
         }
-
       });
     });
   }
 
-  MapEntry<SettingsIds, BehaviorSubject<String>> addSinglSettingStream(SettingsIds setting){
-    MapEntry<SettingsIds, BehaviorSubject<String>> newStream = MapEntry(setting, new BehaviorSubject<String>.seeded(null));
+  MapEntry<SettingsIds, BehaviorSubject<String>> addSinglSettingStream(
+      SettingsIds setting) {
+    MapEntry<SettingsIds, BehaviorSubject<String>> newStream =
+        MapEntry(setting, new BehaviorSubject<String>.seeded(null));
     activeSingleSettingListeners.add(newStream);
     return newStream;
   }
 
-  deleteSingSettingStream(SettingsIds setting){
-    activeSingleSettingListeners.where((element) => element.key==setting).toList().forEach((activeListener) {
-      !activeListener.value.isClosed?activeListener.value.close():null;
+  deleteSingSettingStream(SettingsIds setting) {
+    activeSingleSettingListeners
+        .where((element) => element.key == setting)
+        .toList()
+        .forEach((activeListener) {
+      !activeListener.value.isClosed ? activeListener.value.close() : null;
     });
-    activeSingleSettingListeners.removeWhere((element) => element.key==setting);
+    activeSingleSettingListeners
+        .removeWhere((element) => element.key == setting);
   }
 
-  BehaviorSubject<String> getOrCreateSingleSettingStream(SettingsIds setting){
-    MapEntry<SettingsIds, BehaviorSubject<String>> existingStream = activeSingleSettingListeners.firstWhere((element) => element.key==setting,orElse: (){
+  BehaviorSubject<String> getOrCreateSingleSettingStream(SettingsIds setting) {
+    MapEntry<SettingsIds, BehaviorSubject<String>> existingStream =
+        activeSingleSettingListeners
+            .firstWhere((element) => element.key == setting, orElse: () {
       return null;
     });
-    if(existingStream!=null && existingStream.value!=null && !existingStream.value.isClosed){
+    if (existingStream != null &&
+        existingStream.value != null &&
+        !existingStream.value.isClosed) {
       return existingStream.value;
-    }else{
+    } else {
       return addSinglSettingStream(setting).value;
     }
   }
 
-  BehaviorSubject<Map<SettingsIds,String>> createSettingStreamOfASettingId(SettingsIds setting){
-    return _settings$.distinct((prev,next)  {
-      if(prev[setting]!=next[setting]){
+  BehaviorSubject<Map<SettingsIds, String>> createSettingStreamOfASettingId(
+      SettingsIds setting) {
+    return _settings$.distinct((prev, next) {
+      if (prev[setting] != next[setting]) {
         return true;
-      }else{
+      } else {
         return false;
       }
     });
   }
 
-  fetchSettings() async{
+  fetchSettings() async {
     Map<SettingsIds, String> settingsMap = new Map();
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    try{
-      SettingsIds.values.toList().forEach((setting){
-        String storedSettingValue = _prefs.getString(getEnumValue(setting).toString());
-        if(storedSettingValue==null){
+    try {
+      SettingsIds.values.toList().forEach((setting) {
+        String storedSettingValue =
+            _prefs.getString(getEnumValue(setting).toString());
+        if (storedSettingValue == null) {
           settingsMap[setting] = getDefaultSetting(setting);
-        }else{
+        } else {
           settingsMap[setting] = storedSettingValue;
         }
-
       });
-    }catch (e){
+    } catch (e) {
       return false;
     }
     _settings$.add(settingsMap);
   }
 
-
-  fetchSingleSetting(SettingsIds setting)async {
+  fetchSingleSetting(SettingsIds setting) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    try{
+    try {
       Map<SettingsIds, String> settingsMap = _settings$.value;
-      settingsMap[setting]= _prefs.getString(getEnumValue(setting).toString());
+      settingsMap[setting] = _prefs.getString(getEnumValue(setting).toString());
       _settings$.add(settingsMap);
-    }catch (e){
+    } catch (e) {
       print("Error in fetching setting ${e}");
       return false;
     }
   }
 
-
-  getCurrentMemorySetting(SettingsIds setting){
+  getCurrentMemorySetting(SettingsIds setting) {
     return _settings$.value[setting];
   }
 
+  BehaviorSubject<String> subscribeToMemorySetting(SettingsIds settingsIds) {
+    BehaviorSubject<String> newStream = new BehaviorSubject<String>();
+    _settings$.listen((data) {
+      newStream.add(data[settingsIds]);
+    });
 
-  BehaviorSubject<String> subscribeToMemorySetting(SettingsIds settingsIds){
-     BehaviorSubject<String> newStream = new BehaviorSubject<String>();
-     _settings$.listen((data){
-       newStream.add(data[settingsIds]);
-     });
-
-     return newStream;
+    return newStream;
   }
 
-  updateSingleSetting(SettingsIds setting, String value) async{
+  updateSingleSetting(SettingsIds setting, String value) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    try{
+    try {
       Map<SettingsIds, String> settingsMap = _settings$.value;
-      await _prefs.setString(getEnumValue(setting).toString(),value);
-      settingsMap[setting]= value;
+      await _prefs.setString(getEnumValue(setting).toString(), value);
+      settingsMap[setting] = value;
       _settings$.add(settingsMap);
       return true;
-    }catch (e){
+    } catch (e) {
       print("Error in saving setting ${e}");
       return false;
     }
   }
 
-
-
   //Utils
 
   //will return the default setting for each settingID
-  getDefaultSetting(SettingsIds setting){
-    switch(setting){
+  getDefaultSetting(SettingsIds setting) {
+    switch (setting) {
       case SettingsIds.SET_LANG:
-      return "English";
+        return "English";
         break;
       case SettingsIds.SET_ARTIST_THUMB_UPDATE:
         return "false";
@@ -209,8 +211,8 @@ class settingService{
   }
 
   //will return the default setting for each Album SettingID
-  getDefaultListPageSetting(LIST_PAGE_SettingsIds setting){
-    switch(setting){
+  getDefaultListPageSetting(LIST_PAGE_SettingsIds setting) {
+    switch (setting) {
       case LIST_PAGE_SettingsIds.ALBUMS_PAGE_BOX_FADE_IN_DURATION:
         return "300";
         break;
@@ -229,29 +231,31 @@ class settingService{
     }
   }
 
-  Map<LIST_PAGE_SettingsIds, String> DeserializeUISettings(String uiSettingsString){
-    if(uiSettingsString!=null){
-      Map<String,dynamic> TempMap = json.decode(uiSettingsString);
-      Map<LIST_PAGE_SettingsIds, String> finalMap =Map();
+  Map<LIST_PAGE_SettingsIds, String> DeserializeUISettings(
+      String uiSettingsString) {
+    if (uiSettingsString != null) {
+      Map<String, dynamic> TempMap = json.decode(uiSettingsString);
+      Map<LIST_PAGE_SettingsIds, String> finalMap = Map();
       LIST_PAGE_SettingsIds.values.forEach((element) {
-        int indexOfElementInAlbumSettingIDList = TempMap.keys.toList().indexOf(getAlbumListEnumValue(element));
-        if(indexOfElementInAlbumSettingIDList!=-1){
+        int indexOfElementInAlbumSettingIDList =
+            TempMap.keys.toList().indexOf(getAlbumListEnumValue(element));
+        if (indexOfElementInAlbumSettingIDList != -1) {
           finalMap[element] = TempMap[getAlbumListEnumValue(element)];
-        }else{
+        } else {
           finalMap[element] = getDefaultListPageSetting(element);
         }
       });
       return finalMap;
-    }else{
+    } else {
       return null;
     }
   }
 
-  String getEnumValue(SettingsIds set){
+  String getEnumValue(SettingsIds set) {
     return set.toString().split('.').last;
   }
 
-  String getAlbumListEnumValue(LIST_PAGE_SettingsIds set){
+  String getAlbumListEnumValue(LIST_PAGE_SettingsIds set) {
     return set.toString();
   }
 
@@ -262,4 +266,3 @@ class settingService{
     });
   }
 }
-

@@ -90,13 +90,21 @@ class NewModal extends StatefulWidget {
 }
 
 class _NewModalState extends State<NewModal> {
-  bool get _showTopLateralWidgets => widget.topLeftWidget != null || widget.topRightWidget != null;
+  bool get _showTopLateralWidgets =>
+      widget.topLeftWidget != null || widget.topRightWidget != null;
 
-  ValueKey get _topKey => widget.topWidgetKeys.isEmpty ? ValueKey([]) : ValueKey(widget.topWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
-  ValueKey get _bodyKey =>
-      widget.bodyWidgetKeys.isEmpty ? ValueKey([]) : ValueKey(widget.bodyWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
-  ValueKey get _bottomKey =>
-      widget.bottomWidgetKeys.isEmpty ? ValueKey([]) : ValueKey(widget.bottomWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
+  ValueKey get _topKey => widget.topWidgetKeys.isEmpty
+      ? ValueKey([])
+      : ValueKey(
+          widget.topWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
+  ValueKey get _bodyKey => widget.bodyWidgetKeys.isEmpty
+      ? ValueKey([])
+      : ValueKey(
+          widget.bodyWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
+  ValueKey get _bottomKey => widget.bottomWidgetKeys.isEmpty
+      ? ValueKey([])
+      : ValueKey(widget.bottomWidgetKeys
+          .reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
 
   double get _horizontalPadding => getMultipleConditions(30, 30, 30, 30, 10);
 
@@ -107,23 +115,35 @@ class _NewModalState extends State<NewModal> {
       children: [
         Container(
           constraints: BoxConstraints(minHeight: 50),
-          padding: EdgeInsets.symmetric(horizontal: _horizontalPadding, vertical: 10),
+          padding: EdgeInsets.symmetric(
+              horizontal: _horizontalPadding, vertical: 10),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (_showTopLateralWidgets) Container(width: 50, height: 50, child: Center(child: widget.topLeftWidget)),
+              if (_showTopLateralWidgets)
+                Container(
+                    width: 50,
+                    height: 50,
+                    child: Center(child: widget.topLeftWidget)),
               if (widget.title != null)
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
                   child: Container(
                     key: _topKey,
-                    padding: widget.addPaddingToTopWidget ? EdgeInsets.symmetric(horizontal: _horizontalPadding, vertical: 8) : EdgeInsets.zero,
+                    padding: widget.addPaddingToTopWidget
+                        ? EdgeInsets.symmetric(
+                            horizontal: _horizontalPadding, vertical: 8)
+                        : EdgeInsets.zero,
                     child: widget.title!,
                   ),
                 ),
-              if (_showTopLateralWidgets) Container(width: 50, height: 50, child: Center(child: widget.topRightWidget)),
+              if (_showTopLateralWidgets)
+                Container(
+                    width: 50,
+                    height: 50,
+                    child: Center(child: widget.topRightWidget)),
             ],
           ),
         ),
@@ -132,7 +152,10 @@ class _NewModalState extends State<NewModal> {
             duration: const Duration(milliseconds: 200),
             child: Container(
               key: _topKey,
-              padding: widget.addPaddingToTopWidget ? EdgeInsets.symmetric(horizontal: _horizontalPadding, vertical: 8) : EdgeInsets.zero,
+              padding: widget.addPaddingToTopWidget
+                  ? EdgeInsets.symmetric(
+                      horizontal: _horizontalPadding, vertical: 8)
+                  : EdgeInsets.zero,
               child: widget.topWidget!,
             ),
           ),
@@ -161,7 +184,9 @@ class _NewModalState extends State<NewModal> {
       duration: const Duration(milliseconds: 200),
       child: Container(
         key: _bodyKey,
-        padding: widget.addPaddingToBodyWidget ? EdgeInsets.symmetric(horizontal: _horizontalPadding, vertical: 8) : EdgeInsets.zero,
+        padding: widget.addPaddingToBodyWidget
+            ? EdgeInsets.symmetric(horizontal: _horizontalPadding, vertical: 8)
+            : EdgeInsets.zero,
         child: widget.bodyWidget ?? Container(),
       ),
     );
@@ -176,7 +201,9 @@ class _NewModalState extends State<NewModal> {
         color: ZwapColors.shades0,
         child: Container(
           width: widget.width,
-          constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.2, maxHeight: MediaQuery.of(context).size.height * 0.8),
+          constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height * 0.2,
+              maxHeight: MediaQuery.of(context).size.height * 0.8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -184,14 +211,18 @@ class _NewModalState extends State<NewModal> {
             mainAxisSize: MainAxisSize.min,
             children: [
               _getTitleSection(),
-              if (widget.showDivider) Divider(height: 2, thickness: 1, color: ZwapColors.neutral300),
+              if (widget.showDivider)
+                Divider(height: 2, thickness: 1, color: ZwapColors.neutral300),
               _getSingleBodySection(),
               if (widget.bottomWidget != null)
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
                   child: Container(
                     key: _bottomKey,
-                    padding: widget.addPaddingToBottomWidget ? EdgeInsets.symmetric(horizontal: _horizontalPadding, vertical: 8) : EdgeInsets.zero,
+                    padding: widget.addPaddingToBottomWidget
+                        ? EdgeInsets.symmetric(
+                            horizontal: _horizontalPadding, vertical: 8)
+                        : EdgeInsets.zero,
                     child: widget.bottomWidget!,
                   ),
                 ),

@@ -11,13 +11,10 @@ import 'app/app.dart';
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-        runApp(
-            MaterialApp(
-                title: 'Movies',
-                debugShowCheckedModeBanner: false,
-                theme: themeData,
-                home: App()
-            )
-        );
+    runApp(MaterialApp(
+        title: 'Movies',
+        debugShowCheckedModeBanner: false,
+        theme: themeData,
+        home: App()));
   });
 }

@@ -14,59 +14,59 @@ import 'package:nylo_framework/nylo_framework.dart';
 
 ThemeData lightTheme() {
   TextTheme lightTheme =
-  getAppTextTheme(appThemeFont, defaultTextTheme.merge(_lightTextTheme()));
+      getAppTextTheme(appThemeFont, defaultTextTheme.merge(_lightTextTheme()));
   final Color lightPrimaryContent = NyColors.light.primaryContent;
   final Color darkPrimaryContent = NyColors.dark.primaryContent;
 
   return ThemeData(
-    primaryColor: lightPrimaryContent,
-    backgroundColor: NyColors.light.background,
-    colorScheme: ColorScheme.light(),
-    primaryColorLight: NyColors.light.primaryAccent,
-    primaryColorDark: darkPrimaryContent,
-    focusColor: lightPrimaryContent,
-    scaffoldBackgroundColor: NyColors.light.background,
-    hintColor: NyColors.light.primaryAccent,
-    appBarTheme: AppBarTheme(
-      backgroundColor: NyColors.light.appBarBackground,
-      titleTextStyle: lightTheme.headline6
-          .copyWith(color: NyColors.light.appBarPrimaryContent),
-      iconTheme: IconThemeData(color: NyColors.light.appBarPrimaryContent),
-      elevation: 1.0,
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
-    ),
-    buttonTheme: ButtonThemeData(
-      buttonColor: NyColors.light.buttonPrimaryContent,
-      colorScheme: ColorScheme.light(primary: NyColors.light.buttonBackground),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(primary: lightPrimaryContent),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: TextButton.styleFrom(
-          primary: NyColors.light.buttonPrimaryContent,
-          backgroundColor: NyColors.light.buttonBackground),
-    ),
-      inputDecorationTheme: InputDecorationTheme(
-        focusedBorder:UnderlineInputBorder(
-            borderSide:BorderSide(color: Colors.black)
-        ),
+      primaryColor: lightPrimaryContent,
+      backgroundColor: NyColors.light.background,
+      colorScheme: ColorScheme.light(),
+      primaryColorLight: NyColors.light.primaryAccent,
+      primaryColorDark: darkPrimaryContent,
+      focusColor: lightPrimaryContent,
+      scaffoldBackgroundColor: NyColors.light.background,
+      hintColor: NyColors.light.primaryAccent,
+      appBarTheme: AppBarTheme(
+        backgroundColor: NyColors.light.appBarBackground,
+        titleTextStyle: lightTheme.headline6
+            .copyWith(color: NyColors.light.appBarPrimaryContent),
+        iconTheme: IconThemeData(color: NyColors.light.appBarPrimaryContent),
+        elevation: 1.0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: NyColors.light.bottomTabBarBackground,
-      unselectedIconTheme:
-      IconThemeData(color: NyColors.light.bottomTabBarIconUnselected),
-      selectedIconTheme:
-      IconThemeData(color: NyColors.light.bottomTabBarIconSelected),
-      unselectedLabelStyle:
-      TextStyle(color: NyColors.light.bottomTabBarLabelUnselected),
-      selectedLabelStyle:
-      TextStyle(color: NyColors.light.bottomTabBarLabelSelected),
-      selectedItemColor: NyColors.light.bottomTabBarLabelSelected,
-    ),
-    textTheme: lightTheme,
-      textSelectionTheme: TextSelectionThemeData(cursorColor: NyColors.light.inputPrimaryContent)
-  );
+      buttonTheme: ButtonThemeData(
+        buttonColor: NyColors.light.buttonPrimaryContent,
+        colorScheme:
+            ColorScheme.light(primary: NyColors.light.buttonBackground),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(primary: lightPrimaryContent),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: TextButton.styleFrom(
+            primary: NyColors.light.buttonPrimaryContent,
+            backgroundColor: NyColors.light.buttonBackground),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: NyColors.light.bottomTabBarBackground,
+        unselectedIconTheme:
+            IconThemeData(color: NyColors.light.bottomTabBarIconUnselected),
+        selectedIconTheme:
+            IconThemeData(color: NyColors.light.bottomTabBarIconSelected),
+        unselectedLabelStyle:
+            TextStyle(color: NyColors.light.bottomTabBarLabelUnselected),
+        selectedLabelStyle:
+            TextStyle(color: NyColors.light.bottomTabBarLabelSelected),
+        selectedItemColor: NyColors.light.bottomTabBarLabelSelected,
+      ),
+      textTheme: lightTheme,
+      textSelectionTheme: TextSelectionThemeData(
+          cursorColor: NyColors.light.inputPrimaryContent));
 }
 
 /*

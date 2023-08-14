@@ -9,5 +9,4 @@ class ImpossiblocksKeys {
   static final levelListLoading = const Key('__levelListLoading__');
 
   static final levelItem = (String id) => Key('Level__$id');
-
 }

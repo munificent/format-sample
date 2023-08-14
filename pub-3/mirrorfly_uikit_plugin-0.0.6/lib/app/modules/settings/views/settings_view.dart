@@ -9,7 +9,7 @@ import 'blocked/blocked_list_view.dart';
 import 'chat_settings/chat_settings_view.dart';
 
 class SettingsView extends StatefulWidget {
-  const SettingsView({Key? key, this.enableAppBar=true}) : super(key: key);
+  const SettingsView({Key? key, this.enableAppBar = true}) : super(key: key);
   final bool enableAppBar;
   @override
   State<SettingsView> createState() => _SettingsViewState();
@@ -21,15 +21,18 @@ class _SettingsViewState extends State<SettingsView> {
     // final controller = Get.put(SettingsController());
     return Scaffold(
       backgroundColor: MirrorflyUikit.getTheme?.scaffoldColor,
-      appBar: widget.enableAppBar ? AppBar(
-        title: Text(
-          'Settings',
-          style: TextStyle(color: MirrorflyUikit.getTheme?.colorOnAppbar),
-        ),
-        iconTheme: IconThemeData(color: MirrorflyUikit.getTheme?.colorOnAppbar),
-        automaticallyImplyLeading: true,
-        backgroundColor: MirrorflyUikit.getTheme?.appBarColor,
-      ) : null,
+      appBar: widget.enableAppBar
+          ? AppBar(
+              title: Text(
+                'Settings',
+                style: TextStyle(color: MirrorflyUikit.getTheme?.colorOnAppbar),
+              ),
+              iconTheme:
+                  IconThemeData(color: MirrorflyUikit.getTheme?.colorOnAppbar),
+              automaticallyImplyLeading: true,
+              backgroundColor: MirrorflyUikit.getTheme?.appBarColor,
+            )
+          : null,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -62,8 +65,10 @@ class _SettingsViewState extends State<SettingsView> {
                   "Blocked Contacts",
                   blockedIcon,
                   rightArrowIcon,
-                  () => Navigator.push(context,
-                      MaterialPageRoute(builder: (con) => const BlockedListView()))),
+                  () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (con) => const BlockedListView()))),
             ],
           ),
         ),

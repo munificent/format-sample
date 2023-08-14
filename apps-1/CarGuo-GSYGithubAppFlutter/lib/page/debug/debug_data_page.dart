@@ -151,8 +151,8 @@ class _DebugDataListState extends State<DebugDataList>
                             padding: EdgeInsets.only(top: 30),
                             color: Colors.white,
                             child: SingleChildScrollView(
-                                child:
-                                    JsonViewerWidget(widget.dataList[index] as Map<String, dynamic>)),
+                                child: JsonViewerWidget(widget.dataList[index]
+                                    as Map<String, dynamic>)),
                           ),
                           Transform.translate(
                             offset: Offset(0, -10),

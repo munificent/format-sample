@@ -211,7 +211,7 @@ class FirebaseEmailLinkHandler with WidgetsBindingObserver {
         androidPackageName: packageName,
         androidInstallIfNotAvailable: androidInstallIfNotAvailable,
         androidMinimumVersion: androidMinimumVersion,
-      );//on platformexception catch (e)
+      ); //on platformexception catch (e)
     } on PlatformException {
       rethrow;
     } finally {

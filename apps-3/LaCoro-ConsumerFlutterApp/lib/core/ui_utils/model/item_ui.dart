@@ -14,5 +14,4 @@ class ItemUI {
         price = item.price,
         image = item.picture,
         itemEntity = item;
-
 }

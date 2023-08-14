@@ -20,7 +20,8 @@ class MockClient extends Mock implements http.Client {
       return Future.value(http.Response('', 401));
     });
 
-    when(post(Uri.parse('https://example.com/check_status?check_id=92039d9sjf20dlsld9')))
+    when(post(Uri.parse(
+            'https://example.com/check_status?check_id=92039d9sjf20dlsld9')))
         .thenAnswer((_) => Future.value(http.Response('', 401)));
   }
 }

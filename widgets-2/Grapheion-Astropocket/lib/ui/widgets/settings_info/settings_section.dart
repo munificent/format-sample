@@ -147,7 +147,7 @@ class _SettingsSectionState extends State<SettingsSection> {
                     });
                     SetSettings()
                         .setSettings('distanceUnit', "kilometers", String);
-                      isKilometers = true;
+                    isKilometers = true;
                   },
                 ),
               ],

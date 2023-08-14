@@ -8,18 +8,23 @@ class FancyFabNote extends StatefulWidget {
   final String tooltip;
   final IconData icon;
   final DataModel dataModel;
-  FancyFabNote({this.onPressed, this.tooltip, this.icon,this.dataModel,this.scaffoldKey});
+  FancyFabNote(
+      {this.onPressed,
+      this.tooltip,
+      this.icon,
+      this.dataModel,
+      this.scaffoldKey});
 
   @override
   _FancyFabNoteState createState() =>
-      _FancyFabNoteState(dataModel:dataModel,scaffoldKey:scaffoldKey);
+      _FancyFabNoteState(dataModel: dataModel, scaffoldKey: scaffoldKey);
 }
 
 class _FancyFabNoteState extends State<FancyFabNote>
     with SingleTickerProviderStateMixin {
-final DataModel dataModel;
+  final DataModel dataModel;
   final scaffoldKey;
-_FancyFabNoteState({this.dataModel,this.scaffoldKey});
+  _FancyFabNoteState({this.dataModel, this.scaffoldKey});
   bool isOpened = false;
   static AnimationController _animationControllerNote;
   Animation<Color> _buttonColor;
@@ -41,7 +46,7 @@ _FancyFabNoteState({this.dataModel,this.scaffoldKey});
     _animateIcon =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationControllerNote);
     _buttonColor = ColorTween(
-      begin:  Colors.blue,
+      begin: Colors.blue,
       end: Colors.blue,
     ).animate(CurvedAnimation(
       parent: _animationControllerNote,
@@ -94,15 +99,17 @@ _FancyFabNoteState({this.dataModel,this.scaffoldKey});
   }
 
   Widget form() {
-    if(DataModel.currentBook.bookId!=null){
-    return NewItemNote(animationControllerNote:_animationControllerNote,dataModel: dataModel,);}
-    else{
-      
+    if (DataModel.currentBook.bookId != null) {
+      return NewItemNote(
+        animationControllerNote: _animationControllerNote,
+        dataModel: dataModel,
+      );
+    } else {
       //  final snackbar = SnackBar(
       //       content: Text('You need to create a book or select one'),
       //     );
       //     scaffoldKey.currentState.showSnackBar(snackbar);
-        return Text('You need to create a book or select one');
+      return Text('You need to create a book or select one');
     }
   }
 

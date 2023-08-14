@@ -6,9 +6,9 @@ import 'package:rapidinho/redux/selectors.dart';
 import 'package:redux/redux.dart';
 import 'package:rapidinho/redux/app_reducer.dart';
 
-main(){
-  group('Test state reducer', (){
-    test('should get the filter list', (){
+main() {
+  group('Test state reducer', () {
+    test('should get the filter list', () {
       final store = Store<AppState>(
         appReducer,
         initialState: AppState(),
@@ -17,7 +17,7 @@ main(){
       //expect(store.state.filters.length, 6);
     });
 
-    test('Should change the active tab', (){
+    test('Should change the active tab', () {
       final store = Store<AppState>(
         appReducer,
         distinct: true,

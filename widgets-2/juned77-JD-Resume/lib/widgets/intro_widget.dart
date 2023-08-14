@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jdwebapp/utils/constants.dart';
 import 'package:jdwebapp/widgets/text_widget.dart';
 
-
 class IntroWidget extends StatelessWidget {
   const IntroWidget({
     Key key,

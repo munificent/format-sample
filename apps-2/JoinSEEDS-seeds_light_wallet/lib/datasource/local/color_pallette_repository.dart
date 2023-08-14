@@ -5,7 +5,8 @@ class ColorPaletteRepository {
   static final Map<String, Color?> _cache = {};
 
   Future<Color?> getImagePalette(ImageProvider imageProvider) async {
-    final PaletteGenerator paletteGenerator = await PaletteGenerator.fromImageProvider(imageProvider);
+    final PaletteGenerator paletteGenerator =
+        await PaletteGenerator.fromImageProvider(imageProvider);
     return paletteGenerator.dominantColor?.color;
   }
 
@@ -14,7 +15,8 @@ class ColorPaletteRepository {
       return _cache[assetName];
     }
     final imageProvider = AssetImage(assetName);
-    final PaletteGenerator paletteGenerator = await PaletteGenerator.fromImageProvider(imageProvider);
+    final PaletteGenerator paletteGenerator =
+        await PaletteGenerator.fromImageProvider(imageProvider);
     final Color? color = paletteGenerator.dominantColor?.color;
 
     _cache[assetName] = color;

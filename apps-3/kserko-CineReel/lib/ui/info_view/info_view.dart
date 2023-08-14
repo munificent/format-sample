@@ -85,7 +85,8 @@ class InfoViewState extends State<InfoView> {
         overflow: TextOverflow.clip,
         text: TextSpan(style: defaultStyle.copyWith(fontSize: 16.0), children: [
           TextSpan(
-              text: "This app is free as in freedom and you can check out the source code "
+              text:
+                  "This app is free as in freedom and you can check out the source code "
                   "on github \n"),
           TextSpan(
               style: defaultStyle.copyWith(color: Colors.blue, fontSize: 14.0),
@@ -101,7 +102,10 @@ class InfoViewState extends State<InfoView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(height: 40.0, width: 40.0, child: Image.asset("assets/film_reel.png")),
+        SizedBox(
+            height: 40.0,
+            width: 40.0,
+            child: Image.asset("assets/film_reel.png")),
         Text(
           "$APP_NAME ${_packageInfo.version}",
           style: defaultStyle.copyWith(fontSize: 22.0),

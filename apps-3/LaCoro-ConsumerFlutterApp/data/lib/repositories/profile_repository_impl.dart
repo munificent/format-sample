@@ -14,7 +14,8 @@ class ProfileRepositoryImpl extends ProfileRepository {
   @override
   Future<Result> getValidSession(String sessionToken) async {
     try {
-      final currentUserId = await _remoteDataSource.getCurrentUserId(sessionToken);
+      final currentUserId =
+          await _remoteDataSource.getCurrentUserId(sessionToken);
       return Success(currentUserId != null);
     } catch (e) {
       return Failure(exception: e);
@@ -27,7 +28,8 @@ class ProfileRepositoryImpl extends ProfileRepository {
 
     try {
       FirebaseAuth _auth = FirebaseAuth.instance;
-      AuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+      AuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: smsCode);
 
       final result = await _auth.signInWithCredential(credential);
       if (result.user != null) {
@@ -48,7 +50,9 @@ class ProfileRepositoryImpl extends ProfileRepository {
       phoneNumber: mobile,
       timeout: Duration(seconds: 30),
       verificationCompleted: (AuthCredential authCredential) {
-        _auth.signInWithCredential(authCredential).then((UserCredential credential) {
+        _auth
+            .signInWithCredential(authCredential)
+            .then((UserCredential credential) {
           userPhoneVerified = true;
         });
       },

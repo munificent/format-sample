@@ -17,7 +17,8 @@ part 'generic_error_content.g.dart';
 /// * [message] - Message contains the error message.
 /// * [statusCode] - Code represents the error status code (404, 403, 401, ...).
 @BuiltValue()
-abstract class GenericErrorContent implements Built<GenericErrorContent, GenericErrorContentBuilder> {
+abstract class GenericErrorContent
+    implements Built<GenericErrorContent, GenericErrorContentBuilder> {
   /// Debug contains debug information. This is usually not available and has to be enabled.
   @BuiltValueField(wireName: r'debug')
   String? get debug;
@@ -40,18 +41,24 @@ abstract class GenericErrorContent implements Built<GenericErrorContent, Generic
 
   GenericErrorContent._();
 
-  factory GenericErrorContent([void updates(GenericErrorContentBuilder b)]) = _$GenericErrorContent;
+  factory GenericErrorContent([void updates(GenericErrorContentBuilder b)]) =
+      _$GenericErrorContent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GenericErrorContentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GenericErrorContent> get serializer => _$GenericErrorContentSerializer();
+  static Serializer<GenericErrorContent> get serializer =>
+      _$GenericErrorContentSerializer();
 }
 
-class _$GenericErrorContentSerializer implements PrimitiveSerializer<GenericErrorContent> {
+class _$GenericErrorContentSerializer
+    implements PrimitiveSerializer<GenericErrorContent> {
   @override
-  final Iterable<Type> types = const [GenericErrorContent, _$GenericErrorContent];
+  final Iterable<Type> types = const [
+    GenericErrorContent,
+    _$GenericErrorContent
+  ];
 
   @override
   final String wireName = r'GenericErrorContent';
@@ -104,7 +111,9 @@ class _$GenericErrorContentSerializer implements PrimitiveSerializer<GenericErro
     GenericErrorContent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(serializers, object,
+            specifiedType: specifiedType)
+        .toList();
   }
 
   void _deserializeProperties(
@@ -182,4 +191,3 @@ class _$GenericErrorContentSerializer implements PrimitiveSerializer<GenericErro
     return result.build();
   }
 }
-

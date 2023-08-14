@@ -15,14 +15,34 @@ class ArrowNextProposal extends CustomPainter {
       ..moveTo(size.width * 0.6836821, size.height * 0.5000000)
       ..lineTo(size.width * 0.3163339, size.height * 0.5000000)
       ..moveTo(size.width * 0.9591893, size.height * 0.5000000)
-      ..cubicTo(size.width * 0.9591893, size.height * 0.7536000, size.width * 0.7536071, size.height * 0.9591821,
-          size.width * 0.5000071, size.height * 0.9591821)
-      ..cubicTo(size.width * 0.2464071, size.height * 0.9591821, size.width * 0.04082393, size.height * 0.7536000,
-          size.width * 0.04082393, size.height * 0.5000000)
-      ..cubicTo(size.width * 0.04082393, size.height * 0.2463986, size.width * 0.2464071, size.height * 0.04081500,
-          size.width * 0.5000071, size.height * 0.04081500)
-      ..cubicTo(size.width * 0.7536071, size.height * 0.04081500, size.width * 0.9591893, size.height * 0.2463986,
-          size.width * 0.9591893, size.height * 0.5000000)
+      ..cubicTo(
+          size.width * 0.9591893,
+          size.height * 0.7536000,
+          size.width * 0.7536071,
+          size.height * 0.9591821,
+          size.width * 0.5000071,
+          size.height * 0.9591821)
+      ..cubicTo(
+          size.width * 0.2464071,
+          size.height * 0.9591821,
+          size.width * 0.04082393,
+          size.height * 0.7536000,
+          size.width * 0.04082393,
+          size.height * 0.5000000)
+      ..cubicTo(
+          size.width * 0.04082393,
+          size.height * 0.2463986,
+          size.width * 0.2464071,
+          size.height * 0.04081500,
+          size.width * 0.5000071,
+          size.height * 0.04081500)
+      ..cubicTo(
+          size.width * 0.7536071,
+          size.height * 0.04081500,
+          size.width * 0.9591893,
+          size.height * 0.2463986,
+          size.width * 0.9591893,
+          size.height * 0.5000000)
       ..close();
 
     final Paint paintStroke = Paint()

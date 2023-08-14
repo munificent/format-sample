@@ -1,7 +1,15 @@
 import 'package:cine_reel/bloc/bloc_provider.dart';
 import 'package:flutter/material.dart';
 
-enum TabKey { kNowPlaying, kUpcoming, kTopRated, kPopular, kGenres, kSearchMovies, kSearchPeople }
+enum TabKey {
+  kNowPlaying,
+  kUpcoming,
+  kTopRated,
+  kPopular,
+  kGenres,
+  kSearchMovies,
+  kSearchPeople
+}
 
 const Map<TabKey, String> tabs = {
   TabKey.kNowPlaying: "NOW PLAYING",

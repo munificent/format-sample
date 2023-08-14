@@ -57,7 +57,6 @@ class HandCursor extends StatelessWidget {
   }
 }
 
-
 /**
  * Utils for device detection.
  */
@@ -83,6 +82,7 @@ class Device {
     }
     return _isOpera;
   }
+
   /**
    * Determines if the current device is running Internet Explorer.
    */
@@ -92,6 +92,7 @@ class Device {
     }
     return _isIE;
   }
+
   /**
    * Determines if the current device is running Firefox.
    */
@@ -101,6 +102,7 @@ class Device {
     }
     return _isFirefox;
   }
+
   /**
    * Determines if the current device is running WebKit.
    */
@@ -110,6 +112,7 @@ class Device {
     }
     return _isWebKit;
   }
+
   /**
    * Gets the CSS property prefix for the current platform.
    */
@@ -127,6 +130,7 @@ class Device {
     }
     return _cachedCssPrefix = prefix;
   }
+
   /**
    * Prefix as used for JS property names.
    */
@@ -144,6 +148,7 @@ class Device {
     }
     return _cachedPropertyPrefix = prefix;
   }
+
   /**
    * Checks to see if the event class is supported by the current platform.
    */
@@ -152,7 +157,7 @@ class Device {
     try {
       var e = new Event.eventType(eventType, '');
       return e is Event;
-    } catch (_) { }
+    } catch (_) {}
     return false;
   }
 }

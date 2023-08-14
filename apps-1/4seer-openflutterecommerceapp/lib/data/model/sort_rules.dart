@@ -85,4 +85,5 @@ class SortRules {
 }
 
 enum SortType { DateAdded, Reviewed, Price, Popularity }
+
 enum SortOrder { FromLowestToHighest, FromHighestToLowest }

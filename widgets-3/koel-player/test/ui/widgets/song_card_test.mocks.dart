@@ -23,8 +23,8 @@ import 'package:rxdart/rxdart.dart' as _i3;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeAssetsAudioPlayer extends _i1.Fake implements _i2.AssetsAudioPlayer {
-}
+class _FakeAssetsAudioPlayer extends _i1.Fake
+    implements _i2.AssetsAudioPlayer {}
 
 class _FakeValueStream<T> extends _i1.Fake implements _i3.ValueStream<T> {}
 

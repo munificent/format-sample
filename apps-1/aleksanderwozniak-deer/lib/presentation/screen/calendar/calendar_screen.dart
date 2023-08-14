@@ -193,15 +193,20 @@ class _CalendarScreenState extends State<CalendarScreen> {
         selectedColor: ColorfulApp.of(context).colors.medium,
         todayColor: ColorfulApp.of(context).colors.pale,
         markersColor: ColorfulApp.of(context).colors.bleak,
-        weekendStyle: TextStyle().copyWith(color: ColorfulApp.of(context).colors.medium),
-        outsideWeekendStyle: TextStyle().copyWith(color: ColorfulApp.of(context).colors.bright.withOpacity(0.8)),
+        weekendStyle:
+            TextStyle().copyWith(color: ColorfulApp.of(context).colors.medium),
+        outsideWeekendStyle: TextStyle().copyWith(
+            color: ColorfulApp.of(context).colors.bright.withOpacity(0.8)),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: ColorfulApp.of(context).colors.bright),
+        weekendStyle:
+            TextStyle().copyWith(color: ColorfulApp.of(context).colors.bright),
       ),
       headerStyle: HeaderStyle(
-        leftChevronIcon: Icon(Icons.chevron_left, color: ColorfulApp.of(context).colors.dark),
-        rightChevronIcon: Icon(Icons.chevron_right, color: ColorfulApp.of(context).colors.dark),
+        leftChevronIcon: Icon(Icons.chevron_left,
+            color: ColorfulApp.of(context).colors.dark),
+        rightChevronIcon: Icon(Icons.chevron_right,
+            color: ColorfulApp.of(context).colors.dark),
         formatButtonVisible: false,
         centerHeaderTitle: true,
         headerPadding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -212,7 +217,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Widget _buildDateHeader(CalendarState state) {
-    final highlightStyle = TextStyle().copyWith(fontSize: 16.0, fontWeight: FontWeight.bold);
+    final highlightStyle =
+        TextStyle().copyWith(fontSize: 16.0, fontWeight: FontWeight.bold);
 
     return GestureDetector(
       onTap: () => _onDateHeaderTapped(state.calendarVisible),
@@ -237,10 +243,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 left: 12,
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: ColorfulApp.of(context).colors.bleak),
+                    border:
+                        Border.all(color: ColorfulApp.of(context).colors.bleak),
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: Text(
                     '${state.archiveVisible ? 'Active' : 'Archive'}',
                     style: TextStyle().copyWith(fontSize: 13.0),
@@ -255,12 +263,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   children: <Widget>[
                     Text(
                       '${state.activeTodos.length}',
-                      style: state.archiveVisible ? TextStyle() : highlightStyle,
+                      style:
+                          state.archiveVisible ? TextStyle() : highlightStyle,
                     ),
                     Text(' / '),
                     Text(
                       '${state.archivedTodos.length}',
-                      style: state.archiveVisible ? highlightStyle : TextStyle(),
+                      style:
+                          state.archiveVisible ? highlightStyle : TextStyle(),
                     ),
                   ],
                 ),
@@ -278,13 +288,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
     if (state.archiveVisible) {
       children.add(
         Expanded(
-          child: state.archivedTodos.length == 0 ? _buildPlaceholder('Archive is empty!') : _buildArchivedList(state),
+          child: state.archivedTodos.length == 0
+              ? _buildPlaceholder('Archive is empty!')
+              : _buildArchivedList(state),
         ),
       );
     } else {
       children.add(
         Expanded(
-          child: state.activeTodos.length == 0 ? _buildPlaceholder('Todo list is empty!') : _buildActiveList(state),
+          child: state.activeTodos.length == 0
+              ? _buildPlaceholder('Todo list is empty!')
+              : _buildActiveList(state),
         ),
       );
     }
@@ -337,8 +351,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         final todo = state.activeTodos[index];
         return Dismissible(
           key: Key(todo.addedDate.toIso8601String()),
-          background: buildDismissibleBackground(context: context, leftToRight: true),
-          secondaryBackground: buildDismissibleBackground(context: context, leftToRight: false),
+          background:
+              buildDismissibleBackground(context: context, leftToRight: true),
+          secondaryBackground:
+              buildDismissibleBackground(context: context, leftToRight: false),
           onDismissed: (_) => _archiveTodo(todo),
           child: TodoTile(
             todo: todo,

@@ -23,28 +23,29 @@ class VisualFilter extends StatelessWidget {
           scrollDirection: Axis.horizontal, itemBuilder: _blankChip);
     } else {
       List<Widget> widgetList = hashTags
-        ?.map((optionHashTag) => 
-          Padding(
-            padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
-            child: ChoiceChip(
-              selected: selecteHashTags!=null ? 
-                selecteHashTags[optionHashTag] ?? false : false,
-              padding: EdgeInsets.all(
-                AppSizes.linePadding,
-              ),
-              backgroundColor: Theme.of(context).primaryColor,
-              selectedColor: Theme.of(context).accentColor,
-              label: Text(
-                optionHashTag.title,
-                style: Theme.of(context).textTheme.button,
-              ),
-              onSelected: (value) {
-                onFilterChanged(optionHashTag, value);
-              },
-            ),
-          ))
-        ?.toList(growable: false) ?? [];
-        
+              ?.map((optionHashTag) => Padding(
+                    padding: EdgeInsets.only(right: AppSizes.sidePadding / 2),
+                    child: ChoiceChip(
+                      selected: selecteHashTags != null
+                          ? selecteHashTags[optionHashTag] ?? false
+                          : false,
+                      padding: EdgeInsets.all(
+                        AppSizes.linePadding,
+                      ),
+                      backgroundColor: Theme.of(context).primaryColor,
+                      selectedColor: Theme.of(context).accentColor,
+                      label: Text(
+                        optionHashTag.title,
+                        style: Theme.of(context).textTheme.button,
+                      ),
+                      onSelected: (value) {
+                        onFilterChanged(optionHashTag, value);
+                      },
+                    ),
+                  ))
+              ?.toList(growable: false) ??
+          [];
+
       return ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
@@ -52,8 +53,7 @@ class VisualFilter extends StatelessWidget {
                 width: 16,
               )
             ] +
-            widgetList
-            +
+            widgetList +
             [
               SizedBox(
                 width: 16,

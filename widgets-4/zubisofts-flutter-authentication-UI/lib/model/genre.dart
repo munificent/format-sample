@@ -16,12 +16,12 @@ class Genry {
   });
 
   factory Genry.fromMap(Map<String, dynamic> json) => Genry(
-    genres: List<Genre>.from(json["genres"].map((x) => Genre.fromMap(x))),
-  );
+        genres: List<Genre>.from(json["genres"].map((x) => Genre.fromMap(x))),
+      );
 
   Map<String, dynamic> toMap() => {
-    "genres": List<dynamic>.from(genres.map((x) => x.toMap())),
-  };
+        "genres": List<dynamic>.from(genres.map((x) => x.toMap())),
+      };
 }
 
 class Genre {
@@ -34,12 +34,12 @@ class Genre {
   });
 
   factory Genre.fromMap(Map<String, dynamic> json) => Genre(
-    id: json["id"],
-    name: json["name"],
-  );
+        id: json["id"],
+        name: json["name"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "id": id,
-    "name": name,
-  };
+        "id": id,
+        "name": name,
+      };
 }

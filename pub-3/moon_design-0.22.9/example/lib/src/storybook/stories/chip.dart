@@ -45,18 +45,21 @@ class ChipStory extends Story {
               options: colorOptions,
             );
 
-            final backgroundColor = colorTable(context)[backgroundColorsKnob ?? 40];
+            final backgroundColor =
+                colorTable(context)[backgroundColorsKnob ?? 40];
 
             final activeBackgroundColorsKnob = context.knobs.nullable.options(
               label: "activeBackgroundColor",
-              description: "MoonColors variants for active MoonChip background.",
+              description:
+                  "MoonColors variants for active MoonChip background.",
               enabled: false,
               initial: 0,
               // piccolo
               options: colorOptions,
             );
 
-            final activeBackgroundColor = colorTable(context)[activeBackgroundColorsKnob ?? 40];
+            final activeBackgroundColor =
+                colorTable(context)[activeBackgroundColorsKnob ?? 40];
 
             final borderColorsKnob = context.knobs.nullable.options(
               label: "borderColor",
@@ -90,7 +93,8 @@ class ChipStory extends Story {
 
             final showBorderKnob = context.knobs.boolean(
               label: "showBorder",
-              description: "Show border when hovered, focused or isActive is true.",
+              description:
+                  "Show border when hovered, focused or isActive is true.",
             );
             final isActiveKnob = context.knobs.boolean(
               label: "isActive",
@@ -114,7 +118,9 @@ class ChipStory extends Story {
               description: "Show widget in MoonChip trailing slot.",
             );
 
-            final resolvedIconVariant = chipSizesKnob == MoonChipSize.sm ? MoonIcons.frame_16 : MoonIcons.frame_24;
+            final resolvedIconVariant = chipSizesKnob == MoonChipSize.sm
+                ? MoonIcons.frame_16
+                : MoonIcons.frame_24;
 
             return Center(
               child: SingleChildScrollView(
@@ -131,13 +137,18 @@ class ChipStory extends Story {
                       activeBackgroundColor: activeBackgroundColor,
                       textColor: textColor,
                       isActive: isActiveKnob,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadiusKnob != null
+                          ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                          : null,
                       showBorder: showBorderKnob,
                       chipSize: chipSizesKnob,
-                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      leading: showLeadingKnob
+                          ? MoonIcon(resolvedIconVariant)
+                          : null,
                       label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob
+                          ? MoonIcon(resolvedIconVariant)
+                          : null,
                     ),
                     const SizedBox(height: 40),
                     const TextDivider(text: "Text MoonChip"),
@@ -147,13 +158,18 @@ class ChipStory extends Story {
                       borderColor: borderColor,
                       textColor: textColor,
                       isActive: isActiveKnob,
-                      borderRadius:
-                          borderRadiusKnob != null ? BorderRadius.circular(borderRadiusKnob.toDouble()) : null,
+                      borderRadius: borderRadiusKnob != null
+                          ? BorderRadius.circular(borderRadiusKnob.toDouble())
+                          : null,
                       showBorder: showBorderKnob,
                       chipSize: chipSizesKnob,
-                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      leading: showLeadingKnob
+                          ? MoonIcon(resolvedIconVariant)
+                          : null,
                       label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob
+                          ? MoonIcon(resolvedIconVariant)
+                          : null,
                     ),
                     const SizedBox(height: 40),
                     const TextDivider(text: "Preset MoonChip"),
@@ -167,9 +183,13 @@ class ChipStory extends Story {
                       borderWidth: 2,
                       showBorder: showBorderKnob,
                       chipSize: chipSizesKnob,
-                      leading: showLeadingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      leading: showLeadingKnob
+                          ? MoonIcon(resolvedIconVariant)
+                          : null,
                       label: showLabelKnob ? Text(customLabelTextKnob) : null,
-                      trailing: showTrailingKnob ? MoonIcon(resolvedIconVariant) : null,
+                      trailing: showTrailingKnob
+                          ? MoonIcon(resolvedIconVariant)
+                          : null,
                     ),
                     const SizedBox(height: 64),
                   ],

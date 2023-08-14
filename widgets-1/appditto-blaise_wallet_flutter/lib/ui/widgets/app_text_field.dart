@@ -120,7 +120,8 @@ class _AppTextFieldState extends State<AppTextField> {
                     maxLines: widget.maxLines,
                     minLines: 1,
                     onSubmitted: (text) {
-                      if (widget.textInputAction == TextInputAction.done && widget.onSubmitted == null) {
+                      if (widget.textInputAction == TextInputAction.done &&
+                          widget.onSubmitted == null) {
                         FocusScope.of(context).unfocus();
                       } else if (widget.onSubmitted != null) {
                         widget.onSubmitted();
@@ -152,9 +153,9 @@ class _AppTextFieldState extends State<AppTextField> {
                       suffixIcon: widget.firstButton == null &&
                               widget.secondButton == null
                           ? Container(
-                            width: 0,
-                            height: 0,
-                          )
+                              width: 0,
+                              height: 0,
+                            )
                           : Container(
                               width: widget.firstButton == null ||
                                       widget.secondButton == null
