@@ -15,8 +15,9 @@ class SearchUserStateMapper extends StateMapper {
         telosResult.isError &&
         fullNameResult.isError) {
       return currentState.copyWith(
-          pageState: PageState.failure,
-          errorMessage: 'Error Searching for User');
+        pageState: PageState.failure,
+        errorMessage: 'Error Searching for User',
+      );
     } else {
       final List<MemberModel> seedsUsers =
           seedsMembersResult.asValue?.value ?? [];
@@ -44,13 +45,17 @@ class SearchUserStateMapper extends StateMapper {
       }
 
       if (currentState.showOnlyCitizenshipStatus != null) {
-        uniqueUsers.removeWhere((element) =>
-            element.citizenshipStatus !=
-            currentState.showOnlyCitizenshipStatus);
+        uniqueUsers.removeWhere(
+          (element) =>
+              element.citizenshipStatus !=
+              currentState.showOnlyCitizenshipStatus,
+        );
       }
 
       return currentState.copyWith(
-          pageState: PageState.success, users: uniqueUsers);
+        pageState: PageState.success,
+        users: uniqueUsers,
+      );
     }
   }
 }

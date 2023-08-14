@@ -29,7 +29,9 @@ class _MarqueeState extends State<Marquee> with TickerProviderStateMixin {
     });
 
     _controller = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
     _animation = CurveTween(curve: Curves.easeIn).animate(_controller);
     _animation.addStatusListener((status) {
       if (status == AnimationStatus.dismissed) {

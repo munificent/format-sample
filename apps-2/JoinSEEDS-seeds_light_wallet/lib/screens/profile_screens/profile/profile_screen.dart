@@ -35,8 +35,9 @@ class _ProfileScreenState extends State<ProfileScreen>
         listenWhen: (_, current) => current.pageCommand != null,
         listener: (context, state) {
           final pageCommand = state.pageCommand;
-          BlocProvider.of<ProfileBloc>(context)
-              .add(const ClearProfilePageCommand());
+          BlocProvider.of<ProfileBloc>(context).add(
+            const ClearProfilePageCommand(),
+          );
           if (pageCommand is ShowSwitchAccount) {
             const SwithAccountBottomSheet().show(context);
           }
@@ -45,15 +46,16 @@ class _ProfileScreenState extends State<ProfileScreen>
           return Scaffold(
             appBar: AppBar(
               title: InkWell(
-                onTap: () => BlocProvider.of<ProfileBloc>(context)
-                    .add(const OnSwitchAccountButtonTapped()),
+                onTap: () => BlocProvider.of<ProfileBloc>(context).add(
+                  const OnSwitchAccountButtonTapped(),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(settingsStorage.accountName),
-                      const Icon(Icons.keyboard_arrow_down)
+                      const Icon(Icons.keyboard_arrow_down),
                     ],
                   ),
                 ),
@@ -61,9 +63,11 @@ class _ProfileScreenState extends State<ProfileScreen>
               actions: [
                 IconButton(
                   icon: SvgPicture.asset(
-                      'assets/images/wallet/app_bar/scan_qr_code_icon.svg'),
-                  onPressed: () => NavigationService.of(context)
-                      .navigateTo(Routes.scanQRCode),
+                    'assets/images/wallet/app_bar/scan_qr_code_icon.svg',
+                  ),
+                  onPressed: () => NavigationService.of(context).navigateTo(
+                    Routes.scanQRCode,
+                  ),
                 ),
               ],
             ),
@@ -78,8 +82,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                       const DividerJungle(thickness: 2),
                       const ProfileMiddle(),
                       const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: DividerJungle(thickness: 2)),
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: DividerJungle(thickness: 2),
+                      ),
                       const ProfileBottom(),
                     ],
                   ),

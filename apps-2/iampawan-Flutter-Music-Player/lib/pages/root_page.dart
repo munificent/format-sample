@@ -11,13 +11,15 @@ class RootPage extends StatelessWidget {
     //Goto Now Playing Page
     void goToNowPlaying(Song s, {bool nowPlayTap: false}) {
       Navigator.push(
-          context,
-          new MaterialPageRoute(
-              builder: (context) => new NowPlaying(
-                    rootIW.songData,
-                    s,
-                    nowPlayTap: nowPlayTap,
-                  )));
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new NowPlaying(
+                rootIW.songData,
+                s,
+                nowPlayTap: nowPlayTap,
+              ),
+        ),
+      );
     }
 
     //Shuffle Songs and goto now playing page
@@ -33,17 +35,19 @@ class RootPage extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: new Center(
               child: new InkWell(
-                  child: new Text("Now Playing"),
-                  onTap: () => goToNowPlaying(
-                        rootIW.songData.songs[
-                            (rootIW.songData.currentIndex == null ||
-                                    rootIW.songData.currentIndex < 0)
-                                ? 0
-                                : rootIW.songData.currentIndex],
-                        nowPlayTap: true,
-                      )),
+                child: new Text("Now Playing"),
+                onTap: () => goToNowPlaying(
+                      rootIW.songData.songs[
+                        (rootIW.songData.currentIndex == null ||
+                                  rootIW.songData.currentIndex < 0)
+                            ? 0
+                            : rootIW.songData.currentIndex
+                      ],
+                      nowPlayTap: true,
+                    ),
+              ),
             ),
-          )
+          ),
         ],
       ),
       // drawer: new MPDrawer(),
@@ -51,7 +55,9 @@ class RootPage extends StatelessWidget {
           ? new Center(child: new CircularProgressIndicator())
           : new Scrollbar(child: new MPListView()),
       floatingActionButton: new FloatingActionButton(
-          child: new Icon(Icons.shuffle), onPressed: () => shuffleSongs()),
+        child: new Icon(Icons.shuffle),
+        onPressed: () => shuffleSongs(),
+      ),
     );
   }
 }

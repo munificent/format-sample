@@ -69,10 +69,7 @@ class _WelcomePageState extends State<WelcomePage> {
             right: _buttonRight,
             curve: _curve ?? Curves.easeOutCubic,
             onEnd: _animateText,
-            child: BlackButton(
-              text: "LET'S PLAY",
-              onTap: _animateHide,
-            ),
+            child: BlackButton(text: "LET'S PLAY", onTap: _animateHide),
           ),
         ],
       ),

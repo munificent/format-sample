@@ -22,18 +22,18 @@ class TriangleInputButton extends StatelessWidget {
         elevation: 4.0,
         shape: CircleBorder(
           side: BorderSide(
-              color: input.value.isNotEmpty
-                  ? Theme.of(context).primaryColor
-                  : (input.isActive ? Colors.yellow : Colors.grey),
-              width: 3),
+            color: input.value.isNotEmpty
+                ? Theme.of(context).primaryColor
+                : (input.isActive ? Colors.yellow : Colors.grey),
+            width: 3,
+          ),
         ),
         child: Container(
-            child: Center(
-          child: Text(
-            input.value,
-            style: Theme.of(context).textTheme.headline,
+          child: Center(
+            child:
+                Text(input.value, style: Theme.of(context).textTheme.headline),
           ),
-        )),
+        ),
       ),
     );
   }

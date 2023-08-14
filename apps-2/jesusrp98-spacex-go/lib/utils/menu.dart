@@ -12,11 +12,7 @@ class Menu {
     'spacex.launch.menu.press_kit',
   ];
 
-  static const wikipedia = [
-    'spacex.other.menu.wikipedia',
-  ];
+  static const wikipedia = ['spacex.other.menu.wikipedia'];
 
-  static const ship = [
-    'spacex.other.menu.marine_traffic',
-  ];
+  static const ship = ['spacex.other.menu.marine_traffic'];
 }

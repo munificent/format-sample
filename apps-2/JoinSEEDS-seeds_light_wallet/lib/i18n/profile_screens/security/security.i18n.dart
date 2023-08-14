@@ -47,7 +47,7 @@ extension Localization on String {
           'Key Guardians': "Guardiões de Chave",
           'Choose 3 - 5 friends and/or family members to help you recover your account in case.':
               "Escolha de 3 a 5 amigos ou familiares para lhe ajudar a recuperar sua conta caso seja necessário.",
-        }
+        },
       };
 
   String get i18n => localize(this, _t);

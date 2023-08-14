@@ -52,10 +52,7 @@ class Routes {
 
           return ResponsivePageRoute(
             settings: routeSettings,
-            builder: (_) => CorePage(
-              launchId: launchId,
-              coreId: coreId,
-            ),
+            builder: (_) => CorePage(launchId: launchId, coreId: coreId),
           );
 
         case CapsulePage.route:
@@ -80,10 +77,7 @@ class Routes {
 
           return ResponsivePageRoute(
             settings: routeSettings,
-            builder: (_) => LandpadPage(
-              launchId: launchId,
-              coreId: coreId,
-            ),
+            builder: (_) => LandpadPage(launchId: launchId, coreId: coreId),
           );
 
         case VehiclePage.route:
@@ -119,19 +113,17 @@ class ResponsivePageRoute extends PageRouteBuilder {
     Duration transitionDuration = const Duration(milliseconds: 200),
     Curve transitionCurve = Curves.linear,
   }) : super(
-          settings: settings,
-          pageBuilder: (context, animation, _) => FadeTransition(
-            opacity: CurvedAnimation(
-              parent: animation,
-              curve: transitionCurve,
-            ),
-            child: ResponsivePage(child: builder(context)),
-          ),
-          transitionDuration: transitionDuration,
-          reverseTransitionDuration: transitionDuration,
-          opaque: false,
-          barrierDismissible: true,
-          barrierColor: barrierColor,
-          fullscreenDialog: true,
-        );
+         settings: settings,
+         pageBuilder: (context, animation, _) => FadeTransition(
+               opacity:
+                   CurvedAnimation(parent: animation, curve: transitionCurve),
+               child: ResponsivePage(child: builder(context)),
+             ),
+         transitionDuration: transitionDuration,
+         reverseTransitionDuration: transitionDuration,
+         opaque: false,
+         barrierDismissible: true,
+         barrierColor: barrierColor,
+         fullscreenDialog: true,
+       );
 }

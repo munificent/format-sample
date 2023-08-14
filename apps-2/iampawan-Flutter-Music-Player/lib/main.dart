@@ -15,6 +15,9 @@ class MyMaterialAppState extends State<MyMaterialApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        debugShowCheckedModeBanner: false, theme: darkTheme, home: new MyApp());
+      debugShowCheckedModeBanner: false,
+      theme: darkTheme,
+      home: new MyApp(),
+    );
   }
 }

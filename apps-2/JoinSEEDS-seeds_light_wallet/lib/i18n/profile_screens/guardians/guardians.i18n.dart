@@ -130,7 +130,7 @@ extension Localization on String {
           'Select up to 5 Guardians to invite':
               'Selecione até 5 Guardiões para convidar',
           'Enter user name or account': 'Digite o nome ou conta',
-        }
+        },
       };
 
   String get i18n => localize(this, _t);

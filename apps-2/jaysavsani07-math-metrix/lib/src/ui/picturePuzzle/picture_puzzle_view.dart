@@ -23,36 +23,38 @@ class PicturePuzzleView extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                      flex: 10,
-                      child: SizedBox(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Timer(GameCategoryType.PICTURE_PUZZLE),
-                        ),
-                      )),
+                    flex: 10,
+                    child: SizedBox(
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Timer(GameCategoryType.PICTURE_PUZZLE),
+                      ),
+                    ),
+                  ),
                   Expanded(
                     flex: 40,
                     child: Consumer<PicturePuzzleProvider>(
-                        builder: (context, provider, child) {
-                      return Visibility(
-                        visible: !provider.pause,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: provider.currentState.list.map((list) {
-                            return Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: list.shapeList.map((subList) {
-                                  return PicturePuzzleButton(subList);
-                                }).toList(),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      );
-                    }),
+                      builder: (context, provider, child) {
+                        return Visibility(
+                          visible: !provider.pause,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: provider.currentState.list.map((list) {
+                              return Padding(
+                                padding: const EdgeInsets.all(6),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: list.shapeList.map((subList) {
+                                    return PicturePuzzleButton(subList);
+                                  }).toList(),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   Expanded(
                     flex: 40,
@@ -64,44 +66,57 @@ class PicturePuzzleView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Expanded(
-                              child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: Theme.of(context).accentColor),
-                            ),
-                            margin: EdgeInsets.fromLTRB(25, 0, 25, 15),
-                            constraints: BoxConstraints.expand(),
-                            child: Center(
-                              child: Consumer<PicturePuzzleProvider>(
-                                builder: (context, provider, child) {
-                                  return Text(
-                                    provider.result,
-                                    style: Theme.of(context).textTheme.display1,
-                                  );
-                                },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                border: Border.all(
+                                  color: Theme.of(context).accentColor,
+                                ),
+                              ),
+                              margin: EdgeInsets.fromLTRB(25, 0, 25, 15),
+                              constraints: BoxConstraints.expand(),
+                              child: Center(
+                                child: Consumer<PicturePuzzleProvider>(
+                                  builder: (context, provider, child) {
+                                    return Text(
+                                      provider.result,
+                                      style:
+                                          Theme.of(context).textTheme.display1,
+                                    );
+                                  },
+                                ),
                               ),
                             ),
-                          )),
+                          ),
                           Expanded(
                             child: Row(
                               children: <Widget>[
                                 PicturePuzzleAnswerButton(
-                                    "5",
-                                    BorderRadius.only(
-                                        topLeft: Radius.circular(40))),
+                                  "5",
+                                  BorderRadius.only(
+                                    topLeft: Radius.circular(40),
+                                  ),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "6", BorderRadius.all(Radius.zero)),
+                                  "6",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "7", BorderRadius.all(Radius.zero)),
+                                  "7",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "8", BorderRadius.all(Radius.zero)),
+                                  "8",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "9",
-                                    BorderRadius.only(
-                                        topRight: Radius.circular(40)))
+                                  "9",
+                                  BorderRadius.only(
+                                    topRight: Radius.circular(40),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -109,15 +124,25 @@ class PicturePuzzleView extends StatelessWidget {
                             child: Row(
                               children: <Widget>[
                                 PicturePuzzleAnswerButton(
-                                    "0", BorderRadius.all(Radius.zero)),
+                                  "0",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "1", BorderRadius.all(Radius.zero)),
+                                  "1",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "2", BorderRadius.all(Radius.zero)),
+                                  "2",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "3", BorderRadius.all(Radius.zero)),
+                                  "3",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                                 PicturePuzzleAnswerButton(
-                                    "4", BorderRadius.all(Radius.zero)),
+                                  "4",
+                                  BorderRadius.all(Radius.zero),
+                                ),
                               ],
                             ),
                           ),
@@ -125,10 +150,12 @@ class PicturePuzzleView extends StatelessWidget {
                             child: Row(
                               children: <Widget>[
                                 PicturePuzzleAnswerButton(
-                                    "CLEAR",
-                                    BorderRadius.only(
-                                        bottomLeft: Radius.circular(40),
-                                        bottomRight: Radius.circular(40))),
+                                  "CLEAR",
+                                  BorderRadius.only(
+                                    bottomLeft: Radius.circular(40),
+                                    bottomRight: Radius.circular(40),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -137,13 +164,13 @@ class PicturePuzzleView extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                      flex: 10,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Consumer<PicturePuzzleProvider>(
-                              builder: (context, provider, child) {
+                    flex: 10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Consumer<PicturePuzzleProvider>(
+                          builder: (context, provider, child) {
                             return IconButton(
                               icon: provider.pause
                                   ? Icon(Icons.play_arrow)
@@ -153,9 +180,10 @@ class PicturePuzzleView extends StatelessWidget {
                                 provider.pauseGame();
                               },
                             );
-                          }),
-                          Consumer<PicturePuzzleProvider>(
-                              builder: (context, provider, child) {
+                          },
+                        ),
+                        Consumer<PicturePuzzleProvider>(
+                          builder: (context, provider, child) {
                             return IconButton(
                               icon: Icon(Icons.info_outline),
                               iconSize: 40,
@@ -163,9 +191,11 @@ class PicturePuzzleView extends StatelessWidget {
                                 provider.showInfoDialog();
                               },
                             );
-                          })
-                        ],
-                      )),
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

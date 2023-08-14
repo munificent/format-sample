@@ -22,15 +22,20 @@ class Config {
     fontWeight: FontWeight.bold,
   );
   static final TextStyle statsTitleStyle = GoogleFonts.poppins(
-      color: Config.primaryColor.withOpacity(.8),
-      fontSize: 14,
-      fontWeight: FontWeight.w600);
-  static final TextStyle infectedStyle =
-      statsTitleStyle.copyWith(color: redColor);
-  static final TextStyle curedStyle =
-      statsTitleStyle.copyWith(color: greenColor);
-  static final TextStyle deadStyle =
-      statsTitleStyle.copyWith(color: Colors.grey[600]);
-  static final TextStyle activeStyle =
-      statsTitleStyle.copyWith(color: Colors.deepOrange);
+    color: Config.primaryColor.withOpacity(.8),
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  );
+  static final TextStyle infectedStyle = statsTitleStyle.copyWith(
+    color: redColor,
+  );
+  static final TextStyle curedStyle = statsTitleStyle.copyWith(
+    color: greenColor,
+  );
+  static final TextStyle deadStyle = statsTitleStyle.copyWith(
+    color: Colors.grey[600],
+  );
+  static final TextStyle activeStyle = statsTitleStyle.copyWith(
+    color: Colors.deepOrange,
+  );
 }

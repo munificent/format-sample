@@ -27,16 +27,16 @@ class RecoverAccountState extends Equatable {
 
   @override
   List<Object?> get props => [
-        pageState,
-        errorMessage,
-        isGuardianActive,
-        userGuardians,
-        userName,
-        pageCommand,
-        isValidAccount,
-        accountName,
-        accountImage,
-      ];
+    pageState,
+    errorMessage,
+    isGuardianActive,
+    userGuardians,
+    userName,
+    pageCommand,
+    isValidAccount,
+    accountName,
+    accountImage,
+  ];
 
   RecoverAccountState copyWith({
     PageState? pageState,

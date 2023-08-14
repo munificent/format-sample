@@ -8,19 +8,25 @@ import 'package:seeds/screens/transfer/send/send_enter_data/interactor/viewmodel
 
 class SendTransactionMapper extends StateMapper {
   SendEnterDataPageState mapResultToState(
-      SendEnterDataPageState currentState, Result result) {
+    SendEnterDataPageState currentState,
+    Result result,
+  ) {
     if (result.isError) {
       return currentState.copyWith(
-          pageState: PageState.failure,
-          errorMessage: result.asError!.error.toString());
+        pageState: PageState.failure,
+        errorMessage: result.asError!.error.toString(),
+      );
     } else {
       final resultResponse = result.asValue!.value as SendTransactionResponse;
       final pageCommand =
           SendTransactionStateMapper.transactionResultPageCommand(
-              resultResponse, currentState.ratesState);
+        resultResponse,
+        currentState.ratesState,
+      );
       if (resultResponse.isTransfer) {
         eventBus.fire(
-            OnNewTransactionEventBus(resultResponse.transferTransactionModel));
+          OnNewTransactionEventBus(resultResponse.transferTransactionModel),
+        );
       }
       return currentState.copyWith(
         pageState: PageState.success,

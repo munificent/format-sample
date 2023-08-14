@@ -24,7 +24,10 @@ class WalletService {
           break;
         default:
           yield AssetEntity(
-              name: wallet.name, amount: 0, symbol: wallet.symbol);
+            name: wallet.name,
+            amount: 0,
+            symbol: wallet.symbol,
+          );
       }
     }
   }
@@ -35,7 +38,10 @@ class WalletService {
     Response response = await Dio().get(url);
     var balance = response.data['data']['confirmed_balance'];
     return AssetEntity(
-        name: 'Litecoin', symbol: 'LTC', amount: double.parse(balance));
+      name: 'Litecoin',
+      symbol: 'LTC',
+      amount: double.parse(balance),
+    );
   }
 
   Future<AssetEntity> _getBTC(String address) async {
@@ -44,7 +50,10 @@ class WalletService {
     Response response = await Dio().get(url);
     var balance = response.data['data']['confirmed_balance'];
     return AssetEntity(
-        name: 'Bitcoin', symbol: 'BTC', amount: double.parse(balance));
+      name: 'Bitcoin',
+      symbol: 'BTC',
+      amount: double.parse(balance),
+    );
   }
 
   Future<List<AssetEntity>> _getETH(String address) async {
@@ -57,7 +66,10 @@ class WalletService {
     var data = response.data;
 
     var eth = AssetEntity(
-        name: 'Ethereum', symbol: 'ETH', amount: data['ETH']['balance']);
+      name: 'Ethereum',
+      symbol: 'ETH',
+      amount: data['ETH']['balance'],
+    );
 
     tokens.add(eth);
 

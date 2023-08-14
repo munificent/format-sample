@@ -9,10 +9,7 @@ import 'package:rapidinho/redux/app_reducer.dart';
 main() {
   group('Test state reducer', () {
     test('should get the filter list', () {
-      final store = Store<AppState>(
-        appReducer,
-        initialState: AppState(),
-      );
+      final store = Store<AppState>(appReducer, initialState: AppState());
 
       //expect(store.state.filters.length, 6);
     });

@@ -9,12 +9,13 @@ class NoGuardiansWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: Text(
-        message,
-        style: Theme.of(context).textTheme.subtitle2LowEmphasis,
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Text(
+          message,
+          style: Theme.of(context).textTheme.subtitle2LowEmphasis,
+        ),
       ),
-    ));
+    );
   }
 }

@@ -8,7 +8,7 @@ void main() {
       expect(
         LaunchpadDetails.fromJson(const {
           'images': {
-            'large': ['image.com']
+            'large': ['image.com'],
           },
           "name": "Kwajalein Atoll",
           "full_name": "Kwajalein Atoll Omelek Island",
@@ -20,7 +20,7 @@ void main() {
           "launch_successes": 2,
           "details":
               "SpaceX's primary Falcon 9 pad, where all east coast Falcon 9s launched prior to the AMOS-6 anomaly. Previously used alongside SLC-41 to launch Titan rockets for the US Air Force, the pad was heavily damaged by the AMOS-6 anomaly in September 2016. It returned to flight with CRS-13 on December 15, 2017, boasting an upgraded throwback-style Transporter-Erector modeled after that at LC-39A.",
-          "id": "5e9e4502f5090995de566f86"
+          "id": "5e9e4502f5090995de566f86",
         }),
         LaunchpadDetails(
           name: 'Kwajalein Atoll',
@@ -46,10 +46,7 @@ void main() {
     });
 
     test('correctly returns status', () {
-      expect(
-        LaunchpadDetails(status: 'test').getStatus,
-        'Test',
-      );
+      expect(LaunchpadDetails(status: 'test').getStatus, 'Test');
     });
 
     test('correctly returns string coordenates', () {

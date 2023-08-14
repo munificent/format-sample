@@ -8,8 +8,8 @@ class CreateAccountUseCase {
   CreateAccountUseCase({
     required SignupRepository signupRepository,
     required FirebaseUserRepository firebaseUserRepository,
-  })  : _signupRepository = signupRepository,
-        _firebaseUserRepository = firebaseUserRepository;
+  }) : _signupRepository = signupRepository,
+       _firebaseUserRepository = firebaseUserRepository;
 
   final SignupRepository _signupRepository;
   final FirebaseUserRepository _firebaseUserRepository;
@@ -33,7 +33,9 @@ class CreateAccountUseCase {
       try {
         // Add phone number
         await _firebaseUserRepository.saveUserPhoneNumber(
-            userId: username, phoneNumber: phoneNumber ?? '');
+          userId: username,
+          phoneNumber: phoneNumber ?? '',
+        );
       } catch (error) {
         print('Failed to save the phone number: $error');
       }

@@ -70,23 +70,26 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     try {
       context.watch<NotificationsCubit>()?.updateNotifications(
-            context,
-            nextLaunch: LaunchUtils.getUpcomingLaunch(
-              context.watch<LaunchesCubit>().state.value,
-            ),
-          );
+        context,
+        nextLaunch: LaunchUtils.getUpcomingLaunch(
+          context.watch<LaunchesCubit>().state.value,
+        ),
+      );
     } catch (_) {
       debugPrint('could set notifications');
     }
 
     return Scaffold(
-      body: IndexedStack(index: _currentIndex, children: [
-        HomeTab(),
-        VehiclesTab(),
-        LaunchesTab(LaunchType.upcoming),
-        LaunchesTab(LaunchType.latest),
-        CompanyTab(),
-      ]),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          HomeTab(),
+          VehiclesTab(),
+          LaunchesTab(LaunchType.upcoming),
+          LaunchesTab(LaunchType.latest),
+          CompanyTab(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).brightness == Brightness.light
             ? Theme.of(context).primaryColor

@@ -32,7 +32,8 @@ class CitizenshipCard extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: AppColors.lightGreen2,
                   borderRadius: BorderRadius.all(
-                      Radius.circular(defaultCardBorderRadius)),
+                    Radius.circular(defaultCardBorderRadius),
+                  ),
                 ),
                 child: Stack(
                   children: [
@@ -78,13 +79,16 @@ class CitizenshipCard extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Row(
                                     children: [
-                                      Text(state.profile!.statusString,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6Green),
+                                      Text(
+                                        state.profile!.statusString,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6Green,
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 5.0),
+                                          horizontal: 5.0,
+                                        ),
                                         child: Container(
                                           width: 32,
                                           height: 32,
@@ -99,20 +103,22 @@ class CitizenshipCard extends StatelessWidget {
                                                   .textTheme
                                                   .headline7
                                                   .copyWith(
-                                                      color: AppColors.primary),
+                                                    color: AppColors.primary,
+                                                  ),
                                             ),
                                           ),
                                         ),
                                       ),
                                       Flexible(
                                         child: Text(
-                                            state.profile!.status ==
-                                                    ProfileStatus.visitor
-                                                ? 'Resident'.i18n
-                                                : 'Citizen'.i18n,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline6Green),
+                                          state.profile!.status ==
+                                                  ProfileStatus.visitor
+                                              ? 'Resident'.i18n
+                                              : 'Citizen'.i18n,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6Green,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -126,15 +132,14 @@ class CitizenshipCard extends StatelessWidget {
                                       ),
                                       color: AppColors.green1,
                                       padding: const EdgeInsets.all(8.0),
-                                      onPressed: () =>
-                                          NavigationService.of(context)
-                                              .navigateTo(
+                                      onPressed: () => NavigationService.of(
+                                        context,
+                                      ).navigateTo(
                                         Routes.citizenship,
                                         ProfileValuesArguments(
                                           profile: BlocProvider.of<ProfileBloc>(
-                                                  context)
-                                              .state
-                                              .profile!,
+                                            context,
+                                          ).state.profile!,
                                         ),
                                       ),
                                       child: Text(
@@ -153,13 +158,15 @@ class CitizenshipCard extends StatelessWidget {
                                                 CitizenshipUpgradeStatus
                                                     .canResident
                                             ? BlocProvider.of<ProfileBloc>(
-                                                    context)
-                                                .add(
-                                                    const OnActivateResidentButtonTapped())
+                                                context,
+                                              ).add(
+                                                const OnActivateResidentButtonTapped(),
+                                              )
                                             : BlocProvider.of<ProfileBloc>(
-                                                    context)
-                                                .add(
-                                                    const OnActivateCitizenButtonTapped());
+                                                context,
+                                              ).add(
+                                                const OnActivateCitizenButtonTapped(),
+                                              );
                                       },
                                     ),
                                   ],

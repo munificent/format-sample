@@ -32,26 +32,27 @@ class PreferencesState extends Equatable {
     this.locale,
     this.sizeScreen,
   }) : super([
-          soundVolume,
-          musicVolume,
-          boardSelected,
-          userChangedEntering,
-          userVisitedStore,
-          userRemoveAnims,
-          locale,
-          sizeScreen,
-        ]);
+         soundVolume,
+         musicVolume,
+         boardSelected,
+         userChangedEntering,
+         userVisitedStore,
+         userRemoveAnims,
+         locale,
+         sizeScreen,
+       ]);
 
   factory PreferencesState.init() {
     return PreferencesState(
-        soundVolume: 2,
-        musicVolume: 2,
-        boardSelected: SizeBoardGame.X3_3,
-        userChangedEntering: false,
-        userVisitedStore: false,
-        userRemoveAnims: false,
-        locale: null,
-        sizeScreen: null);
+      soundVolume: 2,
+      musicVolume: 2,
+      boardSelected: SizeBoardGame.X3_3,
+      userChangedEntering: false,
+      userVisitedStore: false,
+      userRemoveAnims: false,
+      locale: null,
+      sizeScreen: null,
+    );
   }
 
   PreferencesState copyWith({

@@ -24,15 +24,18 @@ class ProposalsStateMapper extends StateMapper {
   }) {
     if (areAllResultsError(results)) {
       return currentState.copyWith(
-          pageState: PageState.failure,
-          errorMessage: 'Error loading proposals'.i18n);
+        pageState: PageState.failure,
+        errorMessage: 'Error loading proposals'.i18n,
+      );
     } else {
       results.retainWhere((Result i) => i.isValue);
       final values = results.map((Result i) => i.asValue!.value).toList();
-      final ProfileModel? profile =
-          values.firstWhereOrNull((i) => i is ProfileModel);
-      final List<ProposalModel> proposalsModel =
-          values.firstWhereOrNull((i) => i is List<ProposalModel>);
+      final ProfileModel? profile = values.firstWhereOrNull(
+        (i) => i is ProfileModel,
+      );
+      final List<ProposalModel> proposalsModel = values.firstWhereOrNull(
+        (i) => i is List<ProposalModel>,
+      );
       final List<List<ReferendumModel>> referendumsLists =
           values.whereType<List<ReferendumModel>>().toList();
       List<ReferendumModel> referendumsModel = [];
@@ -42,12 +45,12 @@ class ProposalsStateMapper extends StateMapper {
       } else {
         referendumsModel = referendumsLists.first;
       }
-      final List<ProposalViewModel> proposals = proposalsModel
-              .map((i) => ProposalViewModel.fromProposal(i))
-              .toList() +
-          referendumsModel
-              .map((i) => ProposalViewModel.fromReferendum(i))
-              .toList();
+      final List<ProposalViewModel> proposals = proposalsModel.map(
+            (i) => ProposalViewModel.fromProposal(i),
+          ).toList() +
+          referendumsModel.map(
+            (i) => ProposalViewModel.fromReferendum(i),
+          ).toList();
       List<ProposalViewModel> newProposals;
 
       if (isScroll) {

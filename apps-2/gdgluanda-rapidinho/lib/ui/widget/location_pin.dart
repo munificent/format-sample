@@ -35,12 +35,9 @@ class LocationPin extends AnimatedWidget {
 
 class LocationPinAnimation {
   LocationPinAnimation(this.controller)
-      : iconSize = Tween(begin: 15.0, end: 30.0).animate(
-          CurvedAnimation(
-            parent: controller,
-            curve: Curves.easeInOut,
-          ),
-        );
+    : iconSize = Tween(begin: 15.0, end: 30.0).animate(
+        CurvedAnimation(parent: controller, curve: Curves.easeInOut),
+      );
 
   final AnimationController controller;
   final Animation<double> iconSize;

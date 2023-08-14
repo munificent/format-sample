@@ -24,93 +24,115 @@ const List<FilterItem> filterList = [
 
 List<ProductType> homeCardItemList1 = [
   ProductType(
-      name: 'Fahita\nChouriço',
-      filter: [0, 1, 4],
-      assetPath: 'assets/images/home_items/home_item.png'),
+    name: 'Fahita\nChouriço',
+    filter: [0, 1, 4],
+    assetPath: 'assets/images/home_items/home_item.png',
+  ),
   ProductType(
-      name: 'Hamburger\nBaicon',
-      filter: [0, 4, 1],
-      assetPath: 'assets/images/home_items/home_item1.jpg'),
+    name: 'Hamburger\nBaicon',
+    filter: [0, 4, 1],
+    assetPath: 'assets/images/home_items/home_item1.jpg',
+  ),
   ProductType(
-      name: 'Ovos\nEstrelados',
-      filter: [0, 1, 4],
-      assetPath: 'assets/images/home_items/home_item5.jpg'),
+    name: 'Ovos\nEstrelados',
+    filter: [0, 1, 4],
+    assetPath: 'assets/images/home_items/home_item5.jpg',
+  ),
   ProductType(
-      name: 'Pudim\nCereja',
-      filter: [0, 3, 5],
-      assetPath: 'assets/images/home_items/home_item10.jpg'),
+    name: 'Pudim\nCereja',
+    filter: [0, 3, 5],
+    assetPath: 'assets/images/home_items/home_item10.jpg',
+  ),
   ProductType(
-      name: 'Chá\nPreto',
-      filter: [5],
-      assetPath: 'assets/images/home_items/home_item7.jpg'),
+    name: 'Chá\nPreto',
+    filter: [5],
+    assetPath: 'assets/images/home_items/home_item7.jpg',
+  ),
   ProductType(
-      filter: [0, 1, 2],
-      name: 'Sumo\nMaçã',
-      assetPath: 'assets/images/home_items/home_item9.jpg'),
+    filter: [0, 1, 2],
+    name: 'Sumo\nMaçã',
+    assetPath: 'assets/images/home_items/home_item9.jpg',
+  ),
   ProductType(
-      filter: [2, 3],
-      name: 'Caipirinha\nLimão',
-      assetPath: 'assets/images/home_items/home_item11.jpg'),
+    filter: [2, 3],
+    name: 'Caipirinha\nLimão',
+    assetPath: 'assets/images/home_items/home_item11.jpg',
+  ),
   ProductType(
-      filter: [0, 5],
-      name: 'Vinho\nTinto',
-      assetPath: 'assets/images/home_items/home_item13.jpg'),
+    filter: [0, 5],
+    name: 'Vinho\nTinto',
+    assetPath: 'assets/images/home_items/home_item13.jpg',
+  ),
   ProductType(
-      name: 'Trages\nAfricanos',
-      filter: [3, 4],
-      assetPath: 'assets/images/home_items/home_item3.jpg'),
+    name: 'Trages\nAfricanos',
+    filter: [3, 4],
+    assetPath: 'assets/images/home_items/home_item3.jpg',
+  ),
   ProductType(
-      name: 'Buque\nRosas',
-      filter: [1, 3],
-      assetPath: 'assets/images/home_items/home_item4.jpg'),
+    name: 'Buque\nRosas',
+    filter: [1, 3],
+    assetPath: 'assets/images/home_items/home_item4.jpg',
+  ),
   ProductType(
-      name: 'iPhone\nX',
-      filter: [1, 5],
-      assetPath: 'assets/images/home_items/home_item8.jpg'),
+    name: 'iPhone\nX',
+    filter: [1, 5],
+    assetPath: 'assets/images/home_items/home_item8.jpg',
+  ),
   ProductType(
-      name: 'Fahita\nChouriço',
-      filter: [0, 1, 4],
-      assetPath: 'assets/images/home_items/home_item.png'),
+    name: 'Fahita\nChouriço',
+    filter: [0, 1, 4],
+    assetPath: 'assets/images/home_items/home_item.png',
+  ),
   ProductType(
-      name: 'Hamburger\nBaicon',
-      filter: [0, 4, 1],
-      assetPath: 'assets/images/home_items/home_item1.jpg'),
+    name: 'Hamburger\nBaicon',
+    filter: [0, 4, 1],
+    assetPath: 'assets/images/home_items/home_item1.jpg',
+  ),
   ProductType(
-      name: 'Ovos\nEstrelados',
-      filter: [0, 1, 4],
-      assetPath: 'assets/images/home_items/home_item5.jpg'),
+    name: 'Ovos\nEstrelados',
+    filter: [0, 1, 4],
+    assetPath: 'assets/images/home_items/home_item5.jpg',
+  ),
   ProductType(
-      name: 'Pudim\nCereja',
-      filter: [0, 3, 5],
-      assetPath: 'assets/images/home_items/home_item10.jpg'),
+    name: 'Pudim\nCereja',
+    filter: [0, 3, 5],
+    assetPath: 'assets/images/home_items/home_item10.jpg',
+  ),
   ProductType(
-      name: 'Chá\nPreto',
-      filter: [5],
-      assetPath: 'assets/images/home_items/home_item7.jpg'),
+    name: 'Chá\nPreto',
+    filter: [5],
+    assetPath: 'assets/images/home_items/home_item7.jpg',
+  ),
   ProductType(
-      filter: [0, 1, 2],
-      name: 'Sumo\nMaçã',
-      assetPath: 'assets/images/home_items/home_item9.jpg'),
+    filter: [0, 1, 2],
+    name: 'Sumo\nMaçã',
+    assetPath: 'assets/images/home_items/home_item9.jpg',
+  ),
   ProductType(
-      filter: [2, 3],
-      name: 'Caipirinha\nLimão',
-      assetPath: 'assets/images/home_items/home_item11.jpg'),
+    filter: [2, 3],
+    name: 'Caipirinha\nLimão',
+    assetPath: 'assets/images/home_items/home_item11.jpg',
+  ),
   ProductType(
-      filter: [0, 5],
-      name: 'Vinho\nTinto',
-      assetPath: 'assets/images/home_items/home_item13.jpg'),
+    filter: [0, 5],
+    name: 'Vinho\nTinto',
+    assetPath: 'assets/images/home_items/home_item13.jpg',
+  ),
   ProductType(
-      name: 'Trages\nAfricanos',
-      filter: [3, 4],
-      assetPath: 'assets/images/home_items/home_item3.jpg'),
+    name: 'Trages\nAfricanos',
+    filter: [3, 4],
+    assetPath: 'assets/images/home_items/home_item3.jpg',
+  ),
   ProductType(
-      name: 'Buque\nRosas',
-      filter: [1, 3],
-      assetPath: 'assets/images/home_items/home_item4.jpg'),
+    name: 'Buque\nRosas',
+    filter: [1, 3],
+    assetPath: 'assets/images/home_items/home_item4.jpg',
+  ),
   ProductType(
-      name: 'iPhone\nX',
-      filter: [1, 5],
-      assetPath: 'assets/images/home_items/home_item8.jpg'),
+    name: 'iPhone\nX',
+    filter: [1, 5],
+    assetPath: 'assets/images/home_items/home_item8.jpg',
+  ),
 ];
 
 class MockData {
@@ -127,7 +149,7 @@ class MockData {
         1: '1 KG de Gelo em cubo',
         2: 'Limoes',
         3: '12 Culheres',
-        4: 'Folha de menta'
+        4: 'Folha de menta',
       },
       description:
           'A caipirinha é o coquetel nacional do Brasil, feito com cachaça, açúcar e limão. A cachaça, também conhecida como caninha, ou qualquer um de uma infinidade de nomes tradicionais, é a bebida alcoólica destilada mais comum no Brasil.',
@@ -147,19 +169,10 @@ class MockData {
   ];
 
   static final List<Vendor> vendorList = [
-    Vendor(
-      id: 0,
-      name: 'Cassule\'s Restaurante',
-      cityId: 0,
-    )
+    Vendor(id: 0, name: 'Cassule\'s Restaurante', cityId: 0),
   ];
 
-  static final List<City> cities = [
-    City(
-      id: 0,
-      cityName: 'Kilamba Kiaxi',
-    ),
-  ];
+  static final List<City> cities = [City(id: 0, cityName: 'Kilamba Kiaxi')];
 
   static final List<ProductType> productCategoryList = [
     ProductType(
@@ -178,9 +191,10 @@ class MockData {
       category: ProductCategory.Book,
     ),
     ProductType(
-        name: 'Refeições',
-        assetPath: 'assets/images/deliverables/food.png',
-        category: ProductCategory.Food),
+      name: 'Refeições',
+      assetPath: 'assets/images/deliverables/food.png',
+      category: ProductCategory.Food,
+    ),
     ProductType(
       name: 'Hamburgers',
       assetPath: 'assets/images/deliverables/hamburger.png',

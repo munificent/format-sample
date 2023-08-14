@@ -50,8 +50,10 @@ class ImageUtil {
       print("Resizing image...");
       double max = math.max(image.height, image.width).toDouble();
       double factor = ImageUtil.MAX / max;
-      image = image.resized((image.width.toDouble() * factor).round(),
-          (image.height.toDouble() * factor).round());
+      image = image.resized(
+        (image.width.toDouble() * factor).round(),
+        (image.height.toDouble() * factor).round(),
+      );
 
       print("New image format: ${image.width}x${image.height}");
     }

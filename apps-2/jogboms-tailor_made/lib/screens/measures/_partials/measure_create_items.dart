@@ -5,33 +5,39 @@ import 'package:tailor_made/screens/measures/_views/slide_down.dart';
 import 'package:tailor_made/widgets/theme_provider.dart';
 
 class MeasureCreateItems extends StatelessWidget {
-  const MeasureCreateItems(
-      {Key key, @required this.grouped, @required this.measurements})
-      : super(key: key);
+  const MeasureCreateItems({
+    Key key,
+    @required this.grouped,
+    @required this.measurements,
+  }) : super(key: key);
 
   final Map<String, List<MeasureModel>> grouped;
   final Map<String, double> measurements;
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      for (var i = 0; i < grouped.length; i++)
-        SlideDownItem(
-          title: grouped.keys.elementAt(i),
-          body: JobMeasureBlock(
-            measures: grouped.values.elementAt(i),
-            measurements: measurements,
+    return Column(
+      children: [
+        for (var i = 0; i < grouped.length; i++)
+          SlideDownItem(
+            title: grouped.keys.elementAt(i),
+            body: JobMeasureBlock(
+              measures: grouped.values.elementAt(i),
+              measurements: measurements,
+            ),
           ),
-        ),
-    ]);
+      ],
+    );
   }
 }
 
 // TODO: should rework this
 class JobMeasureBlock extends StatelessWidget {
-  const JobMeasureBlock(
-      {Key key, @required this.measures, @required this.measurements})
-      : super(key: key);
+  const JobMeasureBlock({
+    Key key,
+    @required this.measures,
+    @required this.measurements,
+  }) : super(key: key);
 
   final List<MeasureModel> measures;
   final Map<String, double> measurements;
@@ -64,12 +70,14 @@ class JobMeasureBlock extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: MkBorderSide(
-                      style:
-                          removeBorder ? BorderStyle.none : BorderStyle.solid,
+                      style: removeBorder
+                          ? BorderStyle.none
+                          : BorderStyle.solid,
                     ),
                     right: MkBorderSide(
-                      style:
-                          index % 2 == 0 ? BorderStyle.solid : BorderStyle.none,
+                      style: index % 2 == 0
+                          ? BorderStyle.solid
+                          : BorderStyle.none,
                     ),
                   ),
                 ),

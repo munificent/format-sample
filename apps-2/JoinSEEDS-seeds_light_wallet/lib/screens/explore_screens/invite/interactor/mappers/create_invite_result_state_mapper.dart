@@ -7,7 +7,9 @@ import 'package:seeds/screens/explore_screens/invite/interactor/viewmodels/invit
 
 class CreateInviteResultStateMapper extends StateMapper {
   InviteState mapResultsToState(
-      InviteState currentState, List<Result> results) {
+    InviteState currentState,
+    List<Result> results,
+  ) {
     if (areAllResultsError(results)) {
       // The 2 calls are error --> transaction fail show snackbar fail
       print('Error transaction hash not retrieved');
@@ -22,13 +24,17 @@ class CreateInviteResultStateMapper extends StateMapper {
       results.retainWhere((Result element) => element.isValue);
       final values =
           results.map((Result element) => element.asValue!.value).toList();
-      final TransactionResponse? response = values
-          .firstWhere((i) => i is TransactionResponse, orElse: () => null);
+      final TransactionResponse? response = values.firstWhere(
+        (i) => i is TransactionResponse,
+        orElse: () => null,
+      );
 
       if (response != null && response.transactionId.isNotEmpty) {
         // Transaction success show invite link dialog
-        final Uri? dynamicSecretLink =
-            values.firstWhere((i) => i is Uri, orElse: () => null);
+        final Uri? dynamicSecretLink = values.firstWhere(
+          (i) => i is Uri,
+          orElse: () => null,
+        );
 
         return currentState.copyWith(
           pageState: PageState.success,

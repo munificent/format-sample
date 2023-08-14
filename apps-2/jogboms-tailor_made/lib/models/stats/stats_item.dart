@@ -27,11 +27,13 @@ abstract class StatsItemModel<T extends num>
   T get completed;
 
   @override
-  Map<String, dynamic> toMap() =>
-      serializers.serializeWith(StatsItemModel.serializer, this);
+  Map<String, dynamic> toMap() => serializers.serializeWith(
+    StatsItemModel.serializer,
+    this,
+  );
 
-  static StatsItemModel fromJson(Map<String, dynamic> map) =>
-      serializers.deserializeWith(StatsItemModel.serializer, map);
+  static StatsItemModel fromJson(Map<String, dynamic> map) => serializers
+      .deserializeWith(StatsItemModel.serializer, map);
 
   static Serializer<StatsItemModel> get serializer =>
       _$statsItemModelSerializer;

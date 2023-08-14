@@ -8,17 +8,19 @@ import 'package:seeds/screens/profile_screens/guardians/select_guardian/interact
 class SelectGuardiansBloc
     extends Bloc<SelectGuardiansEvent, SelectGuardiansState> {
   SelectGuardiansBloc(List<GuardianModel> myGuardians)
-      : super(SelectGuardiansState.initial(myGuardians));
+    : super(SelectGuardiansState.initial(myGuardians));
 
   @override
   Stream<SelectGuardiansState> mapEventToState(
-      SelectGuardiansEvent event) async* {
+    SelectGuardiansEvent event,
+  ) async* {
     if (event is OnUserSelected) {
       if (state.myGuardians.length + state.selectedGuardians.length >=
           MAX_GUARDIANS_ALLOWED) {
         yield state.copyWith(
-            pageCommand:
-                ShowMaxUserCountSelected("Max Guardians number selected"));
+          pageCommand:
+              ShowMaxUserCountSelected("Max Guardians number selected"),
+        );
       } else {
         final mutableSet = <MemberModel>{};
 

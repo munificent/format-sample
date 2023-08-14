@@ -6,19 +6,25 @@ import 'package:seeds/i18n/authentication/import_key/import_key.i18n.dart';
 import 'package:seeds/screens/authentication/import_key/interactor/viewmodels/import_key_bloc.dart';
 
 class ImportKeyStateMapper extends StateMapper {
-  ImportKeyState mapResultsToState(ImportKeyState currentState,
-      List<Result> results, AuthDataModel authData) {
+  ImportKeyState mapResultsToState(
+    ImportKeyState currentState,
+    List<Result> results,
+    AuthDataModel authData,
+  ) {
     // No account found. Show error
     if (results.isEmpty) {
       return currentState.copyWith(
-          pageState: PageState.failure, errorMessage: "No accounts found".i18n);
+        pageState: PageState.failure,
+        errorMessage: "No accounts found".i18n,
+      );
     }
 
     // Accounts found, but errors fetching data happened.
     if (areAllResultsError(results)) {
       return currentState.copyWith(
-          pageState: PageState.failure,
-          errorMessage: "Error Loading Accounts".i18n);
+        pageState: PageState.failure,
+        errorMessage: "Error Loading Accounts".i18n,
+      );
     } else {
       final List<ProfileModel> profiles = results
           .where((Result result) => result.isValue)
@@ -26,7 +32,10 @@ class ImportKeyStateMapper extends StateMapper {
           .toList();
 
       return currentState.copyWith(
-          pageState: PageState.success, accounts: profiles, authData: authData);
+        pageState: PageState.success,
+        accounts: profiles,
+        authData: authData,
+      );
     }
   }
 }

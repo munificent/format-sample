@@ -14,29 +14,37 @@ final levelsStateReducer = combineReducers<LevelListState>([
 ]);
 
 LevelListState _loadLevelInBoard(
-    LevelListState levels, LoadLevelInBoardAction action) {
+  LevelListState levels,
+  LoadLevelInBoardAction action,
+) {
   return levels.copyWith(coins: action.level.assistance?.coins ?? 0);
 }
 
 LevelListState _loadWorlds(LevelListState levels, LoadWorldsAction action) {
-  List<WorldsState> list = action.worlds.worlds
-      .map((w) => WorldsState(name: w.name, world: w.world, levels: w.levels))
-      .toList();
+  List<WorldsState> list = action.worlds.worlds.map(
+    (w) => WorldsState(name: w.name, world: w.world, levels: w.levels),
+  ).toList();
   return levels.copyWith(worlds: list);
 }
 
 LevelListState _fillCompletedWorlds(
-    LevelListState levels, FillCompletedWorldsAction action) {
+  LevelListState levels,
+  FillCompletedWorldsAction action,
+) {
   return levels.copyWith(worldsCompleted: action.completed);
 }
 
 LevelListState _currentWorlds(
-    LevelListState levels, CurrentWorldsAction action) {
+  LevelListState levels,
+  CurrentWorldsAction action,
+) {
   return levels.copyWith(currentWorld: action.world);
 }
 
 LevelListState _loadCurrentLevel(
-    LevelListState levels, SetCurrentLevelAction action) {
+  LevelListState levels,
+  SetCurrentLevelAction action,
+) {
   return levels.copyWith(currentLevel: action.level);
 }
 
@@ -45,7 +53,9 @@ LevelListState _loadLevels(LevelListState levels, LoadLevelsAction action) {
 }
 
 LevelListState _spendCoinsLevel(
-    LevelListState levels, SpendCoinsLevelAction action) {
+  LevelListState levels,
+  SpendCoinsLevelAction action,
+) {
   int coins = levels.coins - GameUtils.getCoinsFor(action.assistanceActionType);
   return levels.copyWith(coins: coins);
 }

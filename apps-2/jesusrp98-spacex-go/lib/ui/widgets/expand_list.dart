@@ -7,11 +7,8 @@ class ExpandList extends StatelessWidget {
   final Widget child;
   final String hint;
 
-  const ExpandList({
-    Key key,
-    @required this.child,
-    this.hint,
-  }) : super(key: key);
+  const ExpandList({Key key, @required this.child, this.hint})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {

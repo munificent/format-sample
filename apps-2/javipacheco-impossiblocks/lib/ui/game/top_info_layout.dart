@@ -28,14 +28,16 @@ class TopInfoClassicLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            TopInfoWithRecord(
-                sizeScreen: sizeScreen,
-                name: ImpossiblocksLocalizations.of(context).text("points"),
-                data: points,
-                record: record),
-          ]),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          TopInfoWithRecord(
+            sizeScreen: sizeScreen,
+            name: ImpossiblocksLocalizations.of(context).text("points"),
+            data: points,
+            record: record,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -61,23 +63,26 @@ class TopInfoArcadeLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            TileCounterInfo(
-                sizeScreen: sizeScreen,
-                bgColor: ResColors.colorTile1,
-                counter: scoreCounterColorsLevel.color1),
-            TopInfoWithRecord(
-              sizeScreen: sizeScreen,
-              name: ImpossiblocksLocalizations.of(context).text("points"),
-              data: points,
-              record: record,
-            ),
-            TileCounterInfo(
-                sizeScreen: sizeScreen,
-                bgColor: ResColors.colorTile2,
-                counter: scoreCounterColorsLevel.color2),
-          ]),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          TileCounterInfo(
+            sizeScreen: sizeScreen,
+            bgColor: ResColors.colorTile1,
+            counter: scoreCounterColorsLevel.color1,
+          ),
+          TopInfoWithRecord(
+            sizeScreen: sizeScreen,
+            name: ImpossiblocksLocalizations.of(context).text("points"),
+            data: points,
+            record: record,
+          ),
+          TileCounterInfo(
+            sizeScreen: sizeScreen,
+            bgColor: ResColors.colorTile2,
+            counter: scoreCounterColorsLevel.color2,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -89,37 +94,41 @@ class TopInfoLevelLayout extends StatelessWidget {
 
   final ScoreCounterColorsLevel scoreCounterColorsLevel;
 
-  TopInfoLevelLayout(
-      {Key key,
-      @required this.sizeScreen,
-      @required this.boardStatus,
-      @required this.scoreCounterColorsLevel})
-      : super(key: key);
+  TopInfoLevelLayout({
+    Key key,
+    @required this.sizeScreen,
+    @required this.boardStatus,
+    @required this.scoreCounterColorsLevel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            if (boardStatus.typeLevel == TypeBoardLevel.COLOR_COUNTER)
-              TileCounterInfo(
-                  sizeScreen: sizeScreen,
-                  bgColor: ResColors.colorTile1,
-                  counter: scoreCounterColorsLevel.color1),
-            TopInfo(
-                sizeScreen: sizeScreen,
-                name: ImpossiblocksLocalizations.of(context).text("moves"),
-                data: boardStatus.typeLevel == TypeBoardLevel.COLOR_COUNTER
-                    ? boardStatus.allMoves
-                    : boardStatus.moves,
-                highlight: true),
-            if (boardStatus.typeLevel == TypeBoardLevel.COLOR_COUNTER)
-              TileCounterInfo(
-                  sizeScreen: sizeScreen,
-                  bgColor: ResColors.colorTile2,
-                  counter: scoreCounterColorsLevel.color2),
-          ]),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          if (boardStatus.typeLevel == TypeBoardLevel.COLOR_COUNTER)
+            TileCounterInfo(
+              sizeScreen: sizeScreen,
+              bgColor: ResColors.colorTile1,
+              counter: scoreCounterColorsLevel.color1,
+            ),
+          TopInfo(
+            sizeScreen: sizeScreen,
+            name: ImpossiblocksLocalizations.of(context).text("moves"),
+            data: boardStatus.typeLevel == TypeBoardLevel.COLOR_COUNTER
+                ? boardStatus.allMoves
+                : boardStatus.moves,
+            highlight: true,
+          ),
+          if (boardStatus.typeLevel == TypeBoardLevel.COLOR_COUNTER)
+            TileCounterInfo(
+              sizeScreen: sizeScreen,
+              bgColor: ResColors.colorTile2,
+              counter: scoreCounterColorsLevel.color2,
+            ),
+        ],
+      ),
     );
   }
 }
@@ -165,16 +174,18 @@ class TopInfoWithRecord extends StatelessWidget {
             child: Container(
               constraints: BoxConstraints.expand(width: 80, height: 20),
               decoration: new BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 2),
-                  color: ResColors.colorTile2,
-                  borderRadius: new BorderRadius.all(Radius.circular(8.0))),
+                border: Border.all(color: Colors.white, width: 2),
+                color: ResColors.colorTile2,
+                borderRadius: new BorderRadius.all(Radius.circular(8.0)),
+              ),
               child: Center(
-                  child: Text(
-                "${ImpossiblocksLocalizations.of(context).text("record")} $r",
-                style: ResStyles.small(sizeScreen, color: Colors.white),
-              )),
+                child: Text(
+                  "${ImpossiblocksLocalizations.of(context).text("record")} $r",
+                  style: ResStyles.small(sizeScreen, color: Colors.white),
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -217,22 +228,34 @@ class TopInfo extends StatelessWidget {
       decoration: highlight
           ? new BoxDecoration(
               color: Colors.white,
-              borderRadius: new BorderRadius.all(Radius.circular(10.0)))
+              borderRadius: new BorderRadius.all(Radius.circular(10.0)),
+            )
           : null,
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(name,
-                maxLines: 1,
-                style: ResStyles.normal(sizeScreen,
-                    color: c, fontWeight: FontWeight.w700)),
-            Padding(
-              padding: EdgeInsets.only(top: removePadding ? 0 : 6.0),
-              child: Text(data.toString(),
-                  style: ResStyles.posintInTop(sizeScreen,
-                      color: c, fontWeight: FontWeight.w700)),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            name,
+            maxLines: 1,
+            style: ResStyles.normal(
+              sizeScreen,
+              color: c,
+              fontWeight: FontWeight.w700,
             ),
-          ]),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: removePadding ? 0 : 6.0),
+            child: Text(
+              data.toString(),
+              style: ResStyles.posintInTop(
+                sizeScreen,
+                color: c,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -257,25 +280,27 @@ class TileCounterInfo extends StatelessWidget {
     return Container(
       constraints: BoxConstraints.expand(width: size, height: size),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.all(Radius.circular(10.0))),
+        color: Colors.white,
+        borderRadius: new BorderRadius.all(Radius.circular(10.0)),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(6.0),
         child: Container(
           decoration: BoxDecoration(
-              color: bgColor,
-              borderRadius: new BorderRadius.all(Radius.circular(10.0))),
+            color: bgColor,
+            borderRadius: new BorderRadius.all(Radius.circular(10.0)),
+          ),
           child: Center(
             child: counter <= 0
-                ? Icon(
-                    Icons.thumb_up,
-                    color: Colors.white,
-                  )
-                : Text(counter.toString(),
+                ? Icon(Icons.thumb_up, color: Colors.white)
+                : Text(
+                    counter.toString(),
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 34.0)),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 34.0,
+                    ),
+                  ),
           ),
         ),
       ),

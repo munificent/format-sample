@@ -8,7 +8,7 @@ class DownloadAlert extends StatefulWidget {
   final String path;
 
   DownloadAlert({Key key, @required this.url, @required this.path})
-      : super(key: key);
+    : super(key: key);
 
   @override
   _DownloadAlertState createState() => _DownloadAlertState();
@@ -60,10 +60,7 @@ class _DownloadAlertState extends State<DownloadAlert> {
             children: <Widget>[
               Text(
                 'Downloading...',
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -71,9 +68,7 @@ class _DownloadAlertState extends State<DownloadAlert> {
               Container(
                 height: 5,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 child: LinearProgressIndicator(
                   value: double.parse(progress) / 100.0,
@@ -89,18 +84,14 @@ class _DownloadAlertState extends State<DownloadAlert> {
                 children: <Widget>[
                   Text(
                     '$progress %',
-                    style: TextStyle(
-                      fontSize: 13.0,
-                    ),
+                    style: TextStyle(fontSize: 13.0),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     '${Constants.formatBytes(received, 1)} '
                     'of ${Constants.formatBytes(total, 1)}',
-                    style: TextStyle(
-                      fontSize: 13.0,
-                    ),
+                    style: TextStyle(fontSize: 13.0),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

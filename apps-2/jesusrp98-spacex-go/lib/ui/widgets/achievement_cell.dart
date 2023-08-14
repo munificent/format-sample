@@ -9,11 +9,8 @@ class AchievementCell extends StatelessWidget {
   final Achievement achievement;
   final int index;
 
-  const AchievementCell({
-    Key key,
-    this.achievement,
-    this.index,
-  }) : super(key: key);
+  const AchievementCell({Key key, this.achievement, this.index})
+    : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(

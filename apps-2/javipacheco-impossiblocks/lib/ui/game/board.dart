@@ -18,7 +18,7 @@ class Board extends StatefulWidget {
   final PlayersGame playersGame;
 
   Board({Key key, @required this.twoPlayers, @required this.playersGame})
-      : super(key: key);
+    : super(key: key);
 
   @override
   _BoardState createState() => _BoardState();
@@ -45,8 +45,10 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
 
     _swipeMove = SwipeMove.empty();
 
-    _controller =
-        AnimationController(duration: Duration(milliseconds: 200), vsync: this);
+    _controller = AnimationController(
+      duration: Duration(milliseconds: 200),
+      vsync: this,
+    );
 
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller)
       ..addListener(() {
@@ -61,12 +63,16 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
       return List.generate(board.columns, (i) => i);
     } else if (_swipeMove.move == Move.DOWN) {
       return List.generate(
-          board.columns, (i) => i + (board.columns * (board.rows - 1)));
+        board.columns,
+        (i) => i + (board.columns * (board.rows - 1)),
+      );
     } else if (_swipeMove.move == Move.LEFT) {
       return List.generate(board.rows, (i) => board.columns * i);
     } else if (_swipeMove.move == Move.RIGHT) {
       return List.generate(
-          board.rows, (i) => (board.columns * i) + (board.columns - 1));
+        board.rows,
+        (i) => (board.columns * i) + (board.columns - 1),
+      );
     }
     return List();
   }
@@ -167,9 +173,9 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
     List<int> colors =
         _positionsToSwipe(board).map((i) => board.tiles[i].color).toList();
 
-    List<int> normalTyles = _positionsToSwipe(board)
-        .map((i) => board.tiles[i].typeTile == TypeTile.NORMAL ? 1 : 0)
-        .toList();
+    List<int> normalTyles = _positionsToSwipe(board).map(
+      (i) => board.tiles[i].typeTile == TypeTile.NORMAL ? 1 : 0,
+    ).toList();
 
     return atLeastOneIs(normalTyles, 1) &&
         (allIs(colors, 0) || allIs(colors, 1));
@@ -211,30 +217,42 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
     if (_noTileAnimation) _noTileAnimation = false;
     return List.generate(viewModel.board.rows, (i) => i).map((row) {
       return TableRow(
-          children:
-              List.generate(viewModel.board.columns, (i) => i).map((column) {
-        return TableCell(
-          child: _tile(
-              viewModel, (row * viewModel.board.columns) + column, noAnimation),
-        );
-      }).toList());
+        children:
+            List.generate(viewModel.board.columns, (i) => i).map((column) {
+              return TableCell(
+                child: _tile(
+                  viewModel,
+                  (row * viewModel.board.columns) + column,
+                  noAnimation,
+                ),
+              );
+            }).toList(),
+      );
     }).toList();
   }
 
-  void _resetTileSize(SizeScreen sizeScreen, int columns,
-      TypeBoardGame typeBoard, bool hasAssistance) {
+  void _resetTileSize(
+    SizeScreen sizeScreen,
+    int columns,
+    TypeBoardGame typeBoard,
+    bool hasAssistance,
+  ) {
     setState(() {
       if (widget.twoPlayers) {
-        _tileSizeForTile =
-            SizeUtils.getTileSizeForTwoPlayers(context, sizeScreen, columns);
+        _tileSizeForTile = SizeUtils.getTileSizeForTwoPlayers(
+          context,
+          sizeScreen,
+          columns,
+        );
       } else {
         _tileSizeForTile = SizeUtils.getTileSize(
-            context,
-            sizeScreen,
-            columns,
-            typeBoard == TypeBoardGame.ARCADE ||
-                (typeBoard == TypeBoardGame.LEVEL && hasAssistance),
-            typeBoard != TypeBoardGame.LEVEL);
+          context,
+          sizeScreen,
+          columns,
+          typeBoard == TypeBoardGame.ARCADE ||
+              (typeBoard == TypeBoardGame.LEVEL && hasAssistance),
+          typeBoard != TypeBoardGame.LEVEL,
+        );
       }
       _tileSize = _tileSizeForTile + (Dimensions.paddingTile * (columns - 1));
     });
@@ -243,80 +261,95 @@ class _BoardState extends State<Board> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, BoardViewModel>(
-        distinct: true,
-        converter: (store) => BoardViewModel.build(store, widget.playersGame),
-        onInitialBuild: (viewModel) {
-          _resetTileSize(viewModel.sizeScreen, viewModel.columns,
-              viewModel.board.typeBoard, viewModel.board.assistance != null);
-          setState(() {
-            _animation.addStatusListener((status) {
-              if (status == AnimationStatus.completed) {
-                _noTileAnimation = true;
-                setState(() {
-                  viewModel.onUpdateTilesAfterSwipe(_swipeMove);
-                  _swipeMove = SwipeMove.empty();
-                  _fraction = 0;
-                });
-              }
-            });
+      distinct: true,
+      converter: (store) => BoardViewModel.build(store, widget.playersGame),
+      onInitialBuild: (viewModel) {
+        _resetTileSize(
+          viewModel.sizeScreen,
+          viewModel.columns,
+          viewModel.board.typeBoard,
+          viewModel.board.assistance != null,
+        );
+        setState(() {
+          _animation.addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _noTileAnimation = true;
+              setState(() {
+                viewModel.onUpdateTilesAfterSwipe(_swipeMove);
+                _swipeMove = SwipeMove.empty();
+                _fraction = 0;
+              });
+            }
           });
-        },
-        onWillChange: (viewModel) {
-          _resetTileSize(viewModel.sizeScreen, viewModel.columns,
-              viewModel.board.typeBoard, viewModel.board.assistance != null);
-        },
-        builder: (context, viewModel) {
-          return BoardTranslate(
-            child: Container(
-              decoration: new BoxDecoration(
-                  color: ResColors.boardBackground,
-                  borderRadius: new BorderRadius.all(Radius.circular(
-                      Dimensions.roundedBoard(viewModel.board.columns)))),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  if (viewModel.board.typeBoard == TypeBoardGame.ARCADE ||
-                      (viewModel.board.typeBoard == TypeBoardGame.LEVEL &&
-                          viewModel.board.assistance != null))
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: Dimensions.paddingTile,
-                          left: Dimensions.paddingTile,
-                          right: Dimensions.paddingTile),
-                      child: AssistanceBar(
-                          sizeScreen: viewModel.sizeScreen,
-                          playersGame: widget.playersGame),
+        });
+      },
+      onWillChange: (viewModel) {
+        _resetTileSize(
+          viewModel.sizeScreen,
+          viewModel.columns,
+          viewModel.board.typeBoard,
+          viewModel.board.assistance != null,
+        );
+      },
+      builder: (context, viewModel) {
+        return BoardTranslate(
+          child: Container(
+            decoration: new BoxDecoration(
+              color: ResColors.boardBackground,
+              borderRadius: new BorderRadius.all(Radius.circular(
+                Dimensions.roundedBoard(viewModel.board.columns),
+              )),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (viewModel.board.typeBoard == TypeBoardGame.ARCADE ||
+                    (viewModel.board.typeBoard == TypeBoardGame.LEVEL &&
+                        viewModel.board.assistance != null))
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: Dimensions.paddingTile,
+                      left: Dimensions.paddingTile,
+                      right: Dimensions.paddingTile,
                     ),
-                  SwipeDetector(
-                    onSwipe: (swipeMove) {
-                      if (viewModel.isGameStatus(GameStatus.PLAYING)) {
-                        setState(() {
-                          _swipeMove = swipeMove;
-                          if (_shouldBlockSwipeMove(viewModel.board)) {
-                            viewModel.onBlockTiles(
-                                _positionsToSwipe(viewModel.board));
-                          } else {
-                            viewModel.onSwipeTiles();
-                            _controller.reset();
-                            _controller.forward();
-                          }
-                        });
-                      }
-                    },
-                    tileSize: _tileSize,
-                    child: Padding(
-                      padding: EdgeInsets.all(Dimensions.paddingTile),
-                      child: Table(
-                        defaultColumnWidth: FixedColumnWidth(_tileSize),
-                        children:
-                            viewModel.board != null ? _board(viewModel) : null,
-                      ),
+                    child: AssistanceBar(
+                      sizeScreen: viewModel.sizeScreen,
+                      playersGame: widget.playersGame,
                     ),
                   ),
-                ],
-              ),
+                SwipeDetector(
+                  onSwipe: (swipeMove) {
+                    if (viewModel.isGameStatus(GameStatus.PLAYING)) {
+                      setState(() {
+                        _swipeMove = swipeMove;
+                        if (_shouldBlockSwipeMove(viewModel.board)) {
+                          viewModel.onBlockTiles(
+                            _positionsToSwipe(viewModel.board),
+                          );
+                        } else {
+                          viewModel.onSwipeTiles();
+                          _controller.reset();
+                          _controller.forward();
+                        }
+                      });
+                    }
+                  },
+                  tileSize: _tileSize,
+                  child: Padding(
+                    padding: EdgeInsets.all(Dimensions.paddingTile),
+                    child: Table(
+                      defaultColumnWidth: FixedColumnWidth(_tileSize),
+                      children: viewModel.board != null
+                          ? _board(viewModel)
+                          : null,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

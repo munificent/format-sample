@@ -27,7 +27,7 @@ extension Localization on String {
           "Regenerative\nEconomy": 'Economia\nRegenerativa',
           "Unite with a global movement of\norganizations and people to regenerate our\nplanet and heal our economy.":
               'Una-se a un movimento global de\norganizações e pessoas para regenerar\nosso planeta e curar nossa economia.',
-        }
+        },
       };
 
   String get i18n => localize(this, _t);

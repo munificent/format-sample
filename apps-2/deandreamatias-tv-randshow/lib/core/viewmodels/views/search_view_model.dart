@@ -37,7 +37,9 @@ class SearchViewModel extends BaseViewModel {
 
     if (_timer != null && (_timer?.isActive ?? false)) _timer!.cancel();
 
-    _timer =
-        Timer(const Duration(seconds: 3), () => pageLoadController.reset());
+    _timer = Timer(
+      const Duration(seconds: 3),
+      () => pageLoadController.reset(),
+    );
   }
 }

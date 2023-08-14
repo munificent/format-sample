@@ -9,14 +9,15 @@ class MovieDetail {
   final List<ProductionCompanies> productionCompanies;
 
   MovieDetail(
-      this.id,
-      this.originalTitle,
-      this.genres,
-      this.synopsis,
-      this.posterPath,
-      this.backdropPath,
-      this.voteAverage,
-      this.productionCompanies);
+    this.id,
+    this.originalTitle,
+    this.genres,
+    this.synopsis,
+    this.posterPath,
+    this.backdropPath,
+    this.voteAverage,
+    this.productionCompanies,
+  );
 }
 
 class Genres {

@@ -9,10 +9,7 @@ class ProductGrid extends StatelessWidget {
   final VoidCallback onTap;
   final ProductType productType;
 
-  ProductGrid({
-    this.onTap,
-    this.productType,
-  });
+  ProductGrid({this.onTap, this.productType});
 
   Widget _buildSideHeader(BuildContext context, int index, {String text}) {
     return Padding(
@@ -23,8 +20,9 @@ class ProductGrid extends StatelessWidget {
           height: 50.0,
           width: 90.0,
           child: GestureDetector(
-            onTap: () => Scaffold.of(context)
-                .showSnackBar(new SnackBar(content: Text('$index'))),
+            onTap: () => Scaffold.of(context).showSnackBar(
+              new SnackBar(content: Text('$index')),
+            ),
             child: new Text('${productType.name}', textAlign: TextAlign.right),
           ),
         ),
@@ -45,16 +43,19 @@ class ProductGrid extends StatelessWidget {
             padding: EdgeInsets.only(left: 100.0),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 4.0,
-                  mainAxisSpacing: 4.0,
-                  childAspectRatio: 1.0),
+                crossAxisCount: 2,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 4.0,
+                childAspectRatio: 1.0,
+              ),
               delegate: SliverChildBuilderDelegate(
                 (context, i) => ProductCard.medium(
-                    product: MockData.productList.firstWhere(
-                        (Product product) =>
-                            product.categoryId == productType.category.index),
-                    onTap: onTap),
+                  product: MockData.productList.firstWhere(
+                    (Product product) =>
+                        product.categoryId == productType.category.index,
+                  ),
+                  onTap: onTap,
+                ),
                 childCount: 12,
               ),
             ),

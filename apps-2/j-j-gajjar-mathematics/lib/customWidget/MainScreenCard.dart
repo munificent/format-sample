@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MainScreenCard extends StatelessWidget {
-  const MainScreenCard(
-      {Key key,
-      @required TextEditingController ques,
-      @required this.icon,
-      this.lable,
-      this.max,
-      this.maxValue = 999999,
-      this.hint})
-      : _ques = ques,
-        super(key: key);
+  const MainScreenCard({
+    Key key,
+    @required TextEditingController ques,
+    @required this.icon,
+    this.lable,
+    this.max,
+    this.maxValue = 999999,
+    this.hint,
+  }) : _ques = ques,
+       super(key: key);
 
   final TextEditingController _ques;
   final IconData icon;
@@ -41,8 +41,9 @@ class MainScreenCard extends StatelessWidget {
         decoration: InputDecoration(
           errorStyle: TextStyle(color: Colors.red),
           errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 3),
-              borderRadius: BorderRadius.circular(16)),
+            borderSide: BorderSide(color: Colors.white, width: 3),
+            borderRadius: BorderRadius.circular(16),
+          ),
           labelText: lable,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Color(0XFF1ea366), width: 3),

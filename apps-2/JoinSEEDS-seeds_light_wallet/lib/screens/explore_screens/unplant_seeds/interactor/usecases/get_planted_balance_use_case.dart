@@ -10,7 +10,7 @@ class GetPlantedBalanceUseCase {
 
     final futures = [
       _plantedRepository.getPlanted(account),
-      _plantedRepository.getRefunds(account)
+      _plantedRepository.getRefunds(account),
     ];
 
     return Future.wait(futures);
