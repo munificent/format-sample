@@ -12,10 +12,12 @@ part of 'gmaps_auto_complete_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 GmapsAutoCompleteResponse _$GmapsAutoCompleteResponseFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _GmapsAutoCompleteResponse.fromJson(json);
 }
 
@@ -32,17 +34,19 @@ mixin _$GmapsAutoCompleteResponse {
 
 /// @nodoc
 abstract class $GmapsAutoCompleteResponseCopyWith<$Res> {
-  factory $GmapsAutoCompleteResponseCopyWith(GmapsAutoCompleteResponse value,
-          $Res Function(GmapsAutoCompleteResponse) then) =
-      _$GmapsAutoCompleteResponseCopyWithImpl<$Res, GmapsAutoCompleteResponse>;
+  factory $GmapsAutoCompleteResponseCopyWith(
+    GmapsAutoCompleteResponse value,
+    $Res Function(GmapsAutoCompleteResponse) then,
+  ) = _$GmapsAutoCompleteResponseCopyWithImpl<$Res, GmapsAutoCompleteResponse>;
   @useResult
   $Res call({List<GmapsPrediction> predictions, String status});
 }
 
 /// @nodoc
-class _$GmapsAutoCompleteResponseCopyWithImpl<$Res,
-        $Val extends GmapsAutoCompleteResponse>
-    implements $GmapsAutoCompleteResponseCopyWith<$Res> {
+class _$GmapsAutoCompleteResponseCopyWithImpl<
+  $Res,
+  $Val extends GmapsAutoCompleteResponse
+> implements $GmapsAutoCompleteResponseCopyWith<$Res> {
   _$GmapsAutoCompleteResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -52,20 +56,19 @@ class _$GmapsAutoCompleteResponseCopyWithImpl<$Res,
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? predictions = null,
-    Object? status = null,
-  }) {
-    return _then(_value.copyWith(
-      predictions: null == predictions
-          ? _value.predictions
-          : predictions // ignore: cast_nullable_to_non_nullable
-              as List<GmapsPrediction>,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? predictions = null, Object? status = null}) {
+    return _then(
+      _value.copyWith(
+        predictions: null == predictions
+            ? _value.predictions
+            : predictions // ignore: cast_nullable_to_non_nullable
+                  as List<GmapsPrediction>,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ) as $Val,
+    );
   }
 }
 
@@ -73,9 +76,9 @@ class _$GmapsAutoCompleteResponseCopyWithImpl<$Res,
 abstract class _$$_GmapsAutoCompleteResponseCopyWith<$Res>
     implements $GmapsAutoCompleteResponseCopyWith<$Res> {
   factory _$$_GmapsAutoCompleteResponseCopyWith(
-          _$_GmapsAutoCompleteResponse value,
-          $Res Function(_$_GmapsAutoCompleteResponse) then) =
-      __$$_GmapsAutoCompleteResponseCopyWithImpl<$Res>;
+    _$_GmapsAutoCompleteResponse value,
+    $Res Function(_$_GmapsAutoCompleteResponse) then,
+  ) = __$$_GmapsAutoCompleteResponseCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<GmapsPrediction> predictions, String status});
@@ -83,29 +86,27 @@ abstract class _$$_GmapsAutoCompleteResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_GmapsAutoCompleteResponseCopyWithImpl<$Res>
-    extends _$GmapsAutoCompleteResponseCopyWithImpl<$Res,
-        _$_GmapsAutoCompleteResponse>
-    implements _$$_GmapsAutoCompleteResponseCopyWith<$Res> {
+    extends _$GmapsAutoCompleteResponseCopyWithImpl<
+      $Res,
+      _$_GmapsAutoCompleteResponse
+    > implements _$$_GmapsAutoCompleteResponseCopyWith<$Res> {
   __$$_GmapsAutoCompleteResponseCopyWithImpl(
-      _$_GmapsAutoCompleteResponse _value,
-      $Res Function(_$_GmapsAutoCompleteResponse) _then)
-      : super(_value, _then);
+    _$_GmapsAutoCompleteResponse _value,
+    $Res Function(_$_GmapsAutoCompleteResponse) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? predictions = null,
-    Object? status = null,
-  }) {
+  $Res call({Object? predictions = null, Object? status = null}) {
     return _then(_$_GmapsAutoCompleteResponse(
       predictions: null == predictions
           ? _value.predictions
           : predictions // ignore: cast_nullable_to_non_nullable
-              as List<GmapsPrediction>,
+                as List<GmapsPrediction>,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
     ));
   }
 }
@@ -113,11 +114,14 @@ class __$$_GmapsAutoCompleteResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_GmapsAutoCompleteResponse implements _GmapsAutoCompleteResponse {
-  const _$_GmapsAutoCompleteResponse(
-      {required this.predictions, required this.status});
+  const _$_GmapsAutoCompleteResponse({
+    required this.predictions,
+    required this.status,
+  });
 
-  factory _$_GmapsAutoCompleteResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_GmapsAutoCompleteResponseFromJson(json);
+  factory _$_GmapsAutoCompleteResponse.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$_GmapsAutoCompleteResponseFromJson(json);
 
   @override
   final List<GmapsPrediction> predictions;
@@ -134,35 +138,40 @@ class _$_GmapsAutoCompleteResponse implements _GmapsAutoCompleteResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GmapsAutoCompleteResponse &&
-            const DeepCollectionEquality()
-                .equals(other.predictions, predictions) &&
+            const DeepCollectionEquality().equals(
+              other.predictions,
+              predictions,
+            ) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(predictions), status);
+    runtimeType,
+    const DeepCollectionEquality().hash(predictions),
+    status,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_GmapsAutoCompleteResponseCopyWith<_$_GmapsAutoCompleteResponse>
-      get copyWith => __$$_GmapsAutoCompleteResponseCopyWithImpl<
-          _$_GmapsAutoCompleteResponse>(this, _$identity);
+  get copyWith => __$$_GmapsAutoCompleteResponseCopyWithImpl<
+    _$_GmapsAutoCompleteResponse
+  >(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GmapsAutoCompleteResponseToJson(
-      this,
-    );
+    return _$$_GmapsAutoCompleteResponseToJson(this);
   }
 }
 
 abstract class _GmapsAutoCompleteResponse implements GmapsAutoCompleteResponse {
-  const factory _GmapsAutoCompleteResponse(
-      {required final List<GmapsPrediction> predictions,
-      required final String status}) = _$_GmapsAutoCompleteResponse;
+  const factory _GmapsAutoCompleteResponse({
+    required final List<GmapsPrediction> predictions,
+    required final String status,
+  }) = _$_GmapsAutoCompleteResponse;
 
   factory _GmapsAutoCompleteResponse.fromJson(Map<String, dynamic> json) =
       _$_GmapsAutoCompleteResponse.fromJson;
@@ -174,7 +183,7 @@ abstract class _GmapsAutoCompleteResponse implements GmapsAutoCompleteResponse {
   @override
   @JsonKey(ignore: true)
   _$$_GmapsAutoCompleteResponseCopyWith<_$_GmapsAutoCompleteResponse>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 GmapsPrediction _$GmapsPredictionFromJson(Map<String, dynamic> json) {
@@ -199,15 +208,17 @@ mixin _$GmapsPrediction {
 /// @nodoc
 abstract class $GmapsPredictionCopyWith<$Res> {
   factory $GmapsPredictionCopyWith(
-          GmapsPrediction value, $Res Function(GmapsPrediction) then) =
-      _$GmapsPredictionCopyWithImpl<$Res, GmapsPrediction>;
+    GmapsPrediction value,
+    $Res Function(GmapsPrediction) then,
+  ) = _$GmapsPredictionCopyWithImpl<$Res, GmapsPrediction>;
   @useResult
-  $Res call(
-      {String description,
-      String placeId,
-      String reference,
-      GmapsStructuredFormatting structuredFormatting,
-      List<String> types});
+  $Res call({
+    String description,
+    String placeId,
+    String reference,
+    GmapsStructuredFormatting structuredFormatting,
+    List<String> types,
+  });
 
   $GmapsStructuredFormattingCopyWith<$Res> get structuredFormatting;
 }
@@ -231,37 +242,41 @@ class _$GmapsPredictionCopyWithImpl<$Res, $Val extends GmapsPrediction>
     Object? structuredFormatting = null,
     Object? types = null,
   }) {
-    return _then(_value.copyWith(
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      placeId: null == placeId
-          ? _value.placeId
-          : placeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      reference: null == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String,
-      structuredFormatting: null == structuredFormatting
-          ? _value.structuredFormatting
-          : structuredFormatting // ignore: cast_nullable_to_non_nullable
-              as GmapsStructuredFormatting,
-      types: null == types
-          ? _value.types
-          : types // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+        description: null == description
+            ? _value.description
+            : description // ignore: cast_nullable_to_non_nullable
+                  as String,
+        placeId: null == placeId
+            ? _value.placeId
+            : placeId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        reference: null == reference
+            ? _value.reference
+            : reference // ignore: cast_nullable_to_non_nullable
+                  as String,
+        structuredFormatting: null == structuredFormatting
+            ? _value.structuredFormatting
+            : structuredFormatting // ignore: cast_nullable_to_non_nullable
+                  as GmapsStructuredFormatting,
+        types: null == types
+            ? _value.types
+            : types // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+      ) as $Val,
+    );
   }
 
   @override
   @pragma('vm:prefer-inline')
   $GmapsStructuredFormattingCopyWith<$Res> get structuredFormatting {
-    return $GmapsStructuredFormattingCopyWith<$Res>(_value.structuredFormatting,
-        (value) {
-      return _then(_value.copyWith(structuredFormatting: value) as $Val);
-    });
+    return $GmapsStructuredFormattingCopyWith<$Res>(
+      _value.structuredFormatting,
+      (value) {
+        return _then(_value.copyWith(structuredFormatting: value) as $Val);
+      },
+    );
   }
 }
 
@@ -269,16 +284,18 @@ class _$GmapsPredictionCopyWithImpl<$Res, $Val extends GmapsPrediction>
 abstract class _$$_GmapsPredictionCopyWith<$Res>
     implements $GmapsPredictionCopyWith<$Res> {
   factory _$$_GmapsPredictionCopyWith(
-          _$_GmapsPrediction value, $Res Function(_$_GmapsPrediction) then) =
-      __$$_GmapsPredictionCopyWithImpl<$Res>;
+    _$_GmapsPrediction value,
+    $Res Function(_$_GmapsPrediction) then,
+  ) = __$$_GmapsPredictionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String description,
-      String placeId,
-      String reference,
-      GmapsStructuredFormatting structuredFormatting,
-      List<String> types});
+  $Res call({
+    String description,
+    String placeId,
+    String reference,
+    GmapsStructuredFormatting structuredFormatting,
+    List<String> types,
+  });
 
   @override
   $GmapsStructuredFormattingCopyWith<$Res> get structuredFormatting;
@@ -289,8 +306,9 @@ class __$$_GmapsPredictionCopyWithImpl<$Res>
     extends _$GmapsPredictionCopyWithImpl<$Res, _$_GmapsPrediction>
     implements _$$_GmapsPredictionCopyWith<$Res> {
   __$$_GmapsPredictionCopyWithImpl(
-      _$_GmapsPrediction _value, $Res Function(_$_GmapsPrediction) _then)
-      : super(_value, _then);
+    _$_GmapsPrediction _value,
+    $Res Function(_$_GmapsPrediction) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -305,23 +323,23 @@ class __$$_GmapsPredictionCopyWithImpl<$Res>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       placeId: null == placeId
           ? _value.placeId
           : placeId // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       reference: null == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       structuredFormatting: null == structuredFormatting
           ? _value.structuredFormatting
           : structuredFormatting // ignore: cast_nullable_to_non_nullable
-              as GmapsStructuredFormatting,
+                as GmapsStructuredFormatting,
       types: null == types
           ? _value.types
           : types // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+                as List<String>,
     ));
   }
 }
@@ -329,15 +347,17 @@ class __$$_GmapsPredictionCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_GmapsPrediction implements _GmapsPrediction {
-  const _$_GmapsPrediction(
-      {required this.description,
-      required this.placeId,
-      required this.reference,
-      required this.structuredFormatting,
-      required this.types});
+  const _$_GmapsPrediction({
+    required this.description,
+    required this.placeId,
+    required this.reference,
+    required this.structuredFormatting,
+    required this.types,
+  });
 
-  factory _$_GmapsPrediction.fromJson(Map<String, dynamic> json) =>
-      _$$_GmapsPredictionFromJson(json);
+  factory _$_GmapsPrediction.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$_GmapsPredictionFromJson(json);
 
   @override
   final String description;
@@ -372,30 +392,38 @@ class _$_GmapsPrediction implements _GmapsPrediction {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, description, placeId, reference,
-      structuredFormatting, const DeepCollectionEquality().hash(types));
+  int get hashCode => Object.hash(
+    runtimeType,
+    description,
+    placeId,
+    reference,
+    structuredFormatting,
+    const DeepCollectionEquality().hash(types),
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GmapsPredictionCopyWith<_$_GmapsPrediction> get copyWith =>
-      __$$_GmapsPredictionCopyWithImpl<_$_GmapsPrediction>(this, _$identity);
+  _$$_GmapsPredictionCopyWith<_$_GmapsPrediction>
+  get copyWith => __$$_GmapsPredictionCopyWithImpl<_$_GmapsPrediction>(
+    this,
+    _$identity,
+  );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GmapsPredictionToJson(
-      this,
-    );
+    return _$$_GmapsPredictionToJson(this);
   }
 }
 
 abstract class _GmapsPrediction implements GmapsPrediction {
-  const factory _GmapsPrediction(
-      {required final String description,
-      required final String placeId,
-      required final String reference,
-      required final GmapsStructuredFormatting structuredFormatting,
-      required final List<String> types}) = _$_GmapsPrediction;
+  const factory _GmapsPrediction({
+    required final String description,
+    required final String placeId,
+    required final String reference,
+    required final GmapsStructuredFormatting structuredFormatting,
+    required final List<String> types,
+  }) = _$_GmapsPrediction;
 
   factory _GmapsPrediction.fromJson(Map<String, dynamic> json) =
       _$_GmapsPrediction.fromJson;
@@ -417,7 +445,8 @@ abstract class _GmapsPrediction implements GmapsPrediction {
 }
 
 GmapsStructuredFormatting _$GmapsStructuredFormattingFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _GmapsStructuredFormatting.fromJson(json);
 }
 
@@ -434,17 +463,19 @@ mixin _$GmapsStructuredFormatting {
 
 /// @nodoc
 abstract class $GmapsStructuredFormattingCopyWith<$Res> {
-  factory $GmapsStructuredFormattingCopyWith(GmapsStructuredFormatting value,
-          $Res Function(GmapsStructuredFormatting) then) =
-      _$GmapsStructuredFormattingCopyWithImpl<$Res, GmapsStructuredFormatting>;
+  factory $GmapsStructuredFormattingCopyWith(
+    GmapsStructuredFormatting value,
+    $Res Function(GmapsStructuredFormatting) then,
+  ) = _$GmapsStructuredFormattingCopyWithImpl<$Res, GmapsStructuredFormatting>;
   @useResult
   $Res call({String mainText, String secondaryText});
 }
 
 /// @nodoc
-class _$GmapsStructuredFormattingCopyWithImpl<$Res,
-        $Val extends GmapsStructuredFormatting>
-    implements $GmapsStructuredFormattingCopyWith<$Res> {
+class _$GmapsStructuredFormattingCopyWithImpl<
+  $Res,
+  $Val extends GmapsStructuredFormatting
+> implements $GmapsStructuredFormattingCopyWith<$Res> {
   _$GmapsStructuredFormattingCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -454,20 +485,19 @@ class _$GmapsStructuredFormattingCopyWithImpl<$Res,
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? mainText = null,
-    Object? secondaryText = null,
-  }) {
-    return _then(_value.copyWith(
-      mainText: null == mainText
-          ? _value.mainText
-          : mainText // ignore: cast_nullable_to_non_nullable
-              as String,
-      secondaryText: null == secondaryText
-          ? _value.secondaryText
-          : secondaryText // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? mainText = null, Object? secondaryText = null}) {
+    return _then(
+      _value.copyWith(
+        mainText: null == mainText
+            ? _value.mainText
+            : mainText // ignore: cast_nullable_to_non_nullable
+                  as String,
+        secondaryText: null == secondaryText
+            ? _value.secondaryText
+            : secondaryText // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ) as $Val,
+    );
   }
 }
 
@@ -475,9 +505,9 @@ class _$GmapsStructuredFormattingCopyWithImpl<$Res,
 abstract class _$$_GmapsStructuredFormattingCopyWith<$Res>
     implements $GmapsStructuredFormattingCopyWith<$Res> {
   factory _$$_GmapsStructuredFormattingCopyWith(
-          _$_GmapsStructuredFormatting value,
-          $Res Function(_$_GmapsStructuredFormatting) then) =
-      __$$_GmapsStructuredFormattingCopyWithImpl<$Res>;
+    _$_GmapsStructuredFormatting value,
+    $Res Function(_$_GmapsStructuredFormatting) then,
+  ) = __$$_GmapsStructuredFormattingCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String mainText, String secondaryText});
@@ -485,29 +515,27 @@ abstract class _$$_GmapsStructuredFormattingCopyWith<$Res>
 
 /// @nodoc
 class __$$_GmapsStructuredFormattingCopyWithImpl<$Res>
-    extends _$GmapsStructuredFormattingCopyWithImpl<$Res,
-        _$_GmapsStructuredFormatting>
-    implements _$$_GmapsStructuredFormattingCopyWith<$Res> {
+    extends _$GmapsStructuredFormattingCopyWithImpl<
+      $Res,
+      _$_GmapsStructuredFormatting
+    > implements _$$_GmapsStructuredFormattingCopyWith<$Res> {
   __$$_GmapsStructuredFormattingCopyWithImpl(
-      _$_GmapsStructuredFormatting _value,
-      $Res Function(_$_GmapsStructuredFormatting) _then)
-      : super(_value, _then);
+    _$_GmapsStructuredFormatting _value,
+    $Res Function(_$_GmapsStructuredFormatting) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? mainText = null,
-    Object? secondaryText = null,
-  }) {
+  $Res call({Object? mainText = null, Object? secondaryText = null}) {
     return _then(_$_GmapsStructuredFormatting(
       mainText: null == mainText
           ? _value.mainText
           : mainText // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       secondaryText: null == secondaryText
           ? _value.secondaryText
           : secondaryText // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
     ));
   }
 }
@@ -515,11 +543,14 @@ class __$$_GmapsStructuredFormattingCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_GmapsStructuredFormatting implements _GmapsStructuredFormatting {
-  const _$_GmapsStructuredFormatting(
-      {required this.mainText, required this.secondaryText});
+  const _$_GmapsStructuredFormatting({
+    required this.mainText,
+    required this.secondaryText,
+  });
 
-  factory _$_GmapsStructuredFormatting.fromJson(Map<String, dynamic> json) =>
-      _$$_GmapsStructuredFormattingFromJson(json);
+  factory _$_GmapsStructuredFormatting.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$_GmapsStructuredFormattingFromJson(json);
 
   @override
   final String mainText;
@@ -550,21 +581,21 @@ class _$_GmapsStructuredFormatting implements _GmapsStructuredFormatting {
   @override
   @pragma('vm:prefer-inline')
   _$$_GmapsStructuredFormattingCopyWith<_$_GmapsStructuredFormatting>
-      get copyWith => __$$_GmapsStructuredFormattingCopyWithImpl<
-          _$_GmapsStructuredFormatting>(this, _$identity);
+  get copyWith => __$$_GmapsStructuredFormattingCopyWithImpl<
+    _$_GmapsStructuredFormatting
+  >(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GmapsStructuredFormattingToJson(
-      this,
-    );
+    return _$$_GmapsStructuredFormattingToJson(this);
   }
 }
 
 abstract class _GmapsStructuredFormatting implements GmapsStructuredFormatting {
-  const factory _GmapsStructuredFormatting(
-      {required final String mainText,
-      required final String secondaryText}) = _$_GmapsStructuredFormatting;
+  const factory _GmapsStructuredFormatting({
+    required final String mainText,
+    required final String secondaryText,
+  }) = _$_GmapsStructuredFormatting;
 
   factory _GmapsStructuredFormatting.fromJson(Map<String, dynamic> json) =
       _$_GmapsStructuredFormatting.fromJson;
@@ -576,5 +607,5 @@ abstract class _GmapsStructuredFormatting implements GmapsStructuredFormatting {
   @override
   @JsonKey(ignore: true)
   _$$_GmapsStructuredFormattingCopyWith<_$_GmapsStructuredFormatting>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }

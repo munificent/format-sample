@@ -7,10 +7,10 @@ import 'package:json_class/json_class.dart';
 import 'package:yaon/yaon.dart';
 
 void main(List<String> args) {
-  final files =
-      Directory('schemas').listSync(recursive: true).whereType<File>().where(
-            (e) => e.path.endsWith('.yaml') || e.path.endsWith('.json'),
-          );
+  final files = Directory('schemas')
+      .listSync(recursive: true)
+      .whereType<File>()
+      .where((e) => e.path.endsWith('.yaml') || e.path.endsWith('.json'));
   const encoder = JsonEncoder.withIndent('  ');
 
   final schemas = <String, dynamic>{};
@@ -47,14 +47,10 @@ void main(List<String> args) {
   };
 
   const properties = <String, dynamic>{
-    'id': {
-      'type': 'string',
-    },
+    'id': {'type': 'string'},
     'listen': {
       'type': 'array',
-      'items': {
-        'type': 'string',
-      }
+      'items': {'type': 'string'},
     },
   };
 
@@ -75,26 +71,22 @@ void main(List<String> args) {
       } else {
         print('[WIDGET]: $type');
         schemas[id] = schema;
-        oneOf.add(
-          {
-            'type': 'object',
-            'additionalProperties': false,
+        oneOf.add({
+          'type': 'object',
+          'additionalProperties': false,
+          'properties': {
+            ...properties,
+            if (children == 1) 'child': child,
+            if (children == -1) 'children': children,
             'properties': {
-              ...properties,
-              if (children == 1) 'child': child,
-              if (children == -1) 'children': children,
-              'properties': {
-                'args': {
-                  r'$ref': id,
-                },
-                'type': {
-                  'type': 'string',
-                  'const': type.substring(0, type.indexOf('.')),
-                },
+              'args': {r'$ref': id},
+              'type': {
+                'type': 'string',
+                'const': type.substring(0, type.indexOf('.')),
               },
             },
           },
-        );
+        });
       }
     }
   }
@@ -104,13 +96,10 @@ void main(List<String> args) {
     'required': ['type'],
     'properties': {
       ...properties,
-      'args': {
-        'type': 'object',
-        'additionalProperties': true,
-      },
+      'args': {'type': 'object', 'additionalProperties': true},
       ...child,
       ...children,
-    }
+    },
   });
 
   if (dataSchema == null) {
@@ -123,17 +112,13 @@ void main(List<String> args) {
     output.deleteSync(recursive: true);
   }
   output.createSync(recursive: true);
-  output.writeAsStringSync(
-    encoder.convert(
-      {
-        r'$schema': 'http://json-schema.org/draft-06/schema#',
-        r'$id':
-            'https://peiffer-innovations.github.io/flutter_json_schemas/schemas/json_dynamic_widget/json_widget_data.json',
-        r'$comment':
-            'https://pub.dev/documentation/json_dynamic_widget/latest/json_dynamic_widget/JsonWidgetData-class.html',
-        'title': 'JsonWidgetData',
-        'oneOf': oneOf
-      },
-    ),
-  );
+  output.writeAsStringSync(encoder.convert({
+    r'$schema': 'http://json-schema.org/draft-06/schema#',
+    r'$id':
+        'https://peiffer-innovations.github.io/flutter_json_schemas/schemas/json_dynamic_widget/json_widget_data.json',
+    r'$comment':
+        'https://pub.dev/documentation/json_dynamic_widget/latest/json_dynamic_widget/JsonWidgetData-class.html',
+    'title': 'JsonWidgetData',
+    'oneOf': oneOf,
+  }));
 }

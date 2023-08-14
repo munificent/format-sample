@@ -3,8 +3,11 @@ import 'dart:io';
 import 'intl_messages_tools.dart';
 
 /// Checks an `.intl` file. Returns the file entries ([IntlRawEntry]) if OK or `null` if the check fails.
-List<IntlRawEntry?>? checkIntlFile(File file,
-    {String fileType = 'FILE', void Function(String type, Object? msg)? log}) {
+List<IntlRawEntry?>? checkIntlFile(
+  File file, {
+  String fileType = 'FILE',
+  void Function(String type, Object? msg)? log,
+}) {
   log ??= _log;
 
   try {
@@ -23,8 +26,11 @@ List<IntlRawEntry?>? checkIntlFile(File file,
 
 /// Read the `.intl` [file] and parses its entries as [IntlRawEntry].
 /// Null entries in the returned [List] represent empty lines in the file.
-List<IntlRawEntry?>? readIntlEntries(File file,
-    {String fileType = 'FILE', bool strict = false}) {
+List<IntlRawEntry?>? readIntlEntries(
+  File file, {
+  String fileType = 'FILE',
+  bool strict = false,
+}) {
   _log(fileType.trim().toUpperCase(), 'Reading file: ${file.path}');
 
   var lines = _readLines(file);

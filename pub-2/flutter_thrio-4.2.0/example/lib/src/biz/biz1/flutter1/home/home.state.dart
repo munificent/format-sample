@@ -11,6 +11,7 @@ extension Home on _HomePageState {
 
   /// hello, this is a map.
   ///
-  Map<String, dynamic> get goodMap =>
-      widget.getMapParam<String, dynamic>('goodMap');
+  Map<String, dynamic> get goodMap => widget.getMapParam<String, dynamic>(
+    'goodMap',
+  );
 }

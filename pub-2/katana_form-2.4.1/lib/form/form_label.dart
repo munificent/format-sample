@@ -85,24 +85,14 @@ class FormLabel extends StatelessWidget {
       children: [
         SizedBox(width: 12, child: Divider(color: color)),
         const SizedBox(width: 4),
-        if (prefix != null) ...[
-          prefix!,
-          const SizedBox(width: 4),
-        ],
+        if (prefix != null) ...[prefix!, const SizedBox(width: 4)],
         if (icon != null) ...[
-          Icon(
-            icon,
-            color: color ?? dividerColor,
-            size: 12,
-          ),
+          Icon(icon, color: color ?? dividerColor, size: 12),
           const SizedBox(width: 4),
         ],
         Text(
           label,
-          style: TextStyle(
-            color: color ?? dividerColor,
-            fontSize: 12,
-          ),
+          style: TextStyle(color: color ?? dividerColor, fontSize: 12),
         ),
         const SizedBox(width: 4),
         Expanded(child: Divider(color: color)),

@@ -27,11 +27,12 @@ class HMSAudioTrackSetting {
   ///Refer: Read more about audio mode [here](https://www.100ms.live/docs/flutter/v2/how-to-guides/configure-your-device/microphone/music-mode)
   final HMSAudioMode? audioMode;
 
-  HMSAudioTrackSetting(
-      {this.useHardwareAcousticEchoCanceler,
-      this.audioSource,
-      this.trackInitialState = HMSTrackInitState.UNMUTED,
-      this.audioMode});
+  HMSAudioTrackSetting({
+    this.useHardwareAcousticEchoCanceler,
+    this.audioSource,
+    this.trackInitialState = HMSTrackInitState.UNMUTED,
+    this.audioMode,
+  });
 
   factory HMSAudioTrackSetting.fromMap(Map map) {
     List<HMSAudioNode> nodeList = [];
@@ -53,14 +54,16 @@ class HMSAudioTrackSetting {
       audioMode = HMSAudioModeValues.getAudioModeFromName(map["audio_mode"]);
     }
     return HMSAudioTrackSetting(
-        useHardwareAcousticEchoCanceler:
-            map['user_hardware_acoustic_echo_canceler'] ?? null,
-        audioSource: audioMixerSource,
-        trackInitialState: map.containsKey("track_initial_state")
-            ? HMSTrackInitStateValue.getHMSTrackInitStateFromName(
-                map['track_initial_state'])
-            : HMSTrackInitState.UNMUTED,
-        audioMode: audioMode);
+      useHardwareAcousticEchoCanceler:
+          map['user_hardware_acoustic_echo_canceler'] ?? null,
+      audioSource: audioMixerSource,
+      trackInitialState: map.containsKey("track_initial_state")
+          ? HMSTrackInitStateValue.getHMSTrackInitStateFromName(
+              map['track_initial_state'],
+            )
+          : HMSTrackInitState.UNMUTED,
+      audioMode: audioMode,
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -69,10 +72,11 @@ class HMSAudioTrackSetting {
       'audio_source': audioSource?.toList(),
       'track_initial_state':
           HMSTrackInitStateValue.getValuefromHMSTrackInitState(
-              trackInitialState),
+        trackInitialState,
+      ),
       'audio_mode': (audioMode != null)
           ? HMSAudioModeValues.getNameFromHMSAudioMode(audioMode!)
-          : null
+          : null,
     };
   }
 }

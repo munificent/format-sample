@@ -11,10 +11,7 @@ class ListVAccount extends StatefulWidget {
 }
 
 class _ListVAccountState extends State<ListVAccount> {
-  Map<String, dynamic> data = {
-    'PageSize': "30",
-    'PageNumber': "1",
-  };
+  Map<String, dynamic> data = {'PageSize': "30", 'PageNumber': "1"};
   String requestRef = Random().nextInt(100000).toString();
 
   @override
@@ -22,10 +19,9 @@ class _ListVAccountState extends State<ListVAccount> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-            leading: BackButton(
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            title: const Text("List Virtual Account")),
+          leading: BackButton(onPressed: () => Navigator.of(context).pop()),
+          title: const Text("List Virtual Account"),
+        ),
         body: FutureBuilder<ListVirtualAccountResponse>(
           future: KudaBank().list_virtual_account(data, requestRef),
           builder: (context, snapshot) {

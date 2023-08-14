@@ -46,9 +46,7 @@ class PathUtil {
   /// 获取用户目录
   ///
   /// [envName] 其他环境变量名称
-  static String getUserDir({
-    String? envName,
-  }) {
+  static String getUserDir({String? envName}) {
     /// 读取环境变量，获取用户目录
     if (Platform.isWindows) {
       String? p;

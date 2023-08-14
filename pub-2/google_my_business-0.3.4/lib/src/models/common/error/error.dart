@@ -26,6 +26,10 @@ class Error {
 
   @override
   String toString() {
-    return '$code: $message\n${details?.map((e) => e.fieldViolations?.map((e) => 'field "${e.field}" is violated: ${e.description}'))}';
+    return '$code: $message\n${details?.map(
+      (e) => e.fieldViolations?.map(
+        (e) => 'field "${e.field}" is violated: ${e.description}',
+      ),
+    )}';
   }
 }

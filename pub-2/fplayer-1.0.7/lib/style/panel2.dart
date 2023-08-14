@@ -58,8 +58,13 @@ FPanelWidgetBuilder fPanelBuilder({
   /// 视频时间更新
   final void Function()? onVideoTimeChange,
 }) {
-  return (FPlayer player, FData data, BuildContext context, Size viewSize,
-      Rect texturePos) {
+  return (
+    FPlayer player,
+    FData data,
+    BuildContext context,
+    Size viewSize,
+    Rect texturePos,
+  ) {
     return _FPanel2(
       key: key,
       player: player,
@@ -95,20 +100,13 @@ class VideoItem {
   String url;
   String title;
   String subTitle;
-  VideoItem({
-    required this.url,
-    required this.title,
-    required this.subTitle,
-  });
+  VideoItem({required this.url, required this.title, required this.subTitle});
 }
 
 class ResolutionItem {
   int value;
   String url;
-  ResolutionItem({
-    required this.value,
-    required this.url,
-  });
+  ResolutionItem({required this.value, required this.url});
 }
 
 class _FPanel2 extends StatefulWidget {
@@ -165,8 +163,8 @@ class _FPanel2 extends StatefulWidget {
     this.onVideoEnd,
     this.onVideoPrepared,
     this.onVideoTimeChange,
-  })  : assert(hideDuration > 0 && hideDuration < 10000),
-        super(key: key);
+  }) : assert(hideDuration > 0 && hideDuration < 10000),
+       super(key: key);
 
   @override
   __FPanel2State createState() => __FPanel2State();
@@ -217,16 +215,9 @@ class __FPanel2State extends State<_FPanel2> {
 
   int sendCount = 0;
 
-  Map<String, double> speedList = {
-    "2.0": 2.0,
-    "1.5": 1.5,
-    "1.0": 1.0,
-  };
+  Map<String, double> speedList = {"2.0": 2.0, "1.5": 1.5, "1.0": 1.0};
 
-  Map<String, bool> captionList = {
-    "开": true,
-    "关": false,
-  };
+  Map<String, bool> captionList = {"开": true, "关": false};
 
   Map<String, ResolutionItem> resolutionList = {
     "1080P": ResolutionItem(
@@ -293,13 +284,14 @@ class __FPanel2State extends State<_FPanel2> {
     //   });
     // });
 
-    batteryStateListener =
-        battery.onBatteryStateChanged.listen((BatteryState state) {
-      if (batteryState == state) return;
-      setState(() {
-        batteryState = state;
-      });
-    });
+    batteryStateListener = battery.onBatteryStateChanged.listen(
+      (BatteryState state) {
+        if (batteryState == state) return;
+        setState(() {
+          batteryState = state;
+        });
+      },
+    );
 
     getBatteryLevel();
 
@@ -652,10 +644,8 @@ class __FPanel2State extends State<_FPanel2> {
     return IconButton(
       padding: EdgeInsets.zero,
       iconSize: fullScreen ? height : height * 0.8,
-      icon: Icon(
-        Icons.skip_next_rounded,
-        color: Theme.of(context).primaryColor,
-      ),
+      icon:
+          Icon(Icons.skip_next_rounded, color: Theme.of(context).primaryColor),
       onPressed: playNextVideo,
     );
   }
@@ -678,9 +668,7 @@ class __FPanel2State extends State<_FPanel2> {
             },
             child: Text(
               '字幕',
-              style: TextStyle(
-                color: Theme.of(context).primaryColorDark,
-              ),
+              style: TextStyle(color: Theme.of(context).primaryColorDark),
             ),
           ),
         TextButton(
@@ -697,9 +685,7 @@ class __FPanel2State extends State<_FPanel2> {
           },
           child: Text(
             '倍速',
-            style: TextStyle(
-              color: Theme.of(context).primaryColorDark,
-            ),
+            style: TextStyle(color: Theme.of(context).primaryColorDark),
           ),
         ),
         if (widget.isResolution)
@@ -715,9 +701,7 @@ class __FPanel2State extends State<_FPanel2> {
             },
             child: Text(
               '${resolution}P',
-              style: TextStyle(
-                color: Theme.of(context).primaryColorDark,
-              ),
+              style: TextStyle(color: Theme.of(context).primaryColorDark),
             ),
           ),
       ],
@@ -728,44 +712,36 @@ class __FPanel2State extends State<_FPanel2> {
   List<Widget> buildCaptionListWidget() {
     List<Widget> columnChild = [];
     captionList.forEach((String mapKey, bool captionVals) {
-      columnChild.add(
-        Ink(
-          child: InkWell(
-            onTap: () {
-              if (caption == captionVals) return;
-              setState(() {
-                caption = captionVals;
-                hideCaption = true;
-                // player.setCaption(captionVals);
-              });
-            },
-            child: Container(
-              alignment: Alignment.center,
-              width: 50,
-              height: 30,
-              child: Text(
-                mapKey,
-                style: TextStyle(
-                  color: caption == captionVals
-                      ? Theme.of(context).primaryColor
-                      : Colors.white,
-                  fontSize: 16,
-                ),
+      columnChild.add(Ink(
+        child: InkWell(
+          onTap: () {
+            if (caption == captionVals) return;
+            setState(() {
+              caption = captionVals;
+              hideCaption = true;
+              // player.setCaption(captionVals);
+            });
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: 50,
+            height: 30,
+            child: Text(
+              mapKey,
+              style: TextStyle(
+                color: caption == captionVals
+                    ? Theme.of(context).primaryColor
+                    : Colors.white,
+                fontSize: 16,
               ),
             ),
           ),
         ),
-      );
-      columnChild.add(
-        Padding(
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
-          child: Container(
-            width: 50,
-            height: 1,
-            color: Colors.white54,
-          ),
-        ),
-      );
+      ));
+      columnChild.add(Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 5),
+        child: Container(width: 50, height: 1, color: Colors.white54),
+      ));
     });
     columnChild.removeAt(columnChild.length - 1);
     return columnChild;
@@ -776,44 +752,36 @@ class __FPanel2State extends State<_FPanel2> {
     List<Widget> columnChild = [];
     Map<String, double> obj = widget.speedList ?? speedList;
     obj.forEach((String mapKey, double speedVals) {
-      columnChild.add(
-        Ink(
-          child: InkWell(
-            onTap: () {
-              if (speed == speedVals) return;
-              setState(() {
-                speed = speedVals;
-                hideSpeed = true;
-                player.setSpeed(speedVals);
-              });
-            },
-            child: Container(
-              alignment: Alignment.center,
-              width: 50,
-              height: 30,
-              child: Text(
-                "${mapKey}X",
-                style: TextStyle(
-                  color: speed == speedVals
-                      ? Theme.of(context).primaryColor
-                      : Colors.white,
-                  fontSize: 16,
-                ),
+      columnChild.add(Ink(
+        child: InkWell(
+          onTap: () {
+            if (speed == speedVals) return;
+            setState(() {
+              speed = speedVals;
+              hideSpeed = true;
+              player.setSpeed(speedVals);
+            });
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: 50,
+            height: 30,
+            child: Text(
+              "${mapKey}X",
+              style: TextStyle(
+                color: speed == speedVals
+                    ? Theme.of(context).primaryColor
+                    : Colors.white,
+                fontSize: 16,
               ),
             ),
           ),
         ),
-      );
-      columnChild.add(
-        Padding(
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
-          child: Container(
-            width: 50,
-            height: 1,
-            color: Colors.white54,
-          ),
-        ),
-      );
+      ));
+      columnChild.add(Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 5),
+        child: Container(width: 50, height: 1, color: Colors.white54),
+      ));
     });
     columnChild.removeAt(columnChild.length - 1);
     return columnChild;
@@ -824,54 +792,46 @@ class __FPanel2State extends State<_FPanel2> {
     List<Widget> columnChild = [];
     Map<String, ResolutionItem> obj = widget.resolutionList ?? resolutionList;
     obj.forEach((String mapKey, ResolutionItem resolutionItem) {
-      columnChild.add(
-        Ink(
-          child: InkWell(
-            onTap: () async {
-              if (resolution == resolutionItem.value) return;
-              await player.reset();
-              try {
-                await player.setDataSource(
-                  resolutionItem.url,
-                  autoPlay: true,
-                  showCover: true,
-                );
-                setState(() {
-                  resolution = resolutionItem.value;
-                  hideResolution = true;
-                });
-              } catch (error) {
-                print("播放-异常: $error");
-                return;
-              }
-            },
-            child: Container(
-              alignment: Alignment.center,
-              width: 50,
-              height: 30,
-              child: Text(
-                mapKey,
-                style: TextStyle(
-                  color: resolution == resolutionItem.value
-                      ? Theme.of(context).primaryColor
-                      : Colors.white,
-                  fontSize: 16,
-                ),
+      columnChild.add(Ink(
+        child: InkWell(
+          onTap: () async {
+            if (resolution == resolutionItem.value) return;
+            await player.reset();
+            try {
+              await player.setDataSource(
+                resolutionItem.url,
+                autoPlay: true,
+                showCover: true,
+              );
+              setState(() {
+                resolution = resolutionItem.value;
+                hideResolution = true;
+              });
+            } catch (error) {
+              print("播放-异常: $error");
+              return;
+            }
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: 50,
+            height: 30,
+            child: Text(
+              mapKey,
+              style: TextStyle(
+                color: resolution == resolutionItem.value
+                    ? Theme.of(context).primaryColor
+                    : Colors.white,
+                fontSize: 16,
               ),
             ),
           ),
         ),
-      );
-      columnChild.add(
-        Padding(
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
-          child: Container(
-            width: 50,
-            height: 1,
-            color: Colors.white54,
-          ),
-        ),
-      );
+      ));
+      columnChild.add(Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 5),
+        child: Container(width: 50, height: 1, color: Colors.white54),
+      ));
     });
     columnChild.removeAt(columnChild.length - 1);
     return columnChild;
@@ -884,10 +844,7 @@ class __FPanel2State extends State<_FPanel2> {
             Icons.fullscreen_exit_rounded,
             color: Theme.of(context).primaryColor,
           )
-        : Icon(
-            Icons.fullscreen_rounded,
-            color: Theme.of(context).primaryColor,
-          );
+        : Icon(Icons.fullscreen_rounded, color: Theme.of(context).primaryColor);
     bool fullScreen = player.value.fullScreen;
     return IconButton(
       padding: EdgeInsets.zero,
@@ -908,10 +865,7 @@ class __FPanel2State extends State<_FPanel2> {
         "${_duration2String(_currentPos)}/${_duration2String(_duration)}";
     return Text(
       text,
-      style: TextStyle(
-        fontSize: 12,
-        color: Theme.of(context).primaryColorDark,
-      ),
+      style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColorDark),
     );
   }
 
@@ -1088,10 +1042,8 @@ class __FPanel2State extends State<_FPanel2> {
         ),
         child: const Text(
           "截图成功",
-          style: TextStyle(
-            color: Color.fromRGBO(255, 255, 255, .8),
-            fontSize: 15,
-          ),
+          style:
+              TextStyle(color: Color.fromRGBO(255, 255, 255, .8), fontSize: 15),
         ),
       ),
     );
@@ -1101,12 +1053,8 @@ class __FPanel2State extends State<_FPanel2> {
     double height = panelHeight();
 
     bool fullScreen = player.value.fullScreen;
-    Widget leftWidget = Container(
-      color: const Color(0x00000000),
-    );
-    Widget rightWidget = Container(
-      color: const Color(0x00000000),
-    );
+    Widget leftWidget = Container(color: const Color(0x00000000));
+    Widget rightWidget = Container(color: const Color(0x00000000));
 
     if (fullScreen) {
       rightWidget = Padding(
@@ -1116,15 +1064,11 @@ class __FPanel2State extends State<_FPanel2> {
           children: <Widget>[
             Visibility(
               visible: widget.isRightButton,
-              child: Column(
-                children: widget.rightButtonList ?? [],
-              ),
+              child: Column(children: widget.rightButtonList ?? []),
             ),
             Visibility(
               visible: widget.isRightButton,
-              child: const SizedBox(
-                height: 20,
-              ),
+              child: const SizedBox(height: 20),
             ),
             if (widget.isSnapShot &&
                 (player.value.videoRenderStart &&
@@ -1137,9 +1081,7 @@ class __FPanel2State extends State<_FPanel2> {
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColorLight,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
                   ),
                   child: Icon(
                     Icons.camera_alt,
@@ -1173,13 +1115,11 @@ class __FPanel2State extends State<_FPanel2> {
                     Icons.lock_open,
                     color: Theme.of(context).primaryColor,
                   ),
-                  child: Icon(
-                    Icons.lock,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  child:
+                      Icon(Icons.lock, color: Theme.of(context).primaryColor),
                 ),
               ),
-            )
+            ),
           ],
         ),
       );
@@ -1212,10 +1152,7 @@ class __FPanel2State extends State<_FPanel2> {
         Expanded(
           child: Stack(
             children: <Widget>[
-              Align(
-                alignment: Alignment.centerLeft,
-                child: leftWidget,
-              ),
+              Align(alignment: Alignment.centerLeft, child: leftWidget),
               // 字幕开关
               Positioned(
                 right: 170,
@@ -1229,9 +1166,7 @@ class __FPanel2State extends State<_FPanel2> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Column(
-                        children: buildCaptionListWidget(),
-                      ),
+                      child: Column(children: buildCaptionListWidget()),
                     ),
                   ),
                 ),
@@ -1249,9 +1184,7 @@ class __FPanel2State extends State<_FPanel2> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Column(
-                        children: buildSpeedListWidget(),
-                      ),
+                      child: Column(children: buildSpeedListWidget()),
                     ),
                   ),
                 ),
@@ -1269,18 +1202,13 @@ class __FPanel2State extends State<_FPanel2> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Column(
-                        children: buildResolutionListWidget(),
-                      ),
+                      child: Column(children: buildResolutionListWidget()),
                     ),
                   ),
                 ),
               ),
               if (!lock)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: rightWidget,
-                ),
+                Align(alignment: Alignment.centerRight, child: rightWidget),
             ],
           ),
         ),
@@ -1304,7 +1232,7 @@ class __FPanel2State extends State<_FPanel2> {
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 5),
               child: buildBottom(context, height > 80 ? 40 : height / 2),
             ),
-          )
+          ),
       ],
     );
   }
@@ -1321,10 +1249,8 @@ class __FPanel2State extends State<_FPanel2> {
         ),
         child: const Text(
           "2倍速播放中",
-          style: TextStyle(
-            color: Color.fromRGBO(255, 255, 255, .8),
-            fontSize: 15,
-          ),
+          style:
+              TextStyle(color: Color.fromRGBO(255, 255, 255, .8), fontSize: 15),
         ),
       ),
     );
@@ -1341,9 +1267,9 @@ class __FPanel2State extends State<_FPanel2> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: Text(
-            "${_duration2String(
-              Duration(milliseconds: _seekPos.toInt()),
-            )} / ${_duration2String(_duration)}",
+            "${_duration2String(Duration(
+                  milliseconds: _seekPos.toInt(),
+                ))} / ${_duration2String(_duration)}",
             style: TextStyle(
               color: Theme.of(context).primaryColorDark,
               fontSize: 20,
@@ -1412,22 +1338,10 @@ class __FPanel2State extends State<_FPanel2> {
               child: buildPanel(context),
             ),
           ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: buildLongPress(),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: videoLoading,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: screenshotMsg(),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: buildDragProgressTime(),
-          ),
+          Align(alignment: Alignment.topCenter, child: buildLongPress()),
+          Align(alignment: Alignment.center, child: videoLoading),
+          Align(alignment: Alignment.center, child: screenshotMsg()),
+          Align(alignment: Alignment.center, child: buildDragProgressTime()),
         ],
       ),
     );
@@ -1440,7 +1354,8 @@ class __FPanel2State extends State<_FPanel2> {
             max(0.0, widget.texPos.left),
             max(0.0, widget.texPos.top),
             min(widget.viewSize.width, widget.texPos.right),
-            min(widget.viewSize.height, widget.texPos.bottom));
+            min(widget.viewSize.height, widget.texPos.bottom),
+          );
     return rect;
   }
 
@@ -1483,10 +1398,7 @@ class __FPanel2State extends State<_FPanel2> {
       widget.isVideos
           ? widget.videoList![widget.videoIndex].title
           : widget.title,
-      style: const TextStyle(
-        fontSize: 22,
-        color: Color(0xFF787878),
-      ),
+      style: const TextStyle(fontSize: 22, color: Color(0xFF787878)),
     );
   }
 
@@ -1497,10 +1409,7 @@ class __FPanel2State extends State<_FPanel2> {
         widget.isVideos
             ? widget.videoList![widget.videoIndex].subTitle
             : widget.subTitle,
-        style: const TextStyle(
-          fontSize: 14,
-          color: Color(0xFF787878),
-        ),
+        style: const TextStyle(fontSize: 14, color: Color(0xFF787878)),
       ),
     );
   }
@@ -1511,10 +1420,7 @@ class __FPanel2State extends State<_FPanel2> {
       padding: const EdgeInsets.only(right: 10),
       child: Text(
         '${DateTime.now().hour}:${DateTime.now().minute}',
-        style: TextStyle(
-          color: Theme.of(context).primaryColor,
-          fontSize: 12,
-        ),
+        style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 12),
       ),
     );
   }
@@ -1526,10 +1432,8 @@ class __FPanel2State extends State<_FPanel2> {
         children: [
           Text(
             '$batteryLevel%',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontSize: 10,
-            ),
+            style:
+                TextStyle(color: Theme.of(context).primaryColor, fontSize: 10),
           ),
           Icon(
             Icons.battery_charging_full_rounded,
@@ -1542,10 +1446,8 @@ class __FPanel2State extends State<_FPanel2> {
         children: [
           Text(
             '$batteryLevel%',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontSize: 10,
-            ),
+            style:
+                TextStyle(color: Theme.of(context).primaryColor, fontSize: 10),
           ),
           if (batteryLevel < 14)
             Icon(
@@ -1581,7 +1483,7 @@ class __FPanel2State extends State<_FPanel2> {
             Icon(
               Icons.battery_full_rounded,
               color: Theme.of(context).primaryColor,
-            )
+            ),
         ],
       );
     }
@@ -1620,10 +1522,7 @@ class __FPanel2State extends State<_FPanel2> {
       icon: Transform.rotate(
         angle: pi / 2,
         alignment: Alignment.center,
-        child: Icon(
-          Icons.tune_rounded,
-          color: Theme.of(context).primaryColor,
-        ),
+        child: Icon(Icons.tune_rounded, color: Theme.of(context).primaryColor),
       ),
       onPressed: widget.settingFun,
     );
@@ -1637,9 +1536,8 @@ class __FPanel2State extends State<_FPanel2> {
           width: 30,
           height: 30,
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation(
-              Theme.of(context).primaryColorDark,
-            ),
+            valueColor:
+                AlwaysStoppedAnimation(Theme.of(context).primaryColorDark),
           ),
         ),
       );
@@ -1651,11 +1549,7 @@ class __FPanel2State extends State<_FPanel2> {
           children: <Widget>[
             const Padding(
               padding: EdgeInsets.only(bottom: 15),
-              child: Icon(
-                Icons.error_rounded,
-                color: Colors.white70,
-                size: 70,
-              ),
+              child: Icon(Icons.error_rounded, color: Colors.white70, size: 70),
             ),
             RichText(
               text: TextSpan(
@@ -1668,14 +1562,12 @@ class __FPanel2State extends State<_FPanel2> {
                 children: <InlineSpan>[
                   TextSpan(
                     text: "刷新",
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         widget.onError?.call();
                       },
-                  )
+                  ),
                 ],
               ),
             ),
@@ -1725,22 +1617,17 @@ class __FPanel2State extends State<_FPanel2> {
         Widget toast = volume == null
             ? defaultFBrightnessToast(brightness!, _valController.stream)
             : defaultFVolumeToast(volume, _valController.stream);
-        ws.add(
-          IgnorePointer(
-            child: AnimatedOpacity(
-              opacity: 1,
-              duration: const Duration(milliseconds: 500),
-              child: toast,
-            ),
+        ws.add(IgnorePointer(
+          child: AnimatedOpacity(
+            opacity: 1,
+            duration: const Duration(milliseconds: 500),
+            child: toast,
           ),
-        );
+        ));
       }
       ws.add(buildGestureDetector(context));
     }
 
-    return Positioned.fromRect(
-      rect: rect,
-      child: Stack(children: ws),
-    );
+    return Positioned.fromRect(rect: rect, child: Stack(children: ws));
   }
 }

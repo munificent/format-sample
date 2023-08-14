@@ -121,27 +121,32 @@ class Template {
       return <String, Template>{};
     }
 
-    return json.entries.fold(<String, Template>{},
-        (Map<String, Template> previousValue, element) {
-      final Template? object = Template.fromJson(element.value);
-      if (object is Template) {
-        previousValue[element.key] = object;
-      }
+    return json.entries.fold(
+      <String, Template>{},
+      (Map<String, Template> previousValue, element) {
+        final Template? object = Template.fromJson(element.value);
+        if (object is Template) {
+          previousValue[element.key] = object;
+        }
 
-      return previousValue;
-    });
+        return previousValue;
+      },
+    );
   }
 
   // maps a json object with a list of Template-objects as value to a dart map
   static Map<String, List<Template>> mapListFromJson(
-      Map<String, dynamic>? json) {
+    Map<String, dynamic>? json,
+  ) {
     if (json == null) {
       return <String, List<Template>>{};
     }
 
     return json.map((key, value) {
       return MapEntry<String, List<Template>>(
-          key, Template.listFromJson(value));
+        key,
+        Template.listFromJson(value),
+      );
     });
   }
 

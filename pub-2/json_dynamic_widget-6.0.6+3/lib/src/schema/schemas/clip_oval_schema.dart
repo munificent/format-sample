@@ -11,9 +11,7 @@ class ClipOvalSchema {
     r'$comment': 'https://api.flutter.dev/flutter/widgets/ClipOval-class.html',
     'title': 'ClipOval',
     'oneOf': [
-      {
-        'type': 'null',
-      },
+      {'type': 'null'},
       {
         'type': 'object',
         'additionalProperties': false,

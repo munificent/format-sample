@@ -9,34 +9,38 @@ import 'package:flutter_selfie_liveness/widget/progress_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 
 class SelfieLiveness {
-  static const MethodChannel _channel =
-      MethodChannel("elatech_liveliness_plugin");
+  static const MethodChannel _channel = MethodChannel(
+    "elatech_liveliness_plugin",
+  );
 
-  static Future<Map> performFacialVerification(
-      {required BuildContext context,
-      required String bvn,
-      required String appToken,
-      required String poweredBy,
-      required String assetLogo,
-      required int compressQualityiOS,
-      required String bearToken,
-      required int compressQualityandroid}) async {
+  static Future<Map> performFacialVerification({
+    required BuildContext context,
+    required String bvn,
+    required String appToken,
+    required String poweredBy,
+    required String assetLogo,
+    required int compressQualityiOS,
+    required String bearToken,
+    required int compressQualityandroid,
+  }) async {
     try {
       String path = await detectLiveness(
-          poweredBy: poweredBy,
-          assetLogo: assetLogo,
-          compressQualityiOS: compressQualityiOS,
-          compressQualityandroid: compressQualityandroid);
+        poweredBy: poweredBy,
+        assetLogo: assetLogo,
+        compressQualityiOS: compressQualityiOS,
+        compressQualityandroid: compressQualityandroid,
+      );
       if (path.isEmpty) {
         throw Exception("path is empty. user didn't take photo");
       }
       if (context.mounted) {
         showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (BuildContext context) => const ProgressDialog(
-                  status: 'Verifying...',
-                ));
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) => const ProgressDialog(
+                status: 'Verifying...',
+              ),
+        );
       }
 
       var response = await HttpHeler.uploadImage(
@@ -67,11 +71,12 @@ class SelfieLiveness {
     }
   }
 
-  static Future<String> detectLiveness(
-      {required String poweredBy,
-      required String assetLogo,
-      required int compressQualityiOS,
-      required int compressQualityandroid}) async {
+  static Future<String> detectLiveness({
+    required String poweredBy,
+    required String assetLogo,
+    required int compressQualityiOS,
+    required int compressQualityandroid,
+  }) async {
     if (defaultTargetPlatform != TargetPlatform.android &&
         defaultTargetPlatform != TargetPlatform.iOS) {
       throw Exception('platform not supported');
@@ -82,7 +87,7 @@ class SelfieLiveness {
               ? "Blink 3 Times"
               : "Blink Your Eyes",
           "assetPath": assetLogo,
-          "poweredBy": poweredBy
+          "poweredBy": poweredBy,
         }) ??
         "";
     if (response == "") {
@@ -94,9 +99,10 @@ class SelfieLiveness {
 
     try {
       var data = await _compressImage(
-          file: file,
-          compressQualityandroid: compressQualityandroid,
-          compressQualityiOS: compressQualityiOS);
+        file: file,
+        compressQualityandroid: compressQualityandroid,
+        compressQualityiOS: compressQualityiOS,
+      );
 
       return data.path;
     } catch (ex) {
@@ -106,10 +112,11 @@ class SelfieLiveness {
 
   //comopression
 
-  static Future<File> _compressImage(
-      {required File file,
-      required int compressQualityandroid,
-      required int compressQualityiOS}) async {
+  static Future<File> _compressImage({
+    required File file,
+    required int compressQualityandroid,
+    required int compressQualityiOS,
+  }) async {
     Directory tempDir = await getTemporaryDirectory();
     debugPrint("=============>>> imaage ${tempDir.absolute.path}");
     String dir =

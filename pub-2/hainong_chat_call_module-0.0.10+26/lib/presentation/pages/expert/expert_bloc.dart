@@ -25,37 +25,45 @@ class ExpertBloc extends BaseBloc {
 
   _onGetExpert(GetExpertListEvent event, emit) async {
     await accountRepository.getExpertList(
-        specialize:
-            event.specialize?.isNotEmpty == true ? event.specialize : null,
-        funDataServer: (data) {
-          final result = data as FetchData<List<ExpertModel>>;
-          return emit(SuccessDataState(data: result.data));
-        },
-        funError: (error) {
-          return emit(safeErrorState(error: error));
-        });
+      specialize: event.specialize?.isNotEmpty == true
+          ? event.specialize
+          : null,
+      funDataServer: (data) {
+        final result = data as FetchData<List<ExpertModel>>;
+        return emit(SuccessDataState(data: result.data));
+      },
+      funError: (error) {
+        return emit(safeErrorState(error: error));
+      },
+    );
   }
 
   _onGetSpecializes(event, emit) async {
     emit(LoadingUiState(duration: 6));
-    await accountRepository.getSpecializesList(funDataServer: (data) {
-      final result = data as FetchData<List<String>>;
-      emit(CloseLoadingState());
-      return emit(SuccessDataState(data: result.data));
-    }, funError: (error) {
-      emit(CloseLoadingState());
-      return GetSpecializesistState();
-    });
+    await accountRepository.getSpecializesList(
+      funDataServer: (data) {
+        final result = data as FetchData<List<String>>;
+        emit(CloseLoadingState());
+        return emit(SuccessDataState(data: result.data));
+      },
+      funError: (error) {
+        emit(CloseLoadingState());
+        return GetSpecializesistState();
+      },
+    );
   }
 
   _onGetUser(event, emit) async {
-    await accountRepository.getUser(funDataServer: (data) {
-      sharePrefSource.cacheUser(data: data.data);
-      final user = data.data as UserModel?;
-      if (user != null) {}
-    }, funError: (error) {
-      return emit(safeErrorState(error: error));
-    });
+    await accountRepository.getUser(
+      funDataServer: (data) {
+        sharePrefSource.cacheUser(data: data.data);
+        final user = data.data as UserModel?;
+        if (user != null) {}
+      },
+      funError: (error) {
+        return emit(safeErrorState(error: error));
+      },
+    );
   }
 
   _onSignOut(event, emit) async {

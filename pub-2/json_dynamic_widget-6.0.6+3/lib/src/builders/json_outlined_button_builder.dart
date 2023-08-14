@@ -65,24 +65,17 @@ class JsonOutlinedButtonBuilder extends JsonWidgetBuilder {
       result = JsonOutlinedButtonBuilder(
         autofocus: map['autofocus'] == null
             ? false
-            : JsonClass.parseBool(
-                map['autofocus'],
-              ),
-        clipBehavior: ThemeDecoder.decodeClip(
-              map['clipBehavior'],
-              validate: false,
-            ) ??
-            Clip.none,
+            : JsonClass.parseBool(map['autofocus']),
+        clipBehavior:
+            ThemeDecoder.decodeClip(map['clipBehavior'], validate: false) ??
+                Clip.none,
         focusNode: map['focusNode'],
         onFocusChange: map['onFocusChange'],
         onHover: map['onHover'],
         onLongPress: map['onLongPress'],
         onPressed: map['onPressed'],
         statesController: map['statesController'],
-        style: ThemeDecoder.decodeButtonStyle(
-          map['style'],
-          validate: false,
-        ),
+        style: ThemeDecoder.decodeButtonStyle(map['style'], validate: false),
       );
     }
 
@@ -109,10 +102,7 @@ class JsonOutlinedButtonBuilder extends JsonWidgetBuilder {
       onPressed: onPressed,
       statesController: statesController,
       style: style,
-      child: child.build(
-        childBuilder: childBuilder,
-        context: context,
-      ),
+      child: child.build(childBuilder: childBuilder, context: context),
     );
   }
 }

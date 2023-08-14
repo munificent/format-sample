@@ -256,5 +256,5 @@ const _ccittFalseTable = [
   0x2E93,
   0x3EB2,
   0x0ED1,
-  0x1EF0
+  0x1EF0,
 ];

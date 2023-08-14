@@ -76,11 +76,13 @@ class TableControllers {
   }
 
   void _initRefreshController() {
-    bidirectionalSideRefreshController =
-        RefreshController(initialRefresh: false);
+    bidirectionalSideRefreshController = RefreshController(
+      initialRefresh: false,
+    );
     fixedSideRefreshController = RefreshController(initialRefresh: false);
-    htdRefreshController
-        ?.setRefreshController(bidirectionalSideRefreshController);
+    htdRefreshController?.setRefreshController(
+      bidirectionalSideRefreshController,
+    );
     htdRefreshController?.setRefreshController(fixedSideRefreshController);
   }
 
@@ -88,14 +90,16 @@ class TableControllers {
 
   void addHorizontalShadowListener(Function() horizontalShadowListener) {
     _horizontalShadowListener = horizontalShadowListener;
-    bidirectionalSideHorizontalScrollController
-        .addListener(_horizontalShadowListener!);
+    bidirectionalSideHorizontalScrollController.addListener(
+      _horizontalShadowListener!,
+    );
   }
 
   void removeHorizontalShadowListener() {
     if (_horizontalShadowListener != null) {
-      bidirectionalSideHorizontalScrollController
-          .removeListener(_horizontalShadowListener!);
+      bidirectionalSideHorizontalScrollController.removeListener(
+        _horizontalShadowListener!,
+      );
     }
   }
 
@@ -103,14 +107,16 @@ class TableControllers {
 
   void addVerticalShadowListener(Function() verticalShadowListener) {
     _verticalShadowListener = verticalShadowListener;
-    bidirectionalSideListViewScrollController
-        .addListener(_verticalShadowListener!);
+    bidirectionalSideListViewScrollController.addListener(
+      _verticalShadowListener!,
+    );
   }
 
   void removeVerticalShadowListener() {
     if (_verticalShadowListener != null) {
-      bidirectionalSideListViewScrollController
-          .removeListener(_verticalShadowListener!);
+      bidirectionalSideListViewScrollController.removeListener(
+        _verticalShadowListener!,
+      );
     }
   }
 }

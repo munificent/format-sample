@@ -13,8 +13,8 @@ class Conditional extends JsonClass {
     this.conditions,
     this.mode = EvaluationMode.and,
     this.values,
-  })  : assert(conditions == null || values == null),
-        assert(conditions != null || values != null);
+  }) : assert(conditions == null || values == null),
+       assert(conditions != null || values != null);
 
   /// The sub-conditions to evaluate as the criteria.
   final List<Conditional>? conditions;
@@ -96,10 +96,10 @@ class Conditional extends JsonClass {
   /// Encodes the inner representation of this model to a [json] compatible map.
   @override
   Map<String, dynamic> toJson() => JsonClass.removeNull({
-        'conditions': JsonClass.toJsonList(conditions),
-        'mode': mode.code,
-        'values': values,
-      });
+    'conditions': JsonClass.toJsonList(conditions),
+    'mode': mode.code,
+    'values': values,
+  });
 
   bool _evaluateConditions(dynamic actual) {
     assert(actual != null);

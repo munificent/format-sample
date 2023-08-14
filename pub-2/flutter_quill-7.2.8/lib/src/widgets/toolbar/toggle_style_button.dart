@@ -117,9 +117,9 @@ class _ToggleStyleButtonState extends State<ToggleStyleButton> {
   }
 
   void _toggleAttribute() {
-    widget.controller.formatSelection(_isToggled!
-        ? Attribute.clone(widget.attribute, null)
-        : widget.attribute);
+    widget.controller.formatSelection(
+      _isToggled! ? Attribute.clone(widget.attribute, null) : widget.attribute,
+    );
   }
 }
 
@@ -139,18 +139,19 @@ Widget defaultToggleStyleButtonBuilder(
   final iconColor = isEnabled
       ? isToggled == true
           ? (iconTheme?.iconSelectedColor ??
-              theme
-                  .primaryIconTheme.color) //You can specify your own icon color
+                theme
+                    .primaryIconTheme
+                    .color) //You can specify your own icon color
           : (iconTheme?.iconUnselectedColor ?? theme.iconTheme.color)
       : (iconTheme?.disabledIconColor ?? theme.disabledColor);
   final fill = isEnabled
       ? isToggled == true
           ? (iconTheme?.iconSelectedFillColor ??
-              Theme.of(context).primaryColor) //Selected icon fill color
+                Theme.of(context).primaryColor) //Selected icon fill color
           : (iconTheme?.iconUnselectedFillColor ??
-              theme.canvasColor) //Unselected icon fill color :
+                theme.canvasColor) //Unselected icon fill color :
       : (iconTheme?.disabledIconFillColor ??
-          (fillColor ?? theme.canvasColor)); //Disabled icon fill color
+            (fillColor ?? theme.canvasColor)); //Disabled icon fill color
   return QuillIconButton(
     highlightElevation: 0,
     hoverElevation: 0,

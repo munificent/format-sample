@@ -6,10 +6,7 @@ part of keyclic_sdk_api;
 
 class NoteLinksAbout {
   /// Returns a new [NoteLinksAbout] instance.
-  NoteLinksAbout({
-    this.href,
-    this.iriTemplate,
-  });
+  NoteLinksAbout({this.href, this.iriTemplate});
 
   /// Returns a new [NoteLinksAbout] instance and imports its values from
   /// [json] if it's non-null, null if [json] is null.
@@ -51,15 +48,17 @@ class NoteLinksAbout {
       return <NoteLinksAbout>[];
     }
 
-    return json.fold(<NoteLinksAbout>[],
-        (List<NoteLinksAbout> previousValue, element) {
-      final NoteLinksAbout? object = NoteLinksAbout.fromJson(element);
-      if (object is NoteLinksAbout) {
-        previousValue.add(object);
-      }
+    return json.fold(
+      <NoteLinksAbout>[],
+      (List<NoteLinksAbout> previousValue, element) {
+        final NoteLinksAbout? object = NoteLinksAbout.fromJson(element);
+        if (object is NoteLinksAbout) {
+          previousValue.add(object);
+        }
 
-      return previousValue;
-    });
+        return previousValue;
+      },
+    );
   }
 
   static Map<String, NoteLinksAbout> mapFromJson(Map<String, dynamic>? json) {
@@ -67,27 +66,32 @@ class NoteLinksAbout {
       return <String, NoteLinksAbout>{};
     }
 
-    return json.entries.fold(<String, NoteLinksAbout>{},
-        (Map<String, NoteLinksAbout> previousValue, element) {
-      final NoteLinksAbout? object = NoteLinksAbout.fromJson(element.value);
-      if (object is NoteLinksAbout) {
-        previousValue[element.key] = object;
-      }
+    return json.entries.fold(
+      <String, NoteLinksAbout>{},
+      (Map<String, NoteLinksAbout> previousValue, element) {
+        final NoteLinksAbout? object = NoteLinksAbout.fromJson(element.value);
+        if (object is NoteLinksAbout) {
+          previousValue[element.key] = object;
+        }
 
-      return previousValue;
-    });
+        return previousValue;
+      },
+    );
   }
 
   // maps a json object with a list of NoteLinksAbout-objects as value to a dart map
   static Map<String, List<NoteLinksAbout>> mapListFromJson(
-      Map<String, dynamic>? json) {
+    Map<String, dynamic>? json,
+  ) {
     if (json == null) {
       return <String, List<NoteLinksAbout>>{};
     }
 
     return json.map((key, value) {
       return MapEntry<String, List<NoteLinksAbout>>(
-          key, NoteLinksAbout.listFromJson(value));
+        key,
+        NoteLinksAbout.listFromJson(value),
+      );
     });
   }
 

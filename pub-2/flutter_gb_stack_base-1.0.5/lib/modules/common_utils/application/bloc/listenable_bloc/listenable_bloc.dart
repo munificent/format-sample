@@ -35,9 +35,7 @@ class ListenableBloc<Event, State> extends Bloc<Event, State> {
   void onEvent(Event event) {
     super.onEvent(event);
     if (logEvents && (logFilter?.call(event) ?? true)) {
-      logger?.v(
-        customLogOutput?.call(event) ?? event,
-      );
+      logger?.v(customLogOutput?.call(event) ?? event);
     }
     if (!_eventStreamController.isClosed) {
       _eventStreamController.add(event);

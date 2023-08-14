@@ -67,7 +67,9 @@ class _MyAppState extends State<MyApp> {
         break;
       case 'Json':
         var result = await LDClient.jsonVariation(
-            evalKey, LDValue.buildObject().build());
+          evalKey,
+          LDValue.buildObject().build(),
+        );
         setState(() {
           evalResult = json.encode(result.codecValue());
         });
@@ -103,20 +105,27 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(title: const Text('LaunchDarkly Example')),
         body: Container(
-            padding: EdgeInsets.all(8.0),
-            child: Column(children: [
-              Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Expanded(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
                     child: TextField(
-                        onChanged: (text) {
-                          setState(() {
-                            evalKey = text;
-                          });
-                        },
-                        decoration: InputDecoration.collapsed(
-                            hintText: 'Key', border: UnderlineInputBorder()))),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 4.0)),
-                DropdownButton<String>(
+                      onChanged: (text) {
+                        setState(() {
+                          evalKey = text;
+                        });
+                      },
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'Key',
+                        border: UnderlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 4.0)),
+                  DropdownButton<String>(
                     value: typeDropdown,
                     isDense: true,
                     onChanged: (String? newValue) {
@@ -126,45 +135,65 @@ class _MyAppState extends State<MyApp> {
                     },
                     items: ['Boolean', 'Integer', 'Float', 'String', 'Json']
                         .map((String value) {
-                      return DropdownMenuItem<String>(
-                          value: value, child: Text(value));
-                    }).toList())
-              ]),
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        })
+                        .toList(),
+                  ),
+                ],
+              ),
               Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-              Row(children: [
-                Expanded(
+              Row(
+                children: [
+                  Expanded(
                     child: ElevatedButton(
-                        child: Text('Evaluate'), onPressed: evaluate)),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 4.0)),
-                Expanded(
+                      child: Text('Evaluate'),
+                      onPressed: evaluate,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 4.0)),
+                  Expanded(
                     child:
-                        ElevatedButton(child: Text('Track'), onPressed: track))
-              ]),
+                        ElevatedButton(child: Text('Track'), onPressed: track),
+                  ),
+                ],
+              ),
               Divider(),
               Row(children: [Text("$evalResult", textAlign: TextAlign.start)]),
               Spacer(),
               Divider(),
-              Row(children: [
-                Expanded(
+              Row(
+                children: [
+                  Expanded(
                     child: TextField(
-                        onChanged: (text) {
-                          setState(() {
-                            userKey = text;
-                          });
-                        },
-                        decoration: InputDecoration.collapsed(
-                            hintText: 'User Key',
-                            border: UnderlineInputBorder()))),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 4.0)),
-                ElevatedButton(child: Text('Identify'), onPressed: identify)
-              ]),
-              Row(children: [
-                ElevatedButton(child: Text('Flush'), onPressed: flush),
-                Spacer(),
-                Text('Offline'),
-                Switch(value: offline, onChanged: toggleOffline)
-              ])
-            ])),
+                      onChanged: (text) {
+                        setState(() {
+                          userKey = text;
+                        });
+                      },
+                      decoration: InputDecoration.collapsed(
+                        hintText: 'User Key',
+                        border: UnderlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 4.0)),
+                  ElevatedButton(child: Text('Identify'), onPressed: identify),
+                ],
+              ),
+              Row(
+                children: [
+                  ElevatedButton(child: Text('Flush'), onPressed: flush),
+                  Spacer(),
+                  Text('Offline'),
+                  Switch(value: offline, onChanged: toggleOffline),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
