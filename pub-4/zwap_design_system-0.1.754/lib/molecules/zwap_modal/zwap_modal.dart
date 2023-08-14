@@ -19,10 +19,7 @@ Future<T?> showNewZwapModal<T>(BuildContext context, Widget child) async {
     barrierColor: Colors.black.withOpacity(0.5),
     context: context,
     pageBuilder: (context, anim1, anim2) {
-      return Align(
-        alignment: Alignment.topCenter,
-        child: child,
-      );
+      return Align(alignment: Alignment.topCenter, child: child);
     },
   );
 }
@@ -96,15 +93,18 @@ class _NewModalState extends State<NewModal> {
   ValueKey get _topKey => widget.topWidgetKeys.isEmpty
       ? ValueKey([])
       : ValueKey(
-          widget.topWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
+          widget.topWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'),
+        );
   ValueKey get _bodyKey => widget.bodyWidgetKeys.isEmpty
       ? ValueKey([])
       : ValueKey(
-          widget.bodyWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
+          widget.bodyWidgetKeys.reduce((v, e) => '${v.hashCode ^ e.hashCode}'),
+        );
   ValueKey get _bottomKey => widget.bottomWidgetKeys.isEmpty
       ? ValueKey([])
-      : ValueKey(widget.bottomWidgetKeys
-          .reduce((v, e) => '${v.hashCode ^ e.hashCode}'));
+      : ValueKey(widget.bottomWidgetKeys.reduce(
+          (v, e) => '${v.hashCode ^ e.hashCode}',
+        ));
 
   double get _horizontalPadding => getMultipleConditions(30, 30, 30, 30, 10);
 
@@ -116,7 +116,9 @@ class _NewModalState extends State<NewModal> {
         Container(
           constraints: BoxConstraints(minHeight: 50),
           padding: EdgeInsets.symmetric(
-              horizontal: _horizontalPadding, vertical: 10),
+            horizontal: _horizontalPadding,
+            vertical: 10,
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,9 +126,10 @@ class _NewModalState extends State<NewModal> {
             children: [
               if (_showTopLateralWidgets)
                 Container(
-                    width: 50,
-                    height: 50,
-                    child: Center(child: widget.topLeftWidget)),
+                  width: 50,
+                  height: 50,
+                  child: Center(child: widget.topLeftWidget),
+                ),
               if (widget.title != null)
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
@@ -134,16 +137,19 @@ class _NewModalState extends State<NewModal> {
                     key: _topKey,
                     padding: widget.addPaddingToTopWidget
                         ? EdgeInsets.symmetric(
-                            horizontal: _horizontalPadding, vertical: 8)
+                            horizontal: _horizontalPadding,
+                            vertical: 8,
+                          )
                         : EdgeInsets.zero,
                     child: widget.title!,
                   ),
                 ),
               if (_showTopLateralWidgets)
                 Container(
-                    width: 50,
-                    height: 50,
-                    child: Center(child: widget.topRightWidget)),
+                  width: 50,
+                  height: 50,
+                  child: Center(child: widget.topRightWidget),
+                ),
             ],
           ),
         ),
@@ -154,7 +160,9 @@ class _NewModalState extends State<NewModal> {
               key: _topKey,
               padding: widget.addPaddingToTopWidget
                   ? EdgeInsets.symmetric(
-                      horizontal: _horizontalPadding, vertical: 8)
+                      horizontal: _horizontalPadding,
+                      vertical: 8,
+                    )
                   : EdgeInsets.zero,
               child: widget.topWidget!,
             ),
@@ -173,10 +181,8 @@ class _NewModalState extends State<NewModal> {
             left: widget.addPaddingToBodyWidget ? _horizontalPadding : 0,
             right: widget.addPaddingToBodyWidget ? _horizontalPadding : 0,
           ),
-          child: Container(
-            key: _bodyKey,
-            child: widget.bodyWidget ?? Container(),
-          ),
+          child:
+              Container(key: _bodyKey, child: widget.bodyWidget ?? Container()),
         ),
       );
 
@@ -202,11 +208,10 @@ class _NewModalState extends State<NewModal> {
         child: Container(
           width: widget.width,
           constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height * 0.2,
-              maxHeight: MediaQuery.of(context).size.height * 0.8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            minHeight: MediaQuery.of(context).size.height * 0.2,
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
           ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -221,7 +226,9 @@ class _NewModalState extends State<NewModal> {
                     key: _bottomKey,
                     padding: widget.addPaddingToBottomWidget
                         ? EdgeInsets.symmetric(
-                            horizontal: _horizontalPadding, vertical: 8)
+                            horizontal: _horizontalPadding,
+                            vertical: 8,
+                          )
                         : EdgeInsets.zero,
                     child: widget.bottomWidget!,
                   ),

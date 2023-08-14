@@ -576,10 +576,7 @@ mixin MessageMixin on Context {
   ///
   /// Use this method to delete the message received by the bot.
   Future<bool> deleteMessage() async {
-    return await api.deleteMessage(
-      id,
-      _msg.messageId,
-    );
+    return await api.deleteMessage(id, _msg.messageId);
   }
 
   /// Edit the caption of a message.

@@ -4,8 +4,9 @@ import 'package:toolbox/toolbox.dart';
 void main() {
   group('formatDistance', () {
     test('should format seconds correctly', () {
-      final DateTime date =
-          DateTime.now().subtract(const Duration(seconds: 10));
+      final DateTime date = DateTime.now().subtract(
+        const Duration(seconds: 10),
+      );
       final String formatted = formatDistance(
         date,
         locale: 'en',

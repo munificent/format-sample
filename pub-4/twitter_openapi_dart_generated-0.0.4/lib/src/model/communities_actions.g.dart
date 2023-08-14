@@ -10,19 +10,22 @@ class _$CommunitiesActions extends CommunitiesActions {
   @override
   final bool create;
 
-  factory _$CommunitiesActions(
-          [void Function(CommunitiesActionsBuilder)? updates]) =>
-      (new CommunitiesActionsBuilder()..update(updates))._build();
+  factory _$CommunitiesActions([
+    void Function(CommunitiesActionsBuilder)? updates,
+  ]) => (new CommunitiesActionsBuilder()..update(updates))._build();
 
   _$CommunitiesActions._({required this.create}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        create, r'CommunitiesActions', 'create');
+      create,
+      r'CommunitiesActions',
+      'create',
+    );
   }
 
   @override
   CommunitiesActions rebuild(
-          void Function(CommunitiesActionsBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(CommunitiesActionsBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   CommunitiesActionsBuilder toBuilder() =>
@@ -88,8 +91,12 @@ class CommunitiesActionsBuilder
   _$CommunitiesActions _build() {
     final _$result = _$v ??
         new _$CommunitiesActions._(
-            create: BuiltValueNullFieldError.checkNotNull(
-                create, r'CommunitiesActions', 'create'));
+          create: BuiltValueNullFieldError.checkNotNull(
+            create,
+            r'CommunitiesActions',
+            'create',
+          ),
+        );
     replace(_$result);
     return _$result;
   }

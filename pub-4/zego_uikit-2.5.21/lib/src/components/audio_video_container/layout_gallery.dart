@@ -22,7 +22,7 @@ class ZegoLayoutGalleryConfig extends ZegoLayout {
   /// screen sharing configs
   bool showNewScreenSharingViewInFullscreenMode;
   ZegoShowFullscreenModeToggleButtonRules
-      showScreenSharingFullscreenModeToggleButtonRules;
+  showScreenSharingFullscreenModeToggleButtonRules;
 
   ZegoLayoutGalleryConfig({
     this.addBorderRadiusAndSpacingBetweenView = true,
@@ -90,35 +90,40 @@ class _ZegoLayoutGalleryState extends State<ZegoLayoutGallery> {
       children: itemsConfig.layoutItems,
     );
 
-    return LayoutBuilder(builder: (context, constraints) {
-      final rowCountWithScreenSharing =
-          (itemsConfig.layoutItems.length / columnCount).ceil() + 1;
-      return Container(
-        color: widget.backgroundColor,
-        child: itemsConfig.hasScreenSharing
-            ? Column(
-                children: [
-                  Container(
-                    width: constraints.maxWidth,
-                    height: constraints.maxHeight / rowCountWithScreenSharing,
-                    padding:
-                        widget.layoutConfig.addBorderRadiusAndSpacingBetweenView
-                            ? EdgeInsets.symmetric(
-                                horizontal: 10.0.zR, vertical: 10.0.zR)
-                            : EdgeInsets.zero,
-                    child: itemsConfig.topScreenSharing,
-                  ),
-                  SizedBox(
-                    width: constraints.maxWidth,
-                    height: constraints.maxHeight -
-                        (constraints.maxHeight / rowCountWithScreenSharing),
-                    child: layoutItemsContainer,
-                  ),
-                ],
-              )
-            : layoutItemsContainer,
-      );
-    });
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final rowCountWithScreenSharing =
+            (itemsConfig.layoutItems.length / columnCount).ceil() + 1;
+        return Container(
+          color: widget.backgroundColor,
+          child: itemsConfig.hasScreenSharing
+              ? Column(
+                  children: [
+                    Container(
+                      width: constraints.maxWidth,
+                      height: constraints.maxHeight / rowCountWithScreenSharing,
+                      padding: widget
+                                .layoutConfig
+                                .addBorderRadiusAndSpacingBetweenView
+                          ? EdgeInsets.symmetric(
+                              horizontal: 10.0.zR,
+                              vertical: 10.0.zR,
+                            )
+                          : EdgeInsets.zero,
+                      child: itemsConfig.topScreenSharing,
+                    ),
+                    SizedBox(
+                      width: constraints.maxWidth,
+                      height: constraints.maxHeight -
+                          (constraints.maxHeight / rowCountWithScreenSharing),
+                      child: layoutItemsContainer,
+                    ),
+                  ],
+                )
+              : layoutItemsContainer,
+        );
+      },
+    );
   }
 
   _ZegoLayoutGalleryItemsConfig getLayoutItemsConfig() {
@@ -138,50 +143,53 @@ class _ZegoLayoutGalleryState extends State<ZegoLayoutGallery> {
 
       /// audio video
       if (audioVideoListUserIDs.contains(layoutUser.id)) {
-        final audioVideoView = LayoutBuilder(builder: (context, constraints) {
-          return ZegoAudioVideoView(
-            user: layoutUser,
-            backgroundBuilder: widget.backgroundBuilder,
-            foregroundBuilder: widget.foregroundBuilder,
-            borderRadius:
-                widget.layoutConfig.addBorderRadiusAndSpacingBetweenView
-                    ? 18.0.zW
-                    : null,
-            borderColor: Colors.transparent,
-            avatarConfig: widget.avatarConfig,
-          );
-        });
-        itemsConfig.layoutItems.add(LayoutId(
-          id: layoutUser.id,
-          child: audioVideoView,
-        ));
+        final audioVideoView = LayoutBuilder(
+          builder: (context, constraints) {
+            return ZegoAudioVideoView(
+              user: layoutUser,
+              backgroundBuilder: widget.backgroundBuilder,
+              foregroundBuilder: widget.foregroundBuilder,
+              borderRadius:
+                  widget.layoutConfig.addBorderRadiusAndSpacingBetweenView
+                      ? 18.0.zW
+                      : null,
+              borderColor: Colors.transparent,
+              avatarConfig: widget.avatarConfig,
+            );
+          },
+        );
+        itemsConfig.layoutItems.add(
+          LayoutId(id: layoutUser.id, child: audioVideoView),
+        );
       }
 
       /// screen sharing
       if (screenSharingListUserIDs.contains(layoutUser.id)) {
-        final audioVideoView = LayoutBuilder(builder: (context, constraints) {
-          return ZegoScreenSharingView(
-            user: layoutUser,
-            backgroundBuilder: widget.backgroundBuilder,
-            foregroundBuilder: widget.foregroundBuilder,
-            borderRadius:
-                widget.layoutConfig.addBorderRadiusAndSpacingBetweenView
-                    ? 18.0.zW
-                    : null,
-            borderColor: Colors.transparent,
-            controller: widget.screenSharingViewController,
-            showFullscreenModeToggleButtonRules: widget
-                .layoutConfig.showScreenSharingFullscreenModeToggleButtonRules,
-          );
-        });
+        final audioVideoView = LayoutBuilder(
+          builder: (context, constraints) {
+            return ZegoScreenSharingView(
+              user: layoutUser,
+              backgroundBuilder: widget.backgroundBuilder,
+              foregroundBuilder: widget.foregroundBuilder,
+              borderRadius:
+                  widget.layoutConfig.addBorderRadiusAndSpacingBetweenView
+                      ? 18.0.zW
+                      : null,
+              borderColor: Colors.transparent,
+              controller: widget.screenSharingViewController,
+              showFullscreenModeToggleButtonRules: widget
+                  .layoutConfig
+                  .showScreenSharingFullscreenModeToggleButtonRules,
+            );
+          },
+        );
 
         if (!itemsConfig.hasScreenSharing) {
           itemsConfig.topScreenSharing = audioVideoView;
         } else {
-          screenSharingLayoutItems.add(LayoutId(
-            id: layoutUser.id,
-            child: audioVideoView,
-          ));
+          screenSharingLayoutItems.add(
+            LayoutId(id: layoutUser.id, child: audioVideoView),
+          );
         }
 
         itemsConfig.hasScreenSharing = true;

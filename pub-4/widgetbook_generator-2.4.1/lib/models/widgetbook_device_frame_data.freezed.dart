@@ -12,10 +12,12 @@ part of 'widgetbook_device_frame_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 WidgetbookDeviceFrameData _$WidgetbookDeviceFrameDataFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _WidgetbookDeviceFrameData.fromJson(json);
 }
 
@@ -33,9 +35,10 @@ mixin _$WidgetbookDeviceFrameData {
 
 /// @nodoc
 abstract class $WidgetbookDeviceFrameDataCopyWith<$Res> {
-  factory $WidgetbookDeviceFrameDataCopyWith(WidgetbookDeviceFrameData value,
-          $Res Function(WidgetbookDeviceFrameData) then) =
-      _$WidgetbookDeviceFrameDataCopyWithImpl<$Res>;
+  factory $WidgetbookDeviceFrameDataCopyWith(
+    WidgetbookDeviceFrameData value,
+    $Res Function(WidgetbookDeviceFrameData) then,
+  ) = _$WidgetbookDeviceFrameDataCopyWithImpl<$Res>;
   $Res call({String name, String importStatement, List<String> dependencies});
 }
 
@@ -58,15 +61,15 @@ class _$WidgetbookDeviceFrameDataCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       importStatement: importStatement == freezed
           ? _value.importStatement
           : importStatement // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       dependencies: dependencies == freezed
           ? _value.dependencies
           : dependencies // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+                as List<String>,
     ));
   }
 }
@@ -75,9 +78,9 @@ class _$WidgetbookDeviceFrameDataCopyWithImpl<$Res>
 abstract class _$$_WidgetbookDeviceFrameDataCopyWith<$Res>
     implements $WidgetbookDeviceFrameDataCopyWith<$Res> {
   factory _$$_WidgetbookDeviceFrameDataCopyWith(
-          _$_WidgetbookDeviceFrameData value,
-          $Res Function(_$_WidgetbookDeviceFrameData) then) =
-      __$$_WidgetbookDeviceFrameDataCopyWithImpl<$Res>;
+    _$_WidgetbookDeviceFrameData value,
+    $Res Function(_$_WidgetbookDeviceFrameData) then,
+  ) = __$$_WidgetbookDeviceFrameDataCopyWithImpl<$Res>;
   @override
   $Res call({String name, String importStatement, List<String> dependencies});
 }
@@ -87,9 +90,9 @@ class __$$_WidgetbookDeviceFrameDataCopyWithImpl<$Res>
     extends _$WidgetbookDeviceFrameDataCopyWithImpl<$Res>
     implements _$$_WidgetbookDeviceFrameDataCopyWith<$Res> {
   __$$_WidgetbookDeviceFrameDataCopyWithImpl(
-      _$_WidgetbookDeviceFrameData _value,
-      $Res Function(_$_WidgetbookDeviceFrameData) _then)
-      : super(_value, (v) => _then(v as _$_WidgetbookDeviceFrameData));
+    _$_WidgetbookDeviceFrameData _value,
+    $Res Function(_$_WidgetbookDeviceFrameData) _then,
+  ) : super(_value, (v) => _then(v as _$_WidgetbookDeviceFrameData));
 
   @override
   _$_WidgetbookDeviceFrameData get _value =>
@@ -105,15 +108,15 @@ class __$$_WidgetbookDeviceFrameDataCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       importStatement: importStatement == freezed
           ? _value.importStatement
           : importStatement // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       dependencies: dependencies == freezed
           ? _value._dependencies
           : dependencies // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+                as List<String>,
     ));
   }
 }
@@ -121,14 +124,15 @@ class __$$_WidgetbookDeviceFrameDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_WidgetbookDeviceFrameData implements _WidgetbookDeviceFrameData {
-  _$_WidgetbookDeviceFrameData(
-      {required this.name,
-      required this.importStatement,
-      required final List<String> dependencies})
-      : _dependencies = dependencies;
+  _$_WidgetbookDeviceFrameData({
+    required this.name,
+    required this.importStatement,
+    required final List<String> dependencies,
+  }) : _dependencies = dependencies;
 
-  factory _$_WidgetbookDeviceFrameData.fromJson(Map<String, dynamic> json) =>
-      _$$_WidgetbookDeviceFrameDataFromJson(json);
+  factory _$_WidgetbookDeviceFrameData.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$_WidgetbookDeviceFrameDataFromJson(json);
 
   @override
   final String name;
@@ -152,25 +156,31 @@ class _$_WidgetbookDeviceFrameData implements _WidgetbookDeviceFrameData {
         (other.runtimeType == runtimeType &&
             other is _$_WidgetbookDeviceFrameData &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.importStatement, importStatement) &&
-            const DeepCollectionEquality()
-                .equals(other._dependencies, _dependencies));
+            const DeepCollectionEquality().equals(
+              other.importStatement,
+              importStatement,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._dependencies,
+              _dependencies,
+            ));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(importStatement),
-      const DeepCollectionEquality().hash(_dependencies));
+    runtimeType,
+    const DeepCollectionEquality().hash(name),
+    const DeepCollectionEquality().hash(importStatement),
+    const DeepCollectionEquality().hash(_dependencies),
+  );
 
   @JsonKey(ignore: true)
   @override
   _$$_WidgetbookDeviceFrameDataCopyWith<_$_WidgetbookDeviceFrameData>
-      get copyWith => __$$_WidgetbookDeviceFrameDataCopyWithImpl<
-          _$_WidgetbookDeviceFrameData>(this, _$identity);
+  get copyWith => __$$_WidgetbookDeviceFrameDataCopyWithImpl<
+    _$_WidgetbookDeviceFrameData
+  >(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -179,10 +189,11 @@ class _$_WidgetbookDeviceFrameData implements _WidgetbookDeviceFrameData {
 }
 
 abstract class _WidgetbookDeviceFrameData implements WidgetbookDeviceFrameData {
-  factory _WidgetbookDeviceFrameData(
-      {required final String name,
-      required final String importStatement,
-      required final List<String> dependencies}) = _$_WidgetbookDeviceFrameData;
+  factory _WidgetbookDeviceFrameData({
+    required final String name,
+    required final String importStatement,
+    required final List<String> dependencies,
+  }) = _$_WidgetbookDeviceFrameData;
 
   factory _WidgetbookDeviceFrameData.fromJson(Map<String, dynamic> json) =
       _$_WidgetbookDeviceFrameData.fromJson;
@@ -196,5 +207,5 @@ abstract class _WidgetbookDeviceFrameData implements WidgetbookDeviceFrameData {
   @override
   @JsonKey(ignore: true)
   _$$_WidgetbookDeviceFrameDataCopyWith<_$_WidgetbookDeviceFrameData>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }

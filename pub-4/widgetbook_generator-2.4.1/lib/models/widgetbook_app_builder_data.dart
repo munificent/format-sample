@@ -13,6 +13,7 @@ class WidgetbookAppBuilderData extends WidgetbookData
     required List<String> dependencies,
   }) = _WidgetbookAppBuilderData;
 
-  factory WidgetbookAppBuilderData.fromJson(Map<String, dynamic> json) =>
-      _$WidgetbookAppBuilderDataFromJson(json);
+  factory WidgetbookAppBuilderData.fromJson(
+    Map<String, dynamic> json,
+  ) => _$WidgetbookAppBuilderDataFromJson(json);
 }

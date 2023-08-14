@@ -24,7 +24,10 @@ class InspectDOMModule extends UIInspectorModule {
 
   @override
   void receiveFromFrontend(
-      int? id, String method, Map<String, dynamic>? params) {
+    int? id,
+    String method,
+    Map<String, dynamic>? params,
+  ) {
     switch (method) {
       case 'getDocument':
         onGetDocument(id, method, params);
@@ -47,19 +50,19 @@ class InspectDOMModule extends UIInspectorModule {
 
     RenderBox rootRenderObject = document.renderer!;
     BoxHitTestResult result = BoxHitTestResult();
-    rootRenderObject.hitTest(result,
-        position: Offset(x.toDouble(), y.toDouble()));
+    rootRenderObject.hitTest(
+      result,
+      position: Offset(x.toDouble(), y.toDouble()),
+    );
     if (result.path.first.target is RenderBoxModel) {
       RenderBoxModel lastHitRenderBoxModel =
           result.path.first.target as RenderBoxModel;
       int? targetId = lastHitRenderBoxModel.renderStyle.target.pointer!.address;
-      sendToFrontend(
-          id,
-          JSONEncodableMap({
-            'backendId': targetId,
-            'frameId': DEFAULT_FRAME_ID,
-            'nodeId': targetId,
-          }));
+      sendToFrontend(id, JSONEncodableMap({
+        'backendId': targetId,
+        'frameId': DEFAULT_FRAME_ID,
+        'nodeId': targetId,
+      }));
     } else {
       sendToFrontend(id, null);
     }
@@ -71,8 +74,9 @@ class InspectDOMModule extends UIInspectorModule {
 
   void onSetInspectedNode(int? id, Map<String, dynamic> params) {
     int nodeId = params['nodeId'];
-    Node? node =
-        BindingBridge.getBindingObject<Node>(Pointer.fromAddress(nodeId));
+    Node? node = BindingBridge.getBindingObject<Node>(
+      Pointer.fromAddress(nodeId),
+    );
     if (node != null) {
       inspectedNode = node;
     }
@@ -89,16 +93,18 @@ class InspectDOMModule extends UIInspectorModule {
 
   void onGetBoxModel(int? id, Map<String, dynamic> params) {
     int nodeId = params['nodeId'];
-    Element? element =
-        BindingBridge.getBindingObject<Element>(Pointer.fromAddress(nodeId));
+    Element? element = BindingBridge.getBindingObject<Element>(
+      Pointer.fromAddress(nodeId),
+    );
 
     // BoxModel design to BorderBox in kraken.
     if (element != null &&
         element.renderBoxModel != null &&
         element.renderBoxModel!.hasSize) {
       ui.Offset contentBoxOffset = element.renderBoxModel!.localToGlobal(
-          ui.Offset.zero,
-          ancestor: element.ownerDocument.viewport);
+        ui.Offset.zero,
+        ancestor: element.ownerDocument.viewport,
+      );
 
       int widthWithinBorder = element.renderBoxModel!.size.width.toInt();
       int heightWithinBorder = element.renderBoxModel!.size.height.toInt();
@@ -114,35 +120,59 @@ class InspectDOMModule extends UIInspectorModule {
       ];
       List<double> padding = [
         border[0] +
-            (element.renderBoxModel!.renderStyle.borderLeftWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderLeftWidth
                     ?.computedValue ??
                 0),
         border[1] +
-            (element.renderBoxModel!.renderStyle.borderTopWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderTopWidth
                     ?.computedValue ??
                 0),
         border[2] -
-            (element.renderBoxModel!.renderStyle.borderRightWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderRightWidth
                     ?.computedValue ??
                 0),
         border[3] +
-            (element.renderBoxModel!.renderStyle.borderTopWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderTopWidth
                     ?.computedValue ??
                 0),
         border[4] -
-            (element.renderBoxModel!.renderStyle.borderRightWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderRightWidth
                     ?.computedValue ??
                 0),
         border[5] -
-            (element.renderBoxModel!.renderStyle.borderBottomWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderBottomWidth
                     ?.computedValue ??
                 0),
         border[6] +
-            (element.renderBoxModel!.renderStyle.borderLeftWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderLeftWidth
                     ?.computedValue ??
                 0),
         border[7] -
-            (element.renderBoxModel!.renderStyle.borderBottomWidth
+            (element
+                    .renderBoxModel!
+                    .renderStyle
+                    .borderBottomWidth
                     ?.computedValue ??
                 0),
       ];
@@ -189,11 +219,7 @@ class InspectDOMModule extends UIInspectorModule {
         width: widthWithinBorder,
         height: heightWithinBorder,
       );
-      sendToFrontend(
-          id,
-          JSONEncodableMap({
-            'model': boxModel,
-          }));
+      sendToFrontend(id, JSONEncodableMap({'model': boxModel}));
     } else {
       sendToFrontend(id, null);
     }
@@ -303,9 +329,9 @@ class InspectorNode extends JSONEncodable {
       'childNodeCount': childNodeCount,
       'attributes': attributes,
       if (childNodeCount > 0)
-        'children': referencedNode.childNodes
-            .map((Node node) => InspectorNode(node).toJson())
-            .toList(),
+        'children': referencedNode.childNodes.map(
+          (Node node) => InspectorNode(node).toJson(),
+        ).toList(),
     };
   }
 }
@@ -318,13 +344,14 @@ class BoxModel extends JSONEncodable {
   int? width;
   int? height;
 
-  BoxModel(
-      {this.content,
-      this.padding,
-      this.border,
-      this.margin,
-      this.width,
-      this.height});
+  BoxModel({
+    this.content,
+    this.padding,
+    this.border,
+    this.margin,
+    this.width,
+    this.height,
+  });
 
   @override
   Map toJson() {
@@ -349,11 +376,6 @@ class Rect extends JSONEncodable {
 
   @override
   Map toJson() {
-    return {
-      'x': x,
-      'y': y,
-      'width': width,
-      'height': height,
-    };
+    return {'x': x, 'y': y, 'width': width, 'height': height};
   }
 }

@@ -26,8 +26,9 @@ class FlutterFormElement extends WidgetElement {
   @override
   Widget build(BuildContext context, List<Widget> children) {
     return Form(
-        child: FlutterFormElementContext(
-      child: WebFHTMLElement(tagName: 'DIV', children: children),
-    ));
+      child: FlutterFormElementContext(
+        child: WebFHTMLElement(tagName: 'DIV', children: children),
+      ),
+    );
   }
 }

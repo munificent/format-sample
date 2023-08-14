@@ -5,9 +5,7 @@ import 'package:web_socket_channel/html.dart';
 class SocketManagerForWeb extends SocketManager {
   @override
   Future<dynamic> connect(String url) async {
-    HtmlWebSocketChannel channel = HtmlWebSocketChannel.connect(
-      Uri.parse(url),
-    );
+    HtmlWebSocketChannel channel = HtmlWebSocketChannel.connect(Uri.parse(url));
     return channel;
 
     // return "this is from web";

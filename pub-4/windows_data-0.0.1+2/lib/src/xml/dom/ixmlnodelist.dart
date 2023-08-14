@@ -25,24 +25,23 @@ class IXmlNodeList extends IInspectable
   // vtable begins at 6, is 2 entries long.
   IXmlNodeList.fromPtr(super.ptr);
 
-  factory IXmlNodeList.from(IInspectable interface) =>
-      IXmlNodeList.fromPtr(interface.toInterface(IID_IXmlNodeList));
+  factory IXmlNodeList.from(IInspectable interface) => IXmlNodeList.fromPtr(
+    interface.toInterface(IID_IXmlNodeList),
+  );
 
   int get length {
     final retValuePtr = calloc<Uint32>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(6)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(VTablePointer lpVtbl,
-                          Pointer<Uint32> retValuePtr)>>>()
-          .value
-          .asFunction<
-              int Function(VTablePointer lpVtbl,
-                  Pointer<Uint32> retValuePtr)>()(ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.vtable.elementAt(6).cast<
+        Pointer<
+          NativeFunction<
+            HRESULT Function(VTablePointer lpVtbl, Pointer<Uint32> retValuePtr)
+          >
+        >
+      >().value.asFunction<
+        int Function(VTablePointer lpVtbl, Pointer<Uint32> retValuePtr)
+      >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -55,18 +54,23 @@ class IXmlNodeList extends IInspectable
   IXmlNode? item(int index) {
     final retValuePtr = calloc<COMObject>();
 
-    final hr = ptr.ref.vtable
-            .elementAt(7)
-            .cast<
-                Pointer<
-                    NativeFunction<
-                        HRESULT Function(VTablePointer lpVtbl, Uint32 index,
-                            Pointer<COMObject> retValuePtr)>>>()
-            .value
-            .asFunction<
-                int Function(VTablePointer lpVtbl, int index,
-                    Pointer<COMObject> retValuePtr)>()(
-        ptr.ref.lpVtbl, index, retValuePtr);
+    final hr = ptr.ref.vtable.elementAt(7).cast<
+      Pointer<
+        NativeFunction<
+          HRESULT Function(
+            VTablePointer lpVtbl,
+            Uint32 index,
+            Pointer<COMObject> retValuePtr,
+          )
+        >
+      >
+    >().value.asFunction<
+      int Function(
+        VTablePointer lpVtbl,
+        int index,
+        Pointer<COMObject> retValuePtr,
+      )
+    >()(ptr.ref.lpVtbl, index, retValuePtr);
 
     if (FAILED(hr)) {
       free(retValuePtr);
@@ -82,9 +86,10 @@ class IXmlNodeList extends IInspectable
   }
 
   late final _iVectorView = IVectorView<IXmlNode>.fromPtr(
-      toInterface('{139d959e-e7b5-5cb6-a596-4b544478da9b}'),
-      creator: IXmlNode.fromPtr,
-      iterableIid: '{f1146ffc-8c92-56e8-93f1-711f86722633}');
+    toInterface('{139d959e-e7b5-5cb6-a596-4b544478da9b}'),
+    creator: IXmlNode.fromPtr,
+    iterableIid: '{f1146ffc-8c92-56e8-93f1-711f86722633}',
+  );
 
   @override
   IXmlNode getAt(int index) => _iVectorView.getAt(index);
@@ -93,12 +98,17 @@ class IXmlNodeList extends IInspectable
   int get size => _iVectorView.size;
 
   @override
-  bool indexOf(IXmlNode value, Pointer<Uint32> index) =>
-      _iVectorView.indexOf(value, index);
+  bool indexOf(IXmlNode value, Pointer<Uint32> index) => _iVectorView.indexOf(
+    value,
+    index,
+  );
 
   @override
-  int getMany(int startIndex, int itemsSize, List<IXmlNode> items) =>
-      _iVectorView.getMany(startIndex, itemsSize, items);
+  int getMany(
+    int startIndex,
+    int itemsSize,
+    List<IXmlNode> items,
+  ) => _iVectorView.getMany(startIndex, itemsSize, items);
 
   @override
   IIterator<IXmlNode> first() => _iVectorView.first();

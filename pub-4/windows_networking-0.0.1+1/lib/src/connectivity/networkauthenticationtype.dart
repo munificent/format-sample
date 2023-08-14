@@ -32,8 +32,14 @@ enum NetworkAuthenticationType implements WinRTEnum {
 
   const NetworkAuthenticationType(this.value);
 
-  factory NetworkAuthenticationType.from(int value) =>
-      NetworkAuthenticationType.values.firstWhere((e) => e.value == value,
-          orElse: () => throw ArgumentError.value(
-              value, 'value', 'No enum value with that value'));
+  factory NetworkAuthenticationType.from(int value) => NetworkAuthenticationType
+      .values
+      .firstWhere(
+        (e) => e.value == value,
+        orElse: () => throw ArgumentError.value(
+              value,
+              'value',
+              'No enum value with that value',
+            ),
+      );
 }

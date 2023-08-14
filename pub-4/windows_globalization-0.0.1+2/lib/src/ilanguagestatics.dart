@@ -22,8 +22,9 @@ class ILanguageStatics extends IInspectable {
   // vtable begins at 6, is 2 entries long.
   ILanguageStatics.fromPtr(super.ptr);
 
-  factory ILanguageStatics.from(IInspectable interface) =>
-      ILanguageStatics.fromPtr(interface.toInterface(IID_ILanguageStatics));
+  factory ILanguageStatics.from(
+    IInspectable interface,
+  ) => ILanguageStatics.fromPtr(interface.toInterface(IID_ILanguageStatics));
 
   bool isWellFormed(String languageTag) {
     final retValuePtr = calloc<Bool>();
@@ -31,21 +32,23 @@ class ILanguageStatics extends IInspectable {
     try {
       final languageTagHString = languageTag.toHString();
 
-      final hr =
-          ptr.ref.vtable
-                  .elementAt(6)
-                  .cast<
-                      Pointer<
-                          NativeFunction<
-                              HRESULT Function(
-                                  VTablePointer lpVtbl,
-                                  IntPtr languageTag,
-                                  Pointer<Bool> retValuePtr)>>>()
-                  .value
-                  .asFunction<
-                      int Function(VTablePointer lpVtbl, int languageTag,
-                          Pointer<Bool> retValuePtr)>()(
-              ptr.ref.lpVtbl, languageTagHString, retValuePtr);
+      final hr = ptr.ref.vtable.elementAt(6).cast<
+        Pointer<
+          NativeFunction<
+            HRESULT Function(
+              VTablePointer lpVtbl,
+              IntPtr languageTag,
+              Pointer<Bool> retValuePtr,
+            )
+          >
+        >
+      >().value.asFunction<
+        int Function(
+          VTablePointer lpVtbl,
+          int languageTag,
+          Pointer<Bool> retValuePtr,
+        )
+      >()(ptr.ref.lpVtbl, languageTagHString, retValuePtr);
 
       WindowsDeleteString(languageTagHString);
 
@@ -61,17 +64,15 @@ class ILanguageStatics extends IInspectable {
     final retValuePtr = calloc<HSTRING>();
 
     try {
-      final hr = ptr.ref.vtable
-          .elementAt(7)
-          .cast<
-              Pointer<
-                  NativeFunction<
-                      HRESULT Function(VTablePointer lpVtbl,
-                          Pointer<IntPtr> retValuePtr)>>>()
-          .value
-          .asFunction<
-              int Function(VTablePointer lpVtbl,
-                  Pointer<IntPtr> retValuePtr)>()(ptr.ref.lpVtbl, retValuePtr);
+      final hr = ptr.ref.vtable.elementAt(7).cast<
+        Pointer<
+          NativeFunction<
+            HRESULT Function(VTablePointer lpVtbl, Pointer<IntPtr> retValuePtr)
+          >
+        >
+      >().value.asFunction<
+        int Function(VTablePointer lpVtbl, Pointer<IntPtr> retValuePtr)
+      >()(ptr.ref.lpVtbl, retValuePtr);
 
       if (FAILED(hr)) throw WindowsException(hr);
 

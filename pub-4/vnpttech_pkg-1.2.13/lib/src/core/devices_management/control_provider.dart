@@ -28,8 +28,9 @@ class ControlProvider {
     try {
       String serialNumber = rebootDeviceRequest['serialNumber'];
       String? userName = rebootDeviceRequest["userName"];
-      bool isLocal =
-          ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+      bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+        serialNumber,
+      );
       String modelName = rebootDeviceRequest['modelName'];
 
       if (isLocal) {
@@ -56,18 +57,21 @@ class ControlProvider {
         final Map<String, String> headers = {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Cookie": cookie
+          "Cookie": cookie,
         };
 
         var requestParam = {
           "action": getActionTypes(ActionTypes.reboot),
           "macList": macList,
-          "requestId": requestId.toInt()
+          "requestId": requestId.toInt(),
         };
 
         var response = await VNPTTechAgentOperator.shared.postWithHeader(
-            ipAddr, headers, getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
-            params: requestParam);
+          ipAddr,
+          headers,
+          getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
+          params: requestParam,
+        );
         var res = AgentResponse.fromJson(response);
         var sdkResponse = convertToSDKResponseNoneData(res);
         printLog("rebootResponse: $sdkResponse");
@@ -82,7 +86,10 @@ class ControlProvider {
   reboot thiết bị qua ONELink platform.
 */
   Future<dynamic> _rebootDevicePlatform(
-      String serialNumber, String modelName, String? userName) async {
+    String serialNumber,
+    String modelName,
+    String? userName,
+  ) async {
     try {
       String key = getOneLinkPlatformAPIs(OneLinkPlatformAPIs.deviceConfig);
       String? accessToken;
@@ -96,7 +103,7 @@ class ControlProvider {
 
       var requestHeaders = {
         "Content-Type": "application/json",
-        'Authorization': 'Bearer $accessToken'
+        'Authorization': 'Bearer $accessToken',
       };
 
       var requestParams = userName != null
@@ -104,23 +111,27 @@ class ControlProvider {
               "command": getCommandTypes(CommandTypes.reboot),
               "modelName": modelName,
               "serialNumber": serialNumber,
-              'username': userName
+              'username': userName,
             }
           : {
               "command": getCommandTypes(CommandTypes.reboot),
               "modelName": modelName,
               "serialNumber": serialNumber,
             };
-      var response = await VNPTTechOLOperator.shared
-          .post(key, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.post(
+        key,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       if (res.errorCode == 200) {
         return SDKResponse(errorCode: 200, errorMessage: messageSuccess)
             .toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       return SDKResponse(errorCode: 400, errorMessage: messageFail).toJson();
@@ -132,8 +143,9 @@ class ControlProvider {
     try {
       String serialNumber = resettDeviceRequest['serialNumber'];
       String? userName = resettDeviceRequest["userName"];
-      bool isLocal =
-          ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+      bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+        serialNumber,
+      );
 
       String modelName = resettDeviceRequest['modelName'];
 
@@ -149,7 +161,10 @@ class ControlProvider {
 
   /// reset thiết bị qua ONELink platform.
   Future<dynamic> _resetDevicePlatform(
-      String serialNumber, String modelName, String? userName) async {
+    String serialNumber,
+    String modelName,
+    String? userName,
+  ) async {
     try {
       String key = getOneLinkPlatformAPIs(OneLinkPlatformAPIs.deviceConfig);
       String? accessToken;
@@ -163,7 +178,7 @@ class ControlProvider {
 
       var requestHeaders = {
         "Content-Type": "application/json",
-        'Authorization': 'Bearer $accessToken'
+        'Authorization': 'Bearer $accessToken',
       };
 
       var requestParams = userName != null
@@ -171,15 +186,18 @@ class ControlProvider {
               "command": getCommandTypes(CommandTypes.resetFactory),
               "modelName": modelName,
               "serialNumber": serialNumber,
-              'username': userName
+              'username': userName,
             }
           : {
               "command": getCommandTypes(CommandTypes.resetFactory),
               "modelName": modelName,
               "serialNumber": serialNumber,
             };
-      var response = await VNPTTechOLOperator.shared
-          .post(key, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.post(
+        key,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       var sdkResponse = toSDKresponseNoneData(res);
       printLog("resetResponse: $sdkResponse");
@@ -204,18 +222,21 @@ class ControlProvider {
         final Map<String, String> headers = {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Cookie": cookie
+          "Cookie": cookie,
         };
 
         var requestParam = {
           "action": getActionTypes(ActionTypes.reset),
           "macList": macList,
-          "requestId": requestId.toInt()
+          "requestId": requestId.toInt(),
         };
 
         var response = await VNPTTechAgentOperator.shared.postWithHeader(
-            ipAddr, headers, getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
-            params: requestParam);
+          ipAddr,
+          headers,
+          getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
+          params: requestParam,
+        );
         var res = AgentResponse.fromJson(response);
         var sdkResponse = convertToSDKResponseNoneData(res);
         printLog("resetResponse: $sdkResponse");
@@ -237,8 +258,9 @@ class ControlProvider {
   Future<dynamic> updateFirmware(dynamic updateFirmwareRequest) async {
     try {
       String serialNumber = updateFirmwareRequest['serialNumber'];
-      bool isLocal =
-          ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+      bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+        serialNumber,
+      );
       String modelName = updateFirmwareRequest['modelName'];
 
       String? macAddress = updateFirmwareRequest['macAddress'];
@@ -263,7 +285,10 @@ class ControlProvider {
           if (listMac.isNotEmpty && listSerial.isNotEmpty) {
             if (listSerial.length == 1) {
               return await _updateFirmwareLocal(
-                  listSerial.first, macAddress!, uri);
+                listSerial.first,
+                macAddress!,
+                uri,
+              );
             } else {
               for (var serial in listSerial) {
                 var cachedDevice =
@@ -285,29 +310,28 @@ class ControlProvider {
 
         await Future.wait(listSerial.map((serial) async {
           OLResponse result = await _updateFirmwareOnline(
-              serial.trim(), modelName, userName, url);
+            serial.trim(),
+            modelName,
+            userName,
+            url,
+          );
           results.add(result);
         }));
 
         return SDKResponse(
-                errorCode: results.isEmpty
-                    ? 400
-                    : results
-                            .where((element) => element.errorCode != 200)
-                            .isNotEmpty
-                        ? 400
-                        : 200,
-                errorMessage: results.isEmpty
-                    ? messageFail
-                    : results
-                            .where((element) => element.errorCode != 200)
-                            .isNotEmpty
-                        ? results
-                            .where((element) => element.errorCode != 200)
-                            .map((e) => e.errorMessage)
-                            .toString()
-                        : messageSuccess)
-            .toJson();
+          errorCode: results.isEmpty
+              ? 400
+              : results.where((element) => element.errorCode != 200).isNotEmpty
+                  ? 400
+                  : 200,
+          errorMessage: results.isEmpty
+              ? messageFail
+              : results.where((element) => element.errorCode != 200).isNotEmpty
+                  ? results.where((element) => element.errorCode != 200).map(
+                      (e) => e.errorMessage,
+                    ).toString()
+                  : messageSuccess,
+        ).toJson();
       }
     } catch (e) {
       return SDKResponse(errorCode: 400, errorMessage: messageFail).toJson();
@@ -315,7 +339,10 @@ class ControlProvider {
   }
 
   Future<dynamic> _updateFirmwareLocal(
-      String serialNumber, String listMac, String uri) async {
+    String serialNumber,
+    String listMac,
+    String uri,
+  ) async {
     try {
       String md5sum = await calculateMD5SumFile(uri) ?? "";
 
@@ -329,33 +356,39 @@ class ControlProvider {
 
         final Map<String, String> headers = {
           "Content-Type": "application/octet-stream",
-          "Cookie": cookie ?? ""
+          "Cookie": cookie ?? "",
         };
 
         var uploadFileResponse = await VNPTTechAgentOperator.shared
             .upoadFileWithHeader(
-                ipAddr ?? defaultIP,
-                headers,
-                "${getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent)}/files/$fileName",
-                uri,
-                true);
+              ipAddr ?? defaultIP,
+              headers,
+              "${getMobbileAgentAPIs(
+                MobbileAgentAPIs.onelinkagent,
+              )}/files/$fileName",
+              uri,
+              true,
+            );
         var res = AgentResponse.fromJson(uploadFileResponse);
         printLog("updateResuploadFileResponseponse: ${res.toJson()}");
         if (res.status == 0) {
           final Map<String, String> headers = {
             "Content-Type": "application/json",
-            "Cookie": cookie ?? ""
+            "Cookie": cookie ?? "",
           };
           var updateResponse = await VNPTTechAgentOperator.shared
-              .postWithHeader(ipAddr ?? defaultIP, headers,
-                  getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
-                  params: updateFirmwareRequest(
-                          getActionTypes(ActionTypes.upgradeFirmware),
-                          requestId.toInt(),
-                          listMac,
-                          fileName,
-                          md5sum)
-                      .toJson());
+              .postWithHeader(
+                ipAddr ?? defaultIP,
+                headers,
+                getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
+                params: updateFirmwareRequest(
+                  getActionTypes(ActionTypes.upgradeFirmware),
+                  requestId.toInt(),
+                  listMac,
+                  fileName,
+                  md5sum,
+                ).toJson(),
+              );
           printLog(" updateResponse-------------------\n $updateResponse");
           var res = AgentResponse.fromJson(updateResponse);
           if (res.status == 0) {
@@ -373,8 +406,12 @@ class ControlProvider {
     return SDKResponse(errorCode: 407, errorMessage: messageFail).toJson();
   }
 
-  Future<dynamic> _updateFirmwareOnline(String serialNumber, String modelName,
-      String? userName, String url) async {
+  Future<dynamic> _updateFirmwareOnline(
+    String serialNumber,
+    String modelName,
+    String? userName,
+    String url,
+  ) async {
     String command = getCommandTypes(CommandTypes.updateFirm);
     String key = getOneLinkPlatformAPIs(OneLinkPlatformAPIs.deviceConfig);
     String? accessToken;
@@ -388,7 +425,7 @@ class ControlProvider {
 
     var requestHeaders = {
       "Content-Type": "application/json",
-      'Authorization': 'Bearer $accessToken'
+      'Authorization': 'Bearer $accessToken',
     };
 
     var requestParams = userName != null
@@ -397,16 +434,19 @@ class ControlProvider {
             "modelName": modelName,
             "serialNumber": serialNumber,
             "body": {"fileURL": url},
-            'username': userName
+            'username': userName,
           }
         : {
             "command": command,
             "modelName": modelName,
             "serialNumber": serialNumber,
-            "body": {"fileURL": url}
+            "body": {"fileURL": url},
           };
-    var response = await VNPTTechOLOperator.shared
-        .post(key, headers: requestHeaders, params: requestParams);
+    var response = await VNPTTechOLOperator.shared.post(
+      key,
+      headers: requestHeaders,
+      params: requestParams,
+    );
     var res = OLResponse.fromJson(response);
     // var sdkResponse = toSDKresponseNoneData(res);
     // printLog("updateFirmwareOnline: $sdkResponse");
@@ -416,8 +456,9 @@ class ControlProvider {
   Future<dynamic> updateFirmwareMesh(dynamic updateFirmwareRequest) async {
     try {
       String serialNumber = updateFirmwareRequest['serialNumber'];
-      bool isLocal =
-          ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+      bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+        serialNumber,
+      );
       String modelName = updateFirmwareRequest['modelName'];
 
       String? macAddress = updateFirmwareRequest['macAddress'];
@@ -442,14 +483,20 @@ class ControlProvider {
           if (listMac.isNotEmpty && listSerial.isNotEmpty) {
             if (listSerial.length == 1) {
               return await _updateFirmwareLocal(
-                  listSerial.first, macAddress!, uri);
+                listSerial.first,
+                macAddress!,
+                uri,
+              );
             } else {
               for (var serial in listSerial) {
                 var cachedDevice =
                     await _deviceRepository.getString(serial.toUpperCase());
                 if (cachedDevice != null && cachedDevice["cookies"] != null) {
                   return await _updateFirmwareLocal(
-                      serial, macAddress ?? "", uri);
+                    serial,
+                    macAddress ?? "",
+                    uri,
+                  );
                 }
               }
             }
@@ -465,29 +512,29 @@ class ControlProvider {
 
         await Future.wait(listSerial.map((serial) async {
           OLResponse result = await _updateFirmwareMeshOnline(
-              serial.trim(), modelName, userName, url, listMac);
+            serial.trim(),
+            modelName,
+            userName,
+            url,
+            listMac,
+          );
           results.add(result);
         }));
 
         return SDKResponse(
-                errorCode: results.isEmpty
-                    ? 400
-                    : results
-                            .where((element) => element.errorCode != 200)
-                            .isNotEmpty
-                        ? 400
-                        : 200,
-                errorMessage: results.isEmpty
-                    ? messageFail
-                    : results
-                            .where((element) => element.errorCode != 200)
-                            .isNotEmpty
-                        ? results
-                            .where((element) => element.errorCode != 200)
-                            .map((e) => e.errorMessage)
-                            .toString()
-                        : messageSuccess)
-            .toJson();
+          errorCode: results.isEmpty
+              ? 400
+              : results.where((element) => element.errorCode != 200).isNotEmpty
+                  ? 400
+                  : 200,
+          errorMessage: results.isEmpty
+              ? messageFail
+              : results.where((element) => element.errorCode != 200).isNotEmpty
+                  ? results.where((element) => element.errorCode != 200).map(
+                      (e) => e.errorMessage,
+                    ).toString()
+                  : messageSuccess,
+        ).toJson();
       }
     } catch (e) {
       return SDKResponse(errorCode: 400, errorMessage: messageFail).toJson();
@@ -495,11 +542,12 @@ class ControlProvider {
   }
 
   Future<dynamic> _updateFirmwareMeshOnline(
-      String serialNumber,
-      String modelName,
-      String? userName,
-      String url,
-      List<String> listMac) async {
+    String serialNumber,
+    String modelName,
+    String? userName,
+    String url,
+    List<String> listMac,
+  ) async {
     String command = getCommandTypes(CommandTypes.updateFirm);
     String key = getOneLinkPlatformAPIs(OneLinkPlatformAPIs.deviceConfig);
     String? accessToken;
@@ -513,7 +561,7 @@ class ControlProvider {
 
     var requestHeaders = {
       "Content-Type": "application/json",
-      'Authorization': 'Bearer $accessToken'
+      'Authorization': 'Bearer $accessToken',
     };
 
     var requestParams = userName != null
@@ -522,16 +570,19 @@ class ControlProvider {
             "modelName": modelName,
             "serialNumber": serialNumber,
             "body": {"fileURL": url, "macList": listMac},
-            'username': userName
+            'username': userName,
           }
         : {
             "command": command,
             "modelName": modelName,
             "serialNumber": serialNumber,
-            "body": {"fileURL": url, "macList": listMac}
+            "body": {"fileURL": url, "macList": listMac},
           };
-    var response = await VNPTTechOLOperator.shared
-        .post(key, headers: requestHeaders, params: requestParams);
+    var response = await VNPTTechOLOperator.shared.post(
+      key,
+      headers: requestHeaders,
+      params: requestParams,
+    );
     var res = OLResponse.fromJson(response);
     // var sdkResponse = toSDKresponseNoneData(res);
     // printLog("updateFirmwareOnline: $sdkResponse");
@@ -541,8 +592,9 @@ class ControlProvider {
   /// Ping Test
   Future<dynamic> pingTest(dynamic pingTestRequest) async {
     var serialNumber = pingTestRequest["serialNumber"];
-    bool isLocal =
-        ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+    bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+      serialNumber,
+    );
     if (isLocal) {
       return _pingTestAgent(pingTestRequest);
     } else {
@@ -566,16 +618,20 @@ class ControlProvider {
         final Map<String, String> headers = {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Cookie": cookie
+          "Cookie": cookie,
         };
 
         var response = await VNPTTechAgentOperator.shared.postWithHeader(
-            ipAddr ?? defaultIP,
-            headers,
-            getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
-            params: pingTestAgentRequest(getActionTypes(ActionTypes.ping),
-                    pingCode, host, requestId.toInt())
-                .toJson());
+          ipAddr ?? defaultIP,
+          headers,
+          getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
+          params: pingTestAgentRequest(
+            getActionTypes(ActionTypes.ping),
+            pingCode,
+            host,
+            requestId.toInt(),
+          ).toJson(),
+        );
         var res = AgentResponse.fromJson(response);
         // kiểm tả nếu status = 0 thì dữ liệu trả về chỉ lấy phần tử đầu tiên của listJson trả về
         if (res.status == 0) {
@@ -617,15 +673,18 @@ class ControlProvider {
               'modelName': modelName,
               'serialNumber': serialNumber,
               'host': host,
-              'username': userName
+              'username': userName,
             }
           : {
               'modelName': modelName,
               'serialNumber': serialNumber,
-              'host': host
+              'host': host,
             };
-      var response = await VNPTTechOLOperator.shared
-          .get(api, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.get(
+        api,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       printLog("PingResponse: $response");
 
@@ -634,12 +693,15 @@ class ControlProvider {
         var pingTestOutput = PingTestOutput.fromJson(res.body);
         res.body = pingTestOutput.toJson();
         return SDKResponse(
-                errorCode: 200, errorMessage: messageSuccess, data: res.body)
-            .toJson();
+          errorCode: 200,
+          errorMessage: messageSuccess,
+          data: res.body,
+        ).toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       return SDKResponse(errorCode: 400, errorMessage: messageFail).toJson();
@@ -649,8 +711,9 @@ class ControlProvider {
   /// Trace Test
   Future<dynamic> traceTest(dynamic traceTestRequest) async {
     var serialNumber = traceTestRequest["serialNumber"];
-    bool isLocal =
-        ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+    bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+      serialNumber,
+    );
     if (isLocal) {
       return _traceTestAgent(traceTestRequest);
     } else {
@@ -674,24 +737,26 @@ class ControlProvider {
         final Map<String, String> headers = <String, String>{
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Cookie": cookie
+          "Cookie": cookie,
         };
 
         var response = await VNPTTechAgentOperator.shared.postWithHeader(
-            ipAddr ?? defaultIP,
-            headers,
-            getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
-            params: traceTestAgentRequest(
-                    getActionTypes(ActionTypes.traceroute),
-                    tracerouteCode,
-                    host,
-                    requestId.toInt())
-                .toJson());
+          ipAddr ?? defaultIP,
+          headers,
+          getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
+          params: traceTestAgentRequest(
+            getActionTypes(ActionTypes.traceroute),
+            tracerouteCode,
+            host,
+            requestId.toInt(),
+          ).toJson(),
+        );
         var res = AgentResponse.fromJson(response);
         List<dynamic> listTraceOutput = [];
         if (res.status == 0) {
-          var listTraceResultAgent =
-              jsonDecode(jsonEncode(res.data['results']));
+          var listTraceResultAgent = jsonDecode(
+            jsonEncode(res.data['results']),
+          );
 
           for (var i = 0; i < listTraceResultAgent.length; i++) {
             if (listTraceResultAgent[i].isNotEmpty) {
@@ -699,12 +764,14 @@ class ControlProvider {
               var ipAddress = listTraceResultAgent[i]['hopAddress'] ?? '';
               var host = listTraceResultAgent[i]['hopHost'] ?? '';
               var rtTimes = double.parse(
-                  listTraceResultAgent[i]['hopRTTimes'].toString());
+                listTraceResultAgent[i]['hopRTTimes'].toString(),
+              );
               var itemTrace = TraceTestOutput(
-                  errorCode: errorCode,
-                  ipAddress: ipAddress,
-                  host: host,
-                  rtTimes: rtTimes);
+                errorCode: errorCode,
+                ipAddress: ipAddress,
+                host: host,
+                rtTimes: rtTimes,
+              );
               listTraceOutput.add(itemTrace.toJson());
             }
           }
@@ -743,43 +810,50 @@ class ControlProvider {
             'modelName': modelName,
             'serialNumber': serialNumber,
             'host': host,
-            'username': userName
+            'username': userName,
           }
         : {'modelName': modelName, 'serialNumber': serialNumber, 'host': host};
-    var response = await VNPTTechOLOperator.shared
-        .get(api, headers: requestHeaders, params: requestParams);
+    var response = await VNPTTechOLOperator.shared.get(
+      api,
+      headers: requestHeaders,
+      params: requestParams,
+    );
     var res = OLResponse.fromJson(response);
     printLog("TraceResponse: $response");
     List<dynamic> listTraceOutput = [];
     if (res.errorCode == 200) {
-      var listTraceResultPlatform =
-          jsonDecode(jsonEncode(res.body['routeHops']));
+      var listTraceResultPlatform = jsonDecode(
+        jsonEncode(res.body['routeHops']),
+      );
       for (var i = 0; i < listTraceResultPlatform.length; i++) {
         if (listTraceResultPlatform[i].isNotEmpty) {
           var errorCode = int.parse(listTraceResultPlatform[i]['hopErrorCode']);
           var ipAddress = listTraceResultPlatform[i]['hopAddress'] ?? '';
           var host = listTraceResultPlatform[i]['hopHost'] ?? '';
-          var rtTimes =
-              double.parse(listTraceResultPlatform[i]['hopRTTime'].toString());
+          var rtTimes = double.parse(
+            listTraceResultPlatform[i]['hopRTTime'].toString(),
+          );
           var itemTrace = TraceTestOutput(
-              errorCode: errorCode,
-              ipAddress: ipAddress,
-              host: host,
-              rtTimes: rtTimes);
+            errorCode: errorCode,
+            ipAddress: ipAddress,
+            host: host,
+            rtTimes: rtTimes,
+          );
 
           listTraceOutput.add(itemTrace.toJson());
         }
       }
 
       return SDKResponse(
-              errorCode: 200,
-              errorMessage: messageSuccess,
-              data: listTraceOutput)
-          .toJson();
+        errorCode: 200,
+        errorMessage: messageSuccess,
+        data: listTraceOutput,
+      ).toJson();
     } else {
       return SDKResponse(
-              errorCode: res.errorCode, errorMessage: res.errorMessage)
-          .toJson();
+        errorCode: res.errorCode,
+        errorMessage: res.errorMessage,
+      ).toJson();
     }
   }
 
@@ -805,12 +879,12 @@ class ControlProvider {
 
     var requestHeaders = {
       "Content-Type": "application/json",
-      'Authorization': 'Bearer $accessToken'
+      'Authorization': 'Bearer $accessToken',
     };
     var body = {
       "backup_date": backupDate,
       "url": url,
-      "softwareVersion": softwareVersion
+      "softwareVersion": softwareVersion,
     };
     final requestParams = userName != null
         ? {
@@ -818,34 +892,41 @@ class ControlProvider {
             "modelName": modelName,
             "serialNumber": serialNumber,
             "body": body,
-            'username': userName
+            'username': userName,
           }
         : {
             "command": command,
             "modelName": modelName,
             "serialNumber": serialNumber,
-            "body": body
+            "body": body,
           };
-    var response = await VNPTTechOLOperator.shared
-        .post(key, headers: requestHeaders, params: requestParams);
+    var response = await VNPTTechOLOperator.shared.post(
+      key,
+      headers: requestHeaders,
+      params: requestParams,
+    );
     printLog(response);
     var res = OLResponse.fromJson(response);
     if (res.errorCode == 200) {
       return SDKResponse(
-              errorCode: 200, errorMessage: messageSuccess, data: res.body)
-          .toJson();
+        errorCode: 200,
+        errorMessage: messageSuccess,
+        data: res.body,
+      ).toJson();
     } else {
       return SDKResponse(
-              errorCode: res.errorCode, errorMessage: res.errorMessage)
-          .toJson();
+        errorCode: res.errorCode,
+        errorMessage: res.errorMessage,
+      ).toJson();
     }
   }
 
   /// Speed Test
   Future<dynamic> speedTest(dynamic speedTestRequest) async {
     var serialNumber = speedTestRequest["serialNumber"];
-    bool isLocal =
-        ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+    bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+      serialNumber,
+    );
     if (isLocal) {
       return _speedTestAgent(speedTestRequest);
     } else {
@@ -875,39 +956,42 @@ class ControlProvider {
           ? {
               'modelName': modelName,
               'serialNumber': serialNumber,
-              'username': userName
+              'username': userName,
             }
-          : {
-              'modelName': modelName,
-              'serialNumber': serialNumber,
-            };
-      var response = await VNPTTechOLOperator.shared
-          .get(api, headers: requestHeaders, params: requestParams);
+          : {'modelName': modelName, 'serialNumber': serialNumber};
+      var response = await VNPTTechOLOperator.shared.get(
+        api,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       printLog("PingResponse: $response");
 
       if (res.errorCode == 200) {
         var speedData = res.body;
-        var downloadSpeed =
-            double.parse((speedData["downloadSpeed"] ?? '0').toString());
-        var uploadSpeed =
-            double.parse((speedData["uploadSpeed"] ?? '0').toString());
+        var downloadSpeed = double.parse(
+          (speedData["downloadSpeed"] ?? '0').toString(),
+        );
+        var uploadSpeed = double.parse(
+          (speedData["uploadSpeed"] ?? '0').toString(),
+        );
 
         var latency = double.parse((speedData["latency"] ?? '0').toString());
         var speedTestOutput = {
           "downloadSpeed": downloadSpeed,
           "uploadSpeed": uploadSpeed,
-          "latency": latency
+          "latency": latency,
         };
         return SDKResponse(
-                errorCode: 200,
-                errorMessage: messageSuccess,
-                data: speedTestOutput)
-            .toJson();
+          errorCode: 200,
+          errorMessage: messageSuccess,
+          data: speedTestOutput,
+        ).toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       return SDKResponse(errorCode: 400, errorMessage: messageFail).toJson();
@@ -929,35 +1013,38 @@ class ControlProvider {
         final Map<String, String> headers = {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Cookie": cookie
+          "Cookie": cookie,
         };
 
         var param = {
           "action": getActionTypes(ActionTypes.speedtest),
           "speedtestCode": speedtestCode,
-          "requestId": requestId
+          "requestId": requestId,
         };
 
         var response = await VNPTTechAgentOperator.shared.postWithHeader(
-            ipAddr ?? defaultIP,
-            headers,
-            getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
-            params: param);
+          ipAddr ?? defaultIP,
+          headers,
+          getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
+          params: param,
+        );
         var res = AgentResponse.fromJson(response);
         if (res.status == 0) {
           var speedOutput = res.data["results"];
           var speedData = speedOutput[0];
 
-          var downloadSpeed =
-              double.parse((speedData["downloadSpeed"] ?? '0').toString());
-          var uploadSpeed =
-              double.parse((speedData["uploadSpeed"] ?? '0').toString());
+          var downloadSpeed = double.parse(
+            (speedData["downloadSpeed"] ?? '0').toString(),
+          );
+          var uploadSpeed = double.parse(
+            (speedData["uploadSpeed"] ?? '0').toString(),
+          );
 
           var latency = double.parse((speedData["latency"] ?? '0').toString());
           res.data["results"] = {
             "downloadSpeed": downloadSpeed,
             "uploadSpeed": uploadSpeed,
-            "latency": latency
+            "latency": latency,
           };
         }
         var sdkResponse = convertToSDKResponse(res);
@@ -992,12 +1079,15 @@ class ControlProvider {
           ? {
               'modelName': modelName,
               'serialNumber': serialNumber,
-              'username': userName
+              'username': userName,
             }
           : {'modelName': modelName, 'serialNumber': serialNumber};
 
-      var response = await VNPTTechOLOperator.shared
-          .get(api, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.get(
+        api,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       printLog("deleteDevice: $response");
 
@@ -1007,8 +1097,9 @@ class ControlProvider {
             .toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       printLog(e);
@@ -1039,12 +1130,15 @@ class ControlProvider {
           ? {
               'modelName': modelName,
               'serialNumber': serialNumber,
-              'username': userName
+              'username': userName,
             }
           : {'modelName': modelName, 'serialNumber': serialNumber};
 
-      var response = await VNPTTechOLOperator.shared
-          .get(api, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.get(
+        api,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       printLog("deleteAllBackupFile: $response");
 
@@ -1053,8 +1147,9 @@ class ControlProvider {
             .toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       printLog(e);
@@ -1081,35 +1176,35 @@ class ControlProvider {
 
       var requestHeaders = {
         "Content-Type": "application/json",
-        'Authorization': 'Bearer $accessToken'
+        'Authorization': 'Bearer $accessToken',
       };
 
       var requestParams = userName != null
           ? {
               "modelName": modelName,
               "serialNumber": serialNumber,
-              "body": {
-                "urls": backupList,
-              },
-              'username': userName
+              "body": {"urls": backupList},
+              'username': userName,
             }
           : {
               "modelName": modelName,
               "serialNumber": serialNumber,
-              "body": {
-                "urls": backupList,
-              }
+              "body": {"urls": backupList},
             };
-      var response = await VNPTTechOLOperator.shared
-          .post(key, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.post(
+        key,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       if (res.errorCode == 200) {
         return SDKResponse(errorCode: 200, errorMessage: messageSuccess)
             .toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       return SDKResponse(errorCode: 400, errorMessage: messageFail).toJson();
@@ -1118,10 +1213,12 @@ class ControlProvider {
 
   // get Connected User Info
   Future<dynamic> getConnectedUserInfo(
-      dynamic getConnectedUserInfoRequest) async {
+    dynamic getConnectedUserInfoRequest,
+  ) async {
     String serialNumber = getConnectedUserInfoRequest['serialNumber'];
-    bool isLocal =
-        ConnectionManagement.shared.getMoblieAgentConnect(serialNumber);
+    bool isLocal = ConnectionManagement.shared.getMoblieAgentConnect(
+      serialNumber,
+    );
     if (isLocal) {
       return _getConnectedUserInfoAgent(getConnectedUserInfoRequest);
     } else {
@@ -1131,7 +1228,8 @@ class ControlProvider {
 
   // get ConnectedUserInfo
   Future<dynamic> _getConnectedUserInfoPlatform(
-      dynamic getConnectedUserRequest) async {
+    dynamic getConnectedUserRequest,
+  ) async {
     try {
       String modelName = getConnectedUserRequest['modelName'];
       String serialNumber = getConnectedUserRequest['serialNumber'];
@@ -1155,27 +1253,33 @@ class ControlProvider {
               'modelName': modelName,
               'serialNumber': serialNumber,
               'command': command,
-              'username': userName
+              'username': userName,
             }
           : {
               'modelName': modelName,
               'serialNumber': serialNumber,
-              'command': command
+              'command': command,
             };
 
-      var response = await VNPTTechOLOperator.shared
-          .get(api, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.get(
+        api,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       printLog("getConnectedUserInfo: $response");
 
       if (res.errorCode == 200) {
         return SDKResponse(
-                errorCode: 200, errorMessage: messageSuccess, data: res.body)
-            .toJson();
+          errorCode: 200,
+          errorMessage: messageSuccess,
+          data: res.body,
+        ).toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       printLog(e);
@@ -1185,7 +1289,8 @@ class ControlProvider {
 
   /// getConnectedUserInfoAgent
   Future<dynamic> _getConnectedUserInfoAgent(
-      dynamic getConnectedUserInfoRequest) async {
+    dynamic getConnectedUserInfoRequest,
+  ) async {
     try {
       String serialNumber = getConnectedUserInfoRequest['serialNumber'];
       serialNumber = serialNumber.toUpperCase();
@@ -1201,15 +1306,19 @@ class ControlProvider {
         final Map<String, String> headers = {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Cookie": cookies
+          "Cookie": cookies,
         };
         var requestId = DateTime.now().millisecondsSinceEpoch / 1000;
         var getTopologyResponse = await VNPTTechAgentOperator.shared
-            .postWithHeader(ipAddr, headers,
-                getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
-                params: rebootDevicesQuery(
-                        getActionTypes(actionTypes), requestId.toInt())
-                    .toJson());
+            .postWithHeader(
+              ipAddr,
+              headers,
+              getMobbileAgentAPIs(MobbileAgentAPIs.onelinkagent),
+              params: rebootDevicesQuery(
+                getActionTypes(actionTypes),
+                requestId.toInt(),
+              ).toJson(),
+            );
         AgentResponse response = AgentResponse.fromJson(getTopologyResponse);
         if (response.status == 0) {
           var sdkResponse = convertToSDKResponse(response);
@@ -1246,12 +1355,15 @@ class ControlProvider {
             }
           }
           return SDKResponse(
-                  errorCode: 200, errorMessage: messageSuccess, data: data)
-              .toJson();
+            errorCode: 200,
+            errorMessage: messageSuccess,
+            data: data,
+          ).toJson();
         } else {
           return SDKResponse(
-                  errorCode: response.status, errorMessage: response.message)
-              .toJson();
+            errorCode: response.status,
+            errorMessage: response.message,
+          ).toJson();
         }
       }
     } catch (e) {
@@ -1282,16 +1394,19 @@ class ControlProvider {
               'modelName': modelName,
               'serialNumber': serialNumber,
               'backupName': fileName,
-              'username': userName
+              'username': userName,
             }
           : {
               'modelName': modelName,
               'serialNumber': serialNumber,
-              'backupName': fileName
+              'backupName': fileName,
             };
 
-      var response = await VNPTTechOLOperator.shared
-          .get(api, headers: requestHeaders, params: requestParams);
+      var response = await VNPTTechOLOperator.shared.get(
+        api,
+        headers: requestHeaders,
+        params: requestParams,
+      );
       var res = OLResponse.fromJson(response);
       printLog("backupConfig: $response");
       if (res.errorCode == 200) {
@@ -1299,8 +1414,9 @@ class ControlProvider {
             .toJson();
       } else {
         return SDKResponse(
-                errorCode: res.errorCode, errorMessage: res.errorMessage)
-            .toJson();
+          errorCode: res.errorCode,
+          errorMessage: res.errorMessage,
+        ).toJson();
       }
     } catch (e) {
       return SDKResponse(errorCode: 400, errorMessage: messageFail).toJson();

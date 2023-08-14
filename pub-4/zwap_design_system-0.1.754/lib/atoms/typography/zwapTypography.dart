@@ -72,7 +72,7 @@ enum ZwapTextType {
   bigBodyBlack,
 
   /// This is the new version of buttonText (desing system 1.1)
-  textButton
+  textButton,
 }
 
 extension ZwapTextTypeExt on ZwapTextType {
@@ -103,35 +103,34 @@ extension ZwapTextTypeExt on ZwapTextType {
     List<String>? fontFamilyFallback,
     String? package,
     TextOverflow? overflow,
-  }) =>
-      getTextStyle(this).copyWith(
-        inherit: inherit,
-        color: color,
-        backgroundColor: backgroundColor,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        fontStyle: fontStyle,
-        letterSpacing: letterSpacing,
-        wordSpacing: wordSpacing,
-        textBaseline: textBaseline,
-        height: height,
-        leadingDistribution: leadingDistribution,
-        locale: locale,
-        foreground: foreground,
-        background: background,
-        shadows: shadows,
-        fontFeatures: fontFeatures,
-        fontVariations: fontVariations,
-        decoration: decoration,
-        decorationColor: decorationColor,
-        decorationStyle: decorationStyle,
-        decorationThickness: decorationThickness,
-        debugLabel: debugLabel,
-        fontFamily: fontFamily,
-        fontFamilyFallback: fontFamilyFallback,
-        package: package,
-        overflow: overflow,
-      );
+  }) => getTextStyle(this).copyWith(
+    inherit: inherit,
+    color: color,
+    backgroundColor: backgroundColor,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+    fontStyle: fontStyle,
+    letterSpacing: letterSpacing,
+    wordSpacing: wordSpacing,
+    textBaseline: textBaseline,
+    height: height,
+    leadingDistribution: leadingDistribution,
+    locale: locale,
+    foreground: foreground,
+    background: background,
+    shadows: shadows,
+    fontFeatures: fontFeatures,
+    fontVariations: fontVariations,
+    decoration: decoration,
+    decorationColor: decorationColor,
+    decorationStyle: decorationStyle,
+    decorationThickness: decorationThickness,
+    debugLabel: debugLabel,
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+    package: package,
+    overflow: overflow,
+  );
 }
 
 /// Custom typography style for zwap design system kit
@@ -259,310 +258,310 @@ class ZwapTypography {
   //? see https://websemantics.uk/tools/font-size-conversion-pixel-point-em-rem-percent/ for convertions
 
   static TextStyle get extraHeading => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 48,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 48,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigHeading => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 40,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 40,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumHeading => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 32,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 32,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get semiboldH1 => TextStyle(
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 24,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w600,
+    fontStyle: FontStyle.normal,
+    fontSize: 24,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get heavyH1 => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 24,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 24,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get semiboldH2 => TextStyle(
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 20,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w600,
+    fontStyle: FontStyle.normal,
+    fontSize: 20,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get heavyH2 => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 20,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 20,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get semiboldH3 => TextStyle(
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w600,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get heavyH3 => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get extraSmallBodyRegular => TextStyle(
-        fontWeight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
-        fontSize: 11,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    fontSize: 11,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get smallBodyLight => TextStyle(
-        fontWeight: FontWeight.w300,
-        fontStyle: FontStyle.normal,
-        fontSize: 12,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w300,
+    fontStyle: FontStyle.normal,
+    fontSize: 12,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get smallBodyRegular => TextStyle(
-        fontWeight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
-        fontSize: 12,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    fontSize: 12,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get smallBodyMedium => TextStyle(
-        fontWeight: FontWeight.w500,
-        fontStyle: FontStyle.normal,
-        fontSize: 12,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    fontSize: 12,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get smallBodySemibold => TextStyle(
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 12,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w600,
+    fontStyle: FontStyle.normal,
+    fontSize: 12,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get smallBodyBold => TextStyle(
-        fontWeight: FontWeight.w700,
-        fontStyle: FontStyle.normal,
-        fontSize: 12,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    fontSize: 12,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get smallBodyExtraBold => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 12,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 12,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get smallBodyBlack => TextStyle(
-        fontWeight: FontWeight.w900,
-        fontStyle: FontStyle.normal,
-        fontSize: 12,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w900,
+    fontStyle: FontStyle.normal,
+    fontSize: 12,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumBodyLight => TextStyle(
-        fontWeight: FontWeight.w300,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w300,
+    fontStyle: FontStyle.normal,
+    fontSize: 14,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumBodyRegular => TextStyle(
-        fontWeight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    fontSize: 14,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumBodyMedium => TextStyle(
-        fontWeight: FontWeight.w500,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    fontSize: 14,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumBodySemibold => TextStyle(
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w600,
+    fontStyle: FontStyle.normal,
+    fontSize: 14,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumBodyBold => TextStyle(
-        fontWeight: FontWeight.w700,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    fontSize: 14,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumBodyExtraBold => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 14,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get mediumBodyBlack => TextStyle(
-        fontWeight: FontWeight.w900,
-        fontStyle: FontStyle.normal,
-        fontSize: 14,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w900,
+    fontStyle: FontStyle.normal,
+    fontSize: 14,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigBodyLight => TextStyle(
-        fontWeight: FontWeight.w300,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w300,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigBodyRegular => TextStyle(
-        fontWeight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigBodyMedium => TextStyle(
-        fontWeight: FontWeight.w500,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigBodySemibold => TextStyle(
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w600,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigBodyBold => TextStyle(
-        fontWeight: FontWeight.w700,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigBodyExtraBold => TextStyle(
-        fontWeight: FontWeight.w800,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w800,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   static TextStyle get bigBodyBlack => TextStyle(
-        fontWeight: FontWeight.w900,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        letterSpacing: -0.24,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w900,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    letterSpacing: -0.24,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 
   /// This is the new version (design system 1.1) of buttonText
   static TextStyle get textButton => TextStyle(
-        fontWeight: FontWeight.w400,
-        fontStyle: FontStyle.normal,
-        fontSize: 16,
-        height: 1.43,
-        color: ZwapColors.shades100,
-        fontFamily: family.familyName,
-      );
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    fontSize: 16,
+    height: 1.43,
+    color: ZwapColors.shades100,
+    fontFamily: family.familyName,
+  );
 }

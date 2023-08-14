@@ -87,8 +87,9 @@ class _YustTextFieldState extends State<YustTextField> {
     if (_valueDidChange == false) return;
     if (widget.onEditingComplete == null) return;
 
-    final textFieldText =
-        widget.notTrim ? _controller.value.text : _controller.value.text.trim();
+    final textFieldText = widget.notTrim
+        ? _controller.value.text
+        : _controller.value.text.trim();
     final textFieldValue = textFieldText == '' ? null : textFieldText;
 
     if (widget.validator == null || widget.validator!(textFieldValue) == null) {
@@ -177,7 +178,8 @@ class _YustTextFieldState extends State<YustTextField> {
       _controller.text = textValue;
       _initValue = textValue;
       _controller.selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
+        TextPosition(offset: _controller.text.length),
+      );
     }
 
     if (widget.slimDesign) return _buildTextField();
@@ -186,17 +188,13 @@ class _YustTextFieldState extends State<YustTextField> {
       children: [
         Row(
           children: [
-            Expanded(
-              child: _buildTextField(),
-            ),
+            Expanded(child: _buildTextField()),
             widget.suffixIcon ?? const SizedBox(),
             if (widget.onDelete != null && widget.value != '')
               IconButton(
-                  onPressed: widget.onDelete!,
-                  icon: Icon(
-                    Icons.delete,
-                    color: Theme.of(context).primaryColor,
-                  )),
+                onPressed: widget.onDelete!,
+                icon: Icon(Icons.delete, color: Theme.of(context).primaryColor),
+              ),
           ],
         ),
         if (widget.style == YustInputStyle.normal && widget.divider)
@@ -212,7 +210,8 @@ class _YustTextFieldState extends State<YustTextField> {
         labelStyle: widget.readOnly
             ? TextStyle(
                 color: Theme.of(context).textTheme.bodySmall?.color ??
-                    Colors.black)
+                    Colors.black,
+              )
             : null,
         contentPadding: widget.contentPadding,
         border: widget.style == YustInputStyle.outlineBorder
@@ -236,7 +235,8 @@ class _YustTextFieldState extends State<YustTextField> {
       onChanged: widget.onChanged == null
           ? null
           : (value) => widget.onChanged!(
-              value == '' ? null : (widget.notTrim ? value : value.trim())),
+              value == '' ? null : (widget.notTrim ? value : value.trim()),
+            ),
       onTap: widget.onTap,
       autocorrect: widget.autocorrect,
       readOnly: widget.readOnly,

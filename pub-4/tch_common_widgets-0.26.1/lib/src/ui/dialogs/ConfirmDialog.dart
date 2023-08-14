@@ -84,14 +84,7 @@ class ConfirmDialog extends StatelessWidget {
         if (theText != null) ...[
           Row(
             mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Text(
-                  theText,
-                  style: textStyle,
-                ),
-              ),
-            ],
+            children: [Expanded(child: Text(theText, style: textStyle))],
           ),
           CommonSpaceVHalf(),
         ],

@@ -6,20 +6,22 @@ import '../db/drift_chat_database.dart';
 extension UserEntityX on UserEntity {
   /// Maps a [UserEntity] into [User]
   UserModel toUser() => UserModel(
-      userId: id,
-      nickname: nickname,
-      avatarUrl: avatarUrl,
-      createdAt: createdAt,
-      updatedAt: updatedAt);
+    userId: id,
+    nickname: nickname,
+    avatarUrl: avatarUrl,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+  );
 }
 
 /// Useful mapping functions for [User]
 extension UserX on UserModel {
   /// Maps a [User] into [UserEntity]
   UserEntity toEntity() => UserEntity(
-      id: userId,
-      nickname: nickname,
-      avatarUrl: avatarUrl,
-      createdAt: createdAt,
-      updatedAt: updatedAt);
+    id: userId,
+    nickname: nickname,
+    avatarUrl: avatarUrl,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+  );
 }
