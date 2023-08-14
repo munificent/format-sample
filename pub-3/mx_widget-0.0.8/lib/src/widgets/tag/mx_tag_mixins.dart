@@ -9,9 +9,13 @@ import 'mx_tag_plain_style.dart';
 
 class MXTagMixins {
   late MXTagBaseStyle style;
-  void setStyle(BuildContext context, MXTagModeEnum modeEnum,
-      MXTagThemeEnum themeEnum, MXTagshapeEnum shapeEnum,
-      {bool disabled = false}) {
+  void setStyle(
+    BuildContext context,
+    MXTagModeEnum modeEnum,
+    MXTagThemeEnum themeEnum,
+    MXTagshapeEnum shapeEnum, {
+    bool disabled = false,
+  }) {
     switch (modeEnum) {
       case MXTagModeEnum.deep:
         style = MXTagDeepStyle();
@@ -48,8 +52,12 @@ class MXTagMixins {
     return fontStyle;
   }
 
-  Widget? getIcon(BuildContext context, MXTagSizeEnum sizeEnum,
-      {IconData? icon, Widget? iconWidget}) {
+  Widget? getIcon(
+    BuildContext context,
+    MXTagSizeEnum sizeEnum, {
+    IconData? icon,
+    Widget? iconWidget,
+  }) {
     if (iconWidget != null) {
       return iconWidget;
     }
@@ -100,8 +108,12 @@ class MXTagMixins {
 
     if (icon != null || iconWidget != null) {
       // ignore: no_leading_underscores_for_local_identifiers
-      var _icon =
-          getIcon(context, sizeEnum, icon: icon, iconWidget: iconWidget);
+      var _icon = getIcon(
+        context,
+        sizeEnum,
+        icon: icon,
+        iconWidget: iconWidget,
+      );
       if (icon != null) {
         list.add(_icon!);
       }
@@ -118,8 +130,12 @@ class MXTagMixins {
 
     if (needCloseIcon == true) {
       // ignore: no_leading_underscores_for_local_identifiers
-      var _closeIcon = getIcon(context, sizeEnum,
-          icon: Icons.close_rounded, iconWidget: null);
+      var _closeIcon = getIcon(
+        context,
+        sizeEnum,
+        icon: Icons.close_rounded,
+        iconWidget: null,
+      );
       if (list.isNotEmpty) {
         list.add(_closeIcon!);
       } else {
@@ -129,16 +145,17 @@ class MXTagMixins {
     }
 
     child = Container(
-        decoration: BoxDecoration(
-            color: backgroundColor ?? style.backgroundColor,
-            borderRadius: style.borderRadius,
-            border: Border.all(
-                width: style.border!,
-                color: style.border! > 0
-                    ? style.borderColor!
-                    : Colors.transparent)),
-        padding: padding ?? getPadding(context, sizeEnum),
-        child: child);
+      decoration: BoxDecoration(
+        color: backgroundColor ?? style.backgroundColor,
+        borderRadius: style.borderRadius,
+        border: Border.all(
+          width: style.border!,
+          color: style.border! > 0 ? style.borderColor! : Colors.transparent,
+        ),
+      ),
+      padding: padding ?? getPadding(context, sizeEnum),
+      child: child,
+    );
 
     return child;
   }

@@ -125,17 +125,16 @@ void main() {
     final fetchedReactions = await reactionDao.getReactions(messageId);
     expect(fetchedReactions.length, reactions.length + 1);
     expect(
-      fetchedReactions
-          .firstWhere((it) =>
-              it.userId == copyReaction.userId && it.type == copyReaction.type)
-          .score,
+      fetchedReactions.firstWhere(
+        (it) =>
+            it.userId == copyReaction.userId && it.type == copyReaction.type,
+      ).score,
       33,
     );
     expect(
-      fetchedReactions
-          .where((it) =>
-              it.userId == newReaction.userId && it.type == newReaction.type)
-          .isNotEmpty,
+      fetchedReactions.where(
+        (it) => it.userId == newReaction.userId && it.type == newReaction.type,
+      ).isNotEmpty,
       true,
     );
   });

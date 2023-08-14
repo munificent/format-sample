@@ -13,10 +13,7 @@ typedef BuildCustomInput = Widget Function(
   Function() onFieldSubmitted,
 );
 
-typedef CustomSearchFilter = bool Function(
-  String value,
-  AutocompleteItem item,
-);
+typedef CustomSearchFilter = bool Function(String value, AutocompleteItem item);
 
 class MasterAutoComplete extends StatelessWidget {
   final List<AutocompleteItem> items;
@@ -75,12 +72,8 @@ class MasterAutoComplete extends StatelessWidget {
           ),
         );
       },
-      fieldViewBuilder: (
-        context,
-        textEditingController,
-        focusNode,
-        onFieldSubmitted,
-      ) {
+      fieldViewBuilder:
+          (context, textEditingController, focusNode, onFieldSubmitted) {
         return buildCustomInput != null
             ? buildCustomInput!(
                 context,

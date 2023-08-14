@@ -59,7 +59,9 @@ class PerceptFlutterWeb extends PerceptFlutterPlatform {
 
   @override
   Future<Map<String, String>?> getGlobalProperties(
-      List<String>? includeProperties, List<String>? excludeProperties) async {
+    List<String>? includeProperties,
+    List<String>? excludeProperties,
+  ) async {
     Map<String, String> globalProperties = {};
     String? uniqueId = await getUniqueID();
     String? userId = await getUserId();

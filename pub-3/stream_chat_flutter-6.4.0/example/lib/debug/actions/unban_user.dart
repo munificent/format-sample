@@ -6,10 +6,7 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:stream_chat_flutter_example/debug/error_dialog.dart';
 
 class DebugUnbanUser extends StatelessWidget {
-  const DebugUnbanUser({
-    super.key,
-    required this.client,
-  });
+  const DebugUnbanUser({super.key, required this.client});
 
   final StreamChatClient client;
 

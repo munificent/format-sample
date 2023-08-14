@@ -66,59 +66,86 @@ class _$OidcConfiguration extends OidcConfiguration {
   @override
   final BuiltList<String>? userinfoSigningAlgValuesSupported;
 
-  factory _$OidcConfiguration(
-          [void Function(OidcConfigurationBuilder)? updates]) =>
-      (new OidcConfigurationBuilder()..update(updates))._build();
+  factory _$OidcConfiguration([
+    void Function(OidcConfigurationBuilder)? updates,
+  ]) => (new OidcConfigurationBuilder()..update(updates))._build();
 
-  _$OidcConfiguration._(
-      {required this.authorizationEndpoint,
-      this.backchannelLogoutSessionSupported,
-      this.backchannelLogoutSupported,
-      this.claimsParameterSupported,
-      this.claimsSupported,
-      this.codeChallengeMethodsSupported,
-      this.endSessionEndpoint,
-      this.frontchannelLogoutSessionSupported,
-      this.frontchannelLogoutSupported,
-      this.grantTypesSupported,
-      required this.idTokenSignedResponseAlg,
-      required this.idTokenSigningAlgValuesSupported,
-      required this.issuer,
-      required this.jwksUri,
-      this.registrationEndpoint,
-      this.requestObjectSigningAlgValuesSupported,
-      this.requestParameterSupported,
-      this.requestUriParameterSupported,
-      this.requireRequestUriRegistration,
-      this.responseModesSupported,
-      required this.responseTypesSupported,
-      this.revocationEndpoint,
-      this.scopesSupported,
-      required this.subjectTypesSupported,
-      required this.tokenEndpoint,
-      this.tokenEndpointAuthMethodsSupported,
-      this.userinfoEndpoint,
-      required this.userinfoSignedResponseAlg,
-      this.userinfoSigningAlgValuesSupported})
-      : super._() {
+  _$OidcConfiguration._({
+    required this.authorizationEndpoint,
+    this.backchannelLogoutSessionSupported,
+    this.backchannelLogoutSupported,
+    this.claimsParameterSupported,
+    this.claimsSupported,
+    this.codeChallengeMethodsSupported,
+    this.endSessionEndpoint,
+    this.frontchannelLogoutSessionSupported,
+    this.frontchannelLogoutSupported,
+    this.grantTypesSupported,
+    required this.idTokenSignedResponseAlg,
+    required this.idTokenSigningAlgValuesSupported,
+    required this.issuer,
+    required this.jwksUri,
+    this.registrationEndpoint,
+    this.requestObjectSigningAlgValuesSupported,
+    this.requestParameterSupported,
+    this.requestUriParameterSupported,
+    this.requireRequestUriRegistration,
+    this.responseModesSupported,
+    required this.responseTypesSupported,
+    this.revocationEndpoint,
+    this.scopesSupported,
+    required this.subjectTypesSupported,
+    required this.tokenEndpoint,
+    this.tokenEndpointAuthMethodsSupported,
+    this.userinfoEndpoint,
+    required this.userinfoSignedResponseAlg,
+    this.userinfoSigningAlgValuesSupported,
+  }) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        authorizationEndpoint, r'OidcConfiguration', 'authorizationEndpoint');
-    BuiltValueNullFieldError.checkNotNull(idTokenSignedResponseAlg,
-        r'OidcConfiguration', 'idTokenSignedResponseAlg');
-    BuiltValueNullFieldError.checkNotNull(idTokenSigningAlgValuesSupported,
-        r'OidcConfiguration', 'idTokenSigningAlgValuesSupported');
+      authorizationEndpoint,
+      r'OidcConfiguration',
+      'authorizationEndpoint',
+    );
     BuiltValueNullFieldError.checkNotNull(
-        issuer, r'OidcConfiguration', 'issuer');
+      idTokenSignedResponseAlg,
+      r'OidcConfiguration',
+      'idTokenSignedResponseAlg',
+    );
     BuiltValueNullFieldError.checkNotNull(
-        jwksUri, r'OidcConfiguration', 'jwksUri');
+      idTokenSigningAlgValuesSupported,
+      r'OidcConfiguration',
+      'idTokenSigningAlgValuesSupported',
+    );
     BuiltValueNullFieldError.checkNotNull(
-        responseTypesSupported, r'OidcConfiguration', 'responseTypesSupported');
+      issuer,
+      r'OidcConfiguration',
+      'issuer',
+    );
     BuiltValueNullFieldError.checkNotNull(
-        subjectTypesSupported, r'OidcConfiguration', 'subjectTypesSupported');
+      jwksUri,
+      r'OidcConfiguration',
+      'jwksUri',
+    );
     BuiltValueNullFieldError.checkNotNull(
-        tokenEndpoint, r'OidcConfiguration', 'tokenEndpoint');
-    BuiltValueNullFieldError.checkNotNull(userinfoSignedResponseAlg,
-        r'OidcConfiguration', 'userinfoSignedResponseAlg');
+      responseTypesSupported,
+      r'OidcConfiguration',
+      'responseTypesSupported',
+    );
+    BuiltValueNullFieldError.checkNotNull(
+      subjectTypesSupported,
+      r'OidcConfiguration',
+      'subjectTypesSupported',
+    );
+    BuiltValueNullFieldError.checkNotNull(
+      tokenEndpoint,
+      r'OidcConfiguration',
+      'tokenEndpoint',
+    );
+    BuiltValueNullFieldError.checkNotNull(
+      userinfoSignedResponseAlg,
+      r'OidcConfiguration',
+      'userinfoSignedResponseAlg',
+    );
   }
 
   @override
@@ -210,25 +237,33 @@ class _$OidcConfiguration extends OidcConfiguration {
   String toString() {
     return (newBuiltValueToStringHelper(r'OidcConfiguration')
           ..add('authorizationEndpoint', authorizationEndpoint)
-          ..add('backchannelLogoutSessionSupported',
-              backchannelLogoutSessionSupported)
+          ..add(
+            'backchannelLogoutSessionSupported',
+            backchannelLogoutSessionSupported,
+          )
           ..add('backchannelLogoutSupported', backchannelLogoutSupported)
           ..add('claimsParameterSupported', claimsParameterSupported)
           ..add('claimsSupported', claimsSupported)
           ..add('codeChallengeMethodsSupported', codeChallengeMethodsSupported)
           ..add('endSessionEndpoint', endSessionEndpoint)
-          ..add('frontchannelLogoutSessionSupported',
-              frontchannelLogoutSessionSupported)
+          ..add(
+            'frontchannelLogoutSessionSupported',
+            frontchannelLogoutSessionSupported,
+          )
           ..add('frontchannelLogoutSupported', frontchannelLogoutSupported)
           ..add('grantTypesSupported', grantTypesSupported)
           ..add('idTokenSignedResponseAlg', idTokenSignedResponseAlg)
-          ..add('idTokenSigningAlgValuesSupported',
-              idTokenSigningAlgValuesSupported)
+          ..add(
+            'idTokenSigningAlgValuesSupported',
+            idTokenSigningAlgValuesSupported,
+          )
           ..add('issuer', issuer)
           ..add('jwksUri', jwksUri)
           ..add('registrationEndpoint', registrationEndpoint)
-          ..add('requestObjectSigningAlgValuesSupported',
-              requestObjectSigningAlgValuesSupported)
+          ..add(
+            'requestObjectSigningAlgValuesSupported',
+            requestObjectSigningAlgValuesSupported,
+          )
           ..add('requestParameterSupported', requestParameterSupported)
           ..add('requestUriParameterSupported', requestUriParameterSupported)
           ..add('requireRequestUriRegistration', requireRequestUriRegistration)
@@ -238,12 +273,16 @@ class _$OidcConfiguration extends OidcConfiguration {
           ..add('scopesSupported', scopesSupported)
           ..add('subjectTypesSupported', subjectTypesSupported)
           ..add('tokenEndpoint', tokenEndpoint)
-          ..add('tokenEndpointAuthMethodsSupported',
-              tokenEndpointAuthMethodsSupported)
+          ..add(
+            'tokenEndpointAuthMethodsSupported',
+            tokenEndpointAuthMethodsSupported,
+          )
           ..add('userinfoEndpoint', userinfoEndpoint)
           ..add('userinfoSignedResponseAlg', userinfoSignedResponseAlg)
-          ..add('userinfoSigningAlgValuesSupported',
-              userinfoSigningAlgValuesSupported))
+          ..add(
+            'userinfoSigningAlgValuesSupported',
+            userinfoSigningAlgValuesSupported,
+          ))
         .toString();
   }
 }
@@ -261,9 +300,9 @@ class OidcConfigurationBuilder
   bool? get backchannelLogoutSessionSupported =>
       _$this._backchannelLogoutSessionSupported;
   set backchannelLogoutSessionSupported(
-          bool? backchannelLogoutSessionSupported) =>
-      _$this._backchannelLogoutSessionSupported =
-          backchannelLogoutSessionSupported;
+    bool? backchannelLogoutSessionSupported,
+  ) => _$this._backchannelLogoutSessionSupported =
+      backchannelLogoutSessionSupported;
 
   bool? _backchannelLogoutSupported;
   bool? get backchannelLogoutSupported => _$this._backchannelLogoutSupported;
@@ -285,8 +324,8 @@ class OidcConfigurationBuilder
   ListBuilder<String> get codeChallengeMethodsSupported =>
       _$this._codeChallengeMethodsSupported ??= new ListBuilder<String>();
   set codeChallengeMethodsSupported(
-          ListBuilder<String>? codeChallengeMethodsSupported) =>
-      _$this._codeChallengeMethodsSupported = codeChallengeMethodsSupported;
+    ListBuilder<String>? codeChallengeMethodsSupported,
+  ) => _$this._codeChallengeMethodsSupported = codeChallengeMethodsSupported;
 
   String? _endSessionEndpoint;
   String? get endSessionEndpoint => _$this._endSessionEndpoint;
@@ -297,9 +336,9 @@ class OidcConfigurationBuilder
   bool? get frontchannelLogoutSessionSupported =>
       _$this._frontchannelLogoutSessionSupported;
   set frontchannelLogoutSessionSupported(
-          bool? frontchannelLogoutSessionSupported) =>
-      _$this._frontchannelLogoutSessionSupported =
-          frontchannelLogoutSessionSupported;
+    bool? frontchannelLogoutSessionSupported,
+  ) => _$this._frontchannelLogoutSessionSupported =
+      frontchannelLogoutSessionSupported;
 
   bool? _frontchannelLogoutSupported;
   bool? get frontchannelLogoutSupported => _$this._frontchannelLogoutSupported;
@@ -322,9 +361,9 @@ class OidcConfigurationBuilder
   ListBuilder<String> get idTokenSigningAlgValuesSupported =>
       _$this._idTokenSigningAlgValuesSupported ??= new ListBuilder<String>();
   set idTokenSigningAlgValuesSupported(
-          ListBuilder<String>? idTokenSigningAlgValuesSupported) =>
-      _$this._idTokenSigningAlgValuesSupported =
-          idTokenSigningAlgValuesSupported;
+    ListBuilder<String>? idTokenSigningAlgValuesSupported,
+  ) => _$this._idTokenSigningAlgValuesSupported =
+      idTokenSigningAlgValuesSupported;
 
   String? _issuer;
   String? get issuer => _$this._issuer;
@@ -344,9 +383,9 @@ class OidcConfigurationBuilder
       _$this._requestObjectSigningAlgValuesSupported ??=
           new ListBuilder<String>();
   set requestObjectSigningAlgValuesSupported(
-          ListBuilder<String>? requestObjectSigningAlgValuesSupported) =>
-      _$this._requestObjectSigningAlgValuesSupported =
-          requestObjectSigningAlgValuesSupported;
+    ListBuilder<String>? requestObjectSigningAlgValuesSupported,
+  ) => _$this._requestObjectSigningAlgValuesSupported =
+      requestObjectSigningAlgValuesSupported;
 
   bool? _requestParameterSupported;
   bool? get requestParameterSupported => _$this._requestParameterSupported;
@@ -403,9 +442,9 @@ class OidcConfigurationBuilder
   ListBuilder<String> get tokenEndpointAuthMethodsSupported =>
       _$this._tokenEndpointAuthMethodsSupported ??= new ListBuilder<String>();
   set tokenEndpointAuthMethodsSupported(
-          ListBuilder<String>? tokenEndpointAuthMethodsSupported) =>
-      _$this._tokenEndpointAuthMethodsSupported =
-          tokenEndpointAuthMethodsSupported;
+    ListBuilder<String>? tokenEndpointAuthMethodsSupported,
+  ) => _$this._tokenEndpointAuthMethodsSupported =
+      tokenEndpointAuthMethodsSupported;
 
   String? _userinfoEndpoint;
   String? get userinfoEndpoint => _$this._userinfoEndpoint;
@@ -416,16 +455,16 @@ class OidcConfigurationBuilder
   ListBuilder<String> get userinfoSignedResponseAlg =>
       _$this._userinfoSignedResponseAlg ??= new ListBuilder<String>();
   set userinfoSignedResponseAlg(
-          ListBuilder<String>? userinfoSignedResponseAlg) =>
-      _$this._userinfoSignedResponseAlg = userinfoSignedResponseAlg;
+    ListBuilder<String>? userinfoSignedResponseAlg,
+  ) => _$this._userinfoSignedResponseAlg = userinfoSignedResponseAlg;
 
   ListBuilder<String>? _userinfoSigningAlgValuesSupported;
   ListBuilder<String> get userinfoSigningAlgValuesSupported =>
       _$this._userinfoSigningAlgValuesSupported ??= new ListBuilder<String>();
   set userinfoSigningAlgValuesSupported(
-          ListBuilder<String>? userinfoSigningAlgValuesSupported) =>
-      _$this._userinfoSigningAlgValuesSupported =
-          userinfoSigningAlgValuesSupported;
+    ListBuilder<String>? userinfoSigningAlgValuesSupported,
+  ) => _$this._userinfoSigningAlgValuesSupported =
+      userinfoSigningAlgValuesSupported;
 
   OidcConfigurationBuilder() {
     OidcConfiguration._defaults(this);
@@ -493,48 +532,59 @@ class OidcConfigurationBuilder
     try {
       _$result = _$v ??
           new _$OidcConfiguration._(
-              authorizationEndpoint: BuiltValueNullFieldError.checkNotNull(
-                  authorizationEndpoint,
-                  r'OidcConfiguration',
-                  'authorizationEndpoint'),
-              backchannelLogoutSessionSupported:
-                  backchannelLogoutSessionSupported,
-              backchannelLogoutSupported: backchannelLogoutSupported,
-              claimsParameterSupported: claimsParameterSupported,
-              claimsSupported: _claimsSupported?.build(),
-              codeChallengeMethodsSupported:
-                  _codeChallengeMethodsSupported?.build(),
-              endSessionEndpoint: endSessionEndpoint,
-              frontchannelLogoutSessionSupported:
-                  frontchannelLogoutSessionSupported,
-              frontchannelLogoutSupported: frontchannelLogoutSupported,
-              grantTypesSupported: _grantTypesSupported?.build(),
-              idTokenSignedResponseAlg: idTokenSignedResponseAlg.build(),
-              idTokenSigningAlgValuesSupported:
-                  idTokenSigningAlgValuesSupported.build(),
-              issuer: BuiltValueNullFieldError.checkNotNull(
-                  issuer, r'OidcConfiguration', 'issuer'),
-              jwksUri: BuiltValueNullFieldError.checkNotNull(
-                  jwksUri, r'OidcConfiguration', 'jwksUri'),
-              registrationEndpoint: registrationEndpoint,
-              requestObjectSigningAlgValuesSupported:
-                  _requestObjectSigningAlgValuesSupported?.build(),
-              requestParameterSupported: requestParameterSupported,
-              requestUriParameterSupported: requestUriParameterSupported,
-              requireRequestUriRegistration: requireRequestUriRegistration,
-              responseModesSupported: _responseModesSupported?.build(),
-              responseTypesSupported: responseTypesSupported.build(),
-              revocationEndpoint: revocationEndpoint,
-              scopesSupported: _scopesSupported?.build(),
-              subjectTypesSupported: subjectTypesSupported.build(),
-              tokenEndpoint: BuiltValueNullFieldError.checkNotNull(
-                  tokenEndpoint, r'OidcConfiguration', 'tokenEndpoint'),
-              tokenEndpointAuthMethodsSupported:
-                  _tokenEndpointAuthMethodsSupported?.build(),
-              userinfoEndpoint: userinfoEndpoint,
-              userinfoSignedResponseAlg: userinfoSignedResponseAlg.build(),
-              userinfoSigningAlgValuesSupported:
-                  _userinfoSigningAlgValuesSupported?.build());
+            authorizationEndpoint: BuiltValueNullFieldError.checkNotNull(
+              authorizationEndpoint,
+              r'OidcConfiguration',
+              'authorizationEndpoint',
+            ),
+            backchannelLogoutSessionSupported:
+                backchannelLogoutSessionSupported,
+            backchannelLogoutSupported: backchannelLogoutSupported,
+            claimsParameterSupported: claimsParameterSupported,
+            claimsSupported: _claimsSupported?.build(),
+            codeChallengeMethodsSupported:
+                _codeChallengeMethodsSupported?.build(),
+            endSessionEndpoint: endSessionEndpoint,
+            frontchannelLogoutSessionSupported:
+                frontchannelLogoutSessionSupported,
+            frontchannelLogoutSupported: frontchannelLogoutSupported,
+            grantTypesSupported: _grantTypesSupported?.build(),
+            idTokenSignedResponseAlg: idTokenSignedResponseAlg.build(),
+            idTokenSigningAlgValuesSupported:
+                idTokenSigningAlgValuesSupported.build(),
+            issuer: BuiltValueNullFieldError.checkNotNull(
+              issuer,
+              r'OidcConfiguration',
+              'issuer',
+            ),
+            jwksUri: BuiltValueNullFieldError.checkNotNull(
+              jwksUri,
+              r'OidcConfiguration',
+              'jwksUri',
+            ),
+            registrationEndpoint: registrationEndpoint,
+            requestObjectSigningAlgValuesSupported:
+                _requestObjectSigningAlgValuesSupported?.build(),
+            requestParameterSupported: requestParameterSupported,
+            requestUriParameterSupported: requestUriParameterSupported,
+            requireRequestUriRegistration: requireRequestUriRegistration,
+            responseModesSupported: _responseModesSupported?.build(),
+            responseTypesSupported: responseTypesSupported.build(),
+            revocationEndpoint: revocationEndpoint,
+            scopesSupported: _scopesSupported?.build(),
+            subjectTypesSupported: subjectTypesSupported.build(),
+            tokenEndpoint: BuiltValueNullFieldError.checkNotNull(
+              tokenEndpoint,
+              r'OidcConfiguration',
+              'tokenEndpoint',
+            ),
+            tokenEndpointAuthMethodsSupported:
+                _tokenEndpointAuthMethodsSupported?.build(),
+            userinfoEndpoint: userinfoEndpoint,
+            userinfoSignedResponseAlg: userinfoSignedResponseAlg.build(),
+            userinfoSigningAlgValuesSupported:
+                _userinfoSigningAlgValuesSupported?.build(),
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -572,7 +622,10 @@ class OidcConfigurationBuilder
         _userinfoSigningAlgValuesSupported?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'OidcConfiguration', _$failedField, e.toString());
+          r'OidcConfiguration',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AnimationVariant {
-  scale,
-  slide,
-  fade,
-}
+enum AnimationVariant { scale, slide, fade }
 
 class MasterAnimatedListViewItem extends StatefulWidget {
   final Widget child;
@@ -38,16 +34,11 @@ class _MasterAnimatedListViewItemState extends State<MasterAnimatedListViewItem>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    )..forward();
+    _controller = AnimationController(vsync: this, duration: widget.duration)
+      ..forward();
     if (widget.animationVariant == AnimationVariant.scale) {
       _scaleAnimation = Tween<double>(begin: 0.5, end: 1).animate(
-        CurvedAnimation(
-          parent: _controller,
-          curve: widget.animaionCurve,
-        ),
+        CurvedAnimation(parent: _controller, curve: widget.animaionCurve),
       );
     }
     if (widget.animationVariant == AnimationVariant.slide) {
@@ -55,18 +46,12 @@ class _MasterAnimatedListViewItemState extends State<MasterAnimatedListViewItem>
         begin: const Offset(5, 0),
         end: Offset.zero,
       ).animate(
-        CurvedAnimation(
-          parent: _controller,
-          curve: widget.animaionCurve,
-        ),
+        CurvedAnimation(parent: _controller, curve: widget.animaionCurve),
       );
     }
     if (widget.animationVariant == AnimationVariant.fade) {
       _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
-        CurvedAnimation(
-          parent: _controller,
-          curve: widget.animaionCurve,
-        ),
+        CurvedAnimation(parent: _controller, curve: widget.animaionCurve),
       );
     }
   }
@@ -81,21 +66,12 @@ class _MasterAnimatedListViewItemState extends State<MasterAnimatedListViewItem>
   Widget build(BuildContext context) {
     super.build(context);
     if (widget.animationVariant == AnimationVariant.slide) {
-      return SlideTransition(
-        position: _slideAnimation,
-        child: widget.child,
-      );
+      return SlideTransition(position: _slideAnimation, child: widget.child);
     }
     if (widget.animationVariant == AnimationVariant.fade) {
-      return FadeTransition(
-        opacity: _fadeAnimation,
-        child: widget.child,
-      );
+      return FadeTransition(opacity: _fadeAnimation, child: widget.child);
     }
-    return ScaleTransition(
-      scale: _scaleAnimation,
-      child: widget.child,
-    );
+    return ScaleTransition(scale: _scaleAnimation, child: widget.child);
   }
 
   @override

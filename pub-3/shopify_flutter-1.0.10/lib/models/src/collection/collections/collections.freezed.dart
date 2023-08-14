@@ -12,7 +12,8 @@ part of 'collections.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 Collections _$CollectionsFromJson(Map<String, dynamic> json) {
   return _Collections.fromJson(json);
@@ -32,8 +33,9 @@ mixin _$Collections {
 /// @nodoc
 abstract class $CollectionsCopyWith<$Res> {
   factory $CollectionsCopyWith(
-          Collections value, $Res Function(Collections) then) =
-      _$CollectionsCopyWithImpl<$Res, Collections>;
+    Collections value,
+    $Res Function(Collections) then,
+  ) = _$CollectionsCopyWithImpl<$Res, Collections>;
   @useResult
   $Res call({List<Collection> collectionList, bool hasNextPage});
 }
@@ -50,20 +52,19 @@ class _$CollectionsCopyWithImpl<$Res, $Val extends Collections>
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? collectionList = null,
-    Object? hasNextPage = null,
-  }) {
-    return _then(_value.copyWith(
-      collectionList: null == collectionList
-          ? _value.collectionList
-          : collectionList // ignore: cast_nullable_to_non_nullable
-              as List<Collection>,
-      hasNextPage: null == hasNextPage
-          ? _value.hasNextPage
-          : hasNextPage // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  $Res call({Object? collectionList = null, Object? hasNextPage = null}) {
+    return _then(
+      _value.copyWith(
+        collectionList: null == collectionList
+            ? _value.collectionList
+            : collectionList // ignore: cast_nullable_to_non_nullable
+                  as List<Collection>,
+        hasNextPage: null == hasNextPage
+            ? _value.hasNextPage
+            : hasNextPage // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ) as $Val,
+    );
   }
 }
 
@@ -71,8 +72,9 @@ class _$CollectionsCopyWithImpl<$Res, $Val extends Collections>
 abstract class _$$_CollectionsCopyWith<$Res>
     implements $CollectionsCopyWith<$Res> {
   factory _$$_CollectionsCopyWith(
-          _$_Collections value, $Res Function(_$_Collections) then) =
-      __$$_CollectionsCopyWithImpl<$Res>;
+    _$_Collections value,
+    $Res Function(_$_Collections) then,
+  ) = __$$_CollectionsCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Collection> collectionList, bool hasNextPage});
@@ -83,24 +85,22 @@ class __$$_CollectionsCopyWithImpl<$Res>
     extends _$CollectionsCopyWithImpl<$Res, _$_Collections>
     implements _$$_CollectionsCopyWith<$Res> {
   __$$_CollectionsCopyWithImpl(
-      _$_Collections _value, $Res Function(_$_Collections) _then)
-      : super(_value, _then);
+    _$_Collections _value,
+    $Res Function(_$_Collections) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? collectionList = null,
-    Object? hasNextPage = null,
-  }) {
+  $Res call({Object? collectionList = null, Object? hasNextPage = null}) {
     return _then(_$_Collections(
       collectionList: null == collectionList
           ? _value._collectionList
           : collectionList // ignore: cast_nullable_to_non_nullable
-              as List<Collection>,
+                as List<Collection>,
       hasNextPage: null == hasNextPage
           ? _value.hasNextPage
           : hasNextPage // ignore: cast_nullable_to_non_nullable
-              as bool,
+                as bool,
     ));
   }
 }
@@ -108,13 +108,14 @@ class __$$_CollectionsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Collections implements _Collections {
-  _$_Collections(
-      {required final List<Collection> collectionList,
-      required this.hasNextPage})
-      : _collectionList = collectionList;
+  _$_Collections({
+    required final List<Collection> collectionList,
+    required this.hasNextPage,
+  }) : _collectionList = collectionList;
 
-  factory _$_Collections.fromJson(Map<String, dynamic> json) =>
-      _$$_CollectionsFromJson(json);
+  factory _$_Collections.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$_CollectionsFromJson(json);
 
   final List<Collection> _collectionList;
   @override
@@ -137,35 +138,42 @@ class _$_Collections implements _Collections {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Collections &&
-            const DeepCollectionEquality()
-                .equals(other._collectionList, _collectionList) &&
+            const DeepCollectionEquality().equals(
+              other._collectionList,
+              _collectionList,
+            ) &&
             (identical(other.hasNextPage, hasNextPage) ||
                 other.hasNextPage == hasNextPage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_collectionList), hasNextPage);
+  int get hashCode => Object.hash(
+    runtimeType,
+    const DeepCollectionEquality().hash(_collectionList),
+    hasNextPage,
+  );
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CollectionsCopyWith<_$_Collections> get copyWith =>
-      __$$_CollectionsCopyWithImpl<_$_Collections>(this, _$identity);
+  _$$_CollectionsCopyWith<_$_Collections>
+  get copyWith => __$$_CollectionsCopyWithImpl<_$_Collections>(
+    this,
+    _$identity,
+  );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CollectionsToJson(
-      this,
-    );
+    return _$$_CollectionsToJson(this);
   }
 }
 
 abstract class _Collections implements Collections {
-  factory _Collections(
-      {required final List<Collection> collectionList,
-      required final bool hasNextPage}) = _$_Collections;
+  factory _Collections({
+    required final List<Collection> collectionList,
+    required final bool hasNextPage,
+  }) = _$_Collections;
 
   factory _Collections.fromJson(Map<String, dynamic> json) =
       _$_Collections.fromJson;

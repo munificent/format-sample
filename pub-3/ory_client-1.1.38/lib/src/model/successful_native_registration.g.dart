@@ -16,24 +16,27 @@ class _$SuccessfulNativeRegistration extends SuccessfulNativeRegistration {
   @override
   final String? sessionToken;
 
-  factory _$SuccessfulNativeRegistration(
-          [void Function(SuccessfulNativeRegistrationBuilder)? updates]) =>
-      (new SuccessfulNativeRegistrationBuilder()..update(updates))._build();
+  factory _$SuccessfulNativeRegistration([
+    void Function(SuccessfulNativeRegistrationBuilder)? updates,
+  ]) => (new SuccessfulNativeRegistrationBuilder()..update(updates))._build();
 
-  _$SuccessfulNativeRegistration._(
-      {this.continueWith,
-      required this.identity,
-      this.session,
-      this.sessionToken})
-      : super._() {
+  _$SuccessfulNativeRegistration._({
+    this.continueWith,
+    required this.identity,
+    this.session,
+    this.sessionToken,
+  }) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        identity, r'SuccessfulNativeRegistration', 'identity');
+      identity,
+      r'SuccessfulNativeRegistration',
+      'identity',
+    );
   }
 
   @override
   SuccessfulNativeRegistration rebuild(
-          void Function(SuccessfulNativeRegistrationBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+    void Function(SuccessfulNativeRegistrationBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
   SuccessfulNativeRegistrationBuilder toBuilder() =>
@@ -73,8 +76,10 @@ class _$SuccessfulNativeRegistration extends SuccessfulNativeRegistration {
 
 class SuccessfulNativeRegistrationBuilder
     implements
-        Builder<SuccessfulNativeRegistration,
-            SuccessfulNativeRegistrationBuilder> {
+        Builder<
+          SuccessfulNativeRegistration,
+          SuccessfulNativeRegistrationBuilder
+        > {
   _$SuccessfulNativeRegistration? _$v;
 
   ListBuilder<ContinueWith>? _continueWith;
@@ -130,10 +135,11 @@ class SuccessfulNativeRegistrationBuilder
     try {
       _$result = _$v ??
           new _$SuccessfulNativeRegistration._(
-              continueWith: _continueWith?.build(),
-              identity: identity.build(),
-              session: _session?.build(),
-              sessionToken: sessionToken);
+            continueWith: _continueWith?.build(),
+            identity: identity.build(),
+            session: _session?.build(),
+            sessionToken: sessionToken,
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -145,7 +151,10 @@ class SuccessfulNativeRegistrationBuilder
         _session?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'SuccessfulNativeRegistration', _$failedField, e.toString());
+          r'SuccessfulNativeRegistration',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

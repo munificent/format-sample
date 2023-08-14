@@ -143,22 +143,31 @@ class RabbitRequestRealm extends _RabbitRequestRealm
   String get sdkVersion =>
       RealmObjectBase.get<String>(this, 'sdkVersion') as String;
   @override
-  set sdkVersion(String value) =>
-      RealmObjectBase.set(this, 'sdkVersion', value);
+  set sdkVersion(String value) => RealmObjectBase.set(
+    this,
+    'sdkVersion',
+    value,
+  );
 
   @override
   String get touchPoint =>
       RealmObjectBase.get<String>(this, 'touchPoint') as String;
   @override
-  set touchPoint(String value) =>
-      RealmObjectBase.set(this, 'touchPoint', value);
+  set touchPoint(String value) => RealmObjectBase.set(
+    this,
+    'touchPoint',
+    value,
+  );
 
   @override
   String get sessionEvent =>
       RealmObjectBase.get<String>(this, 'sessionEvent') as String;
   @override
-  set sessionEvent(String value) =>
-      RealmObjectBase.set(this, 'sessionEvent', value);
+  set sessionEvent(String value) => RealmObjectBase.set(
+    this,
+    'sessionEvent',
+    value,
+  );
 
   @override
   String get sessionId =>
@@ -176,8 +185,11 @@ class RabbitRequestRealm extends _RabbitRequestRealm
   String get eventValue =>
       RealmObjectBase.get<String>(this, 'eventValue') as String;
   @override
-  set eventValue(String value) =>
-      RealmObjectBase.set(this, 'eventValue', value);
+  set eventValue(String value) => RealmObjectBase.set(
+    this,
+    'eventValue',
+    value,
+  );
 
   @override
   String get osVer => RealmObjectBase.get<String>(this, 'osVer') as String;
@@ -198,15 +210,21 @@ class RabbitRequestRealm extends _RabbitRequestRealm
   String get localeCountry =>
       RealmObjectBase.get<String>(this, 'localeCountry') as String;
   @override
-  set localeCountry(String value) =>
-      RealmObjectBase.set(this, 'localeCountry', value);
+  set localeCountry(String value) => RealmObjectBase.set(
+    this,
+    'localeCountry',
+    value,
+  );
 
   @override
   String get localeLang =>
       RealmObjectBase.get<String>(this, 'localeLang') as String;
   @override
-  set localeLang(String value) =>
-      RealmObjectBase.set(this, 'localeLang', value);
+  set localeLang(String value) => RealmObjectBase.set(
+    this,
+    'localeLang',
+    value,
+  );
 
   @override
   String get latitude =>
@@ -261,15 +279,21 @@ class RabbitRequestRealm extends _RabbitRequestRealm
   String get prevAppVer =>
       RealmObjectBase.get<String>(this, 'prevAppVer') as String;
   @override
-  set prevAppVer(String value) =>
-      RealmObjectBase.set(this, 'prevAppVer', value);
+  set prevAppVer(String value) => RealmObjectBase.set(
+    this,
+    'prevAppVer',
+    value,
+  );
 
   @override
   String get prevAppVerNum =>
       RealmObjectBase.get<String>(this, 'prevAppVerNum') as String;
   @override
-  set prevAppVerNum(String value) =>
-      RealmObjectBase.set(this, 'prevAppVerNum', value);
+  set prevAppVerNum(String value) => RealmObjectBase.set(
+    this,
+    'prevAppVerNum',
+    value,
+  );
 
   @override
   String? get dataLayer =>
@@ -288,48 +312,52 @@ class RabbitRequestRealm extends _RabbitRequestRealm
   set isSend(bool value) => RealmObjectBase.set(this, 'isSend', value);
 
   @override
-  Stream<RealmObjectChanges<RabbitRequestRealm>> get changes =>
-      RealmObjectBase.getChanges<RabbitRequestRealm>(this);
+  Stream<RealmObjectChanges<RabbitRequestRealm>>
+  get changes => RealmObjectBase.getChanges<RabbitRequestRealm>(this);
 
   @override
-  RabbitRequestRealm freeze() =>
-      RealmObjectBase.freezeObject<RabbitRequestRealm>(this);
+  RabbitRequestRealm
+  freeze() => RealmObjectBase.freezeObject<RabbitRequestRealm>(this);
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
     RealmObjectBase.registerFactory(RabbitRequestRealm._);
     return const SchemaObject(
-        ObjectType.realmObject, RabbitRequestRealm, 'RabbitRequestRealm', [
-      SchemaProperty('id', RealmPropertyType.int, primaryKey: true),
-      SchemaProperty('memberId', RealmPropertyType.string),
-      SchemaProperty('ssoId', RealmPropertyType.string),
-      SchemaProperty('globalId', RealmPropertyType.string),
-      SchemaProperty('sdkVersion', RealmPropertyType.string),
-      SchemaProperty('touchPoint', RealmPropertyType.string),
-      SchemaProperty('sessionEvent', RealmPropertyType.string),
-      SchemaProperty('sessionId', RealmPropertyType.string),
-      SchemaProperty('eventName', RealmPropertyType.string),
-      SchemaProperty('eventValue', RealmPropertyType.string),
-      SchemaProperty('osVer', RealmPropertyType.string),
-      SchemaProperty('osType', RealmPropertyType.string),
-      SchemaProperty('display', RealmPropertyType.string),
-      SchemaProperty('localeCountry', RealmPropertyType.string),
-      SchemaProperty('localeLang', RealmPropertyType.string),
-      SchemaProperty('latitude', RealmPropertyType.string),
-      SchemaProperty('longitude', RealmPropertyType.string),
-      SchemaProperty('maid', RealmPropertyType.string),
-      SchemaProperty('device', RealmPropertyType.string),
-      SchemaProperty('model', RealmPropertyType.string),
-      SchemaProperty('brandName', RealmPropertyType.string),
-      SchemaProperty('board', RealmPropertyType.string),
-      SchemaProperty('appVer', RealmPropertyType.string),
-      SchemaProperty('appVerNum', RealmPropertyType.string),
-      SchemaProperty('prevAppVer', RealmPropertyType.string),
-      SchemaProperty('prevAppVerNum', RealmPropertyType.string),
-      SchemaProperty('dataLayer', RealmPropertyType.string, optional: true),
-      SchemaProperty('time', RealmPropertyType.string),
-      SchemaProperty('isSend', RealmPropertyType.bool),
-    ]);
+      ObjectType.realmObject,
+      RabbitRequestRealm,
+      'RabbitRequestRealm',
+      [
+        SchemaProperty('id', RealmPropertyType.int, primaryKey: true),
+        SchemaProperty('memberId', RealmPropertyType.string),
+        SchemaProperty('ssoId', RealmPropertyType.string),
+        SchemaProperty('globalId', RealmPropertyType.string),
+        SchemaProperty('sdkVersion', RealmPropertyType.string),
+        SchemaProperty('touchPoint', RealmPropertyType.string),
+        SchemaProperty('sessionEvent', RealmPropertyType.string),
+        SchemaProperty('sessionId', RealmPropertyType.string),
+        SchemaProperty('eventName', RealmPropertyType.string),
+        SchemaProperty('eventValue', RealmPropertyType.string),
+        SchemaProperty('osVer', RealmPropertyType.string),
+        SchemaProperty('osType', RealmPropertyType.string),
+        SchemaProperty('display', RealmPropertyType.string),
+        SchemaProperty('localeCountry', RealmPropertyType.string),
+        SchemaProperty('localeLang', RealmPropertyType.string),
+        SchemaProperty('latitude', RealmPropertyType.string),
+        SchemaProperty('longitude', RealmPropertyType.string),
+        SchemaProperty('maid', RealmPropertyType.string),
+        SchemaProperty('device', RealmPropertyType.string),
+        SchemaProperty('model', RealmPropertyType.string),
+        SchemaProperty('brandName', RealmPropertyType.string),
+        SchemaProperty('board', RealmPropertyType.string),
+        SchemaProperty('appVer', RealmPropertyType.string),
+        SchemaProperty('appVerNum', RealmPropertyType.string),
+        SchemaProperty('prevAppVer', RealmPropertyType.string),
+        SchemaProperty('prevAppVerNum', RealmPropertyType.string),
+        SchemaProperty('dataLayer', RealmPropertyType.string, optional: true),
+        SchemaProperty('time', RealmPropertyType.string),
+        SchemaProperty('isSend', RealmPropertyType.bool),
+      ],
+    );
   }
 }

@@ -166,10 +166,9 @@ class CommandManager with SdkAccessor {
         if (cmd.errorCode == ErrorCode.accessTokenNotValid) {
           sdk.eventManager.notifySessionTokenRequired();
         }
-        completer?.completeError(SBError(
-          code: cmd.errorCode,
-          message: cmd.errorMessage,
-        ));
+        completer?.completeError(
+          SBError(code: cmd.errorCode, message: cmd.errorMessage),
+        );
         // completer2?.completeError(SBError(
         //   code: cmd.errorCode,
         //   message: cmd.errorMessage,
@@ -341,10 +340,9 @@ class CommandManager with SdkAccessor {
       if (event.requestId != null) {
         //if sent by api then added id to cache -> done
         if (message.channelType == ChannelType.group) {
-          sendCommand(Command.buildMessageMACK(
-            message.channelUrl,
-            message.messageId,
-          ));
+          sendCommand(
+            Command.buildMessageMACK(message.channelUrl, message.messageId),
+          );
         }
       }
 
@@ -453,10 +451,8 @@ class CommandManager with SdkAccessor {
     final event = MessageEvent.fromJson(cmd.payload);
 
     try {
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       eventManager.notifyMessageDeleted(channel, event.messageId);
     } catch (e) {
       logger.w('Aborted ${cmd.cmd} ' + e.toString());
@@ -553,10 +549,8 @@ class CommandManager with SdkAccessor {
   Future<void> _processReaction(Command cmd) async {
     try {
       final event = ReactionEvent.fromJson(cmd.payload);
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       eventManager.notifyReactionUpdated(channel, event);
     } catch (e) {
       logger.w('Aborted ${cmd.cmd} ' + e.toString());
@@ -667,10 +661,8 @@ class CommandManager with SdkAccessor {
 
   Future<void> _processChannelPinnedMessage(ChannelEvent event) async {
     try {
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       if (channel is GroupChannel) {
         if (event.data.isEmpty) {
           channel.pinnedMessageIds = [];
@@ -682,14 +674,16 @@ class CommandManager with SdkAccessor {
           channel.pinnedMessageIds =
               (event.data["pinned_message_ids"]).cast<int>();
 
-          channel.lastPinnedMessage =
-              BaseMessage.fromJson(event.data["latest_pinned_message"]);
+          channel.lastPinnedMessage = BaseMessage.fromJson(
+            event.data["latest_pinned_message"],
+          );
           channel.pinnedMessagesUpdatedAt = event.ts ?? 0;
           eventManager.notifyPinUpdated(channel);
         }
       } else {
-        final error =
-            SBError(message: "Pin Message Only Supports GroupChannel");
+        final error = SBError(
+          message: "Pin Message Only Supports GroupChannel",
+        );
         logger.e(StackTrace.current, error);
         throw (error);
       }
@@ -726,10 +720,8 @@ class CommandManager with SdkAccessor {
       final user = banned
           ? RestrictedUser.fromJson(event.data)
           : User.fromJson(event.data);
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       if (banned) {
         if (channel is OpenChannel && user.isCurrentUser) {
           channel.removeFromCache();
@@ -764,19 +756,19 @@ class CommandManager with SdkAccessor {
       final user = muted
           ? RestrictedUser.fromJson(event.data)
           : User.fromJson(event.data);
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       if (channel is GroupChannel) {
         if (user.isCurrentUser) {
           channel.myMutedState = muted ? MuteState.muted : MuteState.unmuted;
         }
 
-        final member =
-            channel.members.firstWhereOrNull((e) => e.userId == user.userId);
-        member?.restrictionInfo =
-            muted ? RestrictionInfo.fromJson(event.data) : null;
+        final member = channel.members.firstWhereOrNull(
+          (e) => e.userId == user.userId,
+        );
+        member?.restrictionInfo = muted
+            ? RestrictionInfo.fromJson(event.data)
+            : null;
         member?.isMuted = muted;
       }
 
@@ -865,11 +857,7 @@ class CommandManager with SdkAccessor {
         }
       }
 
-      eventManager.notifyInvitationReceived(
-        channel,
-        invitees,
-        inviter,
-      );
+      eventManager.notifyInvitationReceived(channel, invitees, inviter);
     } catch (e) {
       logger.w('Aborted ${event.category.toString()} ' + e.toString());
     }
@@ -925,10 +913,8 @@ class CommandManager with SdkAccessor {
 
   Future<void> _processChannelFrozen(ChannelEvent event, bool frozen) async {
     try {
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       channel.isFrozen = frozen;
 
       if (frozen) {
@@ -971,10 +957,8 @@ class CommandManager with SdkAccessor {
 
   Future<void> _processChannelMetaData(ChannelEvent event) async {
     try {
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
 
       final cachedMetaData =
           sdk.cache.find<CachedDataMap<String>>(channelKey: event.channelUrl) ??
@@ -1001,10 +985,8 @@ class CommandManager with SdkAccessor {
 
   Future<void> _processChannelMetaCounter(ChannelEvent event) async {
     try {
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       eventManager.notifyMetaCountersChanged(channel, event.data);
     } catch (e) {
       logger.e('Aborted ${event.category.toString()} ' + e.toString());
@@ -1013,17 +995,15 @@ class CommandManager with SdkAccessor {
 
   Future<void> _processChannelOperators(ChannelEvent event) async {
     try {
-      final channel = await BaseChannel.getBaseChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.getBaseChannel(event.channelType, event.channelUrl);
       if (channel is OpenChannel) {
         channel.operators = event.operators;
       } else if (channel is GroupChannel) {
         channel.members.forEach((member) {
-          final isOperator = event.operators
-              .where((e) => e.userId == member.userId)
-              .isNotEmpty;
+          final isOperator = event.operators.where(
+            (e) => e.userId == member.userId,
+          ).isNotEmpty;
           member.role = isOperator ? Role.chat_operator : Role.none;
           if (member.isCurrentUser) {
             channel.myRole = isOperator ? Role.chat_operator : Role.none;
@@ -1038,10 +1018,8 @@ class CommandManager with SdkAccessor {
 
   Future<void> _processChannelPropChanged(ChannelEvent event) async {
     try {
-      final channel = await BaseChannel.refreshChannel(
-        event.channelType,
-        event.channelUrl,
-      );
+      final channel =
+          await BaseChannel.refreshChannel(event.channelType, event.channelUrl);
       if (channel is GroupChannel) {
         if (!channel.canChangeUnreadMessageCount) {
           channel.unreadMessageCount = 0;
@@ -1059,10 +1037,7 @@ class CommandManager with SdkAccessor {
 
   Future<void> _processChannelDelete(ChannelEvent event) async {
     sdk.cache.delete(channelKey: event.channelUrl);
-    eventManager.notifyChannelDeleted(
-      event.channelUrl,
-      event.channelType,
-    );
+    eventManager.notifyChannelDeleted(event.channelUrl, event.channelType);
   }
 
   Future<void> _processUserEvent(Command cmd) async {
@@ -1085,19 +1060,17 @@ class CommandManager with SdkAccessor {
   void _processBlock(UserEvent event) {
     final sdk = SendbirdSdk().getInternal();
     final channels = sdk.cache.findAll<GroupChannel>();
-    channels?.forEach((e) => e.setBlockedByMe(
-          targetId: event.blockee.userId,
-          blocked: true,
-        ));
+    channels?.forEach(
+      (e) => e.setBlockedByMe(targetId: event.blockee.userId, blocked: true),
+    );
   }
 
   void _processUnblock(UserEvent event) {
     final sdk = SendbirdSdk().getInternal();
     final channels = sdk.cache.findAll<GroupChannel>();
-    channels?.forEach((e) => e.setBlockedByMe(
-          targetId: event.blockee.userId,
-          blocked: false,
-        ));
+    channels?.forEach(
+      (e) => e.setBlockedByMe(targetId: event.blockee.userId, blocked: false),
+    );
   }
 
   void _processFriendDiscovery(UserEvent event) {

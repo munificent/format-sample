@@ -57,7 +57,7 @@ class _$GenericErrorContentSerializer
   @override
   final Iterable<Type> types = const [
     GenericErrorContent,
-    _$GenericErrorContent
+    _$GenericErrorContent,
   ];
 
   @override
@@ -111,9 +111,11 @@ class _$GenericErrorContentSerializer
     GenericErrorContent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object,
-            specifiedType: specifiedType)
-        .toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(

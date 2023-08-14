@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:mx_widget/src/export.dart';
 
 class MXPopUpBottomBody extends StatelessWidget {
-  const MXPopUpBottomBody(
-      {super.key,
-      required this.title,
-      this.leftText,
-      this.rightText,
-      this.titleStyle,
-      this.leftWidget,
-      this.rightWidget,
-      this.onRightCallback,
-      this.onLeftCallback,
-      required this.child,
-      this.backgroundColor});
+  const MXPopUpBottomBody({
+    super.key,
+    required this.title,
+    this.leftText,
+    this.rightText,
+    this.titleStyle,
+    this.leftWidget,
+    this.rightWidget,
+    this.onRightCallback,
+    this.onLeftCallback,
+    required this.child,
+    this.backgroundColor,
+  });
 
   final String title;
 
@@ -42,41 +43,43 @@ class MXPopUpBottomBody extends StatelessWidget {
       children: [
         _buildTtileLeft(),
         _buildTitleCenter(context),
-        _buildTitleRight()
+        _buildTitleRight(),
       ],
     );
   }
 
   Widget _buildTtileLeft() {
     return Visibility(
-        visible: leftWidget != null || leftText != null,
-        child: leftWidget ??
-            MXButton(
-              customMargin: const EdgeInsets.all(0),
-              text: leftText ?? '',
-              afterClickButtonCallback: () {
-                onLeftCallback?.call();
-              },
-              sizeEnum: MXButtonSizeEnum.small,
-              themeEnum: MXButtonThemeEnum.error,
-              typeEnum: MXButtonTypeEnum.plainText,
-            ));
+      visible: leftWidget != null || leftText != null,
+      child: leftWidget ??
+          MXButton(
+            customMargin: const EdgeInsets.all(0),
+            text: leftText ?? '',
+            afterClickButtonCallback: () {
+              onLeftCallback?.call();
+            },
+            sizeEnum: MXButtonSizeEnum.small,
+            themeEnum: MXButtonThemeEnum.error,
+            typeEnum: MXButtonTypeEnum.plainText,
+          ),
+    );
   }
 
   Widget _buildTitleRight() {
     return Visibility(
-        visible: rightWidget != null || rightText != null,
-        child: rightWidget ??
-            MXButton(
-              customMargin: const EdgeInsets.all(0),
-              text: rightText ?? '',
-              afterClickButtonCallback: () {
-                onLeftCallback?.call();
-              },
-              sizeEnum: MXButtonSizeEnum.small,
-              themeEnum: MXButtonThemeEnum.primary,
-              typeEnum: MXButtonTypeEnum.text,
-            ));
+      visible: rightWidget != null || rightText != null,
+      child: rightWidget ??
+          MXButton(
+            customMargin: const EdgeInsets.all(0),
+            text: rightText ?? '',
+            afterClickButtonCallback: () {
+              onLeftCallback?.call();
+            },
+            sizeEnum: MXButtonSizeEnum.small,
+            themeEnum: MXButtonThemeEnum.primary,
+            typeEnum: MXButtonTypeEnum.text,
+          ),
+    );
   }
 
   Widget _buildTitleCenter(BuildContext context) {
@@ -86,9 +89,10 @@ class MXPopUpBottomBody extends StatelessWidget {
       font: MXTheme.of(context).fontBodyMedium,
       style: titleStyle ??
           TextStyle(
-              overflow: TextOverflow.ellipsis,
-              color: MXTheme.of(context).fontUsePrimaryColor,
-              fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+            color: MXTheme.of(context).fontUsePrimaryColor,
+            fontWeight: FontWeight.bold,
+          ),
     );
   }
 
@@ -96,9 +100,9 @@ class MXPopUpBottomBody extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(MXTheme.of(context).space4),
       decoration: BoxDecoration(
-          color: backgroundColor ?? MXTheme.of(context).whiteColor,
-          borderRadius:
-              BorderRadius.circular(MXTheme.of(context).radiusMedium)),
+        color: backgroundColor ?? MXTheme.of(context).whiteColor,
+        borderRadius: BorderRadius.circular(MXTheme.of(context).radiusMedium),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [_buildTitle(context), child],

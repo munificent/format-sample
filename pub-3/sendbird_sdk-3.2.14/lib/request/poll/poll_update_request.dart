@@ -7,10 +7,7 @@ class PollUpdateRequest extends ApiRequest {
   @override
   final method = Method.put;
 
-  PollUpdateRequest({
-    required int pollId,
-    required PollUpdateParams params,
-  }) {
+  PollUpdateRequest({required int pollId, required PollUpdateParams params}) {
     url = 'polls/$pollId';
     body.addAll(params.toJson());
 

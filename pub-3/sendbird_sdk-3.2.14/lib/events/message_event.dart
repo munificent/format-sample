@@ -54,15 +54,17 @@ class MessageEvent extends BaseEvent {
     this.oldValues,
   });
 
-  factory MessageEvent.fromJson(Map<String, dynamic> json) =>
-      _$MessageEventFromJson(json);
+  factory MessageEvent.fromJson(
+    Map<String, dynamic> json,
+  ) => _$MessageEventFromJson(json);
 
   MentionType? hasChangedMentionType() {
     if (oldValues == null || oldValues?['mention_type'] == null) {
       return null;
     }
-    final oldMentionType =
-        MentionType.values.byName(oldValues?['mention_type']);
+    final oldMentionType = MentionType.values.byName(
+      oldValues?['mention_type'],
+    );
 
     return oldMentionType != mentionType ? mentionType : null;
   }

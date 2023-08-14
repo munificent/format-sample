@@ -32,26 +32,17 @@ void main() {
       where('f', isLessThan: 'abc'),
       const Filter.lessThan(field: 'f', value: 'abc'),
     );
-    expect(
-      where('f', exists: true),
-      const Filter.exists(field: 'f'),
-    );
+    expect(where('f', exists: true), const Filter.exists(field: 'f'));
     expect(
       where('f', exists: false),
       const Filter.not(Filter.exists(field: 'f')),
     );
-    expect(
-      where('f', isNull: true),
-      const Filter.isNull(field: 'f'),
-    );
+    expect(where('f', isNull: true), const Filter.isNull(field: 'f'));
     expect(
       where('f', isNull: false),
       const Filter.not(Filter.isNull(field: 'f')),
     );
-    expect(
-      where('f', isEmpty: true),
-      const Filter.isEmpty(field: 'f'),
-    );
+    expect(where('f', isEmpty: true), const Filter.isEmpty(field: 'f'));
     expect(
       where('f', isEmpty: false),
       const Filter.not(Filter.isEmpty(field: 'f')),

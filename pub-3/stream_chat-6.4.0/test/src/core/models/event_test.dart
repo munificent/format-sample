@@ -29,28 +29,25 @@ void main() {
         online: true,
       );
 
-      expect(
-        event.toJson(),
-        {
-          'type': 'type',
-          'cid': 'cid',
-          'connection_id': 'connectionId',
-          'created_at': '2020-01-29T03:22:47.636130Z',
-          'me': {'id': 'id2'},
-          'user': {'id': 'id'},
-          'reaction': null,
-          'message': null,
-          'channel': null,
-          'total_unread_count': 1,
-          'unread_channels': 1,
-          'online': true,
-          'member': null,
-          'channel_id': null,
-          'channel_type': null,
-          'parent_id': null,
-          'is_local': true,
-        },
-      );
+      expect(event.toJson(), {
+        'type': 'type',
+        'cid': 'cid',
+        'connection_id': 'connectionId',
+        'created_at': '2020-01-29T03:22:47.636130Z',
+        'me': {'id': 'id2'},
+        'user': {'id': 'id'},
+        'reaction': null,
+        'message': null,
+        'channel': null,
+        'total_unread_count': 1,
+        'unread_channels': 1,
+        'online': true,
+        'member': null,
+        'channel_id': null,
+        'channel_type': null,
+        'parent_id': null,
+        'is_local': true,
+      });
     });
 
     test('copyWith', () {
@@ -87,11 +84,14 @@ void main() {
 
     group('eventChannel', () {
       test('should parse json correctly', () {
-        final eventChannel =
-            EventChannel.fromJson(jsonFixture('event_channel.json'));
+        final eventChannel = EventChannel.fromJson(
+          jsonFixture('event_channel.json'),
+        );
         expect(eventChannel.type, 'messaging');
-        expect(eventChannel.cid,
-            'messaging:!members-v9ktpgmYysZA-MjgC-GMoeEawFHSelkOdTu6JGxFZWU');
+        expect(
+          eventChannel.cid,
+          'messaging:!members-v9ktpgmYysZA-MjgC-GMoeEawFHSelkOdTu6JGxFZWU',
+        );
         expect(eventChannel.createdBy!.id, 'super-band-9');
         expect(eventChannel.frozen, false);
         expect(eventChannel.members!.length, 2);

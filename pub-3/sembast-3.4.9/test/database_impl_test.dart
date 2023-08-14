@@ -57,17 +57,16 @@ void defineTests(DatabaseTestContext ctx) {
           fail('not changed');
         }
 
-        return db
-            .reOpen(DatabaseOpenOptions(onVersionChanged: onVersionChanged))
-            .then((Database db) {
+        return db.reOpen(
+          DatabaseOpenOptions(onVersionChanged: onVersionChanged),
+        ).then((Database db) {
           expect(db.path, dbPath);
           expect(db.version, 1);
           return db.close();
         }).then((_) {
-          return db
-              .reOpen(DatabaseOpenOptions(
-                  version: 1, onVersionChanged: onVersionChanged))
-              .then((Database db) {
+          return db.reOpen(
+            DatabaseOpenOptions(version: 1, onVersionChanged: onVersionChanged),
+          ).then((Database db) {
             expect(db.path, dbPath);
             expect(db.version, 1);
             return db.close();
@@ -87,10 +86,9 @@ void defineTests(DatabaseTestContext ctx) {
           localNewVersion = newVersion;
         }
 
-        return db
-            .reOpen(DatabaseOpenOptions(
-                version: 2, onVersionChanged: onVersionChanged))
-            .then((Database db) {
+        return db.reOpen(
+          DatabaseOpenOptions(version: 2, onVersionChanged: onVersionChanged),
+        ).then((Database db) {
           expect(localOldVersion, 1);
           expect(localNewVersion, 2);
           expect(db.path, dbPath);
@@ -114,10 +112,11 @@ void defineTests(DatabaseTestContext ctx) {
       test('export', () async {
         db = await factory.openDatabase(dbPath) as SembastDatabase;
         expect(
-            // ignore: deprecated_member_use
-            db!.toJson()['exportStat'],
-            // ignore: deprecated_member_use, deprecated_member_use_from_same_package
-            factory.hasStorage ? isNotNull : isNull);
+          // ignore: deprecated_member_use
+          db!.toJson()['exportStat'],
+          // ignore: deprecated_member_use, deprecated_member_use_from_same_package
+          factory.hasStorage ? isNotNull : isNull,
+        );
       });
     });
 

@@ -11,11 +11,12 @@ class MXButtonStyle {
   // 文字颜色
   Color? textColor;
 
-  MXButtonStyle(
-      {this.backgroundColor,
-      this.borderColor,
-      this.borderWidth,
-      this.textColor});
+  MXButtonStyle({
+    this.backgroundColor,
+    this.borderColor,
+    this.borderWidth,
+    this.textColor,
+  });
 
   /// 通过按钮的主题风格来获取对应的按钮状态样式
   MXButtonStyle.getFillStyleByTheme(
@@ -73,8 +74,10 @@ class MXButtonStyle {
     }
 
     /// 统一设置文字按钮的背景色
-    backgroundColor =
-        _getButtonTypeByTextClickStatusBackgroundColor(context, statusEnum);
+    backgroundColor = _getButtonTypeByTextClickStatusBackgroundColor(
+      context,
+      statusEnum,
+    );
 
     /// 将border的颜色设置为背景色
     borderColor = backgroundColor;
@@ -102,8 +105,10 @@ class MXButtonStyle {
     }
 
     /// 统一设置外框按钮的背景色
-    backgroundColor =
-        _getButtonTypeByOutlineClickStatusBackgroundColor(context, statusEnum);
+    backgroundColor = _getButtonTypeByOutlineClickStatusBackgroundColor(
+      context,
+      statusEnum,
+    );
 
     /// 将border的颜色设置为文件颜色
     borderColor = textColor;
@@ -112,7 +117,9 @@ class MXButtonStyle {
 
   /// 根据按钮的状态来获取对应的品牌色
   Color _getColorByPrimary(
-      BuildContext context, MXButtonStatusEnum statusEnum) {
+    BuildContext context,
+    MXButtonStatusEnum statusEnum,
+  ) {
     switch (statusEnum) {
       case MXButtonStatusEnum.normal:
         return MXTheme.of(context).brandPrimaryColor;
@@ -149,7 +156,9 @@ class MXButtonStyle {
 
   /// 根据按钮的状态来获取对应的成功色
   Color _getColorBySuccess(
-      BuildContext context, MXButtonStatusEnum statusEnum) {
+    BuildContext context,
+    MXButtonStatusEnum statusEnum,
+  ) {
     switch (statusEnum) {
       case MXButtonStatusEnum.normal:
         return MXTheme.of(context).successPrimaryColor;
@@ -162,7 +171,9 @@ class MXButtonStyle {
 
   /// 获取文字按钮对应状态的背景色
   Color _getButtonTypeByTextClickStatusBackgroundColor(
-      BuildContext context, MXButtonStatusEnum statusEnum) {
+    BuildContext context,
+    MXButtonStatusEnum statusEnum,
+  ) {
     switch (statusEnum) {
       case MXButtonStatusEnum.click:
         return MXTheme.of(context).infoPrimaryColor;
@@ -175,7 +186,9 @@ class MXButtonStyle {
 
   /// 获取外框按钮对应状态的背景色
   Color _getButtonTypeByOutlineClickStatusBackgroundColor(
-      BuildContext context, MXButtonStatusEnum statusEnum) {
+    BuildContext context,
+    MXButtonStatusEnum statusEnum,
+  ) {
     switch (statusEnum) {
       case MXButtonStatusEnum.click:
         return MXTheme.of(context).infoPrimaryColor;

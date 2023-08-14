@@ -27,9 +27,9 @@ class LiSlider extends StatefulWidget {
     this.min = 0.0,
     this.max = 1.0,
     this.colors = const LiSliderColors(),
-  })  : assert(min <= max),
-        assert(value >= min && value <= max),
-        super(key: key);
+  }) : assert(min <= max),
+       assert(value >= min && value <= max),
+       super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -106,8 +106,12 @@ class LiSliderColors {
           hashCode == other.hashCode;
 
   @override
-  int get hashCode =>
-      Object.hash(playedColor, bufferedColor, cursorColor, baselineColor);
+  int get hashCode => Object.hash(
+    playedColor,
+    bufferedColor,
+    cursorColor,
+    baselineColor,
+  );
 }
 
 class _SliderPainter extends CustomPainter {
@@ -119,8 +123,12 @@ class _SliderPainter extends CustomPainter {
 
   final LiSliderColors colors;
 
-  _SliderPainter(this.v, this.cv, this.dragging,
-      {this.colors = const LiSliderColors()});
+  _SliderPainter(
+    this.v,
+    this.cv,
+    this.dragging, {
+    this.colors = const LiSliderColors(),
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -129,46 +137,37 @@ class _SliderPainter extends CustomPainter {
 
     double radius = min(size.height / 2, 4);
     // draw background
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromPoints(
-          Offset(0, size.height / 2 - lineHeight),
-          Offset(size.width, size.height / 2 + lineHeight),
-        ),
-        Radius.circular(radius),
+    canvas.drawRRect(RRect.fromRectAndRadius(
+      Rect.fromPoints(
+        Offset(0, size.height / 2 - lineHeight),
+        Offset(size.width, size.height / 2 + lineHeight),
       ),
-      pt,
-    );
+      Radius.circular(radius),
+    ), pt);
 
     final double value = v * size.width;
 
     // draw played part
     pt.color = colors.playedColor;
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromPoints(
-          Offset(0, size.height / 2 - lineHeight),
-          Offset(value, size.height / 2 + lineHeight),
-        ),
-        Radius.circular(radius),
+    canvas.drawRRect(RRect.fromRectAndRadius(
+      Rect.fromPoints(
+        Offset(0, size.height / 2 - lineHeight),
+        Offset(value, size.height / 2 + lineHeight),
       ),
-      pt,
-    );
+      Radius.circular(radius),
+    ), pt);
 
     // draw cached part
     final double cacheValue = cv * size.width;
     if (cacheValue > value && cacheValue > 0) {
       pt.color = colors.bufferedColor;
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(
-          Rect.fromPoints(
-            Offset(value, size.height / 2 - lineHeight),
-            Offset(cacheValue, size.height / 2 + lineHeight),
-          ),
-          Radius.circular(radius),
+      canvas.drawRRect(RRect.fromRectAndRadius(
+        Rect.fromPoints(
+          Offset(value, size.height / 2 - lineHeight),
+          Offset(cacheValue, size.height / 2 + lineHeight),
         ),
-        pt,
-      );
+        Radius.circular(radius),
+      ), pt);
     }
 
     // draw circle cursor

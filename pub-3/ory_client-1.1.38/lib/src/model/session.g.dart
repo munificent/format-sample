@@ -29,17 +29,17 @@ class _$Session extends Session {
   factory _$Session([void Function(SessionBuilder)? updates]) =>
       (new SessionBuilder()..update(updates))._build();
 
-  _$Session._(
-      {this.active,
-      this.authenticatedAt,
-      this.authenticationMethods,
-      this.authenticatorAssuranceLevel,
-      this.devices,
-      this.expiresAt,
-      required this.id,
-      required this.identity,
-      this.issuedAt})
-      : super._() {
+  _$Session._({
+    this.active,
+    this.authenticatedAt,
+    this.authenticationMethods,
+    this.authenticatorAssuranceLevel,
+    this.devices,
+    this.expiresAt,
+    required this.id,
+    required this.identity,
+    this.issuedAt,
+  }) : super._() {
     BuiltValueNullFieldError.checkNotNull(id, r'Session', 'id');
     BuiltValueNullFieldError.checkNotNull(identity, r'Session', 'identity');
   }
@@ -115,15 +115,15 @@ class SessionBuilder implements Builder<Session, SessionBuilder> {
       _$this._authenticationMethods ??=
           new ListBuilder<SessionAuthenticationMethod>();
   set authenticationMethods(
-          ListBuilder<SessionAuthenticationMethod>? authenticationMethods) =>
-      _$this._authenticationMethods = authenticationMethods;
+    ListBuilder<SessionAuthenticationMethod>? authenticationMethods,
+  ) => _$this._authenticationMethods = authenticationMethods;
 
   AuthenticatorAssuranceLevel? _authenticatorAssuranceLevel;
   AuthenticatorAssuranceLevel? get authenticatorAssuranceLevel =>
       _$this._authenticatorAssuranceLevel;
   set authenticatorAssuranceLevel(
-          AuthenticatorAssuranceLevel? authenticatorAssuranceLevel) =>
-      _$this._authenticatorAssuranceLevel = authenticatorAssuranceLevel;
+    AuthenticatorAssuranceLevel? authenticatorAssuranceLevel,
+  ) => _$this._authenticatorAssuranceLevel = authenticatorAssuranceLevel;
 
   ListBuilder<SessionDevice>? _devices;
   ListBuilder<SessionDevice> get devices =>
@@ -186,15 +186,16 @@ class SessionBuilder implements Builder<Session, SessionBuilder> {
     try {
       _$result = _$v ??
           new _$Session._(
-              active: active,
-              authenticatedAt: authenticatedAt,
-              authenticationMethods: _authenticationMethods?.build(),
-              authenticatorAssuranceLevel: authenticatorAssuranceLevel,
-              devices: _devices?.build(),
-              expiresAt: expiresAt,
-              id: BuiltValueNullFieldError.checkNotNull(id, r'Session', 'id'),
-              identity: identity.build(),
-              issuedAt: issuedAt);
+            active: active,
+            authenticatedAt: authenticatedAt,
+            authenticationMethods: _authenticationMethods?.build(),
+            authenticatorAssuranceLevel: authenticatorAssuranceLevel,
+            devices: _devices?.build(),
+            expiresAt: expiresAt,
+            id: BuiltValueNullFieldError.checkNotNull(id, r'Session', 'id'),
+            identity: identity.build(),
+            issuedAt: issuedAt,
+          );
     } catch (_) {
       late String _$failedField;
       try {
@@ -208,7 +209,10 @@ class SessionBuilder implements Builder<Session, SessionBuilder> {
         identity.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            r'Session', _$failedField, e.toString());
+          r'Session',
+          _$failedField,
+          e.toString(),
+        );
       }
       rethrow;
     }

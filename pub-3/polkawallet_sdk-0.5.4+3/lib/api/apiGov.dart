@@ -32,9 +32,9 @@ class ApiGov {
   Future<List<ReferendumInfo>> queryReferendums(String address) async {
     final List data = await service.queryReferendums(address);
     if (data.length > 0) {
-      return data
-          .map((e) => ReferendumInfo.fromJson(Map<String, dynamic>.of(e)))
-          .toList();
+      return data.map(
+        (e) => ReferendumInfo.fromJson(Map<String, dynamic>.of(e)),
+      ).toList();
     }
     return [];
   }
@@ -42,9 +42,9 @@ class ApiGov {
   Future<List<ProposalInfoData>> queryProposals() async {
     final List data =
         await (service.queryProposals() as FutureOr<List<dynamic>>);
-    return data
-        .map((e) => ProposalInfoData.fromJson(Map<String, dynamic>.of(e)))
-        .toList();
+    return data.map(
+      (e) => ProposalInfoData.fromJson(Map<String, dynamic>.of(e)),
+    ).toList();
   }
 
   Future<ProposalInfoData?> queryNextExternal() async {
@@ -77,9 +77,9 @@ class ApiGov {
   Future<List<CouncilMotionData>> queryCouncilMotions() async {
     final List? data = await service.queryCouncilMotions();
     if (data != null) {
-      return data
-          .map((e) => CouncilMotionData.fromJson(Map<String, dynamic>.of(e)))
-          .toList();
+      return data.map(
+        (e) => CouncilMotionData.fromJson(Map<String, dynamic>.of(e)),
+      ).toList();
     }
     return [];
   }
@@ -88,7 +88,8 @@ class ApiGov {
     final Map? data = await service.queryTreasuryOverview();
     if (data != null) {
       return TreasuryOverviewData.fromJson(
-          Map<String, dynamic>.of(data as Map<String, dynamic>));
+        Map<String, dynamic>.of(data as Map<String, dynamic>),
+      );
     }
     return TreasuryOverviewData();
   }
@@ -96,9 +97,9 @@ class ApiGov {
   Future<List<TreasuryTipData>> queryTreasuryTips() async {
     final List? data = await service.queryTreasuryTips();
     if (data != null) {
-      return data
-          .map((e) => TreasuryTipData.fromJson(Map<String, dynamic>.of(e)))
-          .toList();
+      return data.map(
+        (e) => TreasuryTipData.fromJson(Map<String, dynamic>.of(e)),
+      ).toList();
     }
     return [];
   }

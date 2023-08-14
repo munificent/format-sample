@@ -45,20 +45,15 @@ class NesKeyIcon extends StatelessWidget {
 
     return Stack(
       children: [
-        Positioned(
-          child: NesIcon(
-            size: buttonSize,
-            iconData: iconData,
-          ),
-        ),
+        Positioned(child: NesIcon(size: buttonSize, iconData: iconData)),
         Positioned(
           left: buttonSize.width / 2 - 5,
           top: buttonSize.height / 2 - (pressed ? 4 : 8),
           child: Text(
             buttonKey.toUpperCase(),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: nesIconTheme.secondary,
-                ),
+              color: nesIconTheme.secondary,
+            ),
           ),
         ),
       ],

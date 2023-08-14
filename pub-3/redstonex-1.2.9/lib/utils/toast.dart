@@ -21,8 +21,8 @@ class rToast {
     Color? backgroundColor,
     double radius = 10.0,
     VoidCallback? onDismiss,
-    EdgeInsetsGeometry? textPadding =
-        const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+    EdgeInsetsGeometry?
+    textPadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
     EdgeInsetsGeometry? margin = const EdgeInsets.all(50),
     TextAlign? textAlign,
     TextStyle? textStyle,
@@ -49,14 +49,15 @@ class rToast {
               Icon(icon, color: iconColor, size: iconSize),
               rGaps.hGap4,
               Flexible(
-                  child: Text(
-                msg,
-                style: textStyle,
-                textAlign: textAlign,
-                maxLines: textMaxLines,
-                overflow: textOverflow,
-                softWrap: true,
-              )),
+                child: Text(
+                  msg,
+                  style: textStyle,
+                  textAlign: textAlign,
+                  maxLines: textMaxLines,
+                  overflow: textOverflow,
+                  softWrap: true,
+                ),
+              ),
             ],
           ),
         ),

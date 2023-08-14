@@ -13,12 +13,13 @@ class WrapperBuilder {
   ///Parsing fields
   static final _recordBuilder =
       <String, DbBaseModel Function(Map<String, dynamic> map)>{
-    'WrapperLocation': (Map<String, dynamic> map) =>
-        WrapperLocation.fromJson(map),
+    'WrapperLocation':
+        (Map<String, dynamic> map) => WrapperLocation.fromJson(map),
     'WrapperEmpty': (Map<String, dynamic> map) => WrapperEmpty.fromJson(map),
   };
 
   ///Parsing method
-  static DbBaseModel buildRecord(Map<String, dynamic> map) =>
-      _recordBuilder[map['type']]!(map);
+  static DbBaseModel buildRecord(
+    Map<String, dynamic> map,
+  ) => _recordBuilder[map['type']]!(map);
 }

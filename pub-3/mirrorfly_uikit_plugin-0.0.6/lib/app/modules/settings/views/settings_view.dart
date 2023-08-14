@@ -39,36 +39,43 @@ class _SettingsViewState extends State<SettingsView> {
             children: [
               // Get.toNamed(Routes.profile,arguments: {"from":Routes.settings})
               settingListItem(
-                  "Profile",
-                  profileIcon,
-                  rightArrowIcon,
-                  () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (con) => const ProfileView()))),
+                "Profile",
+                profileIcon,
+                rightArrowIcon,
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (con) => const ProfileView()),
+                ),
+              ),
               settingListItem("Chats", chatIcon, rightArrowIcon, () {
                 // Get.toNamed(Routes.chatSettings);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (con) => ChatSettingsView()));
-              }),
-              settingListItem("Starred Messages", staredMsgIcon, rightArrowIcon,
-                  () {
-                // Get.toNamed(Routes.starredMessages);
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (con) => const StarredMessagesView()));
+                  context,
+                  MaterialPageRoute(builder: (con) => ChatSettingsView()),
+                );
               }),
+              settingListItem(
+                "Starred Messages",
+                staredMsgIcon,
+                rightArrowIcon,
+                () {
+                  // Get.toNamed(Routes.starredMessages);
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (con) => const StarredMessagesView(),
+                  ));
+                },
+              ),
               // settingListItem(
               //     "Notifications", notificationIcon, rightArrowIcon, ()=>Get.toNamed(Routes.notification)),
               settingListItem(
-                  "Blocked Contacts",
-                  blockedIcon,
-                  rightArrowIcon,
-                  () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (con) => const BlockedListView()))),
+                "Blocked Contacts",
+                blockedIcon,
+                rightArrowIcon,
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (con) => const BlockedListView()),
+                ),
+              ),
             ],
           ),
         ),

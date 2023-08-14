@@ -4,8 +4,5 @@ class FocusRect {
   final RRect real;
   final RRect display;
 
-  FocusRect({
-    required this.real,
-    required this.display,
-  });
+  FocusRect({required this.real, required this.display});
 }

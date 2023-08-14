@@ -27,9 +27,9 @@ abstract class IdentitySchemaContainer
 
   IdentitySchemaContainer._();
 
-  factory IdentitySchemaContainer(
-          [void updates(IdentitySchemaContainerBuilder b)]) =
-      _$IdentitySchemaContainer;
+  factory IdentitySchemaContainer([
+    void updates(IdentitySchemaContainerBuilder b),
+  ]) = _$IdentitySchemaContainer;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(IdentitySchemaContainerBuilder b) => b;
@@ -44,7 +44,7 @@ class _$IdentitySchemaContainerSerializer
   @override
   final Iterable<Type> types = const [
     IdentitySchemaContainer,
-    _$IdentitySchemaContainer
+    _$IdentitySchemaContainer,
   ];
 
   @override
@@ -77,9 +77,11 @@ class _$IdentitySchemaContainerSerializer
     IdentitySchemaContainer object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object,
-            specifiedType: specifiedType)
-        .toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(

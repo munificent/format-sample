@@ -14,6 +14,7 @@ class PaymentMethodResponse with _$PaymentMethodResponse {
     StripeError? error,
   }) = _PaymentMethodResponse;
 
-  factory PaymentMethodResponse.fromJson(Map<String, dynamic> json) =>
-      _$PaymentMethodResponseFromJson(json);
+  factory PaymentMethodResponse.fromJson(
+    Map<String, dynamic> json,
+  ) => _$PaymentMethodResponseFromJson(json);
 }

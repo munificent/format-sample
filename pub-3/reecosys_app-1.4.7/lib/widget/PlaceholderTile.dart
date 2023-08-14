@@ -21,10 +21,7 @@ class BannerPlaceholder extends StatelessWidget {
 class TitlePlaceholder extends StatelessWidget {
   final double width;
 
-  const TitlePlaceholder({
-    Key? key,
-    required this.width,
-  }) : super(key: key);
+  const TitlePlaceholder({Key? key, required this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +31,9 @@ class TitlePlaceholder extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: width,
-            height: 12.0,
-            color: Colors.white,
-          ),
+          Container(width: width, height: 12.0, color: Colors.white),
           const SizedBox(height: 8.0),
-          Container(
-            width: width,
-            height: 12.0,
-            color: Colors.white,
-          ),
+          Container(width: width, height: 12.0, color: Colors.white),
         ],
       ),
     );
@@ -54,10 +43,7 @@ class TitlePlaceholder extends StatelessWidget {
 class FiledPlaceholder extends StatelessWidget {
   final double width;
 
-  const FiledPlaceholder({
-    Key? key,
-    required this.width,
-  }) : super(key: key);
+  const FiledPlaceholder({Key? key, required this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,16 +57,18 @@ class FiledPlaceholder extends StatelessWidget {
             width: width,
             height: 50.0,
             decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(kBorderRadius)),
+              color: white,
+              borderRadius: BorderRadius.circular(kBorderRadius),
+            ),
           ),
           const SizedBox(height: 12.0),
           Container(
             width: width,
             height: 50.0,
             decoration: BoxDecoration(
-                color: white,
-                borderRadius: BorderRadius.circular(kBorderRadius)),
+              color: white,
+              borderRadius: BorderRadius.circular(kBorderRadius),
+            ),
           ),
         ],
       ),
@@ -88,18 +76,13 @@ class FiledPlaceholder extends StatelessWidget {
   }
 }
 
-enum ContentLineType {
-  twoLines,
-  threeLines,
-}
+enum ContentLineType { twoLines, threeLines }
 
 class ContentPlaceholder extends StatelessWidget {
   final ContentLineType lineType;
 
-  const ContentPlaceholder({
-    Key? key,
-    required this.lineType,
-  }) : super(key: key);
+  const ContentPlaceholder({Key? key, required this.lineType})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -136,14 +119,10 @@ class ContentPlaceholder extends StatelessWidget {
                     color: Colors.white,
                     margin: const EdgeInsets.only(bottom: 8.0),
                   ),
-                Container(
-                  width: 100.0,
-                  height: 10.0,
-                  color: Colors.white,
-                )
+                Container(width: 100.0, height: 10.0, color: Colors.white),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

@@ -88,7 +88,8 @@ class ApiResponse {
       page: json['page'],
       cursor: json['cursor'],
       result: List<Transaction>.from(
-          json['result'].map((x) => Transaction.fromJson(x))),
+        json['result'].map((x) => Transaction.fromJson(x)),
+      ),
     );
   }
 }
