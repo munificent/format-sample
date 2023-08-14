@@ -8,11 +8,7 @@ class RequestError extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.error_outline,
-            color: Colors.black,
-            size: 100,
-          ),
+          Icon(Icons.error_outline, color: Colors.black, size: 100),
           SizedBox(height: 10),
           Text(
             'Who\'s that Pokémon?',
@@ -46,7 +42,7 @@ class RequestError extends StatelessWidget {
             ),
             onPressed: () => Navigator.of(context).pop(),
             child: Text('Return Home'),
-          )
+          ),
         ],
       ),
     );

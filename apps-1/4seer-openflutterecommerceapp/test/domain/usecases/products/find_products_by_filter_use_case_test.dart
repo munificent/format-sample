@@ -28,7 +28,8 @@ void main() {
       () async {
         // arrange
         when(woocommerce.getProductList(any)).thenAnswer(
-            (_) async => json.decode(fixture('woocommerce/products.json')));
+          (_) async => json.decode(fixture('woocommerce/products.json')),
+        );
         // act
         final productsData =
             await findProductsByFilterUseCase.execute(productsByFilterParams);

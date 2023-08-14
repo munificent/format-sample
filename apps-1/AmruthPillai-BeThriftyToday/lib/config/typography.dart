@@ -12,7 +12,7 @@ TextStyle transactionSubtitleStyle = TextStyle(
 );
 
 TextStyle transactionAmountStyle(Color color) => TextStyle(
-      fontSize: 18,
-      color: color,
-      fontWeight: FontWeight.w700,
-    );
+  fontSize: 18,
+  color: color,
+  fontWeight: FontWeight.w700,
+);

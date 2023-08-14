@@ -29,8 +29,9 @@ class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
 
   @override
   Future removePaymentMethod(int paymentMethodId) async {
-    dataStorage.paymentMethods
-        .removeWhere((paymentMethods) => paymentMethods.id == paymentMethodId);
+    dataStorage.paymentMethods.removeWhere(
+      (paymentMethods) => paymentMethods.id == paymentMethodId,
+    );
   }
 
   @override
@@ -38,8 +39,9 @@ class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
     List<PaymentMethodModel> paymentMethods = dataStorage.paymentMethods;
     dataStorage.paymentMethods.clear();
     paymentMethods.forEach((paymentMethod) {
-      dataStorage.paymentMethods.add(paymentMethod.copyWith(
-          isDefault: paymentMethod.id == paymentMethodId));
+      dataStorage.paymentMethods.add(
+        paymentMethod.copyWith(isDefault: paymentMethod.id == paymentMethodId),
+      );
     });
   }
 

@@ -115,9 +115,8 @@ class CommonUtils {
 
     var status = await Permission.storage.status;
     if (status != PermissionStatus.granted) {
-      Map<Permission, PermissionStatus> statuses = await [
-        Permission.storage,
-      ].request();
+      Map<Permission, PermissionStatus> statuses =
+          await [Permission.storage].request();
       if (statuses[Permission.storage] != PermissionStatus.granted) {
         return null;
       }
@@ -295,7 +294,8 @@ class CommonUtils {
   static copy(String? data, BuildContext context) {
     Clipboard.setData(new ClipboardData(text: data));
     Fluttertoast.showToast(
-        msg: GSYLocalizations.i18n(context)!.option_share_copy_success);
+      msg: GSYLocalizations.i18n(context)!.option_share_copy_success,
+    );
   }
 
   static launchUrl(context, String? url) {
@@ -336,11 +336,14 @@ class CommonUtils {
       NavigatorUtils.goGSYWebView(context, url, title);
     } else {
       NavigatorUtils.goGSYWebView(
-          context,
-          new Uri.dataFromString(url,
-                  mimeType: 'text/html', encoding: Encoding.getByName("utf-8"))
-              .toString(),
-          title);
+        context,
+        new Uri.dataFromString(
+          url,
+          mimeType: 'text/html',
+          encoding: Encoding.getByName("utf-8"),
+        ).toString(),
+        title,
+      );
     }
   }
 
@@ -349,46 +352,52 @@ class CommonUtils {
       await launch(url);
     } else {
       Fluttertoast.showToast(
-          msg: GSYLocalizations.i18n(context)!.option_web_launcher_error +
-              ": " +
-              (url ?? ""));
+        msg: GSYLocalizations.i18n(context)!.option_web_launcher_error +
+            ": " +
+            (url ?? ""),
+      );
     }
   }
 
   static Future<Null> showLoadingDialog(BuildContext context) {
     return NavigatorUtils.showGSYDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return new Material(
-              color: Colors.transparent,
-              child: WillPopScope(
-                onWillPop: () => new Future.value(false),
-                child: Center(
-                  child: new Container(
-                    width: 200.0,
-                    height: 200.0,
-                    padding: new EdgeInsets.all(4.0),
-                    decoration: new BoxDecoration(
-                      color: Colors.transparent,
-                      //用一个BoxDecoration装饰器提供背景图片
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                    child: new Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Container(
-                            child: SpinKitCubeGrid(color: GSYColors.white)),
-                        new Container(height: 10.0),
-                        new Container(
-                            child: new Text(
-                                GSYLocalizations.i18n(context)!.loading_text,
-                                style: GSYConstant.normalTextWhite)),
-                      ],
-                    ),
-                  ),
+      context: context,
+      builder: (BuildContext context) {
+        return new Material(
+          color: Colors.transparent,
+          child: WillPopScope(
+            onWillPop: () => new Future.value(false),
+            child: Center(
+              child: new Container(
+                width: 200.0,
+                height: 200.0,
+                padding: new EdgeInsets.all(4.0),
+                decoration: new BoxDecoration(
+                  color: Colors.transparent,
+                  //用一个BoxDecoration装饰器提供背景图片
+                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
                 ),
-              ));
-        });
+                child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      child: SpinKitCubeGrid(color: GSYColors.white),
+                    ),
+                    new Container(height: 10.0),
+                    new Container(
+                      child: new Text(
+                        GSYLocalizations.i18n(context)!.loading_text,
+                        style: GSYConstant.normalTextWhite,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   static Future<Null> showEditDialog(
@@ -402,20 +411,21 @@ class CommonUtils {
     bool needTitle = true,
   }) {
     return NavigatorUtils.showGSYDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Center(
-            child: new IssueEditDialog(
-              dialogTitle,
-              onTitleChanged,
-              onContentChanged,
-              onPressed,
-              titleController: titleController,
-              valueController: valueController,
-              needTitle: needTitle,
-            ),
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: new IssueEditDialog(
+            dialogTitle,
+            onTitleChanged,
+            onContentChanged,
+            onPressed,
+            titleController: titleController,
+            valueController: valueController,
+            needTitle: needTitle,
+          ),
+        );
+      },
+    );
   }
 
   ///列表item dialog
@@ -428,65 +438,72 @@ class CommonUtils {
     List<Color>? colorList,
   }) {
     return NavigatorUtils.showGSYDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Center(
-            child: new Container(
-              width: width,
-              height: height,
-              padding: new EdgeInsets.all(4.0),
-              margin: new EdgeInsets.all(20.0),
-              decoration: new BoxDecoration(
-                color: GSYColors.white,
-                //用一个BoxDecoration装饰器提供背景图片
-                borderRadius: BorderRadius.all(Radius.circular(4.0)),
-              ),
-              child: new ListView.builder(
-                  itemCount: commitMaps?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return GSYFlexButton(
-                      maxLines: 1,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      fontSize: 14.0,
-                      color: colorList != null
-                          ? colorList[index]
-                          : Theme.of(context).primaryColor,
-                      text: commitMaps![index],
-                      textColor: GSYColors.white,
-                      onPress: () {
-                        Navigator.pop(context);
-                        onTap(index);
-                      },
-                    );
-                  }),
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: new Container(
+            width: width,
+            height: height,
+            padding: new EdgeInsets.all(4.0),
+            margin: new EdgeInsets.all(20.0),
+            decoration: new BoxDecoration(
+              color: GSYColors.white,
+              //用一个BoxDecoration装饰器提供背景图片
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
             ),
-          );
-        });
+            child: new ListView.builder(
+              itemCount: commitMaps?.length ?? 0,
+              itemBuilder: (context, index) {
+                return GSYFlexButton(
+                  maxLines: 1,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  fontSize: 14.0,
+                  color: colorList != null
+                      ? colorList[index]
+                      : Theme.of(context).primaryColor,
+                  text: commitMaps![index],
+                  textColor: GSYColors.white,
+                  onPress: () {
+                    Navigator.pop(context);
+                    onTap(index);
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   ///版本更新
   static Future<Null> showUpdateDialog(
-      BuildContext context, String contentMsg) {
+    BuildContext context,
+    String contentMsg,
+  ) {
     return NavigatorUtils.showGSYDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: new Text(GSYLocalizations.i18n(context)!.app_version_title),
-            content: new Text(contentMsg),
-            actions: <Widget>[
-              new TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(GSYLocalizations.i18n(context)!.app_cancel)),
-              new TextButton(
-                  onPressed: () {
-                    launch(Address.updateUrl);
-                    Navigator.pop(context);
-                  },
-                  child: new Text(GSYLocalizations.i18n(context)!.app_ok)),
-            ],
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text(GSYLocalizations.i18n(context)!.app_version_title),
+          content: new Text(contentMsg),
+          actions: <Widget>[
+            new TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: new Text(GSYLocalizations.i18n(context)!.app_cancel),
+            ),
+            new TextButton(
+              onPressed: () {
+                launch(Address.updateUrl);
+                Navigator.pop(context);
+              },
+              child: new Text(GSYLocalizations.i18n(context)!.app_ok),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

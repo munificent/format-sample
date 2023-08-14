@@ -40,10 +40,11 @@ class _FlutterReduxAppState extends State<FlutterReduxApp>
 
     ///初始化数据
     initialState: new GSYState(
-        userInfo: User.empty(),
-        login: false,
-        themeData: CommonUtils.getThemeData(GSYColors.primarySwatch),
-        locale: Locale('zh', 'CH')),
+      userInfo: User.empty(),
+      login: false,
+      themeData: CommonUtils.getThemeData(GSYColors.primarySwatch),
+      locale: Locale('zh', 'CH'),
+    ),
   );
 
   @override
@@ -65,11 +66,11 @@ class _FlutterReduxAppState extends State<FlutterReduxApp>
     /// 通过 StoreProvider 应用 store
     return new StoreProvider(
       store: store,
-      child: new StoreBuilder<GSYState>(builder: (context, store) {
-        ///使用 StoreBuilder 获取 store 中的 theme 、locale
-        store.state.platformLocale = WidgetsBinding.instance!.window.locale;
-        return new MaterialApp(
-
+      child: new StoreBuilder<GSYState>(
+        builder: (context, store) {
+          ///使用 StoreBuilder 获取 store 中的 theme 、locale
+          store.state.platformLocale = WidgetsBinding.instance!.window.locale;
+          return new MaterialApp(
             ///多语言实现代理
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
@@ -77,7 +78,7 @@ class _FlutterReduxAppState extends State<FlutterReduxApp>
               GSYLocalizationsDelegate.delegate,
             ],
             supportedLocales: [
-              store.state.locale ?? store.state.platformLocale!
+              store.state.locale ?? store.state.platformLocale!,
             ],
             locale: store.state.locale,
             theme: store.state.themeData,
@@ -111,8 +112,10 @@ class _FlutterReduxAppState extends State<FlutterReduxApp>
               PhotoViewPage.sName: (context) {
                 return PhotoViewPage();
               },
-            });
-      }),
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -171,17 +174,20 @@ mixin HttpErrorListener on State<FlutterReduxApp> {
         showToast(GSYLocalizations.i18n(_context)!.github_refused);
         break;
       default:
-        showToast(GSYLocalizations.i18n(_context)!.network_error_unknown +
-            " " +
-            message);
+        showToast(
+          GSYLocalizations.i18n(_context)!.network_error_unknown +
+              " " +
+              message,
+        );
         break;
     }
   }
 
   showToast(String message) {
     Fluttertoast.showToast(
-        msg: message,
-        gravity: ToastGravity.CENTER,
-        toastLength: Toast.LENGTH_LONG);
+      msg: message,
+      gravity: ToastGravity.CENTER,
+      toastLength: Toast.LENGTH_LONG,
+    );
   }
 }

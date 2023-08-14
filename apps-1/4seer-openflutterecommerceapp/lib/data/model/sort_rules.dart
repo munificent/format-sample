@@ -16,22 +16,22 @@ class SortRules {
     }
   }
 
-  const SortRules(
-      {this.sortOrder = SortOrder.FromHighestToLowest,
-      this.sortType = SortType.DateAdded});
+  const SortRules({
+    this.sortOrder = SortOrder.FromHighestToLowest,
+    this.sortType = SortType.DateAdded,
+  });
 
   String get jsonOrder =>
       sortOrder == SortOrder.FromLowestToHighest ? 'asc' : 'desc';
 
   static List<SortRules> get options => SortType.values.fold(
-      [],
-      (list, sortType) => list
-        ..addAll([
-          SortRules(
-              sortType: sortType, sortOrder: SortOrder.FromHighestToLowest),
-          SortRules(
-              sortType: sortType, sortOrder: SortOrder.FromLowestToHighest),
-        ]));
+    [],
+    (list, sortType) => list
+      ..addAll([
+        SortRules(sortType: sortType, sortOrder: SortOrder.FromHighestToLowest),
+        SortRules(sortType: sortType, sortOrder: SortOrder.FromLowestToHighest),
+      ]),
+  );
 
   String getSortTitle() {
     switch (sortType) {
@@ -69,18 +69,19 @@ class SortRules {
   }
 
   Map<SortType, String> get sortTextVariants => {
-        SortType.DateAdded: 'Date added',
-        SortType.Reviewed: 'Reviews',
-        SortType.Price: 'Price',
-        SortType.Popularity: 'Popularity'
-      };
+    SortType.DateAdded: 'Date added',
+    SortType.Reviewed: 'Reviews',
+    SortType.Price: 'Price',
+    SortType.Popularity: 'Popularity',
+  };
 
   SortRules copyWithChangedOrder() {
     return SortRules(
-        sortType: sortType,
-        sortOrder: sortOrder == SortOrder.FromHighestToLowest
-            ? SortOrder.FromLowestToHighest
-            : SortOrder.FromHighestToLowest);
+      sortType: sortType,
+      sortOrder: sortOrder == SortOrder.FromHighestToLowest
+          ? SortOrder.FromLowestToHighest
+          : SortOrder.FromHighestToLowest,
+    );
   }
 }
 

@@ -23,11 +23,7 @@ class UnitScreen extends StatefulWidget {
     );
   }
 
-  UnitScreen(
-    this.unit, {
-    this.member,
-    this.isShowcase = false,
-  });
+  UnitScreen(this.unit, {this.member, this.isShowcase = false});
 
   final UnitModel unit;
   final MemberModel member;
@@ -102,9 +98,7 @@ class _UnitScreenState extends State<UnitScreen> {
         SlidingUpPanel(
           body: Column(
             children: <Widget>[
-              SizedBox(
-                height: _UnitCarouselSliderSettings.verticalPadding,
-              ),
+              SizedBox(height: _UnitCarouselSliderSettings.verticalPadding),
               Stack(
                 children: <Widget>[
                   Container(),
@@ -125,25 +119,26 @@ class _UnitScreenState extends State<UnitScreen> {
                             BuildContext fromHeroContext,
                             BuildContext toHeroContext,
                           ) {
-                            animation
-                                .addStatusListener((AnimationStatus status) {
-                              if ([
-                                AnimationStatus.completed,
-                                AnimationStatus.dismissed,
-                              ].contains(status)) {
-                                if (mounted) {
-                                  setState(() {
-                                    _showHero = null;
-                                    // TODO: надо бы тут включать CarouselSlider, но тогда мигает экран
-                                    // _isCarouselSlider = true;
-                                  });
+                            animation.addStatusListener(
+                              (AnimationStatus status) {
+                                if ([
+                                  AnimationStatus.completed,
+                                  AnimationStatus.dismissed,
+                                ].contains(status)) {
+                                  if (mounted) {
+                                    setState(() {
+                                      _showHero = null;
+                                      // TODO: надо бы тут включать CarouselSlider, но тогда мигает экран
+                                      // _isCarouselSlider = true;
+                                    });
+                                  }
                                 }
-                              }
-                            });
+                              },
+                            );
                             final hero =
                                 flightDirection == HeroFlightDirection.pop
                                     // && _showHero != _ShowHero.forCloseZoom
-                                    ? fromHeroContext.widget
+                                      ? fromHeroContext.widget
                                     : toHeroContext.widget;
                             return (hero as Hero).child;
                           },
@@ -174,8 +169,9 @@ class _UnitScreenState extends State<UnitScreen> {
                         return Container(
                           width: size.width,
                           margin: EdgeInsets.symmetric(
-                              horizontal: _UnitCarouselSliderSettings
-                                  .unitHorizontalMargin),
+                            horizontal: _UnitCarouselSliderSettings
+                                .unitHorizontalMargin,
+                          ),
                           child: Material(
                             child: InkWell(
                               onLongPress:
@@ -235,9 +231,7 @@ class _UnitScreenState extends State<UnitScreen> {
                 mainAxisSize: MainAxisSize.min,
                 key: _panelColumnKey,
                 children: <Widget>[
-                  SizedBox(
-                    height: 16,
-                  ),
+                  SizedBox(height: 16),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -266,20 +260,22 @@ class _UnitScreenState extends State<UnitScreen> {
                         child: Row(
                           children: <Widget>[
                             Spacer(),
-                            _DistanceButton(onTap: () {
-                              final savedIndex = _currentIndex;
-                              setState(() {
-                                _isCarouselSlider = false;
-                              });
-                              navigator
-                                  .push(UnitMapScreen(unit).getRoute())
-                                  .then((_) {
+                            _DistanceButton(
+                              onTap: () {
+                                final savedIndex = _currentIndex;
                                 setState(() {
-                                  _currentIndex = savedIndex;
-                                  _isCarouselSlider = true;
+                                  _isCarouselSlider = false;
                                 });
-                              });
-                            }),
+                                navigator
+                                    .push(UnitMapScreen(unit).getRoute())
+                                    .then((_) {
+                                      setState(() {
+                                        _currentIndex = savedIndex;
+                                        _isCarouselSlider = true;
+                                      });
+                                    });
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -324,9 +320,8 @@ class _UnitScreenState extends State<UnitScreen> {
                       width: size.width,
                       height: getMagicHeight(otherUnitWidth),
                       child: ListView.separated(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: separatorWidth,
-                        ),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: separatorWidth),
                         scrollDirection: Axis.horizontal,
                         itemCount: _otherUnits.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -358,8 +353,9 @@ class _UnitScreenState extends State<UnitScreen> {
                                 child: Ink.image(
                                   fit: BoxFit.cover,
                                   image: ExtendedImage.network(
-                                    otherUnit.images[0]
-                                        .getDummyUrl(otherUnit.id),
+                                    otherUnit.images[0].getDummyUrl(
+                                      otherUnit.id,
+                                    ),
                                     loadStateChanged: loadStateChanged,
                                   ).image,
                                 ),
@@ -369,15 +365,11 @@ class _UnitScreenState extends State<UnitScreen> {
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            width: separatorWidth,
-                          );
+                          return SizedBox(width: separatorWidth);
                         },
                       ),
                     ),
-                  SizedBox(
-                    height: 16 + kBigButtonHeight + 16 + 8,
-                  ),
+                  SizedBox(height: 16 + kBigButtonHeight + 16 + 8),
                 ],
               ),
             ],
@@ -451,10 +443,11 @@ class _UnitScreenState extends State<UnitScreen> {
                   final result = await showDialog(
                     context: context,
                     child: _ConfirmDialog(
-                        title: 'Вы уверены, что хотите удалить лот?',
-                        content:
-                            'Размещать его повторно\nзапрещено — возможен бан.',
-                        ok: 'Удалить'),
+                      title: 'Вы уверены, что хотите удалить лот?',
+                      content:
+                          'Размещать его повторно\nзапрещено — возможен бан.',
+                      ok: 'Удалить',
+                    ),
                   );
                   if (result != true) return;
                   final options = MutationOptions(
@@ -463,17 +456,16 @@ class _UnitScreenState extends State<UnitScreen> {
                     fetchPolicy: FetchPolicy.noCache,
                   );
                   // ignore: unawaited_futures
-                  client
-                      .mutate(options)
-                      .timeout(kGraphQLMutationTimeout)
-                      .then((QueryResult result) {
-                    if (result.hasException) {
-                      throw result.exception;
-                    }
-                    if (result.data['update_unit']['affected_rows'] != 1) {
-                      throw 'Invalid update_unit.affected_rows';
-                    }
-                  }).catchError((error) {
+                  client.mutate(options).timeout(kGraphQLMutationTimeout).then(
+                    (QueryResult result) {
+                      if (result.hasException) {
+                        throw result.exception;
+                      }
+                      if (result.data['update_unit']['affected_rows'] != 1) {
+                        throw 'Invalid update_unit.affected_rows';
+                      }
+                    },
+                  ).catchError((error) {
                     out(error);
                     if (mounted) {
                       setState(() {
@@ -507,18 +499,17 @@ class _UnitScreenState extends State<UnitScreen> {
                     fetchPolicy: FetchPolicy.noCache,
                   );
                   // ignore: unawaited_futures
-                  client
-                      .mutate(options)
-                      .timeout(kGraphQLMutationTimeout)
-                      .then((QueryResult result) {
-                    if (result.hasException) {
-                      throw result.exception;
-                    }
-                    if (result.data['insert_moderation']['affected_rows'] !=
-                        1) {
-                      throw 'Invalid insert_moderation.affected_rows';
-                    }
-                  }).catchError((error) {
+                  client.mutate(options).timeout(kGraphQLMutationTimeout).then(
+                    (QueryResult result) {
+                      if (result.hasException) {
+                        throw result.exception;
+                      }
+                      if (result.data['insert_moderation']['affected_rows'] !=
+                          1) {
+                        throw 'Invalid insert_moderation.affected_rows';
+                      }
+                    },
+                  ).catchError((error) {
                     out(error);
                   });
                 }
@@ -528,15 +519,17 @@ class _UnitScreenState extends State<UnitScreen> {
                     builder: (BuildContext context) {
                       return _EnumModelDialog<QuestionValue>(
                         title: 'Что Вы хотите узнать о лоте?',
-                        getName: (QuestionValue value) =>
-                            getQuestionName(value),
+                        getName:
+                            (QuestionValue value) => getQuestionName(value),
                       );
                     },
                   );
                   if (result == null) return;
                   final snackBar = SnackBar(
-                      content: Text(
-                          'Вопрос принят и будет передан автору, чтобы дополнил описание'));
+                    content: Text(
+                      'Вопрос принят и будет передан автору, чтобы дополнил описание',
+                    ),
+                  );
                   _scaffoldKey.currentState.showSnackBar(snackBar);
                   final options = MutationOptions(
                     document: addFragments(Mutations.insertSuggestion),
@@ -547,18 +540,17 @@ class _UnitScreenState extends State<UnitScreen> {
                     fetchPolicy: FetchPolicy.noCache,
                   );
                   // ignore: unawaited_futures
-                  client
-                      .mutate(options)
-                      .timeout(kGraphQLMutationTimeout)
-                      .then((QueryResult result) {
-                    if (result.hasException) {
-                      throw result.exception;
-                    }
-                    if (result.data['insert_suggestion']['affected_rows'] !=
-                        1) {
-                      throw 'Invalid insert_suggestion.affected_rows';
-                    }
-                  }).catchError((error) {
+                  client.mutate(options).timeout(kGraphQLMutationTimeout).then(
+                    (QueryResult result) {
+                      if (result.hasException) {
+                        throw result.exception;
+                      }
+                      if (result.data['insert_suggestion']['affected_rows'] !=
+                          1) {
+                        throw 'Invalid insert_suggestion.affected_rows';
+                      }
+                    },
+                  ).catchError((error) {
                     out(error);
                   });
                 }
@@ -650,27 +642,24 @@ class _UnitScreenState extends State<UnitScreen> {
 
   Widget _buildStatusText(UnitModel unit) {
     if (unit.isBlockedOrLocalDeleted) {
-      return Text(
-        'Заблокировано',
-      );
+      return Text('Заблокировано');
     }
     if (unit.win != null) {
-      return Text(
-        'Победитель — ${unit.win.member.displayName}',
-      );
+      return Text('Победитель — ${unit.win.member.displayName}');
     }
     if (unit.expiresAt != null) {
       if (unit.isExpired) {
         return Text('Завершено');
       }
       return CountdownTimer(
-          endTime: unit.expiresAt.millisecondsSinceEpoch,
-          builder: (BuildContext context, int seconds) {
-            return Text(formatDDHHMMSS(seconds));
-          },
-          onClose: () {
-            setState(() {}); // for unit.isClosed
-          });
+        endTime: unit.expiresAt.millisecondsSinceEpoch,
+        builder: (BuildContext context, int seconds) {
+          return Text(formatDDHHMMSS(seconds));
+        },
+        onClose: () {
+          setState(() {}); // for unit.isClosed
+        },
+      );
     }
     return Text(getUrgentName(unit.urgent));
   }
@@ -872,19 +861,14 @@ class _WantDialog extends StatelessWidget {
             title: Text(
               'Самовывоз',
               // такой же стиль для 'Автоповышение ставки'
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.8),
-              ),
+              style: TextStyle(color: Colors.black.withOpacity(0.8)),
             ),
             subtitle: unit.address == null
                 ? null
                 : ConstrainedBox(
                     constraints:
                         BoxConstraints(maxWidth: 0), // TODO: убрать hack
-                    child: Text(
-                      unit.address,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    child: Text(unit.address, overflow: TextOverflow.ellipsis),
                   ),
             trailing: Icon(
               Icons.navigate_next,
@@ -892,9 +876,7 @@ class _WantDialog extends StatelessWidget {
               size: kButtonIconSize,
             ),
             onTap: () {
-              navigator.push(
-                UnitMapScreen(unit).getRoute(),
-              );
+              navigator.push(UnitMapScreen(unit).getRoute());
             },
           ),
         ),
@@ -911,7 +893,9 @@ class _WantDialog extends StatelessWidget {
         SizedBox(height: 16),
         Text(
           unit.price == null
-              ? 'Только ${getWantLimit(profile.balance)} лотов даром в\u00A0день'
+              ? 'Только ${getWantLimit(
+                  profile.balance,
+                )} лотов даром в\u00A0день'
               : 'Карма заморозится до\u00A0конца таймера',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -931,9 +915,7 @@ class _WantDialog extends StatelessWidget {
               textColor: Colors.black.withOpacity(0.8),
               child: Text('Отмена'),
             ),
-            SizedBox(
-              width: 16,
-            ),
+            SizedBox(width: 16),
             FlatButton(
               onLongPress: () {}, // чтобы сократить время для splashColor
               onPressed: () {
@@ -976,11 +958,9 @@ class _AutoIncreaseFieldState extends State<_AutoIncreaseField>
 
   int get currentValue => _currentValue;
 
-  final _values = kPaymentSteps
-      .map<int>(
-        (PaymentStepModel element) => element.amount,
-      )
-      .toList();
+  final _values = kPaymentSteps.map<int>(
+    (PaymentStepModel element) => element.amount,
+  ).toList();
 
   @override
   void initState() {
@@ -1000,17 +980,16 @@ class _AutoIncreaseFieldState extends State<_AutoIncreaseField>
     final needValue = max(0, _currentValue - widget.balance);
     final step = getNearestStep(_values, needValue);
     final header = Tooltip(
-      message:
-          _isExpanded ? 'Выключить автоповышение' : 'Включить автоповышение',
+      message: _isExpanded
+          ? 'Выключить автоповышение'
+          : 'Включить автоповышение',
       child: SwitchListTile.adaptive(
         contentPadding: EdgeInsets.zero,
         dense: true,
         title: Text(
           'Автоповышение ставки',
           // такой же стиль для 'Самовывоз'
-          style: TextStyle(
-            color: Colors.black.withOpacity(0.8),
-          ),
+          style: TextStyle(color: Colors.black.withOpacity(0.8)),
         ),
         value: _isExpanded,
         onChanged: (bool value) {
@@ -1031,16 +1010,13 @@ class _AutoIncreaseFieldState extends State<_AutoIncreaseField>
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 0), // TODO: убрать hack
           child: Text(
-            'У Вас только ${getPluralKarma(widget.balance)}. Получите\u00A0ещё, чтобы установить желаемый максимум.',
-            style: TextStyle(
-              fontSize: kFontSize,
-              color: Colors.red,
-            ),
+            'У Вас только ${getPluralKarma(
+              widget.balance,
+            )}. Получите\u00A0ещё, чтобы установить желаемый максимум.',
+            style: TextStyle(fontSize: kFontSize, color: Colors.red),
           ),
         ),
-        SizedBox(
-          height: 8,
-        ),
+        SizedBox(height: 8),
         FlatButton(
           onLongPress: () {}, // чтобы сократить время для splashColor
           onPressed: () {
@@ -1062,7 +1038,9 @@ class _AutoIncreaseFieldState extends State<_AutoIncreaseField>
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 0), // TODO: убрать hack
           child: Text(
-            'Ставка будет повышаться автоматически на\u00A0+${getPluralKarma(1)} до\u00A0заданного максимума:',
+            'Ставка будет повышаться автоматически на\u00A0+${getPluralKarma(
+              1,
+            )} до\u00A0заданного максимума:',
             style: TextStyle(
               fontSize: kFontSize,
               color: Colors.black.withOpacity(0.6),
@@ -1073,41 +1051,35 @@ class _AutoIncreaseFieldState extends State<_AutoIncreaseField>
         Container(
           color: Colors.yellow.withOpacity(0.5),
           height: kButtonHeight,
-          child: GlowNotificationWidget(
-            ExtendedListWheelScrollView(
-              scrollDirection: Axis.horizontal,
-              itemExtent: kButtonHeight * kGoldenRatio,
-              useMagnifier: true,
-              magnification: kGoldenRatio,
-              onSelectedItemChanged: (int index) {
-                setState(() {
-                  _currentValue = index;
-                });
-              },
-              controller: _controller,
-              minIndex: _minValue,
-              maxIndex: 999999,
-              builder: (BuildContext context, int index) {
-                return Center(
-                  child: Text(
-                    index.toString(),
-                    style: TextStyle(
-                      fontSize: kPriceFontSize / kGoldenRatio,
-                      color: Colors.red,
-                      fontWeight: FontWeight.w600,
-                    ),
+          child: GlowNotificationWidget(ExtendedListWheelScrollView(
+            scrollDirection: Axis.horizontal,
+            itemExtent: kButtonHeight * kGoldenRatio,
+            useMagnifier: true,
+            magnification: kGoldenRatio,
+            onSelectedItemChanged: (int index) {
+              setState(() {
+                _currentValue = index;
+              });
+            },
+            controller: _controller,
+            minIndex: _minValue,
+            maxIndex: 999999,
+            builder: (BuildContext context, int index) {
+              return Center(
+                child: Text(
+                  index.toString(),
+                  style: TextStyle(
+                    fontSize: kPriceFontSize / kGoldenRatio,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w600,
                   ),
-                );
-              },
-            ),
-          ),
+                ),
+              );
+            },
+          )),
         ),
-        SizedBox(
-          height: 8,
-        ),
-        _buildAnimatedSize(
-          needValue > 0 ? message : Container(),
-        ),
+        SizedBox(height: 8),
+        _buildAnimatedSize(needValue > 0 ? message : Container()),
         SizedBox(height: 16),
       ],
     );
@@ -1116,12 +1088,7 @@ class _AutoIncreaseFieldState extends State<_AutoIncreaseField>
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         header,
-        _buildAnimatedSize(
-          Offstage(
-            offstage: !_isExpanded,
-            child: body,
-          ),
-        ),
+        _buildAnimatedSize(Offstage(offstage: !_isExpanded, child: body)),
       ],
     );
   }
@@ -1171,9 +1138,9 @@ class _DistanceButton extends StatelessWidget {
           ),
           TextSpan(
             style: DefaultTextStyle.of(context).style.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black.withOpacity(0.8),
-                ),
+              fontWeight: FontWeight.w600,
+              color: Colors.black.withOpacity(0.8),
+            ),
             text: distance.value,
           ),
         ],
@@ -1188,9 +1155,7 @@ class _DistanceButton extends StatelessWidget {
           child: Container(
             height: kButtonHeight,
             alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: text,
           ),
         ),
@@ -1226,10 +1191,7 @@ class _ConfirmDialog extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(top: 16),
-          child: Text(
-            content,
-            textAlign: TextAlign.center,
-          ),
+          child: Text(content, textAlign: TextAlign.center),
         ),
         Container(
           alignment: Alignment.center,
@@ -1245,9 +1207,7 @@ class _ConfirmDialog extends StatelessWidget {
                 textColor: Colors.black.withOpacity(0.8),
                 child: Text(cancel ?? 'Отмена'),
               ),
-              SizedBox(
-                width: 16,
-              ),
+              SizedBox(width: 16),
               FlatButton(
                 onLongPress: () {}, // чтобы сократить время для splashColor
                 onPressed: () {
@@ -1266,11 +1226,7 @@ class _ConfirmDialog extends StatelessWidget {
 }
 
 class _EnumModelDialog<T> extends StatelessWidget {
-  _EnumModelDialog({
-    this.title,
-    this.values,
-    this.getName,
-  });
+  _EnumModelDialog({this.title, this.values, this.getName});
 
   final String title;
   final List<T> values;
@@ -1293,9 +1249,7 @@ class _EnumModelDialog<T> extends StatelessWidget {
                 // TODO: типизировать value
                 navigator.pop(values[index]);
               },
-              child: ListTile(
-                title: Text(getName(values[index])),
-              ),
+              child: ListTile(title: Text(getName(values[index]))),
             ),
           ),
         ),

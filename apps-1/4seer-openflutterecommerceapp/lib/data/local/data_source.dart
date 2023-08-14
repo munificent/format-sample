@@ -54,11 +54,7 @@ abstract class DataSource {
   Future<void> delete(int id) async {
     checkDatabaseConnection();
 
-    await db.delete(
-      tableName,
-      where: '$primaryKey = ?',
-      whereArgs: [id],
-    );
+    await db.delete(tableName, where: '$primaryKey = ?', whereArgs: [id]);
   }
 
   // delete all records in the table
@@ -77,7 +73,8 @@ abstract class DataSource {
   void checkDatabaseConnection() {
     if (db == null) {
       throw Exception(
-          'No open connection to database - call .open() on the datasource to establish a connection to the database');
+        'No open connection to database - call .open() on the datasource to establish a connection to the database',
+      );
     }
   }
 }

@@ -25,7 +25,14 @@ class SearchBLoC {
 
   ///获取搜索数据
   getDataLogic(int page) async {
-    return await ReposDao.searchRepositoryDao(searchText, language, type, sort,
-        selectIndex == 0 ? null : 'user', page, Config.PAGE_SIZE);
+    return await ReposDao.searchRepositoryDao(
+      searchText,
+      language,
+      type,
+      sort,
+      selectIndex == 0 ? null : 'user',
+      page,
+      Config.PAGE_SIZE,
+    );
   }
 }

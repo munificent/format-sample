@@ -91,25 +91,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                         padding: const EdgeInsets.all(10),
                                         width: mediaQuery.size.width,
                                         child: RefreshIndicator(
-                                          onRefresh: () =>
-                                              _refreshData(context),
+                                          onRefresh:
+                                              () => _refreshData(context),
                                           backgroundColor: Colors.blue,
                                           child: ListView(
                                             children: [
                                               FadeIn(
-                                                  delay: 0,
-                                                  child: MainWeather(
-                                                      wData: weatherData)),
+                                                delay: 0,
+                                                child: MainWeather(
+                                                  wData: weatherData,
+                                                ),
+                                              ),
                                               FadeIn(
                                                 delay: 0.33,
                                                 child: WeatherInfo(
-                                                    wData: weatherData
-                                                        .currentWeather),
+                                                  wData: weatherData
+                                                      .currentWeather,
+                                                ),
                                               ),
                                               FadeIn(
                                                 delay: 0.66,
                                                 child: HourlyForecast(
-                                                    weatherData.hourlyWeather),
+                                                  weatherData.hourlyWeather,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -129,9 +133,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                             FadeIn(
-                                                delay: 0.66,
-                                                child: WeatherDetail(
-                                                    wData: weatherData)),
+                                              delay: 0.66,
+                                              child: WeatherDetail(
+                                                wData: weatherData,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),

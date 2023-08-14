@@ -77,7 +77,8 @@ class _WelcomePageState extends State<WelcomePage> {
               children: <Widget>[
                 new Center(
                   child: new Image(
-                      image: new AssetImage('static/images/welcome.png')),
+                    image: new AssetImage('static/images/welcome.png'),
+                  ),
                 ),
                 Align(
                   alignment: Alignment(0.0, 0.3),
@@ -89,21 +90,20 @@ class _WelcomePageState extends State<WelcomePage> {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment(0.0, 0.8),
-                  child: Mole(),
-                ),
+                Align(alignment: Alignment(0.0, 0.8), child: Mole()),
                 new Align(
                   alignment: Alignment.bottomCenter,
                   child: new Container(
                     width: size,
                     height: size,
-                    child: new FlareActor("static/file/flare_flutter_logo_.flr",
-                        alignment: Alignment.topCenter,
-                        fit: BoxFit.fill,
-                        animation: "Placeholder"),
+                    child: new FlareActor(
+                      "static/file/flare_flutter_logo_.flr",
+                      alignment: Alignment.topCenter,
+                      fit: BoxFit.fill,
+                      animation: "Placeholder",
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),

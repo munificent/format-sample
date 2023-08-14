@@ -7,9 +7,7 @@ class MapsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-      appBar: AppBar(
-        title: Text('Live Map'),
-      ),
+      appBar: AppBar(title: Text('Live Map')),
       url: url,
       withZoom: true,
       withLocalStorage: true,

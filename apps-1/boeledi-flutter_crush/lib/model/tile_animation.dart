@@ -26,10 +26,4 @@ class TileAnimation {
 //
 // Types of animations
 //
-enum TileAnimationType {
-  moveDown,
-  avalanche,
-  newTile,
-  chain,
-  collapse,
-}
+enum TileAnimationType { moveDown, avalanche, newTile, chain, collapse }

@@ -19,45 +19,48 @@ class GSYFlexButton extends StatelessWidget {
 
   final MainAxisAlignment mainAxisAlignment;
 
-  GSYFlexButton(
-      {Key? key,
-      this.text,
-      this.color,
-      this.textColor = Colors.black,
-      this.onPress,
-      this.fontSize = 20.0,
-      this.mainAxisAlignment = MainAxisAlignment.center,
-      this.maxLines = 1})
-      : super(key: key);
+  GSYFlexButton({
+    Key? key,
+    this.text,
+    this.color,
+    this.textColor = Colors.black,
+    this.onPress,
+    this.fontSize = 20.0,
+    this.mainAxisAlignment = MainAxisAlignment.center,
+    this.maxLines = 1,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return new ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: ButtonStyleButton.allOrNull<Color>(
-            color,
-          ),
-          padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
-            new EdgeInsets.only(
-                left: 20.0, top: 10.0, right: 20.0, bottom: 10.0),
-          ),
+      style: ButtonStyle(
+        backgroundColor: ButtonStyleButton.allOrNull<Color>(color),
+        padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(
+          new EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0, bottom: 10.0),
         ),
-        child: new Flex(
-          mainAxisAlignment: mainAxisAlignment,
-          direction: Axis.horizontal,
-          children: <Widget>[
-            new Expanded(
-              child: new Text(text!,
-                  style: new TextStyle(
-                      color: textColor, fontSize: fontSize, height: 1),
-                  textAlign: TextAlign.center,
-                  maxLines: maxLines,
-                  overflow: TextOverflow.ellipsis),
-            )
-          ],
-        ),
-        onPressed: () {
-          this.onPress?.call();
-        });
+      ),
+      child: new Flex(
+        mainAxisAlignment: mainAxisAlignment,
+        direction: Axis.horizontal,
+        children: <Widget>[
+          new Expanded(
+            child: new Text(
+              text!,
+              style: new TextStyle(
+                color: textColor,
+                fontSize: fontSize,
+                height: 1,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: maxLines,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+      onPressed: () {
+        this.onPress?.call();
+      },
+    );
   }
 }

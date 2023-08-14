@@ -31,12 +31,9 @@ void main() {
             email: email,
           );
 
-          expect(
-              items.stateStream,
-              emitsThrough(
-                SettingsState.load(
-                    email, hapticFeedbackEnabled, analyticsEnabled),
-              ));
+          expect(items.stateStream, emitsThrough(
+            SettingsState.load(email, hapticFeedbackEnabled, analyticsEnabled),
+          ));
         }
       }
     }
@@ -51,11 +48,15 @@ void main() {
     );
 
     await expectLater(
-        items.stateStream, emitsThrough(SettingsState.load(email, true, true)));
+      items.stateStream,
+      emitsThrough(SettingsState.load(email, true, true)),
+    );
 
     items.analyticsSettingStream.add(false);
     expect(
-        await items.stateStream.next, SettingsState.load(email, true, false));
+      await items.stateStream.next,
+      SettingsState.load(email, true, false),
+    );
     verify(items.authService.setAnalyticsEnabled(false));
 
     items.analyticsSettingStream.add(true);
@@ -72,11 +73,15 @@ void main() {
     );
 
     await expectLater(
-        items.stateStream, emitsThrough(SettingsState.load(email, true, true)));
+      items.stateStream,
+      emitsThrough(SettingsState.load(email, true, true)),
+    );
 
     items.hapticFeedbackSettingStream.add(false);
     expect(
-        await items.stateStream.next, SettingsState.load(email, false, true));
+      await items.stateStream.next,
+      SettingsState.load(email, false, true),
+    );
     verify(items.authService.setHapticFeedbackEnabled(false));
 
     items.hapticFeedbackSettingStream.add(true);
@@ -91,8 +96,10 @@ void main() {
       email: "test",
     );
 
-    await expectLater(items.stateStream,
-        emitsThrough(SettingsState.load("test", true, true)));
+    await expectLater(
+      items.stateStream,
+      emitsThrough(SettingsState.load("test", true, true)),
+    );
 
     items.tosButtonStream.add(null);
     verify(items.navigator.pushNamed(TOS_PAGE_ROUTE));
@@ -105,8 +112,10 @@ void main() {
       email: "test",
     );
 
-    await expectLater(items.stateStream,
-        emitsThrough(SettingsState.load("test", true, true)));
+    await expectLater(
+      items.stateStream,
+      emitsThrough(SettingsState.load("test", true, true)),
+    );
 
     items.logoutButtonStream.add(null);
 
@@ -133,16 +142,21 @@ TestItems _createTestItems({
     tosButtonStream.stream,
   );
 
-  when(authService.analyticsEnabled())
-      .thenAnswer((_) => Future.value(analyticsEnabled));
-  when(authService.hapticFeedbackEnabled())
-      .thenAnswer((_) => Future.value(hapticFeedbackEnabled));
-  when(authService.setHapticFeedbackEnabled(any))
-      .thenAnswer((_) => Future.value(Null));
-  when(authService.setAnalyticsEnabled(any))
-      .thenAnswer((_) => Future.value(Null));
-  when(authService.getCurrentUser())
-      .thenAnswer((_) => Future.value(_MockUser(email)));
+  when(authService.analyticsEnabled()).thenAnswer(
+    (_) => Future.value(analyticsEnabled),
+  );
+  when(authService.hapticFeedbackEnabled()).thenAnswer(
+    (_) => Future.value(hapticFeedbackEnabled),
+  );
+  when(authService.setHapticFeedbackEnabled(any)).thenAnswer(
+    (_) => Future.value(Null),
+  );
+  when(authService.setAnalyticsEnabled(any)).thenAnswer(
+    (_) => Future.value(Null),
+  );
+  when(authService.getCurrentUser()).thenAnswer(
+    (_) => Future.value(_MockUser(email)),
+  );
   when(authService.signOut()).thenAnswer((_) => Future.value(Null));
 
   final stateStream = viewModel.bind(null);
@@ -151,13 +165,14 @@ TestItems _createTestItems({
   viewModel.setNavigator(navigator);
 
   return TestItems(
-      StreamQueue(stateStream),
-      navigator,
-      authService,
-      logoutButtonStream,
-      hapticFeedbackSettingStream,
-      analyticsSettingStream,
-      tosButtonStream);
+    StreamQueue(stateStream),
+    navigator,
+    authService,
+    logoutButtonStream,
+    hapticFeedbackSettingStream,
+    analyticsSettingStream,
+    tosButtonStream,
+  );
 }
 
 class _MockAuthService extends Mock implements AuthenticationService {}

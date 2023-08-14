@@ -121,8 +121,11 @@ class _PersonState extends BasePersonState<PersonPage> {
       return await UserDao.getMemberDao(_getUserName(), page);
     }
     getUserOrg(_getUserName());
-    return await EventDao.getEventDao(_getUserName(),
-        page: page, needDb: page <= 1);
+    return await EventDao.getEventDao(
+      _getUserName(),
+      page: page,
+      needDb: page <= 1,
+    );
   }
 
   @override
@@ -146,46 +149,56 @@ class _PersonState extends BasePersonState<PersonPage> {
   Widget build(BuildContext context) {
     super.build(context);
     return new Scaffold(
-        appBar: new AppBar(
-            title: GSYTitleBar(
+      appBar: new AppBar(
+        title: GSYTitleBar(
           (userInfo != null && userInfo!.login != null) ? userInfo!.login : "",
-          rightWidget: GSYCommonOptionWidget(
-            url: userInfo?.html_url,
-          ),
-        )),
-        floatingActionButton: new FloatingActionButton(
-            child: AutoSizeText(
-              focus,
-              minFontSize: 8,
-              maxLines: 1,
-            ),
-            onPressed: () {
-              ///非组织成员可以关注
-              if (focus == '') {
-                return;
-              }
-              if (userInfo!.type == "Organization") {
-                Fluttertoast.showToast(
-                    msg: GSYLocalizations.i18n(context)!.user_focus_no_support);
-                return;
-              }
-              CommonUtils.showLoadingDialog(context);
-              UserDao.doFollowDao(userName, focusStatus).then((res) {
-                Navigator.pop(context);
-                _getFocusStatus();
-              });
-            }),
-        body: GSYNestedPullLoadWidget(
-          pullLoadWidgetControl,
-          (BuildContext context, int index) =>
-              renderItem(index, userInfo!, beStaredCount, null, null, orgList),
-          handleRefresh,
-          onLoadMore,
-          refreshKey: refreshIKey,
-          headerSliverBuilder: (context, _) {
-            return sliverBuilder(
-                context, _, userInfo!, null, beStaredCount, null);
-          },
-        ));
+          rightWidget: GSYCommonOptionWidget(url: userInfo?.html_url),
+        ),
+      ),
+      floatingActionButton: new FloatingActionButton(
+        child: AutoSizeText(focus, minFontSize: 8, maxLines: 1),
+        onPressed: () {
+          ///非组织成员可以关注
+          if (focus == '') {
+            return;
+          }
+          if (userInfo!.type == "Organization") {
+            Fluttertoast.showToast(
+              msg: GSYLocalizations.i18n(context)!.user_focus_no_support,
+            );
+            return;
+          }
+          CommonUtils.showLoadingDialog(context);
+          UserDao.doFollowDao(userName, focusStatus).then((res) {
+            Navigator.pop(context);
+            _getFocusStatus();
+          });
+        },
+      ),
+      body: GSYNestedPullLoadWidget(
+        pullLoadWidgetControl,
+        (BuildContext context, int index) => renderItem(
+          index,
+          userInfo!,
+          beStaredCount,
+          null,
+          null,
+          orgList,
+        ),
+        handleRefresh,
+        onLoadMore,
+        refreshKey: refreshIKey,
+        headerSliverBuilder: (context, _) {
+          return sliverBuilder(
+            context,
+            _,
+            userInfo!,
+            null,
+            beStaredCount,
+            null,
+          );
+        },
+      ),
+    );
   }
 }

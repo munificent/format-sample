@@ -31,34 +31,38 @@ class _DebugDataPageState extends State<DebugDataPage> {
   @override
   Widget build(BuildContext context) {
     return new TabWidget(
-        type: TabType.top,
+      type: TabType.top,
 
-        /// 返回数据和请求数据
-        tabItems: [
-          _renderTab("Responses", 0),
-          _renderTab("Request", 1),
-          _renderTab("Error", 2),
-          _renderTab("ErrorWidget", 3),
-        ],
-        title: new Text(
-          "Debug",
-          style: TextStyle(color: GSYColors.white),
+      /// 返回数据和请求数据
+      tabItems: [
+        _renderTab("Responses", 0),
+        _renderTab("Request", 1),
+        _renderTab("Error", 2),
+        _renderTab("ErrorWidget", 3),
+      ],
+      title: new Text("Debug", style: TextStyle(color: GSYColors.white)),
+      tabViews: [
+        DebugDataList(
+          LogsInterceptors.sResponsesHttpUrl,
+          LogsInterceptors.sHttpResponses,
         ),
-        tabViews: [
-          DebugDataList(LogsInterceptors.sResponsesHttpUrl,
-              LogsInterceptors.sHttpResponses),
-          DebugDataList(
-              LogsInterceptors.sRequestHttpUrl, LogsInterceptors.sHttpRequest),
-          DebugDataList(
-              LogsInterceptors.sHttpErrorUrl, LogsInterceptors.sHttpError),
-          DebugDataList(ErrorPageState.sErrorName, ErrorPageState.sErrorStack),
-        ],
-        indicatorColor: GSYColors.primaryValue,
-        onTap: (index) {
-          setState(() {
-            tabIndex = index;
-          });
+        DebugDataList(
+          LogsInterceptors.sRequestHttpUrl,
+          LogsInterceptors.sHttpRequest,
+        ),
+        DebugDataList(
+          LogsInterceptors.sHttpErrorUrl,
+          LogsInterceptors.sHttpError,
+        ),
+        DebugDataList(ErrorPageState.sErrorName, ErrorPageState.sErrorStack),
+      ],
+      indicatorColor: GSYColors.primaryValue,
+      onTap: (index) {
+        setState(() {
+          tabIndex = index;
         });
+      },
+    );
   }
 }
 
@@ -98,9 +102,7 @@ class _DebugDataListState extends State<DebugDataList>
                     width: 24,
                     decoration: BoxDecoration(
                       color: GSYColors.primaryValue,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
                     child: new Text(
                       index.toString(),
@@ -111,20 +113,23 @@ class _DebugDataListState extends State<DebugDataList>
                     ),
                   ),
                   new Expanded(
-                      child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    child: new Text(
-                      widget.titles[index] ?? "",
-                      style: TextStyle(fontSize: 15),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      child: new Text(
+                        widget.titles[index] ?? "",
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
-                  ))
+                  ),
                 ],
               ),
             ),
             onLongPress: () {
               try {
                 Clipboard.setData(
-                    new ClipboardData(text: "${widget.titles[index]}"));
+                  new ClipboardData(text: "${widget.titles[index]}"),
+                );
                 Fluttertoast.showToast(msg: "复制链接成功");
               } catch (e) {
                 print(e);
@@ -133,7 +138,8 @@ class _DebugDataListState extends State<DebugDataList>
             onDoubleTap: () {
               try {
                 Clipboard.setData(
-                    new ClipboardData(text: "${widget.dataList[index]}"));
+                  new ClipboardData(text: "${widget.dataList[index]}"),
+                );
                 Fluttertoast.showToast(msg: "复制数据成功");
               } catch (e) {
                 print(e);
@@ -141,39 +147,42 @@ class _DebugDataListState extends State<DebugDataList>
             },
             onTap: () {
               showBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Material(
-                      color: Colors.transparent,
-                      child: new Stack(
-                        children: <Widget>[
-                          new Container(
-                            padding: EdgeInsets.only(top: 30),
-                            color: Colors.white,
-                            child: SingleChildScrollView(
-                                child: JsonViewerWidget(widget.dataList[index]
-                                    as Map<String, dynamic>)),
-                          ),
-                          Transform.translate(
-                            offset: Offset(0, -10),
-                            child: new Container(
-                              alignment: Alignment.topCenter,
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 30,
-                                  color: Colors.black,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                context: context,
+                builder: (context) {
+                  return Material(
+                    color: Colors.transparent,
+                    child: new Stack(
+                      children: <Widget>[
+                        new Container(
+                          padding: EdgeInsets.only(top: 30),
+                          color: Colors.white,
+                          child: SingleChildScrollView(
+                            child: JsonViewerWidget(
+                              widget.dataList[index] as Map<String, dynamic>,
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  });
+                        ),
+                        Transform.translate(
+                          offset: Offset(0, -10),
+                          child: new Container(
+                            alignment: Alignment.topCenter,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                size: 30,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
             },
           );
         },

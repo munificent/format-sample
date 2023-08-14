@@ -102,13 +102,7 @@ class _ArcProgressPainter extends CustomPainter {
 
     final double sweepAngle = controller.value * 2 * Math.pi;
 
-    canvas.drawArc(
-      Offset.zero & size,
-      startAngle,
-      sweepAngle,
-      false,
-      paint,
-    );
+    canvas.drawArc(Offset.zero & size, startAngle, sweepAngle, false, paint);
 
     if (icon != null) {
       double angle = startAngle + sweepAngle;

@@ -96,10 +96,7 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
         SizedBox(
           height: (panelChildWidth - gridSpacing) / 2,
           width: panelChildWidth,
-          child: ImagesField(
-            key: _imagesFieldKey,
-            gridSpacing: gridSpacing,
-          ),
+          child: ImagesField(key: _imagesFieldKey, gridSpacing: gridSpacing),
         ),
         SizedBox(height: 16),
         Container(
@@ -149,9 +146,7 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
           width: panelChildWidth,
           child: ReadyButton(onTap: _handleAddUnit),
         ),
-        SizedBox(
-          height: 16,
-        ),
+        SizedBox(height: 16),
       ],
     );
     return WillPopScope(
@@ -170,9 +165,7 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
           withModel: true,
         ),
         backgroundColor: Colors.white,
-        body: SafeArea(
-          child: ScrollBody(child: child),
-        ),
+        body: SafeArea(child: ScrollBody(child: child)),
         // resizeToAvoidBottomInset: false,
       ),
     );
@@ -248,10 +241,9 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
       fetchPolicy: FetchPolicy.noCache,
     );
     // ignore: unawaited_futures
-    client
-        .mutate(options)
-        .timeout(kGraphQLMutationTimeout)
-        .then((QueryResult result) async {
+    client.mutate(options).timeout(kGraphQLMutationTimeout).then((
+      QueryResult result,
+    ) async {
       if (result.hasException) {
         throw result.exception;
       }
@@ -266,10 +258,8 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
       _reloadUnderwayModel();
       final value = await showDialog<bool>(
         context: context,
-        child: _AddedUnitDialog(
-          newUnit,
-          needModerate: _kind == KindValue.service,
-        ),
+        child:
+            _AddedUnitDialog(newUnit, needModerate: _kind == KindValue.service),
       );
       if (value ?? false) {
         final kind = await navigator.pushReplacement<KindValue, void>(
@@ -280,20 +270,14 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
         // ignore: unawaited_futures
         navigator.push(
           // HomeScreen.globalKey.currentContext, // hack, или: Navigator.of(context, rootNavigator: true)
-          AddUnitScreen(
-            kind: kind,
-            tabIndex: widget.tabIndex,
-          ).getRoute(),
+          AddUnitScreen(kind: kind, tabIndex: widget.tabIndex).getRoute(),
         );
         return;
       }
       final profile = getBloc<ProfileCubit>(context).state.profile;
       // ignore: unawaited_futures
       navigator.pushReplacement(
-        UnitScreen(
-          newUnit,
-          member: profile.member,
-        ).getRoute(),
+        UnitScreen(newUnit, member: profile.member).getRoute(),
       );
     }).catchError((error) {
       out(error);
@@ -301,7 +285,8 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
         navigator.pop(); // for showDialog "Загрузка..."
       }
       final snackBar = SnackBar(
-          content: Text('Не удалось загрузить лот, попробуйте ещё раз'));
+        content: Text('Не удалось загрузить лот, попробуйте ещё раз'),
+      );
       _scaffoldKey.currentState.showSnackBar(snackBar);
     });
   }
@@ -337,17 +322,18 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
     final result = await showModalBottomSheet<bool>(
       context: context,
       builder: (context) => buildModalBottomSheet(
-        context,
-        description: 'Вы очень близки к тому,\nчтобы отдать этот лот.',
-      ),
+            context,
+            description: 'Вы очень близки к тому,\nчтобы отдать этот лот.',
+          ),
     );
     // if enableDrag, result may be null
     return result ?? false;
   }
 
   void _reloadShowcaseTab(kind) {
-    final index = [...MetaKindValue.values, ...KindValue.values]
-        .indexWhere((dynamic value) => value == kind);
+    final index = [...MetaKindValue.values, ...KindValue.values].indexWhere(
+      (dynamic value) => value == kind,
+    );
     if (index == widget.tabIndex?.showcase) {
       HomeShowcase.pullToRefreshNotificationKey.currentState.show();
     } else if (!HomeShowcase.poolForReloadTabs.contains(index)) {
@@ -356,8 +342,9 @@ class _AddUnitScreenState extends State<AddUnitScreen> {
   }
 
   void _reloadUnderwayModel() {
-    final index = UnderwayValue.values
-        .indexWhere((UnderwayValue value) => value == UnderwayValue.give);
+    final index = UnderwayValue.values.indexWhere(
+      (UnderwayValue value) => value == UnderwayValue.give,
+    );
     if (index == widget.tabIndex?.underway) {
       HomeUnderway.pullToRefreshNotificationKey.currentState.show();
     } else if (!HomeUnderway.poolForReloadTabs.contains(index)) {
@@ -423,10 +410,7 @@ class _AddedUnitDialog extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(
-                      FontAwesomeIcons.plus,
-                      size: kButtonIconSize,
-                    ),
+                    Icon(FontAwesomeIcons.plus, size: kButtonIconSize),
                     SizedBox(width: 8),
                     Text('Добавьте ещё один лот'),
                   ],
@@ -443,17 +427,15 @@ class _AddedUnitDialog extends StatelessWidget {
                   color: Colors.white,
                   textColor: Colors.green,
                   shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(2),
-                      borderSide: BorderSide(color: Colors.green)),
+                    borderRadius: BorderRadius.circular(2),
+                    borderSide: BorderSide(color: Colors.green),
+                  ),
                   elevation: 0,
                   highlightElevation: 0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.share,
-                        size: kButtonIconSize,
-                      ),
+                      Icon(FontAwesomeIcons.share, size: kButtonIconSize),
                       SizedBox(width: 8),
                       Text('Поделитесь и получите бонус'),
                     ],
@@ -468,7 +450,9 @@ class _AddedUnitDialog extends StatelessWidget {
 }
 
 Future<UrgentValue> _selectUrgentDialog(
-    BuildContext context, UrgentValue selected) {
+  BuildContext context,
+  UrgentValue selected,
+) {
   return showModalBottomSheet(
     context: context,
     backgroundColor: Colors.white,
@@ -491,8 +475,10 @@ class _UrgentDialog extends StatefulWidget {
 }
 
 class _UrgentDialogState extends State<_UrgentDialog> {
-  final keys =
-      List.generate(UrgentValue.values.length, (int index) => GlobalKey());
+  final keys = List.generate(
+    UrgentValue.values.length,
+    (int index) => GlobalKey(),
+  );
 
   @override
   void initState() {
@@ -549,9 +535,8 @@ class _UrgentDialogState extends State<_UrgentDialog> {
                             ? Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(4),
-                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
                                 ),
                                 padding: EdgeInsets.all(4),
                                 child: Icon(

@@ -150,27 +150,15 @@ class _TransitionAnimation extends StatelessWidget {
     @required this.controller,
     @required this.child,
     @required this.isVisible,
-  })  : _opacity = Tween(begin: 0.0, end: 1.0).animate(
-          CurvedAnimation(
-            parent: controller,
-            curve: const Interval(
-              0.000,
-              0.650,
-              curve: Curves.ease,
-            ),
-          ),
-        ),
-        _yTranslation = Tween(begin: 40.0, end: 0.0).animate(
-          CurvedAnimation(
-            parent: controller,
-            curve: const Interval(
-              0.000,
-              0.650,
-              curve: Curves.ease,
-            ),
-          ),
-        ),
-        super(key: key);
+  }) : _opacity = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+         parent: controller,
+         curve: const Interval(0.000, 0.650, curve: Curves.ease),
+       )),
+       _yTranslation = Tween(begin: 40.0, end: 0.0).animate(CurvedAnimation(
+         parent: controller,
+         curve: const Interval(0.000, 0.650, curve: Curves.ease),
+       )),
+       super(key: key);
 
   final AnimationController controller;
   final Widget child;
@@ -187,15 +175,8 @@ class _TransitionAnimation extends StatelessWidget {
         return IgnorePointer(
           ignoring: !isVisible,
           child: Transform(
-            transform: Matrix4.translationValues(
-              0.0,
-              _yTranslation.value,
-              0.0,
-            ),
-            child: Opacity(
-              opacity: _opacity.value,
-              child: child,
-            ),
+            transform: Matrix4.translationValues(0.0, _yTranslation.value, 0.0),
+            child: Opacity(opacity: _opacity.value, child: child),
           ),
         );
       },

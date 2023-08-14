@@ -7,15 +7,12 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   final dependencies = Dependencies.standard();
   final notificationManager = FlutterLocalNotificationsPlugin();
 
-  runApp(App(
-    dependencies: dependencies,
-    notificationManager: notificationManager,
-  ));
+  runApp(
+    App(dependencies: dependencies, notificationManager: notificationManager),
+  );
 }

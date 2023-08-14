@@ -8,8 +8,11 @@ import 'package:gsy_github_app_flutter/common/net/address.dart';
 import 'package:gsy_github_app_flutter/common/net/api.dart';
 
 class EventDao {
-  static getEventReceived(String? userName,
-      {page = 1, bool needDb = false}) async {
+  static getEventReceived(
+    String? userName, {
+    page = 1,
+    bool needDb = false,
+  }) async {
     if (userName == null) {
       return null;
     }

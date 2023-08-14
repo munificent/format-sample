@@ -12,17 +12,21 @@ class MapScaleLayerOption extends LayerOptions {
   double lineWidth;
   final EdgeInsets padding;
 
-  MapScaleLayerOption(
-      {this.textStyle,
-      this.lineColor = Colors.white,
-      this.lineWidth = 2,
-      this.padding});
+  MapScaleLayerOption({
+    this.textStyle,
+    this.lineColor = Colors.white,
+    this.lineWidth = 2,
+    this.padding,
+  });
 }
 
 class MapScaleLayer implements MapPlugin {
   @override
   Widget createLayer(
-      LayerOptions options, MapState mapState, Stream<void> stream) {
+    LayerOptions options,
+    MapState mapState,
+    Stream<void> stream,
+  ) {
     // if (!(options is MapScaleLayerOption)) {
     //   throw 'Unknown options type for MapScaleLayer: $options';
     // }
@@ -62,11 +66,11 @@ class _MapScaleLayer extends StatelessWidget {
     50,
     25,
     10,
-    5
+    5,
   ];
 
   _MapScaleLayer(this.options, this.mapState, this.stream)
-      : super(key: options.key);
+    : super(key: options.key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +81,11 @@ class _MapScaleLayer extends StatelessWidget {
         final distance = scale[max(0, min(20, zoom.round() + 2))].toDouble();
         final center = mapState.center;
         final start = mapState.project(center);
-        final targetPoint =
-            MapWidget.calculateEndingGlobalCoordinates(center, 90, distance);
+        final targetPoint = MapWidget.calculateEndingGlobalCoordinates(
+          center,
+          90,
+          distance,
+        );
         final end = mapState.project(targetPoint);
         final displayDistance = distance > 999
             ? '${(distance / 1000).toStringAsFixed(0)} km'
@@ -100,8 +107,14 @@ class _MapScaleLayer extends StatelessWidget {
 }
 
 class _MapScalePainter extends CustomPainter {
-  _MapScalePainter(this.width, this.text,
-      {this.padding, this.textStyle, this.lineWidth, this.lineColor});
+  _MapScalePainter(
+    this.width,
+    this.text, {
+    this.padding,
+    this.textStyle,
+    this.lineWidth,
+    this.lineColor,
+  });
   final double width;
   final EdgeInsets padding;
   final String text;
@@ -117,27 +130,39 @@ class _MapScalePainter extends CustomPainter {
       ..strokeWidth = lineWidth;
 
     final sizeForStartEnd = 4;
-    final paddingLeft =
-        padding == null ? 0.0 : padding.left + sizeForStartEnd / 2;
+    final paddingLeft = padding == null
+        ? 0.0
+        : padding.left + sizeForStartEnd / 2;
     var paddingTop = padding == null ? 0.0 : padding.top;
     final textSpan = TextSpan(style: textStyle, text: text);
     final textPainter =
         TextPainter(text: textSpan, textDirection: TextDirection.ltr)..layout();
-    textPainter.paint(canvas,
-        Offset(width / 2 - textPainter.width / 2 + paddingLeft, paddingTop));
+    textPainter.paint(
+      canvas,
+      Offset(width / 2 - textPainter.width / 2 + paddingLeft, paddingTop),
+    );
     paddingTop += textPainter.height;
     final p1 = Offset(paddingLeft, sizeForStartEnd + paddingTop);
     final p2 = Offset(paddingLeft + width, sizeForStartEnd + paddingTop);
     // draw start line
-    canvas.drawLine(Offset(paddingLeft, paddingTop),
-        Offset(paddingLeft, sizeForStartEnd + paddingTop), paint);
+    canvas.drawLine(
+      Offset(paddingLeft, paddingTop),
+      Offset(paddingLeft, sizeForStartEnd + paddingTop),
+      paint,
+    );
     // draw middle line
     final middleX = width / 2 + paddingLeft - lineWidth / 2;
-    canvas.drawLine(Offset(middleX, paddingTop + sizeForStartEnd / 2),
-        Offset(middleX, sizeForStartEnd + paddingTop), paint);
+    canvas.drawLine(
+      Offset(middleX, paddingTop + sizeForStartEnd / 2),
+      Offset(middleX, sizeForStartEnd + paddingTop),
+      paint,
+    );
     // draw end line
-    canvas.drawLine(Offset(width + paddingLeft, paddingTop),
-        Offset(width + paddingLeft, sizeForStartEnd + paddingTop), paint);
+    canvas.drawLine(
+      Offset(width + paddingLeft, paddingTop),
+      Offset(width + paddingLeft, sizeForStartEnd + paddingTop),
+      paint,
+    );
     // draw bottom line
     canvas.drawLine(p1, p2, paint);
   }

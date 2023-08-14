@@ -21,18 +21,23 @@ class BreweryDBService implements BeerSearchService {
 
   @override
   Future<List<Beer>> findBeersMatching(
-      HttpClient httpClient, String pattern) async {
+    HttpClient httpClient,
+    String pattern,
+  ) async {
     if (pattern == null || pattern.trim().isEmpty) {
       return List(0);
     }
 
     var uri = _buildBreweryDBServiceURI(
-        path: "search", queryParameters: {'q': pattern, 'type': 'beer'});
+      path: "search",
+      queryParameters: {'q': pattern, 'type': 'beer'},
+    );
     HttpClientRequest request = await httpClient.getUrl(uri);
     HttpClientResponse response = await request.close();
     if (response.statusCode < 200 || response.statusCode > 299) {
       throw Exception(
-          "Bad response: ${response.statusCode} (${response.reasonPhrase})");
+        "Bad response: ${response.statusCode} (${response.reasonPhrase})",
+      );
     }
 
     String responseBody = await response.transform(utf8.decoder).join();

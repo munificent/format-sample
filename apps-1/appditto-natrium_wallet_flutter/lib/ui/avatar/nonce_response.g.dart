@@ -7,12 +7,9 @@ part of 'nonce_response.dart';
 // **************************************************************************
 
 NonceResponse _$NonceResponseFromJson(Map<String, dynamic> json) {
-  return NonceResponse(
-    nonce: json['nonce'] as int,
-  );
+  return NonceResponse(nonce: json['nonce'] as int);
 }
 
-Map<String, dynamic> _$NonceResponseToJson(NonceResponse instance) =>
-    <String, dynamic>{
-      'nonce': instance.nonce,
-    };
+Map<String, dynamic> _$NonceResponseToJson(
+  NonceResponse instance,
+) => <String, dynamic>{'nonce': instance.nonce};

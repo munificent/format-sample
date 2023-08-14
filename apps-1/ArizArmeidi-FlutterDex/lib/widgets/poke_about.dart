@@ -23,12 +23,7 @@ class PokeAbout extends StatelessWidget {
         children: [
           Container(
             width: 80,
-            child: Text(
-              text,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            child: Text(text, style: TextStyle(fontWeight: FontWeight.w600)),
           ),
           SizedBox(width: 25),
           Text(value),

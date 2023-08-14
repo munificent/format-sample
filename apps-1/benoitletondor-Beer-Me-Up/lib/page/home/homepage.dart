@@ -21,18 +21,16 @@ class HomePage extends StatefulWidget {
   final HomeIntent intent;
   final HomeViewModel model;
 
-  HomePage._({
-    Key key,
-    @required this.intent,
-    @required this.model,
-  }) : super(key: key);
+  HomePage._({Key key, @required this.intent, @required this.model})
+    : super(key: key);
 
-  factory HomePage(
-      {Key key,
-      HomeIntent intent,
-      HomeViewModel model,
-      AuthenticationService authService,
-      UserDataService dataService}) {
+  factory HomePage({
+    Key key,
+    HomeIntent intent,
+    HomeViewModel model,
+    AuthenticationService authService,
+    UserDataService dataService,
+  }) {
     final _intent = intent ?? HomeIntent();
     final _model = model ??
         HomeViewModel(
@@ -59,7 +57,7 @@ class _HomePageState
   static const _TAB_HISTORY_INDEX = 2;
 
   _HomePageState({@required HomeIntent intent, @required HomeViewModel model})
-      : super(intent, model);
+    : super(intent, model);
 
   @override
   Widget build(BuildContext context) {
@@ -112,10 +110,7 @@ class _HomePageState
       ),
       floatingActionButton: FittedBox(
         child: MaterialExtendedFAB(
-          icon: Image.asset(
-            "images/fab_icon.png",
-            width: 20.0,
-          ),
+          icon: Image.asset("images/fab_icon.png", width: 20.0),
           text: Localization.of(context).homeCheckIn,
           color: Theme.of(context).accentColor,
           textColor: Colors.white,
@@ -147,9 +142,7 @@ class _HomePageState
               icon: const Icon(Icons.person),
               title: Text(
                 Localization.of(context).profile,
-                style: const TextStyle(
-                  fontFamily: "Google Sans",
-                ),
+                style: const TextStyle(fontFamily: "Google Sans"),
               ),
             ),
             const BottomNavigationBarItem(
@@ -161,9 +154,7 @@ class _HomePageState
               icon: const Icon(Icons.history),
               title: Text(
                 Localization.of(context).history,
-                style: const TextStyle(
-                  fontFamily: "Google Sans",
-                ),
+                style: const TextStyle(fontFamily: "Google Sans"),
               ),
             ),
           ],
@@ -173,19 +164,13 @@ class _HomePageState
   }
 
   Widget _buildLoadingWidget() {
-    return Scaffold(
-      appBar: _buildAppBar(false),
-      body: LoadingWidget(),
-    );
+    return Scaffold(appBar: _buildAppBar(false), body: LoadingWidget());
   }
 
   Widget _buildErrorWidget({@required String error}) {
     return Scaffold(
       appBar: _buildAppBar(false),
-      body: ErrorOccurredWidget(
-        error: error,
-        onRetry: intent.retry,
-      ),
+      body: ErrorOccurredWidget(error: error, onRetry: intent.retry),
     );
   }
 
@@ -193,30 +178,29 @@ class _HomePageState
     final List<Widget> actions = List();
     if (authenticated) {
       actions.add(PopupMenuButton<String>(
-          // overflow menu
-          icon: const Icon(Icons.more_vert),
-          onSelected: (menu) {
-            performSelectionHaptic(context);
+        // overflow menu
+        icon: const Icon(Icons.more_vert),
+        onSelected: (menu) {
+          performSelectionHaptic(context);
 
-            switch (menu) {
-              case "settings":
-                intent.showSettingsPage();
-                break;
-            }
-          },
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem<String>(
-                value: "settings",
-                child: Text(
-                  Localization.of(context).settings,
-                  style: const TextStyle(
-                    fontFamily: "Google Sans",
-                  ),
-                ),
-              )
-            ];
-          }));
+          switch (menu) {
+            case "settings":
+              intent.showSettingsPage();
+              break;
+          }
+        },
+        itemBuilder: (BuildContext context) {
+          return [
+            PopupMenuItem<String>(
+              value: "settings",
+              child: Text(
+                Localization.of(context).settings,
+                style: const TextStyle(fontFamily: "Google Sans"),
+              ),
+            ),
+          ];
+        },
+      ));
     }
 
     return AppBar(
@@ -245,14 +229,17 @@ class _CenterBottomNavBarFloatFabLocation extends FloatingActionButtonLocation {
     double fabY = contentBottom - fabHeight - kFloatingActionButtonMargin;
     if (snackBarHeight > 0.0)
       fabY = math.min(
-          fabY,
-          contentBottom -
-              snackBarHeight -
-              fabHeight -
-              kFloatingActionButtonMargin);
+        fabY,
+        contentBottom -
+            snackBarHeight -
+            fabHeight -
+            kFloatingActionButtonMargin,
+      );
     if (bottomSheetHeight > 0.0)
-      fabY =
-          math.min(fabY, contentBottom - bottomSheetHeight - fabHeight / 2.0);
+      fabY = math.min(
+        fabY,
+        contentBottom - bottomSheetHeight - fabHeight / 2.0,
+      );
 
     fabY += (scaffoldGeometry.floatingActionButtonSize.height / 1.3);
 

@@ -11,20 +11,25 @@ class OpenFlutterWrapperState<T> extends State {
 
   PageView getPageView(List<Widget> widgets) {
     return PageView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: _viewController,
-        children: widgets);
+      physics: NeverScrollableScrollPhysics(),
+      controller: _viewController,
+      children: widgets,
+    );
   }
 
   void changePage({@required ViewChangeType changeType, int index}) {
     switch (changeType) {
       case ViewChangeType.Forward:
         _viewController.nextPage(
-            duration: Duration(milliseconds: 300), curve: Curves.elasticIn);
+          duration: Duration(milliseconds: 300),
+          curve: Curves.elasticIn,
+        );
         break;
       case ViewChangeType.Backward:
         _viewController.previousPage(
-            duration: Duration(milliseconds: 300), curve: Curves.elasticIn);
+          duration: Duration(milliseconds: 300),
+          curve: Curves.elasticIn,
+        );
         break;
       case ViewChangeType.Start:
         _viewController.jumpToPage(0);

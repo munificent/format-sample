@@ -5,9 +5,5 @@ class ProductRatingInformation {
   final int ratingCount;
   final List<ProductRating> ratings;
 
-  ProductRatingInformation(
-    this.rating,
-    this.ratingCount,
-    this.ratings,
-  );
+  ProductRatingInformation(this.rating, this.ratingCount, this.ratings);
 }

@@ -12,20 +12,24 @@ class LocalProductRepository implements ProductRepository {
   }
 
   @override
-  Future<List<Product>> getSimilarProducts(int categoryId,
-      {int pageIndex = 0, int pageSize = AppConsts.page_size}) {
+  Future<List<Product>> getSimilarProducts(
+    int categoryId, {
+    int pageIndex = 0,
+    int pageSize = AppConsts.page_size,
+  }) {
     // TODO: implement getSimilarProducts
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Product>> getProducts(
-      {int pageIndex = 0,
-      int pageSize = AppConsts.page_size,
-      int categoryId = 0,
-      bool isFavorite = false,
-      SortRules sortRules = const SortRules(),
-      FilterRules filterRules}) {
+  Future<List<Product>> getProducts({
+    int pageIndex = 0,
+    int pageSize = AppConsts.page_size,
+    int categoryId = 0,
+    bool isFavorite = false,
+    SortRules sortRules = const SortRules(),
+    FilterRules filterRules,
+  }) {
     // TODO: implement getProducts
     return null;
   }

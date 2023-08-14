@@ -22,19 +22,31 @@ class FindProductsByFilterUseCaseImpl implements FindProductsByFilterUseCase {
       var products = await _findProductsByFilter(params);
 
       if (products != null && products.isNotEmpty) {
-        return ProductsByFilterResult(products, products.length,
-            FilterRules.getSelectableAttributes(products));
+        return ProductsByFilterResult(
+          products,
+          products.length,
+          FilterRules.getSelectableAttributes(products),
+        );
       }
     } catch (e) {
-      return ProductsByFilterResult([], 0, null,
-          exception: EmptyProductsException());
+      return ProductsByFilterResult(
+        [],
+        0,
+        null,
+        exception: EmptyProductsException(),
+      );
     }
-    return ProductsByFilterResult([], 0, null,
-        exception: EmptyProductsException());
+    return ProductsByFilterResult(
+      [],
+      0,
+      null,
+      exception: EmptyProductsException(),
+    );
   }
 
   Future<List<Product>> _findProductsByFilter(
-      ProductsByFilterParams params) async {
+    ProductsByFilterParams params,
+  ) async {
     List<Product> products;
     if (params.filterByCategory) {
       ProductRepository productRepository = sl();

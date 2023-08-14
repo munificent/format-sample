@@ -9,12 +9,13 @@ import 'package:natrium_wallet_flutter/ui/util/ui_util.dart';
 class AppSettings {
   //Settings item with a dropdown option
   static Widget buildSettingsListItemDoubleLine(
-      BuildContext context,
-      String heading,
-      SettingSelectionItem defaultMethod,
-      IconData icon,
-      Function onPressed,
-      {bool disabled = false}) {
+    BuildContext context,
+    String heading,
+    SettingSelectionItem defaultMethod,
+    IconData icon,
+    Function onPressed, {
+    bool disabled = false,
+  }) {
     return IgnorePointer(
       ignoring: disabled,
       child: FlatButton(
@@ -33,11 +34,13 @@ class AppSettings {
               Container(
                 margin: EdgeInsetsDirectional.only(end: 13.0),
                 child: Container(
-                  child: Icon(icon,
-                      color: disabled
-                          ? StateContainer.of(context).curTheme.primary45
-                          : StateContainer.of(context).curTheme.primary,
-                      size: 24),
+                  child: Icon(
+                    icon,
+                    color: disabled
+                        ? StateContainer.of(context).curTheme.primary45
+                        : StateContainer.of(context).curTheme.primary,
+                    size: 24,
+                  ),
                   margin: EdgeInsets.only(top: 3, left: 3, bottom: 3, right: 3),
                 ),
               ),
@@ -79,9 +82,14 @@ class AppSettings {
   }
 
   //Settings item with direct functionality and two lines
-  static Widget buildSettingsListItemDoubleLineTwo(BuildContext context,
-      String heading, String text, IconData icon, Function onPressed,
-      {bool disabled = false}) {
+  static Widget buildSettingsListItemDoubleLineTwo(
+    BuildContext context,
+    String heading,
+    String text,
+    IconData icon,
+    Function onPressed, {
+    bool disabled = false,
+  }) {
     return IgnorePointer(
       ignoring: disabled,
       child: FlatButton(
@@ -100,11 +108,13 @@ class AppSettings {
               Container(
                 margin: EdgeInsetsDirectional.only(end: 13.0),
                 child: Container(
-                  child: Icon(icon,
-                      color: disabled
-                          ? StateContainer.of(context).curTheme.primary45
-                          : StateContainer.of(context).curTheme.primary,
-                      size: 24),
+                  child: Icon(
+                    icon,
+                    color: disabled
+                        ? StateContainer.of(context).curTheme.primary45
+                        : StateContainer.of(context).curTheme.primary,
+                    size: 24,
+                  ),
                   margin: EdgeInsets.only(top: 3, left: 3, bottom: 3, right: 3),
                 ),
               ),
@@ -147,8 +157,11 @@ class AppSettings {
 
   //Settings item without any dropdown option but rather a direct functionality
   static Widget buildSettingsListItemSingleLine(
-      BuildContext context, String heading, IconData settingIcon,
-      {Function onPressed}) {
+    BuildContext context,
+    String heading,
+    IconData settingIcon, {
+    Function onPressed,
+  }) {
     return FlatButton(
       highlightColor: StateContainer.of(context).curTheme.text15,
       splashColor: StateContainer.of(context).curTheme.text15,

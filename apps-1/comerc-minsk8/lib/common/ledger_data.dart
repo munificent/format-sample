@@ -33,19 +33,16 @@ class LedgerData extends SourceList<LedgerItem> {
     final nowLocal = DateTime.now().toLocal();
     for (final dataItem in dataItems) {
       final payment = PaymentModel.fromJson(dataItem);
-      final date =
-          payment.createdAt.toLocal().toIso8601String().substring(0, 10);
+      final date = payment.createdAt.toLocal().toIso8601String().substring(
+        0,
+        10,
+      );
       if (_nextDate != date) {
         _nextDate = date;
-        items.add(
-          LedgerItem(
-            // TODO: locale autodetect
-            displayDate: getDisplayDate(
-              nowLocal,
-              DateTime.parse(date).toLocal(),
-            ),
-          ),
-        );
+        items.add(LedgerItem(
+          // TODO: locale autodetect
+          displayDate: getDisplayDate(nowLocal, DateTime.parse(date).toLocal()),
+        ));
       }
       items.add(LedgerItem(payment: payment));
     }
@@ -60,9 +57,11 @@ class LedgerData extends SourceList<LedgerItem> {
 }
 
 class LedgerItem {
-  LedgerItem({this.displayDate, this.payment})
-      : assert(displayDate != null || payment != null),
-        assert(!(displayDate != null && payment != null));
+  LedgerItem({
+    this.displayDate,
+    this.payment,
+  }) : assert(displayDate != null || payment != null),
+       assert(!(displayDate != null && payment != null));
 
   String displayDate;
   PaymentModel payment;

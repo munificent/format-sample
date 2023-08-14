@@ -84,13 +84,14 @@ class MediaDetailScreenState extends State<MediaDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: primary,
-        body: CustomScrollView(
-          slivers: <Widget>[
-            _buildAppBar(widget._mediaItem),
-            _buildContentSection(widget._mediaItem),
-          ],
-        ));
+      backgroundColor: primary,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          _buildAppBar(widget._mediaItem),
+          _buildContentSection(widget._mediaItem),
+        ],
+      ),
+    );
   }
 
   Widget _buildAppBar(MediaItem movie) {
@@ -99,11 +100,15 @@ class MediaDetailScreenState extends State<MediaDetailScreen> {
       pinned: true,
       actions: <Widget>[
         ScopedModelDescendant<AppModel>(
-            builder: (context, child, AppModel model) => IconButton(
-                icon: Icon(model.isItemFavorite(widget._mediaItem)
-                    ? Icons.favorite
-                    : Icons.favorite_border),
-                onPressed: () => model.toggleFavorites(widget._mediaItem)))
+          builder: (context, child, AppModel model) => IconButton(
+                icon: Icon(
+                  model.isItemFavorite(widget._mediaItem)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                ),
+                onPressed: () => model.toggleFavorites(widget._mediaItem),
+              ),
+        ),
       ],
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
@@ -112,13 +117,14 @@ class MediaDetailScreenState extends State<MediaDetailScreen> {
             Hero(
               tag: "Movie-Tag-${widget._mediaItem.id}",
               child: FadeInImage.assetNetwork(
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  placeholder: "assets/placeholder.jpg",
-                  image: widget._mediaItem.getBackDropUrl()),
+                fit: BoxFit.cover,
+                width: double.infinity,
+                placeholder: "assets/placeholder.jpg",
+                image: widget._mediaItem.getBackDropUrl(),
+              ),
             ),
             BottomGradient(),
-            _buildMetaSection(movie)
+            _buildMetaSection(movie),
           ],
         ),
       ),
@@ -141,31 +147,30 @@ class MediaDetailScreenState extends State<MediaDetailScreen> {
                   mediaItem.getReleaseYear().toString(),
                   backgroundColor: Color(0xffF47663),
                 ),
-                Container(
-                  width: 8.0,
+                Container(width: 8.0),
+                TextBubble(
+                  mediaItem.voteAverage.toString(),
+                  backgroundColor: Color(0xffF47663),
                 ),
-                TextBubble(mediaItem.voteAverage.toString(),
-                    backgroundColor: Color(0xffF47663)),
               ],
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(mediaItem.title,
-                  style: TextStyle(color: Color(0xFFEEEEEE), fontSize: 20.0)),
+              child: Text(
+                mediaItem.title,
+                style: TextStyle(color: Color(0xFFEEEEEE), fontSize: 20.0),
+              ),
             ),
             Row(
-              children: getGenresForIds(mediaItem.genreIds)
-                  .sublist(0, min(5, mediaItem.genreIds.length))
-                  .map((genre) => Row(
-                        children: <Widget>[
-                          TextBubble(genre),
-                          Container(
-                            width: 8.0,
-                          )
-                        ],
-                      ))
-                  .toList(),
-            )
+              children: getGenresForIds(mediaItem.genreIds).sublist(
+                0,
+                min(5, mediaItem.genreIds.length),
+              ).map(
+                (genre) => Row(
+                  children: <Widget>[TextBubble(genre), Container(width: 8.0)],
+                ),
+              ).toList(),
+            ),
           ],
         ),
       ),
@@ -183,19 +188,13 @@ class MediaDetailScreenState extends State<MediaDetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Text("SYNOPSIS", style: const TextStyle(color: Colors.white)),
+                Container(height: 8.0),
                 Text(
-                  "SYNOPSIS",
-                  style: const TextStyle(color: Colors.white),
+                  media.overview,
+                  style: const TextStyle(color: Colors.white, fontSize: 12.0),
                 ),
-                Container(
-                  height: 8.0,
-                ),
-                Text(media.overview,
-                    style:
-                        const TextStyle(color: Colors.white, fontSize: 12.0)),
-                Container(
-                  height: 8.0,
-                ),
+                Container(height: 8.0),
               ],
             ),
           ),
@@ -203,41 +202,42 @@ class MediaDetailScreenState extends State<MediaDetailScreen> {
         Container(
           decoration: BoxDecoration(color: primary),
           child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: _actorList == null
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : CastSection(_actorList)),
+            padding: const EdgeInsets.all(16.0),
+            child: _actorList == null
+                ? Center(child: CircularProgressIndicator())
+                : CastSection(_actorList),
+          ),
         ),
         Container(
           decoration: BoxDecoration(color: primaryDark),
           child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: _mediaDetails == null
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : MetaSection(_mediaDetails)),
+            padding: const EdgeInsets.all(16.0),
+            child: _mediaDetails == null
+                ? Center(child: CircularProgressIndicator())
+                : MetaSection(_mediaDetails),
+          ),
         ),
         (widget._mediaItem.type == MediaType.show)
             ? Container(
                 decoration: BoxDecoration(color: primary),
                 child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: _seasonList == null
-                        ? Container()
-                        : SeasonSection(widget._mediaItem, _seasonList)),
+                  padding: const EdgeInsets.all(16.0),
+                  child: _seasonList == null
+                      ? Container()
+                      : SeasonSection(widget._mediaItem, _seasonList),
+                ),
               )
             : Container(),
         Container(
-            decoration: BoxDecoration(
-                color: (widget._mediaItem.type == MediaType.movie
-                    ? primary
-                    : primaryDark)),
-            child: _similarMedia == null
-                ? Container()
-                : SimilarSection(_similarMedia))
+          decoration: BoxDecoration(
+            color: (widget._mediaItem.type == MediaType.movie
+                ? primary
+                : primaryDark),
+          ),
+          child: _similarMedia == null
+              ? Container()
+              : SimilarSection(_similarMedia),
+        ),
       ]),
     );
   }

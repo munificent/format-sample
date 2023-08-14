@@ -27,10 +27,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: OpenFlutterScaffold(
         title: 'My Profile',
         body: BlocProvider<ProfileBloc>(
-            create: (context) {
-              return ProfileBloc()..add(ProfileStartEvent());
-            },
-            child: ProfileWrapper()),
+          create: (context) {
+            return ProfileBloc()..add(ProfileStartEvent());
+          },
+          child: ProfileWrapper(),
+        ),
         bottomMenuIndex: 4,
       ),
     );
@@ -46,18 +47,19 @@ class _ProfileWrapperState extends OpenFlutterWrapperState<ProfileWrapper> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
-        cubit: BlocProvider.of<ProfileBloc>(context),
-        builder: (BuildContext context, ProfileState state) {
-          return getPageView(<Widget>[
-            ProfileView(changeView: changePage),
-            MyOrdersView(changeView: changePage),
-            MyShippingAddressesView(changeView: changePage),
-            PaymentMethodsView(changeView: changePage),
-            PromosView(changeView: changePage),
-            MyReviewsView(changeView: changePage),
-            SettingsView(changeView: changePage),
-            MyOrderDetailsView(changeView: changePage),
-          ]);
-        });
+      cubit: BlocProvider.of<ProfileBloc>(context),
+      builder: (BuildContext context, ProfileState state) {
+        return getPageView(<Widget>[
+          ProfileView(changeView: changePage),
+          MyOrdersView(changeView: changePage),
+          MyShippingAddressesView(changeView: changePage),
+          PaymentMethodsView(changeView: changePage),
+          PromosView(changeView: changePage),
+          MyReviewsView(changeView: changePage),
+          SettingsView(changeView: changePage),
+          MyOrderDetailsView(changeView: changePage),
+        ]);
+      },
+    );
   }
 }

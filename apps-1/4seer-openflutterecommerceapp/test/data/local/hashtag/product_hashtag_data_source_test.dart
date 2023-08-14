@@ -15,8 +15,11 @@ void main() {
     });
 
     test('test: insert and get a record in ProductHashTag table', () async {
-      ProductHashTagEntity data =
-          ProductHashTagEntity(id: 1, hashTagId: 1, productId: 1);
+      ProductHashTagEntity data = ProductHashTagEntity(
+        id: 1,
+        hashTagId: 1,
+        productId: 1,
+      );
       await dataSource.insert(data);
 
       ProductHashTagEntity insertedData = await dataSource.get(data.id);
@@ -24,14 +27,20 @@ void main() {
     });
 
     test('test: update a record in ProductHashTag table', () async {
-      ProductHashTagEntity data =
-          ProductHashTagEntity(id: 1, hashTagId: 1, productId: 1);
+      ProductHashTagEntity data = ProductHashTagEntity(
+        id: 1,
+        hashTagId: 1,
+        productId: 1,
+      );
       await dataSource.insert(data);
 
       ProductHashTagEntity insertedData = await dataSource.get(data.id);
 
-      ProductHashTagEntity dataToUpdate =
-          ProductHashTagEntity(id: insertedData.id, hashTagId: 1, productId: 2);
+      ProductHashTagEntity dataToUpdate = ProductHashTagEntity(
+        id: insertedData.id,
+        hashTagId: 1,
+        productId: 2,
+      );
 
       await dataSource.update(dataToUpdate);
 
@@ -40,12 +49,15 @@ void main() {
     });
 
     test('test: delete all records in ProductHashTag table', () async {
-      await dataSource
-          .insert(ProductHashTagEntity(id: 1, hashTagId: 1, productId: 1));
-      await dataSource
-          .insert(ProductHashTagEntity(id: 2, hashTagId: 1, productId: 2));
-      await dataSource
-          .insert(ProductHashTagEntity(id: 3, hashTagId: 1, productId: 3));
+      await dataSource.insert(
+        ProductHashTagEntity(id: 1, hashTagId: 1, productId: 1),
+      );
+      await dataSource.insert(
+        ProductHashTagEntity(id: 2, hashTagId: 1, productId: 2),
+      );
+      await dataSource.insert(
+        ProductHashTagEntity(id: 3, hashTagId: 1, productId: 3),
+      );
 
       await dataSource.deleteAll();
 
@@ -56,8 +68,9 @@ void main() {
     test('test: delete a record in ProductHashTag table', () async {
       await dataSource.deleteAll();
 
-      await dataSource
-          .insert(ProductHashTagEntity(id: 1, hashTagId: 1, productId: 1));
+      await dataSource.insert(
+        ProductHashTagEntity(id: 1, hashTagId: 1, productId: 1),
+      );
 
       await dataSource.delete(1);
 
@@ -68,12 +81,15 @@ void main() {
     test('test: get all records in ProductHashTag table', () async {
       await dataSource.deleteAll();
 
-      await dataSource
-          .insert(ProductHashTagEntity(id: 1, hashTagId: 1, productId: 3));
-      await dataSource
-          .insert(ProductHashTagEntity(id: 2, hashTagId: 1, productId: 4));
-      await dataSource
-          .insert(ProductHashTagEntity(id: 3, hashTagId: 4, productId: 7));
+      await dataSource.insert(
+        ProductHashTagEntity(id: 1, hashTagId: 1, productId: 3),
+      );
+      await dataSource.insert(
+        ProductHashTagEntity(id: 2, hashTagId: 1, productId: 4),
+      );
+      await dataSource.insert(
+        ProductHashTagEntity(id: 3, hashTagId: 4, productId: 7),
+      );
       List<ProductHashTagEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
     });

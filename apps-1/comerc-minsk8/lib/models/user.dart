@@ -17,8 +17,8 @@ class UserModel extends Equatable {
     @required this.id,
     @required this.displayName,
     @required this.imageUrl,
-  })  : assert(email != null),
-        assert(id != null);
+  }) : assert(email != null),
+       assert(id != null);
 
   /// The current user's email address.
   final String email;
@@ -41,10 +41,5 @@ class UserModel extends Equatable {
   );
 
   @override
-  List<Object> get props => [
-        email,
-        id,
-        displayName,
-        imageUrl,
-      ];
+  List<Object> get props => [email, id, displayName, imageUrl];
 }

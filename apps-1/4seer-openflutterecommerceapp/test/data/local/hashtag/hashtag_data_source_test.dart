@@ -15,10 +15,7 @@ void main() {
     });
 
     test('test: insert and get a record in HashTag table', () async {
-      HashTagEntity data = HashTagEntity(
-        id: 1,
-        title: 'Title 1',
-      );
+      HashTagEntity data = HashTagEntity(id: 1, title: 'Title 1');
       await dataSource.insert(data);
 
       HashTagEntity insertedData = await dataSource.get(data.id);
@@ -26,10 +23,7 @@ void main() {
     });
 
     test('test: update a record in HashTag table', () async {
-      HashTagEntity data = HashTagEntity(
-        id: 1,
-        title: 'Title 1',
-      );
+      HashTagEntity data = HashTagEntity(id: 1, title: 'Title 1');
       await dataSource.insert(data);
 
       HashTagEntity insertedData = await dataSource.get(data.id);
@@ -46,18 +40,9 @@ void main() {
     });
 
     test('test: delete all records in HashTag table', () async {
-      await dataSource.insert(HashTagEntity(
-        id: 1,
-        title: 'Title 1',
-      ));
-      await dataSource.insert(HashTagEntity(
-        id: 2,
-        title: 'Title 2',
-      ));
-      await dataSource.insert(HashTagEntity(
-        id: 3,
-        title: 'Title 3',
-      ));
+      await dataSource.insert(HashTagEntity(id: 1, title: 'Title 1'));
+      await dataSource.insert(HashTagEntity(id: 2, title: 'Title 2'));
+      await dataSource.insert(HashTagEntity(id: 3, title: 'Title 3'));
 
       await dataSource.deleteAll();
 
@@ -68,10 +53,7 @@ void main() {
     test('test: delete a record in HashTag table', () async {
       await dataSource.deleteAll();
 
-      await dataSource.insert(HashTagEntity(
-        id: 1,
-        title: 'Title 1',
-      ));
+      await dataSource.insert(HashTagEntity(id: 1, title: 'Title 1'));
 
       await dataSource.delete(1);
 
@@ -82,18 +64,9 @@ void main() {
     test('test: get all records in HashTag table', () async {
       await dataSource.deleteAll();
 
-      await dataSource.insert(HashTagEntity(
-        id: 1,
-        title: 'Title 1',
-      ));
-      await dataSource.insert(HashTagEntity(
-        id: 2,
-        title: 'Title 2',
-      ));
-      await dataSource.insert(HashTagEntity(
-        id: 3,
-        title: 'Title 3',
-      ));
+      await dataSource.insert(HashTagEntity(id: 1, title: 'Title 1'));
+      await dataSource.insert(HashTagEntity(id: 2, title: 'Title 2'));
+      await dataSource.insert(HashTagEntity(id: 3, title: 'Title 3'));
       List<HashTagEntity> allRecords = await dataSource.all();
       expect(allRecords.length == 3, true);
     });

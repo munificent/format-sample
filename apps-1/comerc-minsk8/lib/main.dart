@@ -95,56 +95,65 @@ void main() {
       Zone.current.handleUncaughtError(details.exception, details.stack);
     }
   };
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    notificationAppLaunchDetails =
-        await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    final initializationSettings = InitializationSettings(
-      android: AndroidInitializationSettings('app_icon'),
-      // Note: permissions aren't requested here just to demonstrate
-      // that can be done later using the `requestPermissions()` method
-      // of the `IOSFlutterLocalNotificationsPlugin` class
-      // final initializationSettingsIOS = ;
-      iOS: IOSInitializationSettings(
-        requestAlertPermission: false,
-        requestBadgePermission: false,
-        requestSoundPermission: false,
-        onDidReceiveLocalNotification:
-            (int id, String title, String body, String payload) async {
-          didReceiveLocalNotificationSubject.add(ReceivedNotificationModel(
-              id: id, title: title, body: body, payload: payload));
-        },
-      ),
-    );
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+  runZonedGuarded<Future<void>>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+      notificationAppLaunchDetails = await flutterLocalNotificationsPlugin
+          .getNotificationAppLaunchDetails();
+      final initializationSettings = InitializationSettings(
+        android: AndroidInitializationSettings('app_icon'),
+        // Note: permissions aren't requested here just to demonstrate
+        // that can be done later using the `requestPermissions()` method
+        // of the `IOSFlutterLocalNotificationsPlugin` class
+        // final initializationSettingsIOS = ;
+        iOS: IOSInitializationSettings(
+          requestAlertPermission: false,
+          requestBadgePermission: false,
+          requestSoundPermission: false,
+          onDidReceiveLocalNotification:
+              (int id, String title, String body, String payload) async {
+            didReceiveLocalNotificationSubject.add(ReceivedNotificationModel(
+              id: id,
+              title: title,
+              body: body,
+              payload: payload,
+            ));
+          },
+        ),
+      );
+      await flutterLocalNotificationsPlugin.initialize(
+        initializationSettings,
         onSelectNotification: (String payload) async {
-      if (payload != null) {
-        out('notification payload: $payload');
-      }
-      selectNotificationSubject.add(payload);
-    });
-    await Firebase.initializeApp();
-    // TODO: locale autodetect
-    // await initializeDateFormatting('en_US', null);
-    await initializeDateFormatting('ru_RU');
-    EquatableConfig.stringify = isInDebugMode;
-    // Bloc.observer = SimpleBlocObserver();
-    HydratedBloc.storage = await HydratedStorage.build();
-    runApp(
-      App(
+          if (payload != null) {
+            out('notification payload: $payload');
+          }
+          selectNotificationSubject.add(payload);
+        },
+      );
+      await Firebase.initializeApp();
+      // TODO: locale autodetect
+      // await initializeDateFormatting('en_US', null);
+      await initializeDateFormatting('ru_RU');
+      EquatableConfig.stringify = isInDebugMode;
+      // Bloc.observer = SimpleBlocObserver();
+      HydratedBloc.storage = await HydratedStorage.build();
+      runApp(App(
         authenticationRepository: AuthenticationRepository(),
         databaseRepository: DatabaseRepository(),
         remoteConfig: await RemoteConfig.instance,
-      ),
-    );
-  }, (error, stackTrace) {
-    out('**** runZonedGuarded ****');
-    out('$error');
-    out('$stackTrace');
-    // TODO: [MVP] отправлять ошибки в Sentry (или Firebase Crashlytics)
-    // TODO: [MVP] не перехватывается "NoSuchMethodError: The method '[]' was called on null." при трансформации json
-  });
+      ));
+    },
+    (error, stackTrace) {
+      out('**** runZonedGuarded ****');
+      out('$error');
+      out('$stackTrace');
+      // TODO: [MVP] отправлять ошибки в Sentry (или Firebase Crashlytics)
+      // TODO: [MVP] не перехватывается "NoSuchMethodError: The method '[]' was called on null." при трансформации json
+    },
+  );
 }
 
 class App extends StatelessWidget {
@@ -153,10 +162,10 @@ class App extends StatelessWidget {
     @required this.authenticationRepository,
     @required this.databaseRepository,
     @required this.remoteConfig,
-  })  : assert(authenticationRepository != null),
-        assert(databaseRepository != null),
-        assert(remoteConfig != null),
-        super(key: key);
+  }) : assert(authenticationRepository != null),
+       assert(databaseRepository != null),
+       assert(remoteConfig != null),
+       super(key: key);
 
   final AuthenticationRepository authenticationRepository;
   final DatabaseRepository databaseRepository;
@@ -171,10 +180,7 @@ class App extends StatelessWidget {
       },
       child: result,
     );
-    result = RepositoryProvider.value(
-      value: databaseRepository,
-      child: result,
-    );
+    result = RepositoryProvider.value(value: databaseRepository, child: result);
     result = BlocProvider(
       create: (BuildContext context) {
         return AuthenticationCubit(authenticationRepository);
@@ -192,19 +198,12 @@ class App extends StatelessWidget {
     result = MultiProvider(
       providers: <SingleChildWidget>[
         ChangeNotifierProvider<DistanceModel>(create: (_) => DistanceModel()),
-        ChangeNotifierProvider<MyUnitMapModel>(
-          create: (_) => MyUnitMapModel(),
-        ),
-        ChangeNotifierProvider<AppBarModel>(
-          create: (_) => AppBarModel(),
-        ),
+        ChangeNotifierProvider<MyUnitMapModel>(create: (_) => MyUnitMapModel()),
+        ChangeNotifierProvider<AppBarModel>(create: (_) => AppBarModel()),
       ],
       child: result,
     );
-    result = PersistedAppState(
-      storage: JsonFileStorage(),
-      child: result,
-    );
+    result = PersistedAppState(storage: JsonFileStorage(), child: result);
     return result;
   }
 }
@@ -320,9 +319,7 @@ class AppView extends StatelessWidget {
     //   ),
     //   child: result,
     // );
-    result = _LifecycleManager(
-      child: result,
-    );
+    result = _LifecycleManager(child: result);
     return result;
   }
 }
@@ -339,10 +336,7 @@ class _MediaQueryWrapper extends StatelessWidget {
     // ScreenUtil.init(width: 1920, height: 1200, allowFontScaling: true);
     // printScreenInformation();
     final data = MediaQuery.of(context);
-    return MediaQuery(
-      data: data.copyWith(textScaleFactor: 1),
-      child: child,
-    );
+    return MediaQuery(data: data.copyWith(textScaleFactor: 1), child: child);
     // TODO: responsive app
     // - https://pub.dev/packages/flutter_screenutil
     // - https://pub.dev/packages/device_preview
@@ -405,12 +399,12 @@ class _LifecycleManagerState extends State<_LifecycleManager>
   @override
   void initState() {
     super.initState();
-    HomeShowcase.dataPool = [...MetaKindValue.values, ...KindValue.values]
-        .map((dynamic value) => ShowcaseData(value))
-        .toList();
-    HomeUnderway.dataPool = UnderwayValue.values
-        .map((UnderwayValue value) => UnderwayData(value))
-        .toList();
+    HomeShowcase.dataPool = [...MetaKindValue.values, ...KindValue.values].map(
+      (dynamic value) => ShowcaseData(value),
+    ).toList();
+    HomeUnderway.dataPool = UnderwayValue.values.map(
+      (UnderwayValue value) => UnderwayData(value),
+    ).toList();
     HomeInterplay.dataPool = [
       ChatData(),
       // [

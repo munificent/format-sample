@@ -28,23 +28,24 @@ class _ProfileViewState extends State<ProfileView> {
             Padding(
               padding: const EdgeInsets.only(top: 40.0, left: 10.0),
               child: Container(
-                  child: Text(
-                'My profile',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 34.0),
-              )),
+                child: Text(
+                  'My profile',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 34.0),
+                ),
+              ),
             ),
-            SizedBox(
-              height: 5.0,
-            ),
+            SizedBox(height: 5.0),
             ListTile(
               leading: Container(
                 height: 60.0,
                 width: 60.0,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/profile/user-profile.jpeg'))),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/profile/user-profile.jpeg'),
+                  ),
+                ),
               ),
               title: Text(
                 //TODO: take from profile info
@@ -58,76 +59,96 @@ class _ProfileViewState extends State<ProfileView> {
                 //TODO: take from profile info
                 'matildabrown@mail.com',
                 style: TextStyle(
-                    color: AppColors.lightGray, fontWeight: FontWeight.bold),
+                  color: AppColors.lightGray,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            SizedBox(
-              height: 25.0,
+            SizedBox(height: 25.0),
+            OpenFlutterMenuLine(
+              title: 'My orders',
+              //TODO: make short card info
+              subtitle: 'Already Have 12 orders',
+              onTap: (() => {
+                    bloc..add(ProfileMyOrdersEvent()),
+                    widget.changeView(
+                      changeType: ViewChangeType.Exact,
+                      index: 1,
+                    ),
+                  }),
             ),
-            OpenFlutterMenuLine(
-                title: 'My orders',
-                //TODO: make short card info
-                subtitle: 'Already Have 12 orders',
-                onTap: (() => {
-                      bloc..add(ProfileMyOrdersEvent()),
-                      widget.changeView(
-                          changeType: ViewChangeType.Exact, index: 1)
-                    })),
             Divider(),
             OpenFlutterMenuLine(
-                title: 'Shipping addresses',
-                //TODO: make dynamic address count
-                subtitle: '3 addresses',
-                onTap: (() => {
-                      widget.changeView(
-                          changeType: ViewChangeType.Exact, index: 2)
-                    })),
+              title: 'Shipping addresses',
+              //TODO: make dynamic address count
+              subtitle: '3 addresses',
+              onTap: (() => {
+                    widget.changeView(
+                      changeType: ViewChangeType.Exact,
+                      index: 2,
+                    ),
+                  }),
+            ),
             Divider(),
             OpenFlutterMenuLine(
-                title: 'Payments methods',
-                //TODO: make short card info
-                subtitle: 'visa **34',
-                onTap: (() => {
-                      widget.changeView(
-                          changeType: ViewChangeType.Exact, index: 3)
-                    })),
+              title: 'Payments methods',
+              //TODO: make short card info
+              subtitle: 'visa **34',
+              onTap: (() => {
+                    widget.changeView(
+                      changeType: ViewChangeType.Exact,
+                      index: 3,
+                    ),
+                  }),
+            ),
             Divider(),
             OpenFlutterMenuLine(
-                title: 'Promocodes',
-                //TODO: make dynamic later
-                subtitle: 'You have special promocodes',
-                onTap: (() => {
-                      widget.changeView(
-                          changeType: ViewChangeType.Exact, index: 4)
-                    })),
+              title: 'Promocodes',
+              //TODO: make dynamic later
+              subtitle: 'You have special promocodes',
+              onTap: (() => {
+                    widget.changeView(
+                      changeType: ViewChangeType.Exact,
+                      index: 4,
+                    ),
+                  }),
+            ),
             Divider(),
             OpenFlutterMenuLine(
-                title: 'My reviews',
-                //TODO: make dynamic later
-                subtitle: 'review for 4 items',
-                onTap: (() => {
-                      widget.changeView(
-                          changeType: ViewChangeType.Exact, index: 5)
-                    })),
+              title: 'My reviews',
+              //TODO: make dynamic later
+              subtitle: 'review for 4 items',
+              onTap: (() => {
+                    widget.changeView(
+                      changeType: ViewChangeType.Exact,
+                      index: 5,
+                    ),
+                  }),
+            ),
             Divider(),
             OpenFlutterMenuLine(
-                title: 'Settings',
-                subtitle: 'Notification, Password',
-                onTap: (() => {
-                      widget.changeView(
-                          changeType: ViewChangeType.Exact, index: 6)
-                      //Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.settings)
-                    })),
+              title: 'Settings',
+              subtitle: 'Notification, Password',
+              onTap: (() => {
+                    widget.changeView(
+                      changeType: ViewChangeType.Exact,
+                      index: 6,
+                    ),
+                    //Navigator.of(context).pushNamed(OpenFlutterEcommerceRoutes.settings)
+                  }),
+            ),
             Divider(),
             OpenFlutterMenuLine(
-                title: 'SignIn/SignUp',
-                subtitle: 'Connect your web account',
-                onTap: (() => {
-                      Navigator.of(context)
-                          .pushNamed(OpenFlutterEcommerceRoutes.signin)
-                    }))
+              title: 'SignIn/SignUp',
+              subtitle: 'Connect your web account',
+              onTap: (() => {
+                    Navigator.of(context).pushNamed(
+                      OpenFlutterEcommerceRoutes.signin,
+                    ),
+                  }),
+            ),
           ],
-        )
+        ),
       ],
     );
   }

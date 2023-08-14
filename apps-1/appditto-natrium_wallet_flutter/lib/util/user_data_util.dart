@@ -24,7 +24,7 @@ class QRScanErrs {
   static const List<String> ERROR_LIST = [
     PERMISSION_DENIED,
     UNKNOWN_ERROR,
-    CANCEL_ERROR
+    CANCEL_ERROR,
   ];
 }
 
@@ -78,7 +78,8 @@ class UserDataUtil {
     UIUtil.cancelLockEvent();
     try {
       String data = await BarcodeScanner.scan(
-          StateContainer.of(context).curTheme.qrScanTheme);
+        StateContainer.of(context).curTheme.qrScanTheme,
+      );
       if (isEmpty(data)) {
         return null;
       }
@@ -86,11 +87,15 @@ class UserDataUtil {
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         UIUtil.showSnackbar(
-            AppLocalization.of(context).qrInvalidPermissions, context);
+          AppLocalization.of(context).qrInvalidPermissions,
+          context,
+        );
         return QRScanErrs.PERMISSION_DENIED;
       } else {
         UIUtil.showSnackbar(
-            AppLocalization.of(context).qrUnknownError, context);
+          AppLocalization.of(context).qrUnknownError,
+          context,
+        );
         return QRScanErrs.UNKNOWN_ERROR;
       }
     } on FormatException {
@@ -103,9 +108,7 @@ class UserDataUtil {
 
   static Future<void> setSecureClipboardItem(String value) async {
     if (Platform.isIOS) {
-      final Map<String, dynamic> params = <String, dynamic>{
-        'value': value,
-      };
+      final Map<String, dynamic> params = <String, dynamic>{'value': value};
       await _channel.invokeMethod("setSecureClipboardItem", params);
     } else {
       // Set item in clipboard

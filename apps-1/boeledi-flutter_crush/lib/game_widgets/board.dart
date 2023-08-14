@@ -6,12 +6,7 @@ import 'package:flutter_crush/model/level.dart';
 import 'package:flutter/material.dart';
 
 class Board extends StatelessWidget {
-  Board({
-    Key key,
-    this.cols,
-    this.rows,
-    this.level,
-  }) : super(key: key);
+  Board({Key key, this.cols, this.rows, this.level}) : super(key: key);
 
   final int rows;
   final int cols;
@@ -74,8 +69,9 @@ class Board extends StatelessWidget {
         if (value != 0 && value != 6 && value != 9) {
           boxDecoration = BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/borders/border_$value.png'),
-                fit: BoxFit.cover),
+              image: AssetImage('assets/images/borders/border_$value.png'),
+              fit: BoxFit.cover,
+            ),
           );
         }
         _decorations[row][col] = boxDecoration;
@@ -112,8 +108,9 @@ class Board extends StatelessWidget {
     final Size screenSize = MediaQuery.of(context).size;
     final double maxDimension = math.min(screenSize.width, screenSize.height);
     final double maxTileWidth = math.min(
-        maxDimension / GameBloc.kMaxTilesPerRowAndColumn,
-        GameBloc.kMaxTilesSize);
+      maxDimension / GameBloc.kMaxTilesPerRowAndColumn,
+      GameBloc.kMaxTilesSize,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => _afterBuild());
 
@@ -137,8 +134,10 @@ class Board extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           _showDecorations(maxTileWidth),
-          _showGrid(maxTileWidth,
-              gameBloc), // We pass the gameBloc since we will need to use it to pass the dimensions and coordinates
+          _showGrid(
+            maxTileWidth,
+            gameBloc,
+          ), // We pass the gameBloc since we will need to use it to pass the dimensions and coordinates
         ],
       ),
     );
@@ -187,13 +186,14 @@ class Board extends StatelessWidget {
           return Container(
             color: _checker[rows - row - 1][col],
             child: LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-              if (isFirst) {
-                isFirst = false;
-                return Container(key: _keyCheckerCell);
-              }
-              return Container();
-            }),
+              builder: (BuildContext context, BoxConstraints constraints) {
+                if (isFirst) {
+                  isFirst = false;
+                  return Container(key: _keyCheckerCell);
+                }
+                return Container();
+              },
+            ),
           );
         },
       ),
@@ -207,10 +207,15 @@ class Board extends StatelessWidget {
     final RenderBox box = context.findRenderObject() as RenderBox;
 
     final Offset topLeft = box.size.topLeft(box.localToGlobal(Offset.zero));
-    final Offset bottomRight =
-        box.size.bottomRight(box.localToGlobal(Offset.zero));
+    final Offset bottomRight = box.size.bottomRight(
+      box.localToGlobal(Offset.zero),
+    );
     return Rect.fromLTRB(
-        topLeft.dx, topLeft.dy, bottomRight.dx, bottomRight.dy);
+      topLeft.dx,
+      topLeft.dy,
+      bottomRight.dx,
+      bottomRight.dy,
+    );
   }
 
   //
@@ -222,8 +227,9 @@ class Board extends StatelessWidget {
     // Let's get the dimensions and position of the exact position of the board
     //
     if (_keyChecker.currentContext != null) {
-      final Rect rectBoard =
-          _getDimensionsFromContext(_keyChecker.currentContext);
+      final Rect rectBoard = _getDimensionsFromContext(
+        _keyChecker.currentContext,
+      );
 
       //
       // Save the position of the board
@@ -234,8 +240,9 @@ class Board extends StatelessWidget {
       //
       // Let's get the dimensions of one cell of the board
       //
-      final Rect rectBoardSquare =
-          _getDimensionsFromContext(_keyCheckerCell.currentContext);
+      final Rect rectBoardSquare = _getDimensionsFromContext(
+        _keyCheckerCell.currentContext,
+      );
 
       //
       // Save it for later reuse
