@@ -47,54 +47,55 @@ class _NewsRowState extends State<NewsRow> {
           backgroundImage: new NetworkImage(widget.news.icons[1].url),
         );
       } catch (Exception) {
-        return new CircleAvatar(
-          child: new Icon(Icons.library_books),
-        );
+        return new CircleAvatar(child: new Icon(Icons.library_books));
       }
     }
 
     final newsCard = Container(
-        child: GridTile(
-            child: Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 16.0),
-          child: new Container(
-              child: channelLogo(widget.news.url),
-              width: 130.0,
-              height: 130.0,
-              padding: const EdgeInsets.all(3.0),
-              // border width
-              decoration: new BoxDecoration(
-                color: Colors.teal, // border color
-                shape: BoxShape.circle,
-              )),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, right: 4.0, left: 4.0),
-          child: Text(
-            widget.news.name,
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 16.0,
+      child: GridTile(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: new Container(
+                child: channelLogo(widget.news.url),
+                width: 130.0,
+                height: 130.0,
+                padding: const EdgeInsets.all(3.0),
+                // border width
+                decoration: new BoxDecoration(
+                  color: Colors.teal, // border color
+                  shape: BoxShape.circle,
+                ),
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, right: 4.0, left: 4.0),
+              child: Text(
+                widget.news.name,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
-    )));
+      ),
+    );
     return new Container(
       child: GestureDetector(
         onTap: () {
           if (widget.news.id.toString().isNotEmpty) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => NewsDetailPage(
-                      id: widget.news.id, channel: widget.news.name)),
-            );
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) => NewsDetailPage(
+                    id: widget.news.id,
+                    channel: widget.news.name,
+                  ),
+            ));
           }
         },
         child: newsCard,

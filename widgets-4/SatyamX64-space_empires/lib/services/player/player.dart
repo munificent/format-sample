@@ -14,10 +14,7 @@ import 'military_mixin.dart';
 import 'planet_mixin.dart';
 import 'stats.dart';
 
-enum PlayerType {
-  human,
-  computer,
-}
+enum PlayerType { human, computer }
 
 class Player extends ChangeNotifier with Stats, Military, Planets {
   late final Ruler ruler;
@@ -26,10 +23,11 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
   late bool canAttack; // Player Can Only Attack once every Day
   late Map<Ruler, bool> _interactionAvailable;
 
-  Player(
-      {required this.ruler,
-      required List<Planet> planets,
-      required this.playerType}) {
+  Player({
+    required this.ruler,
+    required List<Planet> planets,
+    required this.playerType,
+  }) {
     money = 10000;
     canAttack = true;
     planetsInit = planets;
@@ -72,8 +70,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     // Military Effect only negatively effects morale
     // So having extra propoganda won't help whatsoever
     // 1 Propoganda Point can counter 3 Points of Military Morale
-    final _militaryEffect =
-        min(0, statValue(StatsType.propoganda) * 3 - militaryMoraleImpact);
+    final _militaryEffect = min(
+      0,
+      statValue(StatsType.propoganda) * 3 - militaryMoraleImpact,
+    );
 
     // Luxury is what basically makes the morale
     // more luxury, more morale
@@ -85,9 +85,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     // Culture doesn't positively affect morale
     // Although if it falls short, it will negatively affect it
     final _culturalEffect = min<int>(
-            0,
-            statValue(StatsType.culture) -
-                min<int>(100, planets.length * (Random().nextInt(5) + 10))) *
+          0,
+          statValue(StatsType.culture) -
+              min<int>(100, planets.length * (Random().nextInt(5) + 10)),
+        ) *
         5;
     final _baseMorale = _militaryEffect +
         _luxuryGains +
@@ -162,14 +163,15 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
         planetBudgetAllotment.add(totalUnits);
       }
     }
-    myPlanets
-        .sort((a, b) => Comparable.compare(a.militaryMight, b.militaryMight));
+    myPlanets.sort(
+      (a, b) => Comparable.compare(a.militaryMight, b.militaryMight),
+    );
 
     for (int i = 0; i < myPlanets.length; i++) {
       autoBuyDefenseShipsForPlanet(
-          moneyAllotted:
-              (moneyAllotted * planetBudgetAllotment[i] / 100).floor(),
-          planetName: myPlanets[i].name);
+        moneyAllotted: (moneyAllotted * planetBudgetAllotment[i] / 100).floor(),
+        planetName: myPlanets[i].name,
+      );
     }
   }
 
@@ -186,14 +188,15 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
         planetBudgetAllotment.add(totalUnits);
       }
     }
-    myPlanets
-        .sort((a, b) => Comparable.compare(a.militaryMight, b.militaryMight));
+    myPlanets.sort(
+      (a, b) => Comparable.compare(a.militaryMight, b.militaryMight),
+    );
 
     for (int i = 0; i < myPlanets.length; i++) {
       autoBuyUpgradeForPlanet(
-          moneyAllotted:
-              (moneyAllotted * planetBudgetAllotment[i] / 100).floor(),
-          planetName: myPlanets[i].name);
+        moneyAllotted: (moneyAllotted * planetBudgetAllotment[i] / 100).floor(),
+        planetName: myPlanets[i].name,
+      );
     }
   }
 
@@ -258,8 +261,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     }
   }
 
-  void autoBuyDefenseShipsForPlanet(
-      {required int moneyAllotted, required PlanetName planetName}) {
+  void autoBuyDefenseShipsForPlanet({
+    required int moneyAllotted,
+    required PlanetName planetName,
+  }) {
     final budgets = [0.5, 0.0, 0.5]..shuffle();
     final _defenseShips = kDefenseShipsData.values.toList();
     for (int i = 0; i < _defenseShips.length; i++) {
@@ -271,8 +276,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     }
   }
 
-  void autoBuyUpgradeForPlanet(
-      {required int moneyAllotted, required PlanetName planetName}) {
+  void autoBuyUpgradeForPlanet({
+    required int moneyAllotted,
+    required PlanetName planetName,
+  }) {
     int moneyLeft = moneyAllotted;
     for (final upgradeType in UpgradeType.values) {
       if (planetUpgradeAvailable(type: upgradeType, name: planetName) &&
@@ -307,8 +314,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     for (int i = 0; i < damageOutputs.length; i++) {
       final shipsLost =
           damageOutputs[i] ~/ kAttackShipsData[ships.keys.toList()[i]]!.health;
-      shipDestroyed[ships.keys.toList()[i]] =
-          min(militaryShipCount(ships.keys.toList()[i]), shipsLost);
+      shipDestroyed[ships.keys.toList()[i]] = min(
+        militaryShipCount(ships.keys.toList()[i]),
+        shipsLost,
+      );
     }
     for (final ship in ships.keys.toList()) {
       damageFactor += shipDestroyed[ship]! * kAttackShipsData[ship]!.point;
@@ -318,8 +327,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
 
   List<int> damageOutputForFormation(List<int> formation) {
     // Calculates the damage that player will cause using the given formation
-    final damageOutput = List.generate(formation.length,
-        (index) => 0); // What Damage will enemy ship at pos[i] reciveve
+    final damageOutput = List.generate(
+      formation.length,
+      (index) => 0,
+    ); // What Damage will enemy ship at pos[i] reciveve
     for (int i = 0; i < formation.length; i++) {
       final shipCount = militaryShipCount(ships.keys.toList()[i]);
       final shipAttackPower = kAttackShipsData[ships.keys.toList()[i]]!.damage;
@@ -376,8 +387,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     }
   }
 
-  void buyDefenseShip(
-      {required DefenseShipType type, required PlanetName name}) {
+  void buyDefenseShip({
+    required DefenseShipType type,
+    required PlanetName name,
+  }) {
     if (money > kDefenseShipsData[type]!.cost) {
       planetAddShip(type: type, name: name, quantity: 1);
       money -= kDefenseShipsData[type]!.cost;
@@ -387,8 +400,10 @@ class Player extends ChangeNotifier with Stats, Military, Planets {
     }
   }
 
-  void sellDefenseShip(
-      {required DefenseShipType type, required PlanetName name}) {
+  void sellDefenseShip({
+    required DefenseShipType type,
+    required PlanetName name,
+  }) {
     final ships = planetShipCount(type: type, name: name);
     if (ships > 0) {
       planetRemoveShip(type: type, name: name, quantity: 1);

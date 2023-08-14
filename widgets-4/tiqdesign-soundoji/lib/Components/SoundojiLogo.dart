@@ -6,9 +6,9 @@ class SoundojiLogo extends StatelessWidget {
     Key key,
     @required double width,
     @required uiColors colors,
-  })  : _colors = colors,
-        width = width,
-        super(key: key);
+  }) : _colors = colors,
+       width = width,
+       super(key: key);
 
   final uiColors _colors;
   final double width;
@@ -19,14 +19,12 @@ class SoundojiLogo extends StatelessWidget {
       width: width,
       height: width,
       decoration: BoxDecoration(
-          color: _colors.defaultWhite,
-          borderRadius: BorderRadius.circular(150)),
+        color: _colors.defaultWhite,
+        borderRadius: BorderRadius.circular(150),
+      ),
       child: Transform.translate(
         offset: Offset(0, -20),
-        child: Image.asset(
-          'assets/images/logo.png',
-          width: width * 2 / 3,
-        ),
+        child: Image.asset('assets/images/logo.png', width: width * 2 / 3),
       ),
     );
   }

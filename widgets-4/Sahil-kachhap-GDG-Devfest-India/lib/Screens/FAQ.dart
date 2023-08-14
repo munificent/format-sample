@@ -18,65 +18,67 @@ class _FAQScreenState extends State<FAQScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'FAQ',
-            style: TextStyle(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
-              letterSpacing: 1.0,
-              fontFamily: 'OpenSans',
-            ),
+      appBar: AppBar(
+        title: Text(
+          'FAQ',
+          style: TextStyle(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
+            letterSpacing: 1.0,
+            fontFamily: 'OpenSans',
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: Theme.of(context).brightness == Brightness.dark
-                  ? Icon(FontAwesomeIcons.sun)
-                  : Icon(FontAwesomeIcons.moon),
-              onPressed: () {
-                _isThemeSwitch = _isThemeSwitch ? false : true;
-                setState(() {
-                  if (_isThemeSwitch) {
-                    BlocProvider.of<ThemeBloc>(context)
-                        .dispatch(ThemeEvent(theme: Themes.DarkTheme));
-                  } else {
-                    BlocProvider.of<ThemeBloc>(context)
-                        .dispatch(ThemeEvent(theme: Themes.LightTheme));
-                  }
-                });
-              },
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            IconButton(
-                icon: Icon(Icons.share),
-                onPressed:
-                    () {} /*=> Share.share(
-                  "Download the new GDG DevFest India App and share with your tech friends.\nPlayStore -  ")*/
-                )
-          ],
         ),
-        body: FutureBuilder(
-            future: DefaultAssetBundle.of(context)
-                .loadString('Assets/JSON/FAQ.json'),
-            builder: (context, snapshot) {
-              var FaqData = json.decode(snapshot.data.toString());
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 8,
-                  itemBuilder: (context, index) {
-                    return ExpandableCards(
-                      answer: FaqData[index]['answer'],
-                      question: FaqData[index]['question'],
-                    );
-                  },
+        actions: <Widget>[
+          IconButton(
+            icon: Theme.of(context).brightness == Brightness.dark
+                ? Icon(FontAwesomeIcons.sun)
+                : Icon(FontAwesomeIcons.moon),
+            onPressed: () {
+              _isThemeSwitch = _isThemeSwitch ? false : true;
+              setState(() {
+                if (_isThemeSwitch) {
+                  BlocProvider.of<ThemeBloc>(context).dispatch(
+                    ThemeEvent(theme: Themes.DarkTheme),
+                  );
+                } else {
+                  BlocProvider.of<ThemeBloc>(context).dispatch(
+                    ThemeEvent(theme: Themes.LightTheme),
+                  );
+                }
+              });
+            },
+          ),
+          SizedBox(width: 5),
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed:
+                () {}, /*=> Share.share(
+                  "Download the new GDG DevFest India App and share with your tech friends.\nPlayStore -  ")*/
+          ),
+        ],
+      ),
+      body: FutureBuilder(
+        future:
+            DefaultAssetBundle.of(context).loadString('Assets/JSON/FAQ.json'),
+        builder: (context, snapshot) {
+          var FaqData = json.decode(snapshot.data.toString());
+          if (snapshot.hasData) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: 8,
+              itemBuilder: (context, index) {
+                return ExpandableCards(
+                  answer: FaqData[index]['answer'],
+                  question: FaqData[index]['question'],
                 );
-              } else {
-                return CircularProgressIndicator();
-              }
-            }));
+              },
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
+      ),
+    );
   }
 }

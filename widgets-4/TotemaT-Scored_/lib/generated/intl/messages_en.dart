@@ -25,45 +25,47 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(date, time) => "${date} ${time}";
 
-  static String m3(count) =>
-      "${Intl.plural(count, one: '1 party selected', other: '${count} parties selected')}";
+  static String m3(count) => "${Intl.plural(
+        count,
+        one: '1 party selected',
+        other: '${count} parties selected',
+      )}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "continueParty": MessageLookupByLibrary.simpleMessage("Continue"),
-        "createParty": MessageLookupByLibrary.simpleMessage("Create the party"),
-        "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
-        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
-        "deletedParties": m0,
-        "deletedParty": m1,
-        "historyDate": m2,
-        "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "noHistoryBody1":
-            MessageLookupByLibrary.simpleMessage("Click on the button"),
-        "noHistoryBody2":
-            MessageLookupByLibrary.simpleMessage("and start a new party now!"),
-        "noHistoryTitle":
-            MessageLookupByLibrary.simpleMessage("No history found :("),
-        "noNameError": MessageLookupByLibrary.simpleMessage("Name is required"),
-        "notFoundBody": MessageLookupByLibrary.simpleMessage(
-            "This page doesn\'t exist maybe you want to"),
-        "notFoundButton": MessageLookupByLibrary.simpleMessage("Go back home"),
-        "partyName": MessageLookupByLibrary.simpleMessage("Party Name"),
-        "playerCount":
-            MessageLookupByLibrary.simpleMessage("Number of players"),
-        "playerName": MessageLookupByLibrary.simpleMessage("Name"),
-        "playerScore": MessageLookupByLibrary.simpleMessage("Score"),
-        "restart": MessageLookupByLibrary.simpleMessage(" Restart"),
-        "selectColor":
-            MessageLookupByLibrary.simpleMessage("Select a main color"),
-        "selectColorShade":
-            MessageLookupByLibrary.simpleMessage("Select a color shade"),
-        "selectedParties": m3,
-        "start": MessageLookupByLibrary.simpleMessage("Start"),
-        "today": MessageLookupByLibrary.simpleMessage("Today"),
-        "undo": MessageLookupByLibrary.simpleMessage("Undo"),
-        "viewScores": MessageLookupByLibrary.simpleMessage("View Scores"),
-        "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday")
-      };
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "continueParty": MessageLookupByLibrary.simpleMessage("Continue"),
+    "createParty": MessageLookupByLibrary.simpleMessage("Create the party"),
+    "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deletedParties": m0,
+    "deletedParty": m1,
+    "historyDate": m2,
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "noHistoryBody1":
+        MessageLookupByLibrary.simpleMessage("Click on the button"),
+    "noHistoryBody2":
+        MessageLookupByLibrary.simpleMessage("and start a new party now!"),
+    "noHistoryTitle":
+        MessageLookupByLibrary.simpleMessage("No history found :("),
+    "noNameError": MessageLookupByLibrary.simpleMessage("Name is required"),
+    "notFoundBody": MessageLookupByLibrary.simpleMessage(
+      "This page doesn\'t exist maybe you want to",
+    ),
+    "notFoundButton": MessageLookupByLibrary.simpleMessage("Go back home"),
+    "partyName": MessageLookupByLibrary.simpleMessage("Party Name"),
+    "playerCount": MessageLookupByLibrary.simpleMessage("Number of players"),
+    "playerName": MessageLookupByLibrary.simpleMessage("Name"),
+    "playerScore": MessageLookupByLibrary.simpleMessage("Score"),
+    "restart": MessageLookupByLibrary.simpleMessage(" Restart"),
+    "selectColor": MessageLookupByLibrary.simpleMessage("Select a main color"),
+    "selectColorShade":
+        MessageLookupByLibrary.simpleMessage("Select a color shade"),
+    "selectedParties": m3,
+    "start": MessageLookupByLibrary.simpleMessage("Start"),
+    "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "undo": MessageLookupByLibrary.simpleMessage("Undo"),
+    "viewScores": MessageLookupByLibrary.simpleMessage("View Scores"),
+    "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
+  };
 }

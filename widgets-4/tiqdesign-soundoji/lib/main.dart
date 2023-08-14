@@ -15,8 +15,9 @@ class Soundoji extends StatelessWidget {
   Widget build(BuildContext context) {
     //Status Bar and Text Color
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: _colors.defaultWhite,
-        statusBarBrightness: Brightness.dark));
+      statusBarColor: _colors.defaultWhite,
+      statusBarBrightness: Brightness.dark,
+    ));
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -53,9 +54,7 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: _colors.defaultWhite,
         body: HomePage(),
-        appBar: SoundojiBar(
-          height: 80,
-        ),
+        appBar: SoundojiBar(height: 80),
         extendBodyBehindAppBar: true,
       ),
     );

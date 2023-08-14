@@ -20,8 +20,9 @@ class _DrinkCardState
   @override
   void initState() {
     super.initState();
-    _selectedPrice =
-        (widget.drink.prices.isNotEmpty) ? widget.drink.prices.first : null;
+    _selectedPrice = (widget.drink.prices.isNotEmpty)
+        ? widget.drink.prices.first
+        : null;
   }
 
   String priceToFancyString(Price p) =>
@@ -69,7 +70,8 @@ class _DrinkCardState
           Card(
             elevation: 5,
             shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30.0))),
+              borderRadius: BorderRadius.all(Radius.circular(30.0)),
+            ),
             child: InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
               onLongPress: () async {
@@ -78,26 +80,29 @@ class _DrinkCardState
                 final Offset position = renderBox.localToGlobal(Offset.zero);
                 int newPrice = await Navigator.of(context).push(
                   PriceChangeDialogRoute(
-                      position: Size(
-                          position.dx + (renderBox.size.height / 2) - 140,
-                          position.dy + renderBox.size.height),
-                      selectedPrice: _selectedPrice,
-                      drink: widget.drink,
-                      theme: Theme.of(context)),
+                    position: Size(
+                      position.dx + (renderBox.size.height / 2) - 140,
+                      position.dy + renderBox.size.height,
+                    ),
+                    selectedPrice: _selectedPrice,
+                    drink: widget.drink,
+                    theme: Theme.of(context),
+                  ),
                 );
               },
               child: SizedBox(
                 width: 100,
                 height: 100,
                 child: Center(
-                    child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(sizeToFancyString()),
-                    if (_selectedPrice != null)
-                      Text(priceToFancyString(_selectedPrice))
-                  ],
-                )),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(sizeToFancyString()),
+                      if (_selectedPrice != null)
+                        Text(priceToFancyString(_selectedPrice)),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

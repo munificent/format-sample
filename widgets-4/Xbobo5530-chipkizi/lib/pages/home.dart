@@ -17,14 +17,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _openRecordingPage(BuildContext context) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => RecordingPage(), fullscreenDialog: true));
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => RecordingPage(),
+        fullscreenDialog: true,
+      ));
     }
 
-    _goToLoginPage() => Navigator.push(context,
-        MaterialPageRoute(builder: (_) => LoginPage(), fullscreenDialog: true));
+    _goToLoginPage() => Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => LoginPage(), fullscreenDialog: true),
+    );
 
     _handleSearch(MainModel model) async {
       await showSearch(
@@ -35,58 +37,63 @@ class HomePage extends StatelessWidget {
 
     _logout(MainModel model) async {
       await showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text(confirmLogoutText),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    model.logout();
-                    Navigator.pop(context);
-                  },
-                  child: Text(logoutText),
-                ),
-                FlatButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(cancelText),
-                )
-              ],
-            );
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(confirmLogoutText),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  model.logout();
+                  Navigator.pop(context);
+                },
+                child: Text(logoutText),
+              ),
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(cancelText),
+              ),
+            ],
+          );
+        },
+      );
     }
 
-    _buildButtons(String label, AppInfoAction action) =>
-        ScopedModelDescendant<MainModel>(
-            builder: (context, child, model) => InkWell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      label,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.brown),
-                    ),
-                  ),
-                  onTap: () => model.handleApInfoAction(action),
-                ));
+    _buildButtons(
+      String label,
+      AppInfoAction action,
+    ) => ScopedModelDescendant<MainModel>(
+      builder: (context, child, model) => InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.brown),
+              ),
+            ),
+            onTap: () => model.handleApInfoAction(action),
+          ),
+    );
 
     _handleShowAppInfo() async {
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       return showAboutDialog(
-          context: context,
-          applicationIcon: CircleAvatar(
-            backgroundColor: Colors.brown,
-            backgroundImage: AssetImage(ASSET_APP_ICON),
-          ),
-          applicationName: packageInfo.appName,
-          applicationVersion: packageInfo.version,
-          children: <Widget>[
-            Text(developedByText),
-            _buildButtons(callText, AppInfoAction.call),
-            _buildButtons(emailText, AppInfoAction.email),
-            _buildButtons(moreText, AppInfoAction.more)
-          ]);
+        context: context,
+        applicationIcon: CircleAvatar(
+          backgroundColor: Colors.brown,
+          backgroundImage: AssetImage(ASSET_APP_ICON),
+        ),
+        applicationName: packageInfo.appName,
+        applicationVersion: packageInfo.version,
+        children: <Widget>[
+          Text(developedByText),
+          _buildButtons(callText, AppInfoAction.call),
+          _buildButtons(emailText, AppInfoAction.email),
+          _buildButtons(moreText, AppInfoAction.more),
+        ],
+      );
     }
 
     final _appBarSection = AppBar(
@@ -94,28 +101,26 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
           onTap: () => _handleShowAppInfo(),
-          child: Image.asset(
-            ASSET_APP_ICON,
-          ),
+          child: Image.asset(ASSET_APP_ICON),
         ),
       ),
       title: Hero(
-          flightShuttleBuilder: (context, animatrion, direction, _, __) {
-            return Icon(
-              Icons.fiber_manual_record,
-              color: Colors.white,
-            );
-          },
-          tag: TAG_APP_TITLE,
-          child: Text(APP_NAME)),
+        flightShuttleBuilder: (context, animatrion, direction, _, __) {
+          return Icon(Icons.fiber_manual_record, color: Colors.white);
+        },
+        tag: TAG_APP_TITLE,
+        child: Text(APP_NAME),
+      ),
       centerTitle: true,
       actions: <Widget>[
         ScopedModelDescendant<MainModel>(
           builder: (_, __, model) => model.isLoggedIn
               ? IconButton(
-                  icon: Icon(model.selectedNavItem == NAV_ITEM_HOME
-                      ? Icons.search
-                      : Icons.exit_to_app),
+                  icon: Icon(
+                    model.selectedNavItem == NAV_ITEM_HOME
+                        ? Icons.search
+                        : Icons.exit_to_app,
+                  ),
                   onPressed: model.selectedNavItem == NAV_ITEM_HOME
                       ? () => _handleSearch(model)
                       : () => _logout(model),
@@ -123,9 +128,10 @@ class HomePage extends StatelessWidget {
               : model.selectedNavItem == NAV_ITEM_HOME
                   ? IconButton(
                       icon: Icon(Icons.search),
-                      onPressed: () => _handleSearch(model))
+                      onPressed: () => _handleSearch(model),
+                    )
                   : Container(),
-        )
+        ),
       ],
     );
 
@@ -138,9 +144,13 @@ class HomePage extends StatelessWidget {
             onTap: (selectedItem) => model.updateSelectedNavItem(selectedItem),
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text(homeText)),
+                icon: Icon(Icons.home),
+                title: Text(homeText),
+              ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.account_circle), title: Text(meText)),
+                icon: Icon(Icons.account_circle),
+                title: Text(meText),
+              ),
             ],
           ),
         );
@@ -151,11 +161,12 @@ class HomePage extends StatelessWidget {
       builder: (_, __, model) {
         return Hero(
           child: FloatingActionButton(
-              child: Icon(Icons.mic),
-              heroTag: 'TAG_MAIN_BUTTON,', //'open recording page',
-              onPressed: model.isLoggedIn
-                  ? () => _openRecordingPage(context)
-                  : () => _goToLoginPage()),
+            child: Icon(Icons.mic),
+            heroTag: 'TAG_MAIN_BUTTON,', //'open recording page',
+            onPressed: model.isLoggedIn
+                ? () => _openRecordingPage(context)
+                : () => _goToLoginPage(),
+          ),
           tag: TAG_MAIN_BUTTON,
         );
       },
@@ -167,19 +178,15 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           Text(
             loginToViewProfileMessage,
-            style: TextStyle(
-              color: Colors.brown,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
-            height: 10.0,
-          ),
+          SizedBox(height: 10.0),
           RaisedButton(
-              color: Colors.brown,
-              textColor: Colors.white,
-              onPressed: () => _goToLoginPage(),
-              child: Text(loginText)),
+            color: Colors.brown,
+            textColor: Colors.white,
+            onPressed: () => _goToLoginPage(),
+            child: Text(loginText),
+          ),
         ],
       ),
     );

@@ -34,20 +34,23 @@ class _ProfileState extends State<Profile> {
   bool _isLoading = false;
 
   void _getOtherProfileInformation() async {
-    final String userTempAbout =
-        await _localStorageHelper.extractImportantTableData(
-            extraImportant: ExtraImportant.About,
-            userMail: FirebaseAuth.instance.currentUser!.email.toString());
+    final String userTempAbout = await _localStorageHelper
+        .extractImportantTableData(
+          extraImportant: ExtraImportant.About,
+          userMail: FirebaseAuth.instance.currentUser!.email.toString(),
+        );
 
-    final String userTempAccCreationDate =
-        await _localStorageHelper.extractImportantTableData(
-            extraImportant: ExtraImportant.CreationDate,
-            userMail: FirebaseAuth.instance.currentUser!.email.toString());
+    final String userTempAccCreationDate = await _localStorageHelper
+        .extractImportantTableData(
+          extraImportant: ExtraImportant.CreationDate,
+          userMail: FirebaseAuth.instance.currentUser!.email.toString(),
+        );
 
-    final String userTempAccCreationTime =
-        await _localStorageHelper.extractImportantTableData(
-            extraImportant: ExtraImportant.CreationTime,
-            userMail: FirebaseAuth.instance.currentUser!.email.toString());
+    final String userTempAccCreationTime = await _localStorageHelper
+        .extractImportantTableData(
+          extraImportant: ExtraImportant.CreationTime,
+          userMail: FirebaseAuth.instance.currentUser!.email.toString(),
+        );
 
     if (mounted) {
       setState(() {
@@ -78,13 +81,9 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Color.fromRGBO(34, 48, 60, 1),
         body: ListView(
           children: [
-            SizedBox(
-              height: 20.0,
-            ),
+            SizedBox(height: 20.0),
             firstPortion(context),
-            SizedBox(
-              height: 50.0,
-            ),
+            SizedBox(height: 50.0),
             otherInformation('About', this._userAbout),
             otherInformation('Join Date', this._userAccCreationDate),
             otherInformation('Join Time', this._userAccCreationTime),
@@ -102,9 +101,7 @@ class _ProfileState extends State<Profile> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 10.0,
-          ),
+          SizedBox(width: 10.0),
           Container(
             alignment: Alignment.centerLeft,
             child: Stack(
@@ -115,9 +112,7 @@ class _ProfileState extends State<Profile> {
                   middleColor: const Color.fromRGBO(34, 48, 60, 1),
                   closedShape: CircleBorder(),
                   closedElevation: 0.0,
-                  transitionDuration: Duration(
-                    milliseconds: 500,
-                  ),
+                  transitionDuration: Duration(milliseconds: 500),
                   transitionType: ContainerTransitionType.fadeThrough,
                   openBuilder: (context, openWidget) {
                     return PreviewImageScreen(
@@ -149,49 +144,48 @@ class _ProfileState extends State<Profile> {
                         : MediaQuery.of(context).size.width / 8 - 15,
                   ),
                   child: Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.lightBlue,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.lightBlue,
+                    ),
+                    child: GestureDetector(
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? MediaQuery.of(context).size.height *
+                                (1.3 / 8) /
+                                2.5 *
+                                (3.5 / 6)
+                            : MediaQuery.of(context).size.height *
+                                (1.3 / 8) /
+                                2,
                       ),
-                      child: GestureDetector(
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: MediaQuery.of(context).orientation ==
-                                  Orientation.portrait
-                              ? MediaQuery.of(context).size.height *
-                                  (1.3 / 8) /
-                                  2.5 *
-                                  (3.5 / 6)
-                              : MediaQuery.of(context).size.height *
-                                  (1.3 / 8) /
-                                  2,
-                        ),
-                        onTap: () async {
-                          final XFile? _pickedFile =
-                              await _imagePicker.pickImage(
-                            source: ImageSource.camera,
-                            imageQuality: 50,
-                          );
+                      onTap: () async {
+                        final XFile? _pickedFile = await _imagePicker.pickImage(
+                          source: ImageSource.camera,
+                          imageQuality: 50,
+                        );
 
-                          print('PickedFile: $_pickedFile');
+                        print('PickedFile: $_pickedFile');
 
-                          if (_pickedFile != null)
-                            await _manageTakeImageAsProfilePic(_pickedFile);
-                        },
-                        onLongPress: () async {
-                          final XFile? _pickedFile =
-                              await _imagePicker.pickImage(
-                            source: ImageSource.gallery,
-                            imageQuality: 50,
-                          );
+                        if (_pickedFile != null)
+                          await _manageTakeImageAsProfilePic(_pickedFile);
+                      },
+                      onLongPress: () async {
+                        final XFile? _pickedFile = await _imagePicker.pickImage(
+                          source: ImageSource.gallery,
+                          imageQuality: 50,
+                        );
 
-                          print('PickedFile: $_pickedFile');
+                        print('PickedFile: $_pickedFile');
 
-                          if (_pickedFile != null)
-                            await _manageTakeImageAsProfilePic(_pickedFile);
-                        },
-                      )),
+                        if (_pickedFile != null)
+                          await _manageTakeImageAsProfilePic(_pickedFile);
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -263,12 +257,7 @@ class _ProfileState extends State<Profile> {
 
   Future<void> _manageTakeImageAsProfilePic(XFile _pickedFile) async {
     try {
-      showToast(
-        'Applying Changes',
-        _fToast,
-        seconds: 5,
-        fontSize: 18.0,
-      );
+      showToast('Applying Changes', _fToast, seconds: 5, fontSize: 18.0);
 
       if (mounted) {
         setState(() {
@@ -277,9 +266,10 @@ class _ProfileState extends State<Profile> {
       }
 
       await _management.uploadNewProfilePicToFireStore(
-          file: File(_pickedFile.path),
-          context: context,
-          userMail: FirebaseAuth.instance.currentUser!.email.toString());
+        file: File(_pickedFile.path),
+        context: context,
+        userMail: FirebaseAuth.instance.currentUser!.email.toString(),
+      );
 
       if (ImportantThings.thisAccountProfileImagePath != '') {
         try {
@@ -288,7 +278,8 @@ class _ProfileState extends State<Profile> {
               .whenComplete(() => print('Old Profile Image Deleted'));
         } catch (e) {
           print(
-              'Exception: Delete Old Profile Picture Exception: ${e.toString()}');
+            'Exception: Delete Old Profile Picture Exception: ${e.toString()}',
+          );
         }
       }
 
@@ -302,24 +293,20 @@ class _ProfileState extends State<Profile> {
       }
     } catch (e) {
       showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-                elevation: 5.0,
-                backgroundColor: const Color.fromRGBO(34, 48, 60, 0.6),
-                title: Text(
-                  'An Error Occured',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 18.0,
-                  ),
-                ),
-                content: Text(
-                  'Please Close the Profile Screen and\nRe-Open To Continue',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ));
+        context: context,
+        builder: (_) => AlertDialog(
+              elevation: 5.0,
+              backgroundColor: const Color.fromRGBO(34, 48, 60, 0.6),
+              title: Text(
+                'An Error Occured',
+                style: TextStyle(color: Colors.red, fontSize: 18.0),
+              ),
+              content: Text(
+                'Please Close the Profile Screen and\nRe-Open To Continue',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+      );
     }
   }
 
@@ -330,9 +317,7 @@ class _ProfileState extends State<Profile> {
           padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40.0),
-            side: BorderSide(
-              color: Colors.red,
-            ),
+            side: BorderSide(color: Colors.red),
           ),
         ),
         child: Container(
@@ -340,18 +325,12 @@ class _ProfileState extends State<Profile> {
           alignment: Alignment.center,
           child: Row(
             children: [
-              Icon(
-                Icons.delete_outline,
-                color: Colors.red,
-              ),
+              Icon(Icons.delete_outline, color: Colors.red),
               Expanded(
                 child: Text(
                   'Delete My Account',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.red,
-                  ),
+                  style: TextStyle(fontSize: 16.0, color: Colors.red),
                 ),
               ),
             ],
@@ -366,98 +345,87 @@ class _ProfileState extends State<Profile> {
 
   Future<void> _deleteConformation() async {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              backgroundColor: const Color.fromRGBO(34, 48, 60, 0.6),
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40.0),
+      context: context,
+      builder: (_) => AlertDialog(
+            backgroundColor: const Color.fromRGBO(34, 48, 60, 0.6),
+            elevation: 5.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40.0),
+            ),
+            title: Center(
+              child: Text(
+                'Sure to Delete Your Account?',
+                style: TextStyle(color: Colors.red, fontSize: 18.0),
               ),
-              title: Center(
-                child: Text(
-                  'Sure to Delete Your Account?',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 18.0,
-                  ),
-                ),
-              ),
-              content: Container(
-                height: 200.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Center(
-                      child: Text(
-                        'If You delete this account, your entire data will lost forever...\n\nDo You Want to Continue?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                        ),
-                      ),
+            ),
+            content: Container(
+              height: 200.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Center(
+                    child: Text(
+                      'If You delete this account, your entire data will lost forever...\n\nDo You Want to Continue?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 16.0),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        TextButton(
-                          child: Text(
-                            'Cancel',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.green,
-                            ),
-                          ),
-                          style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        child: Text(
+                          'Cancel',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.green),
+                        ),
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40.0),
                             side: BorderSide(color: Colors.green),
-                          )),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        TextButton(
-                          child: Text(
-                            'Sure',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.red,
-                            ),
                           ),
-                          style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      TextButton(
+                        child: Text(
+                          'Sure',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40.0),
                             side: BorderSide(color: Colors.red),
-                          )),
-                          onPressed: () async {
-                            Navigator.pop(context);
-
-                            if (mounted) {
-                              setState(() {
-                                _isLoading = true;
-                              });
-                            }
-                            print("Deletion Event");
-
-                            await deleteMyGenerationAccount();
-                          },
+                          ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+
+                          if (mounted) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          }
+                          print("Deletion Event");
+
+                          await deleteMyGenerationAccount();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ));
+            ),
+          ),
+    );
   }
 
   ImageProvider<Object>? _getImageWithProvider() {
     if (ImportantThings.thisAccountProfileImagePath == '')
-      return const ExactAssetImage(
-        "assets/logo/logo.png",
-      );
-    return FileImage(
-      File(ImportantThings.thisAccountProfileImagePath),
-    );
+      return const ExactAssetImage("assets/logo/logo.png");
+    return FileImage(File(ImportantThings.thisAccountProfileImagePath));
   }
 }

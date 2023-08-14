@@ -77,9 +77,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
       body: SafeArea(
         child: _selectedIndex == 2 || _selectedIndex == 4
-            ? Container(
-                child: _widgetOptions.elementAt(_selectedIndex),
-              )
+            ? Container(child: _widgetOptions.elementAt(_selectedIndex))
             : Container(
                 color: AppColors.whiteColor,
                 padding: EdgeInsets.all(10),
@@ -94,10 +92,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           child: Padding(
                             padding:
                                 const EdgeInsets.only(bottom: 15.0, right: 10),
-                            child: Icon(
-                              SimpleLineIcons.location_pin,
-                              size: 35,
-                            ),
+                            child: Icon(SimpleLineIcons.location_pin, size: 35),
                           ),
                         ),
                         Expanded(
@@ -117,17 +112,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   textAlign: TextAlign.left,
                                   style: TextStyles.subText,
                                 ),
-                                Divider(
-                                  color: AppColors.blackColor,
-                                )
+                                Divider(color: AppColors.blackColor),
                               ],
                             ),
                           ),
                         ),
-                        Expanded(
-                          flex: 5,
-                          child: Container(),
-                        ),
+                        Expanded(flex: 5, child: Container()),
                         Expanded(
                           flex: 1,
                           child: Icon(

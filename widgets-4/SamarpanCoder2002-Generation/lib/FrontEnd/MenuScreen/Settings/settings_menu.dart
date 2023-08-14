@@ -37,51 +37,41 @@ class _SettingsWindowState extends State<SettingsWindow> {
       body: ListView(
         shrinkWrap: true,
         children: [
-          SizedBox(
-            height: 40.0,
-          ),
+          SizedBox(height: 40.0),
           everySettingsItem(
-              mainText: 'Notification',
-              icon: Icons.notification_important_outlined,
-              smallDescription: 'Different Notification Customization'),
-          SizedBox(
-            height: 15.0,
+            mainText: 'Notification',
+            icon: Icons.notification_important_outlined,
+            smallDescription: 'Different Notification Customization',
           ),
+          SizedBox(height: 15.0),
           everySettingsItem(
-              mainText: 'Chat Wallpaper',
-              icon: Icons.wallpaper_outlined,
-              smallDescription: 'Change Chat Common Wallpaper'),
-          SizedBox(
-            height: 15.0,
+            mainText: 'Chat Wallpaper',
+            icon: Icons.wallpaper_outlined,
+            smallDescription: 'Change Chat Common Wallpaper',
           ),
+          SizedBox(height: 15.0),
           everySettingsItem(
-              mainText: 'Generation Direct Calling Setting',
-              icon: Icons.call,
-              smallDescription: 'Add Phone Number to Receive Call'),
-          SizedBox(
-            height: 15.0,
+            mainText: 'Generation Direct Calling Setting',
+            icon: Icons.call,
+            smallDescription: 'Add Phone Number to Receive Call',
           ),
+          SizedBox(height: 15.0),
           everySettingsItem(
-              mainText: 'Chat History',
-              icon: Entypo.text_document_inverted,
-              smallDescription: 'Chat History Including Media'),
-          SizedBox(
-            height: 15.0,
+            mainText: 'Chat History',
+            icon: Entypo.text_document_inverted,
+            smallDescription: 'Chat History Including Media',
           ),
+          SizedBox(height: 15.0),
           everySettingsItem(
-              mainText: 'Storage',
-              icon: Icons.storage,
-              smallDescription: 'Storage Usage'),
-          SizedBox(
-            height: 30.0,
+            mainText: 'Storage',
+            icon: Icons.storage,
+            smallDescription: 'Storage Usage',
           ),
+          SizedBox(height: 30.0),
           Center(
             child: Text(
               'Copyright © 2021 @ Generation',
-              style: TextStyle(
-                color: Colors.lightBlue,
-                fontSize: 16.0,
-              ),
+              style: TextStyle(color: Colors.lightBlue, fontSize: 16.0),
             ),
           ),
         ],
@@ -89,10 +79,11 @@ class _SettingsWindowState extends State<SettingsWindow> {
     );
   }
 
-  Widget everySettingsItem(
-      {required String mainText,
-      required IconData icon,
-      required String smallDescription}) {
+  Widget everySettingsItem({
+    required String mainText,
+    required IconData icon,
+    required String smallDescription,
+  }) {
     return OpenContainer(
       closedElevation: 0.0,
       openColor: const Color.fromRGBO(34, 48, 60, 1),
@@ -113,11 +104,13 @@ class _SettingsWindowState extends State<SettingsWindow> {
 
           case 'Chat History':
             return ChatHistoryMakerAndMediaViewer(
-                historyOrMediaChoice: HistoryOrMediaChoice.History);
+              historyOrMediaChoice: HistoryOrMediaChoice.History,
+            );
 
           case 'Storage':
             return ChatHistoryMakerAndMediaViewer(
-                historyOrMediaChoice: HistoryOrMediaChoice.Media);
+              historyOrMediaChoice: HistoryOrMediaChoice.Media,
+            );
         }
         return Center(
           child: Text(
@@ -130,41 +123,26 @@ class _SettingsWindowState extends State<SettingsWindow> {
         return Container(
           width: MediaQuery.of(context).size.width,
           height: 70.0,
-          margin: EdgeInsets.only(
-            left: 20.0,
-          ),
+          margin: EdgeInsets.only(left: 20.0),
           child: Column(
             children: [
               Row(
                 children: [
-                  Icon(
-                    icon,
-                    color: Colors.green,
-                  ),
-                  SizedBox(
-                    width: 15.0,
-                  ),
+                  Icon(icon, color: Colors.green),
+                  SizedBox(width: 15.0),
                   Text(
                     mainText,
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.white70,
-                    ),
-                  )
+                    style: TextStyle(fontSize: 18.0, color: Colors.white70),
+                  ),
                 ],
               ),
               Expanded(
                 child: Container(
                   alignment: Alignment.topLeft,
-                  padding: EdgeInsets.only(
-                    top: 5.0,
-                    left: 40.0,
-                  ),
+                  padding: EdgeInsets.only(top: 5.0, left: 40.0),
                   child: Text(
                     smallDescription,
-                    style: TextStyle(
-                      color: Colors.white54,
-                    ),
+                    style: TextStyle(color: Colors.white54),
                   ),
                 ),
               ),

@@ -12,18 +12,12 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
   void _onIntroEnd(context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => MyApp()),
-    );
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => MyApp()));
   }
 
   Widget _buildImage(String assetName) {
     return Align(
-      child: SvgPicture.asset(
-        'assets/$assetName',
-        width: 200,
-        height: 200,
-      ),
+      child: SvgPicture.asset('assets/$assetName', width: 200, height: 200),
       alignment: Alignment.bottomCenter,
     );
   }
@@ -32,15 +26,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 17.0, fontFamily: 'Baloo Bhai 2');
     const pageDecoration = const PageDecoration(
-        titlePadding: EdgeInsets.zero,
-        titleTextStyle: TextStyle(
-            fontSize: 28, fontFamily: 'BalooBhai', color: Colors.redAccent),
-        bodyTextStyle: bodyStyle,
-        descriptionPadding: EdgeInsets.symmetric(horizontal: 12),
-        pageColor: Color(0xff101630),
-        imagePadding: EdgeInsets.zero,
-        contentPadding: EdgeInsets.symmetric(vertical: 40),
-        footerPadding: EdgeInsets.symmetric(vertical: 39));
+      titlePadding: EdgeInsets.zero,
+      titleTextStyle: TextStyle(
+        fontSize: 28,
+        fontFamily: 'BalooBhai',
+        color: Colors.redAccent,
+      ),
+      bodyTextStyle: bodyStyle,
+      descriptionPadding: EdgeInsets.symmetric(horizontal: 12),
+      pageColor: Color(0xff101630),
+      imagePadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.symmetric(vertical: 40),
+      footerPadding: EdgeInsets.symmetric(vertical: 39),
+    );
 
     return IntroductionScreen(
       key: introKey,
@@ -79,14 +77,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: const Text(
-        'Skip',
-        style: TextStyle(color: Colors.white),
-      ),
-      next: const Icon(
-        Icons.arrow_forward,
-        color: Colors.white,
-      ),
+      skip: const Text('Skip', style: TextStyle(color: Colors.white)),
+      next: const Icon(Icons.arrow_forward, color: Colors.white),
       //done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600,color: Colors.redAccent)),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),

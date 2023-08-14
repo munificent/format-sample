@@ -4,15 +4,20 @@ import 'package:scored/generated/l10n.dart';
 
 extension Snackbar on BuildContext {
   void showSnackbar(
-      String title, String? actionLabel, VoidCallback? actionOnPressed) {
+    String title,
+    String? actionLabel,
+    VoidCallback? actionOnPressed,
+  ) {
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
-        content: Text(title),
-        action: actionLabel != null && actionOnPressed != null
-            ? SnackBarAction(
-                label: actionLabel.toUpperCase(),
-                textColor: Theme.of(this).colorScheme.secondary,
-                onPressed: actionOnPressed)
-            : null));
+      content: Text(title),
+      action: actionLabel != null && actionOnPressed != null
+          ? SnackBarAction(
+              label: actionLabel.toUpperCase(),
+              textColor: Theme.of(this).colorScheme.secondary,
+              onPressed: actionOnPressed,
+            )
+          : null,
+    ));
   }
 }
 
@@ -46,8 +51,9 @@ extension DateHelpers on DateTime {
       return s.historyDate(s.yesterday, time);
     }
 
-    final formatter =
-        isThisYear() ? DateFormat.MMMd(locale) : DateFormat.yMMMd(locale);
+    final formatter = isThisYear()
+        ? DateFormat.MMMd(locale)
+        : DateFormat.yMMMd(locale);
     return s.historyDate(formatter.format(this), time);
   }
 }

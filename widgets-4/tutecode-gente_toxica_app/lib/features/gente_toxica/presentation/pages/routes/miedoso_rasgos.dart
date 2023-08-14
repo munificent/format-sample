@@ -12,11 +12,7 @@ class MiedosoRasgos extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.yellow[500],
         elevation: 0,
-        title: Text(
-          'Rasgos',
-          style: titleAppBar,
-          textScaleFactor: 1.0,
-        ),
+        title: Text('Rasgos', style: titleAppBar, textScaleFactor: 1.0),
       ),
       body: SingleChildScrollView(
         child: Column(

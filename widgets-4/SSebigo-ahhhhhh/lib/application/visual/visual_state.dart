@@ -11,7 +11,7 @@ class VisualState with _$VisualState {
 
   /// @nodoc
   factory VisualState.initial() => const VisualState(
-        chargingVisualPath: '',
-        dischargingVisualPath: '',
-      );
+    chargingVisualPath: '',
+    dischargingVisualPath: '',
+  );
 }

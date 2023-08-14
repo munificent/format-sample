@@ -29,9 +29,7 @@ class CustomRaisedButton extends StatelessWidget {
       child: SizedBox(
         width: 28,
         height: 28,
-        child: CircularProgressIndicator(
-          strokeWidth: 3.0,
-        ),
+        child: CircularProgressIndicator(strokeWidth: 3.0),
       ),
     );
   }
@@ -44,12 +42,9 @@ class CustomRaisedButton extends StatelessWidget {
       child: RaisedButton(
         child: loading ? buildSpinner(context) : child,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
         ), // height / 2
         color: color,
-
         disabledColor: color,
         textColor: textColor,
         onPressed: onPressed,

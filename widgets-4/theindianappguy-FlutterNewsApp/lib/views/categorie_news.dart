@@ -46,43 +46,41 @@ class _CategoryNewsState extends State<CategoryNews> {
             Text(
               "News",
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
-            )
+            ),
           ],
         ),
         actions: <Widget>[
           Opacity(
             opacity: 0,
             child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(
-                  Icons.share,
-                )),
-          )
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(Icons.share),
+            ),
+          ),
         ],
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
       body: _loading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Container(
                 child: Container(
                   margin: EdgeInsets.only(top: 16),
                   child: ListView.builder(
-                      itemCount: newslist.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return NewsTile(
-                          imgUrl: newslist[index].urlToImage ?? "",
-                          title: newslist[index].title ?? "",
-                          desc: newslist[index].description ?? "",
-                          content: newslist[index].content ?? "",
-                          posturl: newslist[index].articleUrl ?? "",
-                        );
-                      }),
+                    itemCount: newslist.length,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return NewsTile(
+                        imgUrl: newslist[index].urlToImage ?? "",
+                        title: newslist[index].title ?? "",
+                        desc: newslist[index].description ?? "",
+                        content: newslist[index].content ?? "",
+                        posturl: newslist[index].articleUrl ?? "",
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

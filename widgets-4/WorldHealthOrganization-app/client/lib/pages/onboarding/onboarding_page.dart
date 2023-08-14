@@ -13,7 +13,7 @@ import 'package:flutter/cupertino.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key key, @required this.service, @required this.prefs})
-      : super(key: key);
+    : super(key: key);
 
   final WhoService service;
   final UserPreferencesStore prefs;
@@ -121,7 +121,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
     var fcmToken = await UserPreferences().getFirebaseToken();
     try {
       await widget.service.putClientSettings(
-          token: fcmToken, isoCountryCode: _selectedCountry.alpha2Code);
+        token: fcmToken,
+        isoCountryCode: _selectedCountry.alpha2Code,
+      );
     } catch (error) {
       print('Error sending client settings to API: $error');
     }

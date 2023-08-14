@@ -20,19 +20,24 @@ const _kNotificationsPrefs = "initLastVersionKey";
 class FileCache {
   static Future<String> getLatestContentFromWeb(String fileName) async {
     var response = await new Dio().get(
-        'https://raw.githubusercontent.com/theRealBitcoinClub/flutter_coinector/master/assets/' +
-            fileName +
-            '.json');
+      'https://raw.githubusercontent.com/theRealBitcoinClub/flutter_coinector/master/assets/' +
+          fileName +
+          '.json',
+    );
     return response.data;
   }
 
   static Future<void> initLastVersion(onHasNewVersionCallback) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var currentVersion = int.parse(
-        getLastVersionNumberFromPrefsWithDefaultValue(
-            prefs, _kNotificationsPrefs));
+      getLastVersionNumberFromPrefsWithDefaultValue(
+        prefs,
+        _kNotificationsPrefs,
+      ),
+    );
     var response = await new Dio().get(
-        'https://raw.githubusercontent.com/theRealBitcoinClub/flutter_coinector/master/dataUpdateIncrementVersion.txt');
+      'https://raw.githubusercontent.com/theRealBitcoinClub/flutter_coinector/master/dataUpdateIncrementVersion.txt',
+    );
     if (int.parse(response.data) > currentVersion) {
       persistCacheVersionCounter(response.data);
       onHasNewVersionCallback();
@@ -40,7 +45,9 @@ class FileCache {
   }
 
   static String getLastVersionNumberFromPrefsWithDefaultValue(
-      SharedPreferences prefs, key) {
+    SharedPreferences prefs,
+    key,
+  ) {
     var lastVersion = prefs.getString(key);
     return lastVersion != null ? lastVersion : "0";
   }
@@ -79,7 +86,8 @@ class FileCache {
   }
 
   static Future<String> getCachedAssetWithDefaultFallback(
-      String fileName) async {
+    String fileName,
+  ) async {
     String cachedAsset;
     try {
       cachedAsset = await FileCache.readCache(fileName);

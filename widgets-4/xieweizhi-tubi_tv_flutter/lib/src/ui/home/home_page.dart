@@ -20,40 +20,42 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-        bloc: homeBloc,
-        builder: (_, HomeState state) {
-          if (state is HomeLoaded) {
-            return HomeListView(homePageModel: state.model);
-          }
-          if (state is HomeError) {
-            return AlertDialog(
-              title: Text('Error'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Text(
-                        'Looks like the system is unavaliable, please try again'),
-                  ],
-                ),
+      bloc: homeBloc,
+      builder: (_, HomeState state) {
+        if (state is HomeLoaded) {
+          return HomeListView(homePageModel: state.model);
+        }
+        if (state is HomeError) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text(
+                    'Looks like the system is unavaliable, please try again',
+                  ),
+                ],
               ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('Cancel'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                FlatButton(
-                  child: Text('Try Again'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    homeBloc.dispatch(FetchHomePage());
-                  },
-                )
-              ],
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        });
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text('Try Again'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  homeBloc.dispatch(FetchHomePage());
+                },
+              ),
+            ],
+          );
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+    );
   }
 }

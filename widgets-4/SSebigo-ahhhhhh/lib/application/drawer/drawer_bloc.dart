@@ -16,18 +16,14 @@ part 'drawer_state.dart';
 @injectable
 class DrawerBloc extends Bloc<DrawerEvent, DrawerState> {
   /// @nodoc
-  DrawerBloc(
-    this._localSessionFacade,
-    this._localAudioFacade,
-  ) : super(DrawerState.initial());
+  DrawerBloc(this._localSessionFacade, this._localAudioFacade)
+    : super(DrawerState.initial());
 
   final ILocalSessionFacade _localSessionFacade;
   final ILocalAudioFacade _localAudioFacade;
 
   @override
-  Stream<DrawerState> mapEventToState(
-    DrawerEvent event,
-  ) async* {
+  Stream<DrawerState> mapEventToState(DrawerEvent event) async* {
     yield* event.map(
       audioAssignedEvent: (value) async* {
         final session = _localSessionFacade.fetchSession();
@@ -56,9 +52,7 @@ class DrawerBloc extends Bloc<DrawerEvent, DrawerState> {
       userAudioUploadedEvent: (value) async* {
         final audios = _localAudioFacade.fetchAllAudios();
 
-        yield state.copyWith(
-          audios: audios,
-        );
+        yield state.copyWith(audios: audios);
       },
     );
   }

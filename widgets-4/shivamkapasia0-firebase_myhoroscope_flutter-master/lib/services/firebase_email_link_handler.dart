@@ -23,13 +23,13 @@ class EmailLinkError {
   final String description;
 
   Map<EmailLinkErrorType, String> get _messages => {
-        EmailLinkErrorType.linkError: description,
-        EmailLinkErrorType.isNotSignInWithEmailLink:
-            Strings.isNotSignInWithEmailLinkMessage,
-        EmailLinkErrorType.emailNotSet: Strings.submitEmailAgain,
-        EmailLinkErrorType.signInFailed: description,
-        EmailLinkErrorType.userAlreadySignedIn: Strings.userAlreadySignedIn,
-      };
+    EmailLinkErrorType.linkError: description,
+    EmailLinkErrorType.isNotSignInWithEmailLink:
+        Strings.isNotSignInWithEmailLinkMessage,
+    EmailLinkErrorType.emailNotSet: Strings.submitEmailAgain,
+    EmailLinkErrorType.signInFailed: description,
+    EmailLinkErrorType.userAlreadySignedIn: Strings.userAlreadySignedIn,
+  };
 
   String get message => _messages[error];
 
@@ -73,9 +73,9 @@ class FirebaseEmailLinkHandler with WidgetsBindingObserver {
     );
     // Check dynamic link once on app startup. This is required to process any dynamic links that may have opened
     // the app when it was closed.
-    FirebaseDynamicLinks.instance
-        .getInitialLink()
-        .then((link) => linkHandler._processDynamicLink(link?.link));
+    FirebaseDynamicLinks.instance.getInitialLink().then(
+      (link) => linkHandler._processDynamicLink(link?.link),
+    );
     // Listen to subsequent links
     FirebaseDynamicLinks.instance.onLink(
       onSuccess: (linkData) => linkHandler.handleLink(linkData?.link),
@@ -158,26 +158,26 @@ class FirebaseEmailLinkHandler with WidgetsBindingObserver {
       // check that user is not signed in
       final User user = await auth.currentUser();
       if (user != null) {
-        _errorController.add(EmailLinkError(
-          error: EmailLinkErrorType.userAlreadySignedIn,
-        ));
+        _errorController.add(
+          EmailLinkError(error: EmailLinkErrorType.userAlreadySignedIn),
+        );
         return;
       }
       // check that email is set
       final email = await emailStore.getEmail();
       if (email == null) {
-        _errorController.add(EmailLinkError(
-          error: EmailLinkErrorType.emailNotSet,
-        ));
+        _errorController.add(
+          EmailLinkError(error: EmailLinkErrorType.emailNotSet),
+        );
         return;
       }
       // sign in
       if (await auth.isSignInWithEmailLink(link)) {
         await auth.signInWithEmailAndLink(email: email, link: link);
       } else {
-        _errorController.add(EmailLinkError(
-          error: EmailLinkErrorType.isNotSignInWithEmailLink,
-        ));
+        _errorController.add(
+          EmailLinkError(error: EmailLinkErrorType.isNotSignInWithEmailLink),
+        );
       }
     } on PlatformException catch (e) {
       _errorController.add(EmailLinkError(

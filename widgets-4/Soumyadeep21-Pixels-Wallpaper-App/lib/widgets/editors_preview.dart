@@ -36,15 +36,15 @@ class _EditorsPreviewState extends State<EditorsPreview>
               padding: EdgeInsets.only(right: 16),
               physics: BouncingScrollPhysics(),
               separatorBuilder: (context, index) => VerticalDivider(
-                color: Colors.transparent,
-              ),
+                    color: Colors.transparent,
+                  ),
               itemBuilder: (context, index) => Container(
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                width: 127,
-              ),
+                    decoration: BoxDecoration(
+                      color: Colors.teal,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    width: 127,
+                  ),
             ),
           );
         }
@@ -53,13 +53,12 @@ class _EditorsPreviewState extends State<EditorsPreview>
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.only(right: 16),
           physics: BouncingScrollPhysics(),
-          separatorBuilder: (context, index) => VerticalDivider(
-            color: Colors.transparent,
-          ),
+          separatorBuilder:
+              (context, index) => VerticalDivider(color: Colors.transparent),
           itemBuilder: (context, index) => WallpaperCard(
-            wallpaper: snapshot.data[index],
-            width: 127,
-          ),
+                wallpaper: snapshot.data[index],
+                width: 127,
+              ),
         );
       },
     );

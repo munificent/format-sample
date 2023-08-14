@@ -89,5 +89,5 @@ const List<ColorSwatch> fullMaterialColors = const <ColorSwatch>[
   Colors.deepOrangeAccent,
   Colors.brown,
   Colors.grey,
-  Colors.blueGrey
+  Colors.blueGrey,
 ];
