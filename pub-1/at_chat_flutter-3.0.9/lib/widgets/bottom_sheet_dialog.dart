@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 class BottomSheetDialog extends StatefulWidget {
   final Function() deleteCallback;
 
-  const BottomSheetDialog(
-    this.deleteCallback, {
-    Key? key,
-  }) : super(key: key);
+  const BottomSheetDialog(this.deleteCallback, {Key? key}) : super(key: key);
 
   @override
   _BottomSheetDialogState createState() => _BottomSheetDialogState();
@@ -23,9 +20,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        SizedBox(
-          height: 16.toHeight,
-        ),
+        SizedBox(height: 16.toHeight),
         GestureDetector(
           onTap: () {
             setState(() {
@@ -36,11 +31,11 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
           child: Container(
             width: 240.toWidth,
             padding: EdgeInsets.symmetric(
-                vertical: 16.toHeight, horizontal: 0.toWidth),
+              vertical: 16.toHeight,
+              horizontal: 0.toWidth,
+            ),
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5.0),
-              ),
+              borderRadius: const BorderRadius.all(Radius.circular(5.0)),
               border: Border.all(color: Colors.grey.shade50),
               color: Colors.white,
             ),
@@ -48,16 +43,12 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 36.toWidth,
-                ),
+                SizedBox(width: 36.toWidth),
                 const Text(
                   'Delete Message',
                   style: TextStyle(color: Colors.red, fontSize: 14),
                 ),
-                SizedBox(
-                  width: 16.toWidth,
-                ),
+                SizedBox(width: 16.toWidth),
                 SizedBox(
                   width: 20.toWidth,
                   height: 20.toHeight,
@@ -70,9 +61,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
             ),
           ),
         ),
-        SizedBox(
-          height: 8.toHeight,
-        ),
+        SizedBox(height: 8.toHeight),
         GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
@@ -80,11 +69,11 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
           child: Container(
             width: 240.toWidth,
             padding: EdgeInsets.symmetric(
-                vertical: 16.toHeight, horizontal: 0.toWidth),
+              vertical: 16.toHeight,
+              horizontal: 0.toWidth,
+            ),
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5.0),
-              ),
+              borderRadius: const BorderRadius.all(Radius.circular(5.0)),
               border: Border.all(color: Colors.grey.shade50),
               color: Colors.white,
             ),
@@ -96,9 +85,7 @@ class _BottomSheetDialogState extends State<BottomSheetDialog> {
             ),
           ),
         ),
-        SizedBox(
-          height: 16.toHeight,
-        ),
+        SizedBox(height: 16.toHeight),
       ],
     );
   }

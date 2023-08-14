@@ -10,9 +10,9 @@ class NumberOfSaleModel {
       this.numberOfSalesByMissionType =
           json["numberOfSalesByMissionType"] == null
               ? null
-              : (json["numberOfSalesByMissionType"] as List)
-                  .map((e) => NumberOfSalesByMissionType.fromJson(e))
-                  .toList();
+              : (json["numberOfSalesByMissionType"] as List).map(
+                  (e) => NumberOfSalesByMissionType.fromJson(e),
+                ).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -30,8 +30,11 @@ class NumberOfSalesByMissionType {
   String? missionTypeName;
   int? numberOfSales;
 
-  NumberOfSalesByMissionType(
-      {this.id, this.missionTypeName, this.numberOfSales});
+  NumberOfSalesByMissionType({
+    this.id,
+    this.missionTypeName,
+    this.numberOfSales,
+  });
 
   NumberOfSalesByMissionType.fromJson(Map<String, dynamic> json) {
     if (json["id"] is int) this.id = json["id"];

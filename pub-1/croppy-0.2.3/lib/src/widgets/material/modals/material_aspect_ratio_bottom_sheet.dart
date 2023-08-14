@@ -2,10 +2,7 @@ import 'package:croppy/src/src.dart';
 import 'package:flutter/material.dart';
 
 class MaterialAspectRatioBottomSheet extends StatelessWidget {
-  const MaterialAspectRatioBottomSheet({
-    super.key,
-    required this.controller,
-  });
+  const MaterialAspectRatioBottomSheet({super.key, required this.controller});
 
   final MaterialCroppableImageController controller;
 

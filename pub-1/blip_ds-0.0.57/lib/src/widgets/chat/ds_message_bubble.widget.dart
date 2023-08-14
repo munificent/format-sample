@@ -22,10 +22,7 @@ class DSMessageBubble extends StatelessWidget {
     required this.align,
     required this.child,
     this.borderRadius = const [DSBorderRadius.all],
-    this.padding = const EdgeInsets.symmetric(
-      vertical: 8.0,
-      horizontal: 16.0,
-    ),
+    this.padding = const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
     this.shouldUseDefaultSize = false,
     this.defaultMaxSize = DSUtils.bubbleMaxSize,
     this.defaultMinSize = DSUtils.bubbleMinSize,
@@ -80,8 +77,9 @@ class DSMessageBubble extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment:
-              isRightAlign ? MainAxisAlignment.end : MainAxisAlignment.start,
+          mainAxisAlignment: isRightAlign
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
           children: isRightAlign ? children : children.reversed.toList(),
         ),
       ],

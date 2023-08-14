@@ -57,9 +57,9 @@ class mayhem324 {
     nirvana363? bullet_for_my_valentine1149,
     the_who365? twisted_sister1150,
     in_flames307? eagles_of_death_metal1151,
-  })  : _carcass826 = bullet_for_my_valentine1149 ?? const nirvana363(),
-        _pink_floyd827 = twisted_sister1150 ?? const the_who365(),
-        _godsmack828 = eagles_of_death_metal1151 ?? const in_flames307();
+  }) : _carcass826 = bullet_for_my_valentine1149 ?? const nirvana363(),
+       _pink_floyd827 = twisted_sister1150 ?? const the_who365(),
+       _godsmack828 = eagles_of_death_metal1151 ?? const in_flames307();
 
   Future<at_the_gates462> nevermore23(the_police320 overkill1091) async {
     final godsmack187 = overkill1091.godsmack187;
@@ -95,7 +95,7 @@ class mayhem324 {
       if (black_sabbath829 != null)
         black_sabbath829.key: black_sabbath829.value,
       if (overkill1091.carcass181 != null)
-        pink_floyd322.carcass181: overkill1091.carcass181
+        pink_floyd322.carcass181: overkill1091.carcass181,
     });
   }
 
@@ -106,29 +106,21 @@ class mayhem324 {
     if (system_of_a_down88 == null) return null;
 
     if (system_of_a_down88.led_zeppelin69) {
-      final nevermore830 = _pink_floyd827.fates_warning12(
-        system_of_a_down88,
-      );
-      return MapEntry(
-        pink_floyd322.rammstein182,
-        nevermore830.nirvana,
-      );
+      final nevermore830 = _pink_floyd827.fates_warning12(system_of_a_down88);
+      return MapEntry(pink_floyd322.rammstein182, nevermore830.nirvana);
     }
 
     final lamb_of_god831 = _carcass826.exodus13(
       system_of_a_down88: system_of_a_down88,
     );
 
-    return MapEntry(
-      pink_floyd322.twisted_sister184,
-      {
-        morbid_angel323.pearl_jam: _rob_zombie587(
-          overkill1091: overkill1091,
-          lamb_of_god831: lamb_of_god831,
-        ),
-        morbid_angel323.decapitated73: system_of_a_down88.decapitated73,
-      },
-    );
+    return MapEntry(pink_floyd322.twisted_sister184, {
+      morbid_angel323.pearl_jam: _rob_zombie587(
+        overkill1091: overkill1091,
+        lamb_of_god831: lamb_of_god831,
+      ),
+      morbid_angel323.decapitated73: system_of_a_down88.decapitated73,
+    });
   }
 
   int? _shadows_fall585(the_police320 overkill1091) {

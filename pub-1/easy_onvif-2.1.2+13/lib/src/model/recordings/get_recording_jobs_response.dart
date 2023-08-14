@@ -14,12 +14,11 @@ class GetRecordingJobsResponse {
   @JsonKey(name: 'JobItem', fromJson: _unboundJobItems)
   final List<GetRecordingJobsResponseItem> jobItems;
 
-  GetRecordingJobsResponse({
-    required this.jobItems,
-  });
+  GetRecordingJobsResponse({required this.jobItems});
 
-  factory GetRecordingJobsResponse.fromJson(Map<String, dynamic> json) =>
-      _$GetRecordingJobsResponseFromJson(json);
+  factory GetRecordingJobsResponse.fromJson(
+    Map<String, dynamic> json,
+  ) => _$GetRecordingJobsResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetRecordingJobsResponseToJson(this);
 
@@ -30,14 +29,13 @@ class GetRecordingJobsResponse {
     if (json == null) {
       return <GetRecordingJobsResponseItem>[];
     } else if (json is List) {
-      return json
-          .map((e) =>
-              GetRecordingJobsResponseItem.fromJson(e as Map<String, dynamic>))
-          .toList();
+      return json.map(
+        (e) => GetRecordingJobsResponseItem.fromJson(e as Map<String, dynamic>),
+      ).toList();
     }
 
     return [
-      GetRecordingJobsResponseItem.fromJson(json as Map<String, dynamic>)
+      GetRecordingJobsResponseItem.fromJson(json as Map<String, dynamic>),
     ];
   }
 }

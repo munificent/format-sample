@@ -12,20 +12,23 @@ import '../../../mocks/establishment/repositories/establishment_repository_mock.
 void main() async {
   var establismentRepositoryMock = EstablishmentRepositoryMock();
   SharedPreferences.setMockInitialValues({});
-  StorageService storageService =
-      StorageService(await SharedPreferences.getInstance());
+  StorageService storageService = StorageService(
+    await SharedPreferences.getInstance(),
+  );
   var findEstablishmentById = FindEstablishmentByIdImpl(
-      establismentRepositoryMock,
-      BaseConfigMock("2234", 'alksdjlaksd'),
-      storageService);
+    establismentRepositoryMock,
+    BaseConfigMock("2234", 'alksdjlaksd'),
+    storageService,
+  );
 
   group("FindEstablishmentById", () {
     test('Deve buscar um establecimento por id', () async {
-      when(() => establismentRepositoryMock.findById("2234"))
-          .thenAnswer((_) async {
-        return EstabelishmentModel.fromJson(jsonDecode(establishimentJson))
-            .estabelecimento;
-      });
+      when(() => establismentRepositoryMock.findById("2234")).thenAnswer(
+        (_) async {
+          return EstabelishmentModel.fromJson(jsonDecode(establishimentJson))
+              .estabelecimento;
+        },
+      );
       var response = await findEstablishmentById();
       expect(response, isNotNull);
     });
@@ -36,11 +39,12 @@ void main() async {
       expect(response, isNull);
     });
     test("Deve retornar o currentID", () async {
-      when(() => establismentRepositoryMock.findById("2234"))
-          .thenAnswer((_) async {
-        return EstabelishmentModel.fromJson(jsonDecode(establishimentJson))
-            .estabelecimento;
-      });
+      when(() => establismentRepositoryMock.findById("2234")).thenAnswer(
+        (_) async {
+          return EstabelishmentModel.fromJson(jsonDecode(establishimentJson))
+              .estabelecimento;
+        },
+      );
       await findEstablishmentById();
       var response = await findEstablishmentById.currentId();
       expect(response, isNotNull);

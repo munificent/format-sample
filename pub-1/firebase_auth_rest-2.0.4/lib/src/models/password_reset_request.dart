@@ -24,6 +24,7 @@ class PasswordResetRequest with _$PasswordResetRequest {
   }) = ConfirmPasswordResetRequest;
 
   /// JSON constructor
-  factory PasswordResetRequest.fromJson(Map<String, dynamic> json) =>
-      _$PasswordResetRequestFromJson(json);
+  factory PasswordResetRequest.fromJson(
+    Map<String, dynamic> json,
+  ) => _$PasswordResetRequestFromJson(json);
 }

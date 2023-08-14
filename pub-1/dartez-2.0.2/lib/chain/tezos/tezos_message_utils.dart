@@ -60,7 +60,8 @@ class TezosMessageUtils {
       return "01" + _hex + "00";
     } else {
       throw new Exception(
-          'Unrecognized address prefix: ${address.substring(0, 3)}');
+        'Unrecognized address prefix: ${address.substring(0, 3)}',
+      );
     }
   }
 
@@ -83,13 +84,19 @@ class TezosMessageUtils {
     var hint = hex.substring(0, 2);
     if (hint == "00") {
       return GenerateKeys.readKeysWithHint(
-          b, GenerateKeys.keyPrefixes[PrefixEnum.edpk]!);
+        b,
+        GenerateKeys.keyPrefixes[PrefixEnum.edpk]!,
+      );
     } else if (hint == "01" && hex.length == 68) {
       return GenerateKeys.readKeysWithHint(
-          b, GenerateKeys.keyPrefixes[PrefixEnum.sppk]!);
+        b,
+        GenerateKeys.keyPrefixes[PrefixEnum.sppk]!,
+      );
     } else if (hint == "02" && hex.length == 68) {
       return GenerateKeys.readKeysWithHint(
-          b, GenerateKeys.keyPrefixes[PrefixEnum.p2pk]!);
+        b,
+        GenerateKeys.keyPrefixes[PrefixEnum.p2pk]!,
+      );
     } else {
       throw new Exception('Unrecognized key type');
     }
@@ -100,7 +107,9 @@ class TezosMessageUtils {
     String keyHex = hex.encode(key);
     if (hint == 'edsk') {
       return GenerateKeys.readKeysWithHint(
-          b, GenerateKeys.keyPrefixes[PrefixEnum.edsk]!);
+        b,
+        GenerateKeys.keyPrefixes[PrefixEnum.edsk]!,
+      );
     } else if (hint == 'edpk') {
       return readPublicKey("00$keyHex", b);
     } else if (hint == 'sppk') {
@@ -120,13 +129,19 @@ class TezosMessageUtils {
     opSignature = Uint8List.fromList(opSignature);
     if (hint == SignerCurve.ED25519) {
       return GenerateKeys.readKeysWithHint(
-          opSignature, GenerateKeys.keyPrefixes[PrefixEnum.edsig]!);
+        opSignature,
+        GenerateKeys.keyPrefixes[PrefixEnum.edsig]!,
+      );
     } else if (hint == SignerCurve.SECP256K1) {
       return GenerateKeys.readKeysWithHint(
-          opSignature, GenerateKeys.keyPrefixes[PrefixEnum.spsig]!);
+        opSignature,
+        GenerateKeys.keyPrefixes[PrefixEnum.spsig]!,
+      );
     } else if (hint == SignerCurve.SECP256R1) {
       return GenerateKeys.readKeysWithHint(
-          opSignature, GenerateKeys.keyPrefixes[PrefixEnum.p2sig]!);
+        opSignature,
+        GenerateKeys.keyPrefixes[PrefixEnum.p2sig]!,
+      );
     } else {
       throw Exception('Unrecognized signature hint, "$hint"');
     }
@@ -143,14 +158,17 @@ class TezosMessageUtils {
   static readBufferWithHint(address, hint) {
     var buffer = address;
     if (hint == 'op') {
-      return bs58check
-          .encode(Uint8List.fromList(hex.decode('0574' + hex.encode(buffer))));
+      return bs58check.encode(
+        Uint8List.fromList(hex.decode('0574' + hex.encode(buffer))),
+      );
     } else if (hint == 'p') {
-      return bs58check
-          .encode(Uint8List.fromList(hex.decode('02aa' + hex.encode(buffer))));
+      return bs58check.encode(
+        Uint8List.fromList(hex.decode('02aa' + hex.encode(buffer))),
+      );
     } else if (hint == 'expr') {
       return bs58check.encode(
-          Uint8List.fromList(hex.decode('0d2c401b' + hex.encode(buffer))));
+        Uint8List.fromList(hex.decode('0d2c401b' + hex.encode(buffer))),
+      );
     } else if (hint == '') {
       return bs58check.encode(buffer);
     } else {
@@ -231,23 +249,18 @@ class TezosMessageUtils {
       return GenerateKeys.readKeysWithHint(b, '06a1a4');
     } else if (hexValue.substring(0, 2) == "01" && hexValue.length == 44) {
       return GenerateKeys.readKeysWithHint(
-          Uint8List.fromList(
-            hex.decode(
-              hexValue.substring(
-                2,
-                42,
-              ),
-            ),
-          ),
-          '025a79');
+        Uint8List.fromList(hex.decode(hexValue.substring(2, 42))),
+        '025a79',
+      );
     } else {
       throw new Exception("Unrecognized address type");
     }
   }
 
   static readAddressWithHint(Uint8List b, String hint) {
-    Uint8List address =
-        !(b.runtimeType == Uint8List) ? Uint8List.fromList(b) : b;
+    Uint8List address = !(b.runtimeType == Uint8List)
+        ? Uint8List.fromList(b)
+        : b;
     String hexValue = hex.encode(address);
     if (hint == 'tz1') {
       return readAddress("0000$hexValue", b);

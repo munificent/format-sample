@@ -12,7 +12,8 @@ part of 'custom_feature.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 /// @nodoc
 mixin _$CustomFeature {
@@ -27,8 +28,9 @@ mixin _$CustomFeature {
 /// @nodoc
 abstract class $CustomFeatureCopyWith<$Res> {
   factory $CustomFeatureCopyWith(
-          CustomFeature value, $Res Function(CustomFeature) then) =
-      _$CustomFeatureCopyWithImpl<$Res, CustomFeature>;
+    CustomFeature value,
+    $Res Function(CustomFeature) then,
+  ) = _$CustomFeatureCopyWithImpl<$Res, CustomFeature>;
   @useResult
   $Res call({String type, CustomFeatureBuilder builder});
 }
@@ -45,20 +47,19 @@ class _$CustomFeatureCopyWithImpl<$Res, $Val extends CustomFeature>
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-    Object? builder = null,
-  }) {
-    return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      builder: null == builder
-          ? _value.builder
-          : builder // ignore: cast_nullable_to_non_nullable
-              as CustomFeatureBuilder,
-    ) as $Val);
+  $Res call({Object? type = null, Object? builder = null}) {
+    return _then(
+      _value.copyWith(
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as String,
+        builder: null == builder
+            ? _value.builder
+            : builder // ignore: cast_nullable_to_non_nullable
+                  as CustomFeatureBuilder,
+      ) as $Val,
+    );
   }
 }
 
@@ -66,8 +67,9 @@ class _$CustomFeatureCopyWithImpl<$Res, $Val extends CustomFeature>
 abstract class _$$_CustomFeatureCopyWith<$Res>
     implements $CustomFeatureCopyWith<$Res> {
   factory _$$_CustomFeatureCopyWith(
-          _$_CustomFeature value, $Res Function(_$_CustomFeature) then) =
-      __$$_CustomFeatureCopyWithImpl<$Res>;
+    _$_CustomFeature value,
+    $Res Function(_$_CustomFeature) then,
+  ) = __$$_CustomFeatureCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, CustomFeatureBuilder builder});
@@ -78,24 +80,22 @@ class __$$_CustomFeatureCopyWithImpl<$Res>
     extends _$CustomFeatureCopyWithImpl<$Res, _$_CustomFeature>
     implements _$$_CustomFeatureCopyWith<$Res> {
   __$$_CustomFeatureCopyWithImpl(
-      _$_CustomFeature _value, $Res Function(_$_CustomFeature) _then)
-      : super(_value, _then);
+    _$_CustomFeature _value,
+    $Res Function(_$_CustomFeature) _then,
+  ) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? type = null,
-    Object? builder = null,
-  }) {
+  $Res call({Object? type = null, Object? builder = null}) {
     return _then(_$_CustomFeature(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+                as String,
       builder: null == builder
           ? _value.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as CustomFeatureBuilder,
+                as CustomFeatureBuilder,
     ));
   }
 }
@@ -130,14 +130,18 @@ class _$_CustomFeature implements _CustomFeature {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomFeatureCopyWith<_$_CustomFeature> get copyWith =>
-      __$$_CustomFeatureCopyWithImpl<_$_CustomFeature>(this, _$identity);
+  _$$_CustomFeatureCopyWith<_$_CustomFeature>
+  get copyWith => __$$_CustomFeatureCopyWithImpl<_$_CustomFeature>(
+    this,
+    _$identity,
+  );
 }
 
 abstract class _CustomFeature implements CustomFeature {
-  const factory _CustomFeature(
-      {required final String type,
-      required final CustomFeatureBuilder builder}) = _$_CustomFeature;
+  const factory _CustomFeature({
+    required final String type,
+    required final CustomFeatureBuilder builder,
+  }) = _$_CustomFeature;
 
   @override
   String get type;

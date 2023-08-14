@@ -34,10 +34,8 @@ class TrackerScreenshotManager {
       if (_path?.isEmpty == true) {
         return null;
       }
-      final Uint8List? content = await _capture(
-        pixelRatio: pixelRatio,
-        delay: delay,
-      );
+      final Uint8List? content =
+          await _capture(pixelRatio: pixelRatio, delay: delay);
 
       if (content != null) {
         return saveFile(content);
@@ -60,10 +58,8 @@ class TrackerScreenshotManager {
     Duration? delay = const Duration(milliseconds: 20),
   }) {
     return Future.delayed(delay ?? const Duration(milliseconds: 20), () async {
-      final ui.Image image = await _captureAsUiImage(
-        delay: Duration.zero,
-        pixelRatio: pixelRatio,
-      );
+      final ui.Image image =
+          await _captureAsUiImage(delay: Duration.zero, pixelRatio: pixelRatio);
       final ByteData? byteData =
           await image.toByteData(format: ui.ImageByteFormat.png);
       final Uint8List? pngBytes = byteData?.buffer.asUint8List();

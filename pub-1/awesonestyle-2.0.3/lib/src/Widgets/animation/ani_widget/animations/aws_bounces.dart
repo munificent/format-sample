@@ -16,20 +16,22 @@ class AwsBounceInDown extends StatefulWidget {
   final bool animate;
   final double from;
 
-  AwsBounceInDown(
-      {key,
-      required this.child,
-      this.duration = const Duration(milliseconds: 1000),
-      this.delay = const Duration(milliseconds: 0),
-      this.controller,
-      this.manualTrigger = false,
-      this.animate = true,
-      this.from = 75})
-      : super(key: key) {
+  AwsBounceInDown({
+    key,
+    required this.child,
+    this.duration = const Duration(milliseconds: 1000),
+    this.delay = const Duration(milliseconds: 0),
+    this.controller,
+    this.manualTrigger = false,
+    this.animate = true,
+    this.from = 75,
+  }) : super(key: key) {
     if (manualTrigger == true && controller == null) {
-      throw FlutterError('If you want to use manualTrigger:true, \n\n'
-          'Then you must provide the controller property, that is a callback like:\n\n'
-          ' ( controller: AnimationController) => yourController = controller \n\n');
+      throw FlutterError(
+        'If you want to use manualTrigger:true, \n\n'
+        'Then you must provide the controller property, that is a callback like:\n\n'
+        ' ( controller: AnimationController) => yourController = controller \n\n',
+      );
     }
   }
 
@@ -58,10 +60,12 @@ class _AwsBounceInDownState extends State<AwsBounceInDown>
     controller = AnimationController(duration: widget.duration, vsync: this);
 
     opacity = Tween<double>(begin: 0, end: 1).animate(
-        CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)));
+      CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)),
+    );
 
-    animation = Tween<double>(begin: widget.from * -1, end: 0)
-        .animate(CurvedAnimation(parent: controller!, curve: Curves.bounceOut));
+    animation = Tween<double>(begin: widget.from * -1, end: 0).animate(
+      CurvedAnimation(parent: controller!, curve: Curves.bounceOut),
+    );
 
     if (!widget.manualTrigger && widget.animate) {
       Future.delayed(widget.delay, () {
@@ -88,12 +92,14 @@ class _AwsBounceInDownState extends State<AwsBounceInDown>
     }
 
     return AnimatedBuilder(
-        animation: controller!,
-        builder: (BuildContext context, Widget? child) {
-          return Transform.translate(
-              offset: Offset(0, animation.value),
-              child: Opacity(opacity: opacity.value, child: widget.child));
-        });
+      animation: controller!,
+      builder: (BuildContext context, Widget? child) {
+        return Transform.translate(
+          offset: Offset(0, animation.value),
+          child: Opacity(opacity: opacity.value, child: widget.child),
+        );
+      },
+    );
   }
 }
 
@@ -113,33 +119,35 @@ class AwsBounceInUp extends StatelessWidget {
   final bool animate;
   final double from;
 
-  AwsBounceInUp(
-      {key,
-      required this.child,
-      this.duration = const Duration(milliseconds: 1000),
-      this.delay = const Duration(milliseconds: 0),
-      this.controller,
-      this.manualTrigger = false,
-      this.animate = true,
-      this.from = 75})
-      : super(key: key) {
+  AwsBounceInUp({
+    key,
+    required this.child,
+    this.duration = const Duration(milliseconds: 1000),
+    this.delay = const Duration(milliseconds: 0),
+    this.controller,
+    this.manualTrigger = false,
+    this.animate = true,
+    this.from = 75,
+  }) : super(key: key) {
     if (manualTrigger == true && controller == null) {
-      throw FlutterError('If you want to use manualTrigger:true, \n\n'
-          'Then you must provide the controller property, that is a callback like:\n\n'
-          ' ( controller: AnimationController) => yourController = controller \n\n');
+      throw FlutterError(
+        'If you want to use manualTrigger:true, \n\n'
+        'Then you must provide the controller property, that is a callback like:\n\n'
+        ' ( controller: AnimationController) => yourController = controller \n\n',
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) => AwsBounceInDown(
-        child: child,
-        duration: duration,
-        delay: delay,
-        controller: controller,
-        manualTrigger: manualTrigger,
-        animate: animate,
-        from: from * -1,
-      );
+    child: child,
+    duration: duration,
+    delay: delay,
+    controller: controller,
+    manualTrigger: manualTrigger,
+    animate: animate,
+    from: from * -1,
+  );
 }
 
 /// Clase [BounceInLeft]:
@@ -158,20 +166,22 @@ class AwsBounceInLeft extends StatefulWidget {
   final bool animate;
   final double from;
 
-  AwsBounceInLeft(
-      {key,
-      required this.child,
-      this.duration = const Duration(milliseconds: 1000),
-      this.delay = const Duration(milliseconds: 0),
-      this.controller,
-      this.manualTrigger = false,
-      this.animate = true,
-      this.from = 75})
-      : super(key: key) {
+  AwsBounceInLeft({
+    key,
+    required this.child,
+    this.duration = const Duration(milliseconds: 1000),
+    this.delay = const Duration(milliseconds: 0),
+    this.controller,
+    this.manualTrigger = false,
+    this.animate = true,
+    this.from = 75,
+  }) : super(key: key) {
     if (manualTrigger == true && controller == null) {
-      throw FlutterError('If you want to use manualTrigger:true, \n\n'
-          'Then you must provide the controller property, that is a callback like:\n\n'
-          ' ( controller: AnimationController) => yourController = controller \n\n');
+      throw FlutterError(
+        'If you want to use manualTrigger:true, \n\n'
+        'Then you must provide the controller property, that is a callback like:\n\n'
+        ' ( controller: AnimationController) => yourController = controller \n\n',
+      );
     }
   }
 
@@ -199,10 +209,12 @@ class _AwsBounceInLeftState extends State<AwsBounceInLeft>
 
     controller = AnimationController(duration: widget.duration, vsync: this);
     opacity = Tween<double>(begin: 0, end: 1).animate(
-        CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)));
+      CurvedAnimation(parent: controller!, curve: const Interval(0, 0.65)),
+    );
 
-    animation = Tween<double>(begin: widget.from * -1, end: 0)
-        .animate(CurvedAnimation(parent: controller!, curve: Curves.bounceOut));
+    animation = Tween<double>(begin: widget.from * -1, end: 0).animate(
+      CurvedAnimation(parent: controller!, curve: Curves.bounceOut),
+    );
 
     if (!widget.manualTrigger && widget.animate) {
       Future.delayed(widget.delay, () {
@@ -229,15 +241,14 @@ class _AwsBounceInLeftState extends State<AwsBounceInLeft>
     }
 
     return AnimatedBuilder(
-        animation: controller!,
-        builder: (BuildContext context, Widget? child) {
-          return Transform.translate(
-              offset: Offset(animation.value, 0),
-              child: Opacity(
-                opacity: opacity.value,
-                child: widget.child,
-              ));
-        });
+      animation: controller!,
+      builder: (BuildContext context, Widget? child) {
+        return Transform.translate(
+          offset: Offset(animation.value, 0),
+          child: Opacity(opacity: opacity.value, child: widget.child),
+        );
+      },
+    );
   }
 }
 
@@ -257,31 +268,33 @@ class AwsBounceInRight extends StatelessWidget {
   final bool animate;
   final double from;
 
-  AwsBounceInRight(
-      {key,
-      required this.child,
-      this.duration = const Duration(milliseconds: 1000),
-      this.delay = const Duration(milliseconds: 0),
-      this.controller,
-      this.manualTrigger = false,
-      this.animate = true,
-      this.from = 75})
-      : super(key: key) {
+  AwsBounceInRight({
+    key,
+    required this.child,
+    this.duration = const Duration(milliseconds: 1000),
+    this.delay = const Duration(milliseconds: 0),
+    this.controller,
+    this.manualTrigger = false,
+    this.animate = true,
+    this.from = 75,
+  }) : super(key: key) {
     if (manualTrigger == true && controller == null) {
-      throw FlutterError('If you want to use manualTrigger:true, \n\n'
-          'Then you must provide the controller property, that is a callback like:\n\n'
-          ' ( controller: AnimationController) => yourController = controller \n\n');
+      throw FlutterError(
+        'If you want to use manualTrigger:true, \n\n'
+        'Then you must provide the controller property, that is a callback like:\n\n'
+        ' ( controller: AnimationController) => yourController = controller \n\n',
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) => AwsBounceInLeft(
-        child: child,
-        duration: duration,
-        delay: delay,
-        controller: controller,
-        manualTrigger: manualTrigger,
-        animate: animate,
-        from: from * -1,
-      );
+    child: child,
+    duration: duration,
+    delay: delay,
+    controller: controller,
+    manualTrigger: manualTrigger,
+    animate: animate,
+    from: from * -1,
+  );
 }

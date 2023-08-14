@@ -7,7 +7,7 @@ main() {
       final expr = {
         'eq': [
           {"var": "age"},
-          {"value": 20}
+          {"value": 20},
         ],
       };
       var vars = {'age': 20};
@@ -24,7 +24,7 @@ main() {
       final expr = {
         'and': [
           {"var": "age"},
-          {"value": 1}
+          {"value": 1},
         ],
       };
       var vars = {'age': 1};
@@ -41,7 +41,7 @@ main() {
       final expr = {
         'or': [
           {"var": "age"},
-          {"value": 0}
+          {"value": 0},
         ],
       };
       var vars = {'age': 1};
@@ -57,7 +57,7 @@ main() {
       final expr = {
         'gt': [
           {"var": "age"},
-          {"value": 22}
+          {"value": 22},
         ],
       };
       var vars = {'age': 23};
@@ -73,7 +73,7 @@ main() {
       final expr = {
         'gte': [
           {"var": "age"},
-          {"value": 22}
+          {"value": 22},
         ],
       };
       var vars = {'age': 22};
@@ -89,7 +89,7 @@ main() {
       final expr = {
         'lt': [
           {"var": "age"},
-          {"value": 22}
+          {"value": 22},
         ],
       };
       var vars = {'age': 21};
@@ -105,7 +105,7 @@ main() {
       final expr = {
         'lte': [
           {"var": "age"},
-          {"value": 22}
+          {"value": 22},
         ],
       };
       var vars = {'age': 22};
@@ -121,7 +121,7 @@ main() {
       final expr = {
         'not': [
           {"var": "age"},
-          {"value": 1}
+          {"value": 1},
         ],
       };
       var vars = {'age': 0};
@@ -138,7 +138,7 @@ main() {
       final expr = {
         'in': [
           {"var": "value"},
-          {"value": "am"}
+          {"value": "am"},
         ],
       };
       Map<String, dynamic> vars = {'value': "Hamza"};
@@ -146,7 +146,7 @@ main() {
       expect(result, equals(true));
 
       vars = {
-        "value": {"am": "name"}
+        "value": {"am": "name"},
       };
       result = JsonExpr().evaluateExpr(expr, vars);
 
@@ -154,9 +154,7 @@ main() {
     });
 
     test('evaluateExpr() test null operator', () {
-      final expr = {
-        'null': null,
-      };
+      final expr = {'null': null};
       var vars = {'age': null};
       var result = JsonExpr().evaluateExpr(expr, vars);
       expect(result, equals(true));
@@ -166,7 +164,7 @@ main() {
       final expr = {
         'match': [
           {"var": "email"},
-          {"value": "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}\b"}
+          {"value": "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}\b"},
         ],
       };
       var vars = {'email': "test@test.com"};
@@ -178,7 +176,7 @@ main() {
       final expr = {
         'null': [
           {"var": "age"},
-          {"value": null}
+          {"value": null},
         ],
       };
       var vars = {'age': 1};
