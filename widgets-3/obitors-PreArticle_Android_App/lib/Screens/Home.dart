@@ -125,81 +125,77 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
       ), */
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SafeArea(
-              child: SizedBox(
-                height: 20,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SafeArea(child: SizedBox(height: 20)),
+          Padding(
+            padding: EdgeInsets.only(left: 25, right: 25, bottom: 30),
+            child: Container(
+              height: 50,
+              width: SizeConfig.blockSizeHorizontal * 100,
+              decoration: BoxDecoration(
+                color: _search == search.enable
+                    ? Color(0xffe7f0ff)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(10),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25, right: 25, bottom: 30),
-              child: Container(
-                height: 50,
-                width: SizeConfig.blockSizeHorizontal * 100,
-                decoration: BoxDecoration(
-                  color: _search == search.enable
-                      ? Color(0xffe7f0ff)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          child: IconButton(
-                            icon: _search == search.enable
-                                ? Icon(Icons.menu)
-                                : Icon(Icons.menu),
-                            iconSize: 30.0,
-                            color: _search == search.enable
-                                ? Colors.grey[800]
-                                : Colors.white,
-                            onPressed: () {
-                              setState(() {
-                                _controller.clear();
-                                _search = _search == search.enable
-                                    ? search.disable
-                                    : search.enable;
-                              });
-                            },
-                          ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        child: IconButton(
+                          icon: _search == search.enable
+                              ? Icon(Icons.menu)
+                              : Icon(Icons.menu),
+                          iconSize: 30.0,
+                          color: _search == search.enable
+                              ? Colors.grey[800]
+                              : Colors.white,
+                          onPressed: () {
+                            setState(() {
+                              _controller.clear();
+                              _search = _search == search.enable
+                                  ? search.disable
+                                  : search.enable;
+                            });
+                          },
                         ),
-                        _search == search.enable
-                            ? GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () {
-                                  _dismissKeyboard(context);
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 20, right: 20),
-                                  width: SizeConfig.blockSizeHorizontal * 100 -
-                                      150,
-                                  child: TextField(
-                                    onChanged: (val) {
-                                      initiateSearch(val);
-                                    },
-                                    controller: _controller,
-                                    decoration: InputDecoration(
-                                      hintText: 'Search Here',
-                                      border: InputBorder.none,
-                                    ),
-                                  ),
-                                ))
-                            : Container(
-                                child: Text(
-                                  'Welcome! ' + _name,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 6,
-                                    fontWeight: FontWeight.bold,
+                      ),
+                      _search == search.enable
+                          ? GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                _dismissKeyboard(context);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                width:
+                                    SizeConfig.blockSizeHorizontal * 100 - 150,
+                                child: TextField(
+                                  onChanged: (val) {
+                                    initiateSearch(val);
+                                  },
+                                  controller: _controller,
+                                  decoration: InputDecoration(
+                                    hintText: 'Search Here',
+                                    border: InputBorder.none,
                                   ),
                                 ),
-                                /* Text(
+                              ),
+                            )
+                          : Container(
+                              child: Text(
+                                'Welcome! ' + _name,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 6,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              /* Text(
                               authNotifier.user != null
                                   ? 'Welcome! ${authNotifier.user.displayName}'
                                   : 'Welcome! to PreArticle',
@@ -209,29 +205,29 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ), */
-                              ),
-                      ],
+                            ),
+                    ],
+                  ),
+                  Container(
+                    child: IconButton(
+                      icon: _search == search.enable
+                          ? Icon(Icons.close)
+                          : Icon(Icons.search),
+                      iconSize: 30.0,
+                      color: _search == search.enable
+                          ? Colors.grey[800]
+                          : Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          _controller.clear();
+                          _search = _search == search.enable
+                              ? search.disable
+                              : search.enable;
+                        });
+                      },
                     ),
-                    Container(
-                      child: IconButton(
-                        icon: _search == search.enable
-                            ? Icon(Icons.close)
-                            : Icon(Icons.search),
-                        iconSize: 30.0,
-                        color: _search == search.enable
-                            ? Colors.grey[800]
-                            : Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            _controller.clear();
-                            _search = _search == search.enable
-                                ? search.disable
-                                : search.enable;
-                          });
-                        },
-                      ),
-                    ),
-                    /* Container(
+                  ),
+                  /* Container(
                       child: IconButton(
                         icon: _search == search.enable
                             ? Icon(Icons.exit_to_app)
@@ -246,11 +242,11 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ), */
-                  ],
-                ),
+                ],
               ),
             ),
-            /* Row(
+          ),
+          /* Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -317,14 +313,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ), */
-            Expanded(
-                child: Stack(
+          Expanded(
+            child: Stack(
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25)),
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25),
+                    ),
                     color: Colors.white,
                   ),
                   child: Padding(
@@ -344,9 +341,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                            top: 20,
-                          ),
+                          padding: EdgeInsets.only(top: 20),
                           child: Container(
                             height: SizeConfig.blockSizeVertical * 15,
                             child: BookSeriesWidget(),
@@ -364,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Expanded(child: CardSwipe())
+                        Expanded(child: CardSwipe()),
                       ],
                     ),
                   ),
@@ -377,63 +372,73 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Card(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
                       color: Colors.white,
                       elevation: 1,
                       child: ListView(
-                          padding: EdgeInsets.only(
-                              left: 20.0, right: 20.0, top: 0, bottom: 0),
-                          primary: false,
-                          shrinkWrap: true,
-                          children: tempSearchStore.map((element) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          BookDetails(name: element['Name']),
-                                      settings: RouteSettings(
-                                          arguments: element['Name'])),
-                                );
-                              },
-                              child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  elevation: 0,
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          /* border: Border.all(
+                        padding: EdgeInsets.only(
+                          left: 20.0,
+                          right: 20.0,
+                          top: 0,
+                          bottom: 0,
+                        ),
+                        primary: false,
+                        shrinkWrap: true,
+                        children: tempSearchStore.map((element) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) => BookDetails(
+                                      name: element['Name'],
+                                    ),
+                                settings:
+                                    RouteSettings(arguments: element['Name']),
+                              ));
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              elevation: 0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  /* border: Border.all(
                                             color: Colors.black, width: 1) */
-                                          ),
-                                      height: 38,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Text(
-                                            element['Name'],
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              color: Colors.grey[800],
-                                              fontSize: 15.0,
-                                            ),
-                                          ),
-                                          FaIcon(
-                                            FontAwesomeIcons.search,
-                                            size: 15,
-                                            color: Colors.grey[500],
-                                          ),
-                                        ],
-                                      ))),
-                            );
-                          }).toList()),
+                                ),
+                                height: 38,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      element['Name'],
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        color: Colors.grey[800],
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                    FaIcon(
+                                      FontAwesomeIcons.search,
+                                      size: 15,
+                                      color: Colors.grey[500],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 ),
               ],
-            ))
-          ]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

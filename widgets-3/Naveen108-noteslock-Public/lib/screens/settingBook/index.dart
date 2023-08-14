@@ -188,30 +188,33 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
           // return object of type Dialog
           return AlertDialog(
             title: Text(
-                "Currently Book Name is ${DataModel.currentBook.bookName} !"),
+              "Currently Book Name is ${DataModel.currentBook.bookName} !",
+            ),
             content: Container(
               height: 150.0,
               width: 200.0,
               child: Form(
-                  key: formTitleKey,
-                  child: ListView(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(top: 0.0, left: 5.0),
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: InputTextFormField(
-                              obscure: false,
-                              texttype: TextInputType.text,
-                              hinttext: "New Book Title",
-                              iconType: Icon(Icons.work),
-                              errortext: "Enter New Book Title here",
-                              errorcheck: "",
-                              onSave: (val) => newBookTitle = val,
-                            ),
-                          )),
-                    ],
-                  )),
+                key: formTitleKey,
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0, left: 5.0),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: InputTextFormField(
+                          obscure: false,
+                          texttype: TextInputType.text,
+                          hinttext: "New Book Title",
+                          iconType: Icon(Icons.work),
+                          errortext: "Enter New Book Title here",
+                          errorcheck: "",
+                          onSave: (val) => newBookTitle = val,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
@@ -226,17 +229,14 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                     },
                   ),
                   FlatButton(
-                    child: Icon(
-                      Icons.done,
-                      color: Colors.blue,
-                    ),
+                    child: Icon(Icons.done, color: Colors.blue),
                     onPressed: () {
                       print('called set bookname');
                       setBookTitle();
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },
@@ -251,30 +251,33 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
           // return object of type Dialog
           return AlertDialog(
             title: Text(
-                "Currently Book Subtitle is ${DataModel.currentBook.bookSubtitle} !"),
+              "Currently Book Subtitle is ${DataModel.currentBook.bookSubtitle} !",
+            ),
             content: Container(
               height: 150.0,
               width: 200.0,
               child: Form(
-                  key: formSubtitleKey,
-                  child: ListView(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(top: 0.0, left: 5.0),
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: InputTextFormField(
-                              obscure: false,
-                              texttype: TextInputType.text,
-                              hinttext: "New Book Subtitle",
-                              iconType: Icon(Icons.work),
-                              errortext: "Enter New Book Subitle here",
-                              errorcheck: "",
-                              onSave: (val) => newSubtitle = val,
-                            ),
-                          )),
-                    ],
-                  )),
+                key: formSubtitleKey,
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0, left: 5.0),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: InputTextFormField(
+                          obscure: false,
+                          texttype: TextInputType.text,
+                          hinttext: "New Book Subtitle",
+                          iconType: Icon(Icons.work),
+                          errortext: "Enter New Book Subitle here",
+                          errorcheck: "",
+                          onSave: (val) => newSubtitle = val,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
@@ -289,17 +292,14 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                     },
                   ),
                   FlatButton(
-                    child: Icon(
-                      Icons.done,
-                      color: Colors.blue,
-                    ),
+                    child: Icon(Icons.done, color: Colors.blue),
                     onPressed: () {
                       print('called set bookname');
                       setBookSubTitle();
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },
@@ -318,25 +318,27 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
               height: 150.0,
               width: 200.0,
               child: Form(
-                  key: formCategoryKey,
-                  child: ListView(
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(top: 0.0, left: 5.0),
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: InputTextFormField(
-                              obscure: false,
-                              texttype: TextInputType.text,
-                              hinttext: "New Book Category",
-                              iconType: Icon(Icons.work),
-                              errortext: "Enter New Book Category here",
-                              errorcheck: "",
-                              onSave: (val) => newBookCategory = val,
-                            ),
-                          )),
-                    ],
-                  )),
+                key: formCategoryKey,
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0, left: 5.0),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: InputTextFormField(
+                          obscure: false,
+                          texttype: TextInputType.text,
+                          hinttext: "New Book Category",
+                          iconType: Icon(Icons.work),
+                          errortext: "Enter New Book Category here",
+                          errorcheck: "",
+                          onSave: (val) => newBookCategory = val,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
@@ -351,16 +353,13 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                     },
                   ),
                   FlatButton(
-                    child: Icon(
-                      Icons.done,
-                      color: Colors.blue,
-                    ),
+                    child: Icon(Icons.done, color: Colors.blue),
                     onPressed: () {
                       changeCategory();
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },
@@ -412,56 +411,56 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
               height: 75.0,
               width: 200.0,
               child: Form(
-                  key: formColorKey,
-                  child: ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.0, left: 15.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    EdgeInsets.only(top: 10.0, right: 25.0),
+                key: formColorKey,
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0, left: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0, right: 25.0),
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Text(
+                                'Book\'s Color',
+                                maxLines: 2,
+                                style: TextStyle(fontSize: 13.0),
+                              ),
+                            ),
+                          ),
+                          new FormField(
+                            //key: formIconKey2,
+                            builder: (FormFieldState state) {
+                              return Padding(
+                                padding: EdgeInsets.only(top: 10.0, left: 5.0),
                                 child: Align(
                                   alignment: Alignment.topCenter,
-                                  child: Text(
-                                    'Book\'s Color',
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      fontSize: 13.0,
-                                    ),
+                                  child: DropdownButton(
+                                    iconSize: 40.0,
+                                    value: boxSetBookColor,
+                                    items: listBookColor,
+                                    onChanged: (int val) {
+                                      boxSetBookColor = val;
+                                      setState(() {
+                                        boxSetBookColor = val;
+
+                                        state.didChange(boxSetBookColor);
+                                      });
+                                    },
                                   ),
                                 ),
-                              ),
-                              new FormField(
-                                  //key: formIconKey2,
-                                  builder: (FormFieldState state) {
-                                return Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 10.0, left: 5.0),
-                                  child: Align(
-                                    alignment: Alignment.topCenter,
-                                    child: DropdownButton(
-                                        iconSize: 40.0,
-                                        value: boxSetBookColor,
-                                        items: listBookColor,
-                                        onChanged: (int val) {
-                                          boxSetBookColor = val;
-                                          setState(() {
-                                            boxSetBookColor = val;
-
-                                            state.didChange(boxSetBookColor);
-                                          });
-                                        }),
-                                  ),
-                                );
-                              }),
-                            ]),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
@@ -476,17 +475,14 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                     },
                   ),
                   FlatButton(
-                    child: Icon(
-                      Icons.done,
-                      color: Colors.blue,
-                    ),
+                    child: Icon(Icons.done, color: Colors.blue),
                     onPressed: () {
                       print('called color change');
                       setBookColor();
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },
@@ -537,56 +533,56 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
               height: 75.0,
               width: 200.0,
               child: Form(
-                  key: formIconKey,
-                  child: ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.0, left: 15.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    EdgeInsets.only(top: 10.0, right: 25.0),
+                key: formIconKey,
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0, left: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0, right: 25.0),
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Text(
+                                'Book\'s Icon',
+                                maxLines: 2,
+                                style: TextStyle(fontSize: 13.0),
+                              ),
+                            ),
+                          ),
+                          new FormField(
+                            //key: formIconKey2,
+                            builder: (FormFieldState state) {
+                              return Padding(
+                                padding: EdgeInsets.only(top: 0.0, left: 5.0),
                                 child: Align(
                                   alignment: Alignment.topCenter,
-                                  child: Text(
-                                    'Book\'s Icon',
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      fontSize: 13.0,
-                                    ),
+                                  child: new DropdownButton(
+                                    iconSize: 40.0,
+                                    value: boxSetBookIcon,
+                                    items: listBookIconImages,
+                                    onChanged: (int val) {
+                                      //boxSetBookIcon = val;
+                                      setState(() {
+                                        print('Setstate was called in icon');
+                                        boxSetBookIcon = val;
+                                        state.didChange(boxSetBookIcon);
+                                      });
+                                    },
                                   ),
                                 ),
-                              ),
-                              new FormField(
-                                  //key: formIconKey2,
-                                  builder: (FormFieldState state) {
-                                return Padding(
-                                  padding: EdgeInsets.only(top: 0.0, left: 5.0),
-                                  child: Align(
-                                    alignment: Alignment.topCenter,
-                                    child: new DropdownButton(
-                                        iconSize: 40.0,
-                                        value: boxSetBookIcon,
-                                        items: listBookIconImages,
-                                        onChanged: (int val) {
-                                          //boxSetBookIcon = val;
-                                          setState(() {
-                                            print(
-                                                'Setstate was called in icon');
-                                            boxSetBookIcon = val;
-                                            state.didChange(boxSetBookIcon);
-                                          });
-                                        }),
-                                  ),
-                                );
-                              }),
-                            ]),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
@@ -601,17 +597,14 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                     },
                   ),
                   FlatButton(
-                    child: Icon(
-                      Icons.done,
-                      color: Colors.blue,
-                    ),
+                    child: Icon(Icons.done, color: Colors.blue),
                     onPressed: () {
                       print('called set icon user');
                       setBookIcon();
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },
@@ -663,50 +656,54 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
               height: 75.0,
               width: 200.0,
               child: Form(
-                  key: formFontFamilyKey,
-                  child: ListView(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.0, left: 15.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    EdgeInsets.only(top: 10.0, right: 25.0),
+                key: formFontFamilyKey,
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0, left: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0, right: 25.0),
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: listFontFamily[bookfont].child,
+                            ),
+                          ),
+                          new FormField(
+                            //key: formIconKey2,
+                            builder: (FormFieldState state) {
+                              return Padding(
+                                padding: EdgeInsets.only(top: 0.0, left: 5.0),
                                 child: Align(
                                   alignment: Alignment.topCenter,
-                                  child: listFontFamily[bookfont].child,
-                                ),
-                              ),
-                              new FormField(
-                                  //key: formIconKey2,
-                                  builder: (FormFieldState state) {
-                                return Padding(
-                                  padding: EdgeInsets.only(top: 0.0, left: 5.0),
-                                  child: Align(
-                                    alignment: Alignment.topCenter,
-                                    child: new DropdownButton(
-                                        iconSize: 10.0,
-                                        value: boxSetBookFont,
-                                        items: listFontFamily,
-                                        onChanged: (int val) {
-                                          setState(() {
-                                            print(
-                                                'Setstate was called in fonstSIze');
-                                            boxSetBookFont = val;
+                                  child: new DropdownButton(
+                                    iconSize: 10.0,
+                                    value: boxSetBookFont,
+                                    items: listFontFamily,
+                                    onChanged: (int val) {
+                                      setState(() {
+                                        print(
+                                          'Setstate was called in fonstSIze',
+                                        );
+                                        boxSetBookFont = val;
 
-                                            state.didChange(boxSetBookFont);
-                                          });
-                                        }),
+                                        state.didChange(boxSetBookFont);
+                                      });
+                                    },
                                   ),
-                                );
-                              }),
-                            ]),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
@@ -721,17 +718,14 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                     },
                   ),
                   FlatButton(
-                    child: Icon(
-                      Icons.done,
-                      color: Colors.blue,
-                    ),
+                    child: Icon(Icons.done, color: Colors.blue),
                     onPressed: () {
                       print('called set fontsize user');
                       setBookFontFamily();
                     },
                   ),
                 ],
-              )
+              ),
             ],
           );
         },
@@ -744,21 +738,16 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            size: 20.0,
-          ),
+          icon: Icon(Icons.arrow_back, size: 20.0),
           onPressed: () {
             print('called navigator');
             // if (bannerOn) {
             //   _bannerAdBookSettingsScreen.dispose();
             // }
             Navigator.pushReplacement(
-                context,
-                SlideRightRoute(
-                    widget: NotesPage(
-                  dataModel: DataModel(),
-                )));
+              context,
+              SlideRightRoute(widget: NotesPage(dataModel: DataModel())),
+            );
           },
         ),
         actions: <Widget>[
@@ -766,9 +755,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
         ],
         title: Center(
           child: Padding(
-            padding: EdgeInsets.only(
-              right: 50.0,
-            ),
+            padding: EdgeInsets.only(right: 50.0),
             child: Text(
               'Settings',
               style: TextStyle(
@@ -805,9 +792,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           height: 50.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('Change Book Title : '),
-                            ],
+                            children: <Widget>[Text('Change Book Title : ')],
                           ),
                         ),
                         SizedBox(
@@ -816,9 +801,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(newBookTitle),
-                            ],
+                            children: <Widget>[Text(newBookTitle)],
                           ),
                         ),
                       ],
@@ -843,9 +826,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           height: 50.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('Change Book Category : '),
-                            ],
+                            children: <Widget>[Text('Change Book Category : ')],
                           ),
                         ),
                         SizedBox(
@@ -854,9 +835,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(newBookCategory),
-                            ],
+                            children: <Widget>[Text(newBookCategory)],
                           ),
                         ),
                       ],
@@ -881,9 +860,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           height: 50.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('Change Book Subtitle : '),
-                            ],
+                            children: <Widget>[Text('Change Book Subtitle : ')],
                           ),
                         ),
                         SizedBox(
@@ -892,9 +869,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(newSubtitle),
-                            ],
+                            children: <Widget>[Text(newSubtitle)],
                           ),
                         ),
                       ],
@@ -919,9 +894,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           height: 50.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('Change Book Icon : '),
-                            ],
+                            children: <Widget>[Text('Change Book Icon : ')],
                           ),
                         ),
                         SizedBox(
@@ -935,7 +908,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                                 width: 30.0,
                                 height: 30.0,
                                 child: listBookIconImages[bookIcon - 1],
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -961,9 +934,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           height: 50.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('Change Book Color : '),
-                            ],
+                            children: <Widget>[Text('Change Book Color : ')],
                           ),
                         ),
                         SizedBox(
@@ -978,7 +949,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                                 height: 30.0,
                                 color:
                                     selectedColor[bookColor - 1].primaryColor,
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -1004,9 +975,7 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                           height: 50.0,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('Change Font Family : '),
-                            ],
+                            children: <Widget>[Text('Change Font Family : ')],
                           ),
                         ),
                         SizedBox(
@@ -1020,9 +989,10 @@ class _BookSettingsPageState extends State<BookSettingsPage> {
                                 width: 90.0,
                                 height: 30.0,
                                 child: listFontFamily[
-                                        DataModel.currentBook.bookFont]
+                                      DataModel.currentBook.bookFont
+                                    ]
                                     .child,
-                              )
+                              ),
                             ],
                           ),
                         ),

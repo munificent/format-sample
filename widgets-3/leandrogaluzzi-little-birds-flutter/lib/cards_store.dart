@@ -8,9 +8,9 @@ class CardsStore extends InheritedWidget {
     Key key,
     @required this.cards,
     @required Widget child,
-  })  : assert(cards != null),
-        assert(child != null),
-        super(key: key, child: child);
+  }) : assert(cards != null),
+       assert(child != null),
+       super(key: key, child: child);
 
   final List<ThronesCard> cards;
 
@@ -36,13 +36,11 @@ class CardsStore extends InheritedWidget {
   }
 
   List<ThronesCard> getCardsWithQuery(String query) {
-    var filteredCards = cards.where(
-      (card) {
-        bool name = card.name.toLowerCase().contains(query.toLowerCase());
-        bool traits = card.traits.toLowerCase().contains(query.toLowerCase());
-        return name || traits;
-      },
-    ).toList();
+    var filteredCards = cards.where((card) {
+      bool name = card.name.toLowerCase().contains(query.toLowerCase());
+      bool traits = card.traits.toLowerCase().contains(query.toLowerCase());
+      return name || traits;
+    }).toList();
     return filteredCards;
   }
 
@@ -55,8 +53,10 @@ class CardsStore extends InheritedWidget {
     for (int i = 0; i < cards.length; i++) {
       final slot = slots[i];
       final card = cards[i];
-      CardQuantity cardQuantity =
-          CardQuantity(card: card, quantity: slot.quantity);
+      CardQuantity cardQuantity = CardQuantity(
+        card: card,
+        quantity: slot.quantity,
+      );
       cardsQuantity.add(cardQuantity);
     }
     return cardsQuantity;

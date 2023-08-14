@@ -8,7 +8,7 @@ enum TabKey {
   kPopular,
   kGenres,
   kSearchMovies,
-  kSearchPeople
+  kSearchPeople,
 }
 
 const Map<TabKey, String> tabs = {
@@ -18,7 +18,7 @@ const Map<TabKey, String> tabs = {
   TabKey.kPopular: "POPULAR",
   TabKey.kGenres: "GENRES",
   TabKey.kSearchMovies: "MOVIES",
-  TabKey.kSearchPeople: "PEOPLE"
+  TabKey.kSearchPeople: "PEOPLE",
 };
 
 class TabObject {

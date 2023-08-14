@@ -40,9 +40,11 @@ class _MoviesListState extends State<MoviesList> {
     return new Container(
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: new Center(
-        child: new Text(message,
-            textAlign: TextAlign.center,
-            style: new TextStyle(fontSize: 20.0, color: color)),
+        child: new Text(
+          message,
+          textAlign: TextAlign.center,
+          style: new TextStyle(fontSize: 20.0, color: color),
+        ),
       ),
     );
   }
@@ -68,7 +70,11 @@ class _MoviesListState extends State<MoviesList> {
     return new Container(
       alignment: Alignment.topCenter,
       padding: new EdgeInsets.only(
-          top: topPadding, left: 0.0, right: 0.0, bottom: 35.0),
+        top: topPadding,
+        left: 0.0,
+        right: 0.0,
+        bottom: 35.0,
+      ),
       child: blocState.isLoading ? _loader() : _moviesList(blocState),
     );
   }

@@ -15,9 +15,8 @@ class LocationPermsProvider extends ChangeNotifier {
   }
 
   static requestPerm() async {
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.locationWhenInUse,
-    ].request();
+    Map<Permission, PermissionStatus> statuses =
+        await [Permission.locationWhenInUse].request();
     return statuses[Permission.locationWhenInUse];
   }
 

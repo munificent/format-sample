@@ -22,9 +22,13 @@ class NewDetailState extends State<NewsPageDetail> {
   WebViewController _controller;
 
   Future<void> loadHtmlFromAssets(String filename, controller) async {
-    controller.loadUrl(Uri.dataFromString(filename,
-            mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
-        .toString());
+    controller.loadUrl(
+      Uri.dataFromString(
+        filename,
+        mimeType: 'text/html',
+        encoding: Encoding.getByName('utf-8'),
+      ).toString(),
+    );
   }
 
   @override
@@ -34,37 +38,39 @@ class NewDetailState extends State<NewsPageDetail> {
       //   title: const Text('News detail'),
       //   actions: <Widget>[],
       // ),
-      body: Builder(builder: (BuildContext context) {
-        return WebView(
-          initialUrl: newsUrl,
+      body: Builder(
+        builder: (BuildContext context) {
+          return WebView(
+            initialUrl: newsUrl,
 
-          /// 是否支持JS
-          javascriptMode: JavascriptMode.unrestricted,
+            /// 是否支持JS
+            javascriptMode: JavascriptMode.unrestricted,
 
-          /// 控制器
-          onWebViewCreated: (WebViewController controller) {
-            _webController.complete(controller);
-          },
+            /// 控制器
+            onWebViewCreated: (WebViewController controller) {
+              _webController.complete(controller);
+            },
 
-          /// 用于处理 S代码
-          javascriptChannels: <JavascriptChannel>[
-            _toasterJavascriptChannel(context),
-          ].toSet(),
+            /// 用于处理 S代码
+            javascriptChannels:
+                <JavascriptChannel>[_toasterJavascriptChannel(context)].toSet(),
 
-          /// 前进后退手势操作，只在IOS有效
-          gestureNavigationEnabled: true,
-        );
-      }),
+            /// 前进后退手势操作，只在IOS有效
+            gestureNavigationEnabled: true,
+          );
+        },
+      ),
     );
   }
 
   JavascriptChannel _toasterJavascriptChannel(BuildContext context) {
     return JavascriptChannel(
-        name: 'Toaster',
-        onMessageReceived: (JavascriptMessage message) {
-          Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text(message.message)),
-          );
-        });
+      name: 'Toaster',
+      onMessageReceived: (JavascriptMessage message) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text(message.message)),
+        );
+      },
+    );
   }
 }

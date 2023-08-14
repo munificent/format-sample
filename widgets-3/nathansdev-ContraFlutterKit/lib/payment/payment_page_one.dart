@@ -45,14 +45,15 @@ class _PaymentPageOneState extends State<PaymentPageOne> {
                     child: Align(
                       alignment: Alignment.bottomLeft,
                       child: ButtonRoundWithShadow(
-                          size: 48,
-                          borderColor: wood_smoke,
-                          color: white,
-                          callback: () {
-                            Navigator.pop(context);
-                          },
-                          shadowColor: wood_smoke,
-                          iconPath: "assets/icons/arrow_back.svg"),
+                        size: 48,
+                        borderColor: wood_smoke,
+                        color: white,
+                        callback: () {
+                          Navigator.pop(context);
+                        },
+                        shadowColor: wood_smoke,
+                        iconPath: "assets/icons/arrow_back.svg",
+                      ),
                     ),
                   ),
                 ),
@@ -64,12 +65,7 @@ class _PaymentPageOneState extends State<PaymentPageOne> {
                     text: "Payments",
                   ),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    width: 20,
-                  ),
-                )
+                Expanded(flex: 1, child: SizedBox(width: 20)),
               ],
             ),
           ],
@@ -99,10 +95,11 @@ class _PaymentPageOneState extends State<PaymentPageOne> {
                 margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 padding: EdgeInsets.all(24),
                 decoration: ShapeDecoration(
-                    color: bareley_white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                    )),
+                  color: bareley_white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                  ),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -117,7 +114,7 @@ class _PaymentPageOneState extends State<PaymentPageOne> {
                       activeColor: lightening_yellow,
                       inactiveTrackColor: selago,
                       inactiveThumbColor: white,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -132,7 +129,7 @@ class _PaymentPageOneState extends State<PaymentPageOne> {
                   textColor: white,
                   borderColor: wood_smoke,
                 ),
-              )
+              ),
             ],
           ),
         ),

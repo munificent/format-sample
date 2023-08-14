@@ -4,12 +4,12 @@ import 'package:engtrhukuksozluk/utils/app_const.dart';
 import 'package:flutter/material.dart';
 
 class HistoryBodyList extends StatelessWidget {
-  HistoryBodyList(
-      {Key key,
-      @required this.history,
-      @required this.historyDao,
-      this.onPressed})
-      : super(key: key);
+  HistoryBodyList({
+    Key key,
+    @required this.history,
+    @required this.historyDao,
+    this.onPressed,
+  }) : super(key: key);
 
   final History history;
   final HistoryDao historyDao;
@@ -27,58 +27,62 @@ class HistoryBodyList extends StatelessWidget {
             children: [
               Text(AppConstant.historyTitle),
               FlatButton(
-                  onPressed: onPressed, child: Text(AppConstant.historyBtn))
+                onPressed: onPressed,
+                child: Text(AppConstant.historyBtn),
+              ),
             ],
           ),
         ),
         StreamBuilder<List<History>>(
-            stream: historyDao?.findAllHistoryStream(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Container();
-              } else {
-                final history = snapshot.data;
-                return Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    child: ListView.builder(
-                      itemCount: history.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(6.0),
-                            shadowColor: Colors.black26,
-                            child: Container(
-                              height: 54,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 16.0),
-                                    child: Text(
-                                      history[index].historyWord,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          .copyWith(
-                                              fontWeight: FontWeight.normal),
-                                    ),
+          stream: historyDao?.findAllHistoryStream(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Container();
+            } else {
+              final history = snapshot.data;
+              return Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: MediaQuery.removePadding(
+                  context: context,
+                  removeTop: true,
+                  child: ListView.builder(
+                    itemCount: history.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(6.0),
+                          shadowColor: Colors.black26,
+                          child: Container(
+                            height: 54,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 16.0),
+                                  child: Text(
+                                    history[index].historyWord,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              }
-            }),
+                ),
+              );
+            }
+          },
+        ),
       ],
     );
   }

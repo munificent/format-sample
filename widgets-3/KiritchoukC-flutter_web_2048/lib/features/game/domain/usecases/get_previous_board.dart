@@ -9,8 +9,9 @@ import '../repositories/board_repository.dart';
 class GetPreviousBoard implements UseCase<Board, NoParams> {
   final BoardRepository boardRepository;
 
-  GetPreviousBoard({@required this.boardRepository})
-      : assert(boardRepository != null);
+  GetPreviousBoard({
+    @required this.boardRepository,
+  }) : assert(boardRepository != null);
   @override
   Future<Either<Failure, Board>> call(NoParams params) async {
     return Right(await boardRepository.getPreviousBoard());

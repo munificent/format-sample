@@ -23,14 +23,16 @@ class CartOnePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
-                child: Text(
-                  "CART",
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade700),
-                )),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
+              child: Text(
+                "CART",
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey.shade700,
+                ),
+              ),
+            ),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.all(16.0),
@@ -52,9 +54,7 @@ class CartOnePage extends StatelessWidget {
                                   height: 80,
                                   child: PNetworkImage(items[index]["image"]),
                                 ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
+                                SizedBox(width: 10.0),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -63,17 +63,17 @@ class CartOnePage extends StatelessWidget {
                                       Text(
                                         items[index]["title"],
                                         style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
+                                      SizedBox(height: 20.0),
                                       Text(
                                         "\$${items[index]['price']}",
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.0),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -92,17 +92,15 @@ class CartOnePage extends StatelessWidget {
                           alignment: Alignment.center,
                           child: MaterialButton(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
                             padding: EdgeInsets.all(0.0),
                             color: Colors.pinkAccent,
-                            child: Icon(
-                              Icons.clear,
-                              color: Colors.white,
-                            ),
+                            child: Icon(Icons.clear, color: Colors.white),
                             onPressed: () {},
                           ),
                         ),
-                      )
+                      ),
                     ],
                   );
                 },
@@ -119,25 +117,19 @@ class CartOnePage extends StatelessWidget {
                     style:
                         TextStyle(color: Colors.grey.shade700, fontSize: 16.0),
                   ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
+                  SizedBox(height: 5.0),
                   Text(
                     "Delivery       \$05",
                     style:
                         TextStyle(color: Colors.grey.shade700, fontSize: 16.0),
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
+                  SizedBox(height: 10.0),
                   Text(
                     "Cart Subtotal     \$55",
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
+                  SizedBox(height: 20.0),
                   SizedBox(
                     width: double.infinity,
                     child: MaterialButton(
@@ -149,10 +141,10 @@ class CartOnePage extends StatelessWidget {
                       ),
                       onPressed: () {},
                     ),
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

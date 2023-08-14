@@ -57,14 +57,10 @@ class HomeScreen extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () {
-                        Navigator.of(
-                          context,
-                          rootNavigator: true,
-                        ).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => const RootScreen(),
-                          ),
-                        );
+                        Navigator.of(context, rootNavigator: true)
+                            .pushReplacement(MaterialPageRoute(
+                              builder: (_) => const RootScreen(),
+                            ));
                       },
                       child: const Text('Refresh'),
                     ),
@@ -89,8 +85,9 @@ class HomeScreen extends StatelessWidget {
             ...songProvider.mostPlayed().map((song) => SongCard(song: song)),
             PlaceholderCard(
               icon: CupertinoIcons.music_note,
-              onPressed: () => Navigator.of(context)
-                  .push(CupertinoPageRoute(builder: (_) => SongsScreen())),
+              onPressed: () => Navigator.of(context).push(
+                CupertinoPageRoute(builder: (_) => SongsScreen()),
+              ),
             ),
           ],
         ),
@@ -101,33 +98,36 @@ class HomeScreen extends StatelessWidget {
           child: SimpleSongList(
             songs: interactionProvider.getRandomFavorites(limit: 5),
             headingText: 'From your favorites',
-            onHeaderTap: () => Navigator.of(context)
-                .push(CupertinoPageRoute(builder: (_) => FavoritesScreen())),
+            onHeaderTap: () => Navigator.of(context).push(
+              CupertinoPageRoute(builder: (_) => FavoritesScreen()),
+            ),
           ),
         ),
         HorizontalCardScroller(
           headingText: 'Top albums',
           cards: <Widget>[
-            ...albumProvider
-                .mostPlayed()
-                .map((album) => AlbumCard(album: album)),
+            ...albumProvider.mostPlayed().map(
+              (album) => AlbumCard(album: album),
+            ),
             PlaceholderCard(
               icon: CupertinoIcons.music_albums,
-              onPressed: () => Navigator.of(context)
-                  .push(CupertinoPageRoute(builder: (_) => AlbumsScreen())),
+              onPressed: () => Navigator.of(context).push(
+                CupertinoPageRoute(builder: (_) => AlbumsScreen()),
+              ),
             ),
           ],
         ),
         HorizontalCardScroller(
           headingText: 'Top artists',
           cards: <Widget>[
-            ...artistProvider
-                .mostPlayed()
-                .map((artist) => ArtistCard(artist: artist)),
+            ...artistProvider.mostPlayed().map(
+              (artist) => ArtistCard(artist: artist),
+            ),
             PlaceholderCard(
               icon: CupertinoIcons.music_mic,
-              onPressed: () => Navigator.of(context)
-                  .push(CupertinoPageRoute(builder: (_) => ArtistsScreen())),
+              onPressed: () => Navigator.of(context).push(
+                CupertinoPageRoute(builder: (_) => ArtistsScreen()),
+              ),
             ),
           ],
         ),
@@ -140,21 +140,17 @@ class HomeScreen extends StatelessWidget {
             headingText: 'Hidden gems',
           ),
         ),
-      ]
-          .map(
-            (widget) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: widget,
-            ),
-          )
-          .toList();
+      ].map(
+        (widget) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: widget,
+        ),
+      ).toList();
     }
 
     return Scaffold(
       body: CupertinoTheme(
-        data: CupertinoThemeData(
-          primaryColor: Colors.white,
-        ),
+        data: CupertinoThemeData(primaryColor: Colors.white),
         child: CustomScrollView(
           slivers: <Widget>[
             CupertinoSliverNavigationBar(
@@ -164,10 +160,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () => Navigator.of(context).push(
                   new CupertinoPageRoute(builder: (_) => const ProfileScreen()),
                 ),
-                icon: const Icon(
-                  CupertinoIcons.person_alt_circle,
-                  size: 24,
-                ),
+                icon: const Icon(CupertinoIcons.person_alt_circle, size: 24),
               ),
             ),
             SliverList(delegate: SliverChildListDelegate.fixed(homeBlocks)),
@@ -183,11 +176,8 @@ class MostPlayedSongs extends StatelessWidget {
   final List<Song> songs;
   final BuildContext context;
 
-  const MostPlayedSongs({
-    Key? key,
-    required this.songs,
-    required this.context,
-  }) : super(key: key);
+  const MostPlayedSongs({Key? key, required this.songs, required this.context})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,10 @@ class MovieDetailsContentWidget extends StatelessWidget {
   final bool hasFailed;
 
   MovieDetailsContentWidget(
-      this.movieDetails, this.movieDetailsBloc, bool this.hasFailed);
+    this.movieDetails,
+    this.movieDetailsBloc,
+    bool this.hasFailed,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -40,26 +43,29 @@ class MovieDetailsContentWidget extends StatelessWidget {
 
   Widget buildMovieExtraDetailsContainer(BuildContext context) {
     return CrossFadeWidgets(
-        childOne: MovieExtraContentWidget(
-            movieDetails: movieDetails, movieDetailsBloc: movieDetailsBloc),
-        childTwo:
-            ErrorsWidget(visible: true, error: movieDetails.status_message),
-        showChildOne: !hasFailed);
+      childOne: MovieExtraContentWidget(
+        movieDetails: movieDetails,
+        movieDetailsBloc: movieDetailsBloc,
+      ),
+      childTwo: ErrorsWidget(visible: true, error: movieDetails.status_message),
+      showChildOne: !hasFailed,
+    );
   }
 
   Widget buildMinorDetailsRow() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: INDENT * 2),
       child: CrossFadeWidgets(
-          childOne: Row(
-            children: <Widget>[
-              buildRunningTime(),
-              buildReleaseDate(),
-              buildDirectorName(),
-            ],
-          ),
-          childTwo: Container(),
-          showChildOne: movieDetails.hasData),
+        childOne: Row(
+          children: <Widget>[
+            buildRunningTime(),
+            buildReleaseDate(),
+            buildDirectorName(),
+          ],
+        ),
+        childTwo: Container(),
+        showChildOne: movieDetails.hasData,
+      ),
     );
   }
 
@@ -89,10 +95,7 @@ class MovieDetailsContentWidget extends StatelessWidget {
               // being lost between transitions
               child: Material(
                 color: Colors.transparent,
-                child: Text(
-                  movieDetails.getTitle,
-                  style: STYLE_TITLE,
-                ),
+                child: Text(movieDetails.getTitle, style: STYLE_TITLE),
               ),
               tag: "${movieDetails.getId}-${movieDetails.getTitle}",
             ),
@@ -110,10 +113,7 @@ class MovieDetailsContentWidget extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              formattedRunningTime,
-              style: TextStyle(fontSize: 13.0),
-            ),
+            child: Text(formattedRunningTime, style: TextStyle(fontSize: 13.0)),
           ),
           getDotSeparator(),
         ],
@@ -142,8 +142,10 @@ class MovieDetailsContentWidget extends StatelessWidget {
         getDotSeparator(),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("directed by ${movieDetails.getDirector()}",
-              style: TextStyle(fontSize: 13.0)),
+          child: Text(
+            "directed by ${movieDetails.getDirector()}",
+            style: TextStyle(fontSize: 13.0),
+          ),
         ),
       ],
     );

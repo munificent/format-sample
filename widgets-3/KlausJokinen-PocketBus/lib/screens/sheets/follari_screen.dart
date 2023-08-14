@@ -8,9 +8,11 @@ import 'package:pocket_bus/localizations.dart';
 import 'package:flutter/material.dart';
 
 class FollariScreen extends StatefulWidget {
-  const FollariScreen(
-      {Key key, @required this.rackIdentifier, this.showTopBar = true})
-      : super(key: key);
+  const FollariScreen({
+    Key key,
+    @required this.rackIdentifier,
+    this.showTopBar = true,
+  }) : super(key: key);
 
   final Rack rackIdentifier;
   final bool showTopBar;
@@ -34,60 +36,64 @@ class _FollariScreenState extends State<FollariScreen> {
     final Size _contextSize = MediaQuery.of(context).size;
     return ClipPath(
       clipper: NotchClipper(Rect.fromCircle(
-          center: Offset(_contextSize.width / 2.0, 0.0),
-          radius: widget.showTopBar ? 6.0 : 0.0)),
+        center: Offset(_contextSize.width / 2.0, 0.0),
+        radius: widget.showTopBar ? 6.0 : 0.0,
+      )),
       clipBehavior: Clip.hardEdge,
       child: Container(
-          decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0),
-              )),
-          height: _contextSize.height / 1.965,
-          child: Column(
-            children: <Widget>[
-              if (widget.showTopBar)
-                TopBar(
-                  selectedRack: widget.rackIdentifier,
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+        height: _contextSize.height / 1.965,
+        child: Column(
+          children: <Widget>[
+            if (widget.showTopBar) TopBar(selectedRack: widget.rackIdentifier),
+            Expanded(
+              child: Container(
+                width: _contextSize.width,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  border: Border.all(
+                    color: Colors.grey.withOpacity(0.2),
+                    style: Theme.of(context).brightness == Brightness.dark
+                        ? BorderStyle.none
+                        : BorderStyle.solid,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                  ),
                 ),
-              Expanded(
-                child: Container(
-                  width: _contextSize.width,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      border: Border.all(
-                          color: Colors.grey.withOpacity(0.2),
-                          style: Theme.of(context).brightness == Brightness.dark
-                              ? BorderStyle.none
-                              : BorderStyle.solid),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      )),
-                  child: StreamBuilder<Rack>(
-                      stream: _follariBloc.outRack,
-                      builder: (context, snapshot) {
-                        Widget buildWidget;
+                child: StreamBuilder<Rack>(
+                  stream: _follariBloc.outRack,
+                  builder: (context, snapshot) {
+                    Widget buildWidget;
 
-                        if (!snapshot.hasData) {
-                          buildWidget = const SizedBox.expand(
-                            child: CenterSpinner(),
-                          );
-                        } else {
-                          buildWidget = snapshot.data.bikesAvail != 0
-                              ? BikesChip(selectedRack: snapshot.data)
-                              : NoBikes(selectedRack: snapshot.data);
-                        }
+                    if (!snapshot.hasData) {
+                      buildWidget = const SizedBox.expand(
+                        child: CenterSpinner(),
+                      );
+                    } else {
+                      buildWidget = snapshot.data.bikesAvail != 0
+                          ? BikesChip(selectedRack: snapshot.data)
+                          : NoBikes(selectedRack: snapshot.data);
+                    }
 
-                        return AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 250),
-                            child: buildWidget);
-                      }),
+                    return AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 250),
+                      child: buildWidget,
+                    );
+                  },
                 ),
-              )
-            ],
-          )),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -107,20 +113,16 @@ class BikesChip extends StatelessWidget {
         const Space(),
         Text(
           Localization.of(context).bikeSheetBikesTitle,
-          style: const TextStyle(
-            fontSize: 30,
-          ),
+          style: const TextStyle(fontSize: 30),
         ),
         const Space(),
         Chip(
-            backgroundColor: Theme.of(context).accentColor,
-            label: Text(
-              '$bikesAvailable/$slotsTotal',
-              style: const TextStyle(
-                fontSize: 50,
-                color: Colors.black,
-              ),
-            )),
+          backgroundColor: Theme.of(context).accentColor,
+          label: Text(
+            '$bikesAvailable/$slotsTotal',
+            style: const TextStyle(fontSize: 50, color: Colors.black),
+          ),
+        ),
       ],
     );
   }
@@ -137,10 +139,11 @@ class TopBar extends StatelessWidget {
     bool showAnimations = false;
     return Container(
       margin: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-      child: Stack(children: <Widget>[
-        Align(
-          alignment: const Alignment(0.86, 1.0),
-          child: StreamBuilder<List<FavoriteRack>>(
+      child: Stack(
+        children: <Widget>[
+          Align(
+            alignment: const Alignment(0.86, 1.0),
+            child: StreamBuilder<List<FavoriteRack>>(
               stream: _follariBloc.outFavorites,
               builder: (context, snapshot) {
                 isFavorite = _follariBloc.isFavorite(selectedRack);
@@ -150,20 +153,26 @@ class TopBar extends StatelessWidget {
                     showAnimations = true;
                   },
                   child: FavoriteHearth(
-                      isFavorite: isFavorite, showAnimations: showAnimations),
+                    isFavorite: isFavorite,
+                    showAnimations: showAnimations,
+                  ),
                 );
-              }),
-        ),
-        Center(child: RackDetails(currentRack: selectedRack)),
-      ]),
+              },
+            ),
+          ),
+          Center(child: RackDetails(currentRack: selectedRack)),
+        ],
+      ),
     );
   }
 }
 
 class RackDetails extends StatelessWidget {
-  const RackDetails(
-      {Key key, @required this.currentRack, this.centerRackDetailsText = true})
-      : super(key: key);
+  const RackDetails({
+    Key key,
+    @required this.currentRack,
+    this.centerRackDetailsText = true,
+  }) : super(key: key);
 
   final Rack currentRack;
   final bool centerRackDetailsText;
@@ -172,11 +181,13 @@ class RackDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.70,
-      child: Text('${currentRack.customName ?? currentRack.name}',
-          overflow: TextOverflow.ellipsis,
-          textAlign: centerRackDetailsText ? TextAlign.center : TextAlign.start,
-          style: TextStyle(
-              fontSize: Theme.of(context).textTheme.subhead.fontSize)),
+      child: Text(
+        '${currentRack.customName ?? currentRack.name}',
+        overflow: TextOverflow.ellipsis,
+        textAlign: centerRackDetailsText ? TextAlign.center : TextAlign.start,
+        style:
+            TextStyle(fontSize: Theme.of(context).textTheme.subhead.fontSize),
+      ),
     );
   }
 }
@@ -196,21 +207,18 @@ class NoBikes extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Space(),
-            const Center(
-              child: Text(
-                '😴',
-                style: TextStyle(fontSize: 50),
-              ),
-            ),
+            const Center(child: Text('😴', style: TextStyle(fontSize: 50))),
+            const Space(),
+            Text(Localization.of(context).bikeSheetNoBikesTitle),
             const Space(),
             Text(
-              Localization.of(context).bikeSheetNoBikesTitle,
-            ),
-            const Space(),
-            Text(
-              '${Localization.of(context).bikeSheetNoBikesBodyFirstPart} $slotsTotal ${Localization.of(context).bikeSheetNoBikesBodySecondPart}',
+              '${Localization.of(
+                context,
+              ).bikeSheetNoBikesBodyFirstPart} $slotsTotal ${Localization.of(
+                context,
+              ).bikeSheetNoBikesBodySecondPart}',
               textAlign: TextAlign.center,
-            )
+            ),
           ],
         ),
       ),

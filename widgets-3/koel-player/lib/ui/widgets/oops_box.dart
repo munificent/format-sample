@@ -12,7 +12,7 @@ class OopsBox extends StatelessWidget {
   final String? message;
 
   const OopsBox({Key? key, this.message, this.onRetryButtonPressed})
-      : super(key: key);
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,7 @@ class OopsBox extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Oops!',
-              style: Theme.of(context).textTheme.headline5,
-            ),
+            Text('Oops!', style: Theme.of(context).textTheme.headline5),
             const SizedBox(height: 16),
             Text(message ?? 'Something wrong happened.'),
             const SizedBox(height: 8.0),
@@ -42,13 +39,11 @@ class OopsBox extends StatelessWidget {
                   key: logOutButtonKey,
                   onPressed: () async {
                     await auth.logout();
-                    await Navigator.of(
-                      context,
-                      rootNavigator: true,
-                    ).pushNamedAndRemoveUntil(
-                      LoginScreen.routeName,
-                      (_) => false,
-                    );
+                    await Navigator.of(context, rootNavigator: true)
+                        .pushNamedAndRemoveUntil(
+                          LoginScreen.routeName,
+                          (_) => false,
+                        );
                   },
                   child: const Text(
                     'Log Out',
@@ -56,7 +51,7 @@ class OopsBox extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

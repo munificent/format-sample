@@ -36,8 +36,10 @@ class App extends StatelessWidget {
           theme: appTheme,
           builder: (BuildContext context, Widget widget) {
             // load settings
-            final settingsProvider =
-                Provider.of<SettingsProvider>(context, listen: false);
+            final settingsProvider = Provider.of<SettingsProvider>(
+              context,
+              listen: false,
+            );
             settingsProvider.loadSettings();
             print("build app");
 

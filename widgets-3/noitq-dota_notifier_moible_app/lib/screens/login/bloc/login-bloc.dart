@@ -15,8 +15,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthBloc authenticationBloc;
   FirebaseBloc firebaseBloc;
 
-  LoginBloc({@required this.authenticationBloc, this.firebaseBloc})
-      : assert(authenticationBloc != null);
+  LoginBloc({
+    @required this.authenticationBloc,
+    this.firebaseBloc,
+  }) : assert(authenticationBloc != null);
 
   @override
   LoginState get initialState => LoginInitial();
@@ -40,9 +42,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       try {
         final token = await authenticationBloc.userRepository.authenticate(
-            email: event.username,
-            password: event.password,
-            firebaseToken: firebaseBloc.token);
+          email: event.username,
+          password: event.password,
+          firebaseToken: firebaseBloc.token,
+        );
 
         authenticationBloc.add(LoggedIn(token: token));
         yield LoginInitial();

@@ -21,12 +21,13 @@ void main() async {
   final dir = await getApplicationDocumentsDirectory();
 
   final themeModel = ThemeModel(
-      localData: localData,
-      service: IOThemeService(
-        themeExporter: exportTheme,
-        dirProvider: getApplicationDocumentsDirectory,
-      ),
-      screenService: LocalScreenshotService(dir));
+    localData: localData,
+    service: IOThemeService(
+      themeExporter: exportTheme,
+      dirProvider: getApplicationDocumentsDirectory,
+    ),
+    screenService: LocalScreenshotService(dir),
+  );
 
   runApp(PanacheApp(themeModel: themeModel));
 }

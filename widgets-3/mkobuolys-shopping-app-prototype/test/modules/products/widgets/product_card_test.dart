@@ -19,36 +19,23 @@ void main() {
       customerReviewAverage: 4.5,
     );
 
-    testWidgets(
-      'should render product card',
-      (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: ProductCard(product: product),
-            ),
-          ),
-        );
+    testWidgets('should render product card', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(home: Scaffold(body: ProductCard(product: product))),
+      );
 
-        expect(
-          find.byWidgetPredicate(
-            (widget) =>
-                widget is SizedNetworkImage && widget.imageUrl == product.image,
-          ),
-          findsOneWidget,
-        );
-        expect(find.text(product.name), findsOneWidget);
-        expect(
-          find.byWidgetPredicate(
-            (widget) =>
-                widget is ProductPrice &&
-                widget.onSale == product.onSale &&
-                widget.regularPrice == product.regularPrice &&
-                widget.salePrice == product.salePrice,
-          ),
-          findsOneWidget,
-        );
-      },
-    );
+      expect(find.byWidgetPredicate(
+        (widget) =>
+            widget is SizedNetworkImage && widget.imageUrl == product.image,
+      ), findsOneWidget);
+      expect(find.text(product.name), findsOneWidget);
+      expect(find.byWidgetPredicate(
+        (widget) =>
+            widget is ProductPrice &&
+            widget.onSale == product.onSale &&
+            widget.regularPrice == product.regularPrice &&
+            widget.salePrice == product.salePrice,
+      ), findsOneWidget);
+    });
   });
 }

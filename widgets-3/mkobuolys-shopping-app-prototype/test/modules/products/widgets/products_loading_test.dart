@@ -6,24 +6,14 @@ import 'package:shopping_app_prototype/widgets/circular_loader.dart';
 
 void main() {
   group('ProductsLoading', () {
-    testWidgets(
-      'should render loader',
-      (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: ProductsLoading(),
-            ),
-          ),
-        );
+    testWidgets('should render loader', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(home: Scaffold(body: ProductsLoading())),
+      );
 
-        expect(
-          find.byWidgetPredicate(
-            (widget) => widget is Center && widget.child is CircularLoader,
-          ),
-          findsOneWidget,
-        );
-      },
-    );
+      expect(find.byWidgetPredicate(
+        (widget) => widget is Center && widget.child is CircularLoader,
+      ), findsOneWidget);
+    });
   });
 }

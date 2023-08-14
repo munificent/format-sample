@@ -4,14 +4,14 @@ class ThinListTiles extends StatelessWidget {
   final void Function(BuildContext context) callback;
   final Widget leading, title, trailing;
   final Color color;
-  const ThinListTiles(
-      {Key key,
-      this.callback,
-      this.leading,
-      this.title,
-      this.trailing,
-      this.color})
-      : super(key: key);
+  const ThinListTiles({
+    Key key,
+    this.callback,
+    this.leading,
+    this.title,
+    this.trailing,
+    this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

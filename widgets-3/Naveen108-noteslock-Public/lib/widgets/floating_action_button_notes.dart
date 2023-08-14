@@ -8,16 +8,19 @@ class FancyFabNote extends StatefulWidget {
   final String tooltip;
   final IconData icon;
   final DataModel dataModel;
-  FancyFabNote(
-      {this.onPressed,
-      this.tooltip,
-      this.icon,
-      this.dataModel,
-      this.scaffoldKey});
+  FancyFabNote({
+    this.onPressed,
+    this.tooltip,
+    this.icon,
+    this.dataModel,
+    this.scaffoldKey,
+  });
 
   @override
-  _FancyFabNoteState createState() =>
-      _FancyFabNoteState(dataModel: dataModel, scaffoldKey: scaffoldKey);
+  _FancyFabNoteState createState() => _FancyFabNoteState(
+    dataModel: dataModel,
+    scaffoldKey: scaffoldKey,
+  );
 }
 
 class _FancyFabNoteState extends State<FancyFabNote>
@@ -38,48 +41,35 @@ class _FancyFabNoteState extends State<FancyFabNote>
 
   @override
   initState() {
-    _animationControllerNote =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
-          ..addListener(() {
-            setState(() {});
-          });
-    _animateIcon =
-        Tween<double>(begin: 0.0, end: 1.0).animate(_animationControllerNote);
-    _buttonColor = ColorTween(
-      begin: Colors.blue,
-      end: Colors.blue,
-    ).animate(CurvedAnimation(
-      parent: _animationControllerNote,
-      curve: Interval(
-        0.00,
-        1.00,
-        curve: Curves.linear,
+    _animationControllerNote = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    )..addListener(() {
+      setState(() {});
+    });
+    _animateIcon = Tween<double>(begin: 0.0, end: 1.0).animate(
+      _animationControllerNote,
+    );
+    _buttonColor = ColorTween(begin: Colors.blue, end: Colors.blue).animate(
+      CurvedAnimation(
+        parent: _animationControllerNote,
+        curve: Interval(0.00, 1.00, curve: Curves.linear),
       ),
-    ));
+    );
     //x direction flow
-    _translateButtonx = Tween<double>(
-      begin: 5000.0,
-      end: _fabEnd,
-    ).animate(CurvedAnimation(
-      parent: _animationControllerNote,
-      curve: Interval(
-        0.0,
-        0.75,
-        curve: _curve,
+    _translateButtonx = Tween<double>(begin: 5000.0, end: _fabEnd).animate(
+      CurvedAnimation(
+        parent: _animationControllerNote,
+        curve: Interval(0.0, 0.75, curve: _curve),
       ),
-    ));
+    );
     //y direction flow
-    _translateButtony = Tween<double>(
-      begin: -14.0,
-      end: -14.0,
-    ).animate(CurvedAnimation(
-      parent: _animationControllerNote,
-      curve: Interval(
-        0.0,
-        0.75,
-        curve: _curve,
+    _translateButtony = Tween<double>(begin: -14.0, end: -14.0).animate(
+      CurvedAnimation(
+        parent: _animationControllerNote,
+        curve: Interval(0.0, 0.75, curve: _curve),
       ),
-    ));
+    );
     super.initState();
   }
 
@@ -119,10 +109,8 @@ class _FancyFabNoteState extends State<FancyFabNote>
         backgroundColor: _buttonColor.value,
         onPressed: animate,
         tooltip: 'Add',
-        child: AnimatedIcon(
-          icon: AnimatedIcons.add_event,
-          progress: _animateIcon,
-        ),
+        child:
+            AnimatedIcon(icon: AnimatedIcons.add_event, progress: _animateIcon),
       ),
     );
   }

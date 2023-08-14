@@ -17,13 +17,14 @@ class ManifestImageWidget<T> extends StatefulWidget {
   final BoxFit fit;
   final Alignment alignment;
 
-  ManifestImageWidget(this.hash,
-      {Key key,
-      this.fit = BoxFit.contain,
-      this.alignment = Alignment.center,
-      this.urlExtractor,
-      this.placeholder})
-      : super(key: key);
+  ManifestImageWidget(
+    this.hash, {
+    Key key,
+    this.fit = BoxFit.contain,
+    this.alignment = Alignment.center,
+    this.urlExtractor,
+    this.placeholder,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

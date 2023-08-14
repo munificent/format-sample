@@ -44,56 +44,55 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
-      body: ListView(children: <Widget>[
-        PreferenceTitle('Theme'),
-        RadioPreference(
-          'Light',
-          'light',
-          'theme',
-          isDefault: true,
-          onSelect: () {
-            Provider.of<ThemeNotifier>(context, listen: false)
-                .updateTheme('light');
-          },
-        ),
-        RadioPreference(
-          'Dark',
-          'dark',
-          'theme',
-          onSelect: () {
-            Provider.of<ThemeNotifier>(context, listen: false)
-                .updateTheme('dark');
-          },
-        ),
-        RadioPreference(
-          'Black / AMOLED',
-          'black',
-          'theme',
-          onSelect: () {
-            Provider.of<ThemeNotifier>(context, listen: false)
-                .updateTheme('black');
-          },
-        ),
-        ListTile(
-          title: Text('Accent Color'),
-          trailing: Padding(
-            padding: const EdgeInsets.only(right: 9, left: 9),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(),
-                color: Color(PrefService.getInt('theme_color') ?? 0xff21d885),
-              ),
-              child: SizedBox(
-                width: 28,
-                height: 28,
+      appBar: AppBar(title: Text('Settings')),
+      body: ListView(
+        children: <Widget>[
+          PreferenceTitle('Theme'),
+          RadioPreference(
+            'Light',
+            'light',
+            'theme',
+            isDefault: true,
+            onSelect: () {
+              Provider.of<ThemeNotifier>(context, listen: false).updateTheme(
+                'light',
+              );
+            },
+          ),
+          RadioPreference(
+            'Dark',
+            'dark',
+            'theme',
+            onSelect: () {
+              Provider.of<ThemeNotifier>(context, listen: false).updateTheme(
+                'dark',
+              );
+            },
+          ),
+          RadioPreference(
+            'Black / AMOLED',
+            'black',
+            'theme',
+            onSelect: () {
+              Provider.of<ThemeNotifier>(context, listen: false).updateTheme(
+                'black',
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Accent Color'),
+            trailing: Padding(
+              padding: const EdgeInsets.only(right: 9, left: 9),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                  color: Color(PrefService.getInt('theme_color') ?? 0xff21d885),
+                ),
+                child: SizedBox(width: 28, height: 28),
               ),
             ),
-          ),
-          onTap: () async {
-            Color color = await showDialog(
+            onTap: () async {
+              Color color = await showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
                       title: Text('Select accent color'),
@@ -102,10 +101,10 @@ class _SettingsPageState extends State<SettingsPage> {
                           crossAxisCount: 5,
                           children: [
                             for (Color color in [
-                              Color(0xff21d885),
-                              ...Colors.primaries,
-                              ...Colors.accents,
-                            ])
+                                  Color(0xff21d885),
+                                  ...Colors.primaries,
+                                  ...Colors.accents,
+                                ])
                               InkWell(
                                 child: Container(
                                   margin: const EdgeInsets.all(5),
@@ -114,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 onTap: () {
                                   Navigator.of(context).pop(color);
                                 },
-                              )
+                              ),
                           ],
                         ),
                         width: MediaQuery.of(context).size.width * .7,
@@ -127,104 +126,99 @@ class _SettingsPageState extends State<SettingsPage> {
                           },
                         ),
                       ],
-                    ));
-            if (color != null) {
-              PrefService.setInt('theme_color', color.value);
+                    ),
+              );
+              if (color != null) {
+                PrefService.setInt('theme_color', color.value);
 
-              Provider.of<ThemeNotifier>(context, listen: false).accentColor =
-                  color;
-            }
-          },
-        ),
-        if (Platform.isAndroid) ...[
-          PreferenceTitle('Data Directory'),
-          SwitchPreference(
-            'Use external storage',
-            'notable_external_directory_enabled',
-            onChange: () async {
-              if (PrefService.getString('notable_external_directory') == null) {
-                PrefService.setString('notable_external_directory',
-                    (await getExternalStorageDirectory()).path);
+                Provider.of<ThemeNotifier>(context, listen: false).accentColor =
+                    color;
               }
-
-              await store.listNotes();
-              await store.filterAndSortNotes();
-              await store.updateTagList();
-
-              if (mounted) setState(() {});
             },
           ),
-          PreferenceHider([
-            ListTile(
-              title: Text('Location'),
-              subtitle: Text(
-                PrefService.getString('notable_external_directory') ?? '',
-              ),
-              onTap: () async {
-                Directory dir;
-
-                final dirStr = await _pickExternalDir();
-
-                if (dirStr == null) {
-                  return;
-                }
-
-                dir = Directory(dirStr);
-
-                if (dir != null) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: ListTile(
-                        leading: CircularProgressIndicator(),
-                        title: Text('Processing files...'),
-                      ),
-                    ),
-                    barrierDismissible: false,
+          if (Platform.isAndroid) ...[
+            PreferenceTitle('Data Directory'),
+            SwitchPreference(
+              'Use external storage',
+              'notable_external_directory_enabled',
+              onChange: () async {
+                if (PrefService.getString('notable_external_directory') ==
+                    null) {
+                  PrefService.setString(
+                    'notable_external_directory',
+                    (await getExternalStorageDirectory()).path,
                   );
-                  PrefService.setString('notable_external_directory', dir.path);
-
-                  await store.listNotes();
-                  await store.filterAndSortNotes();
-                  await store.updateTagList();
-                  setState(() {});
-                  Navigator.of(context).pop();
                 }
+
+                await store.listNotes();
+                await store.filterAndSortNotes();
+                await store.updateTagList();
+
+                if (mounted) setState(() {});
               },
             ),
-          ], '!notable_external_directory_enabled'),
-        ],
-        PreferenceTitle('Editor'),
-        SwitchPreference(
-          'Auto Save',
-          'editor_auto_save',
-        ),
-        SwitchPreference(
-          'Use Mode Switcher',
-          'editor_mode_switcher',
-        ),
-        SwitchPreference(
-          'Pair Brackets/Quotes',
-          'editor_pair_brackets',
-        ),
-        PreferenceTitle('Search'),
-        SwitchPreference(
-          'Search content of notes',
-          'search_content',
-        ),
-        PreferenceTitle('Tags'),
-        SwitchPreference(
-          'Sort tags alphabetically in the sidebar',
-          'sort_tags_in_sidebar',
-        ),
-        PreferenceTitle('Preview'),
-        SwitchPreference(
-          'Enable single line break syntax',
-          'single_line_break_syntax',
-          desc:
-              'When enabled, single line breaks are rendered as real line breaks',
-        ),
-        /*        PreferenceTitle('Sync'),
+            PreferenceHider([
+              ListTile(
+                title: Text('Location'),
+                subtitle: Text(
+                  PrefService.getString('notable_external_directory') ?? '',
+                ),
+                onTap: () async {
+                  Directory dir;
+
+                  final dirStr = await _pickExternalDir();
+
+                  if (dirStr == null) {
+                    return;
+                  }
+
+                  dir = Directory(dirStr);
+
+                  if (dir != null) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: ListTile(
+                              leading: CircularProgressIndicator(),
+                              title: Text('Processing files...'),
+                            ),
+                          ),
+                      barrierDismissible: false,
+                    );
+                    PrefService.setString(
+                      'notable_external_directory',
+                      dir.path,
+                    );
+
+                    await store.listNotes();
+                    await store.filterAndSortNotes();
+                    await store.updateTagList();
+                    setState(() {});
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            ], '!notable_external_directory_enabled'),
+          ],
+          PreferenceTitle('Editor'),
+          SwitchPreference('Auto Save', 'editor_auto_save'),
+          SwitchPreference('Use Mode Switcher', 'editor_mode_switcher'),
+          SwitchPreference('Pair Brackets/Quotes', 'editor_pair_brackets'),
+          PreferenceTitle('Search'),
+          SwitchPreference('Search content of notes', 'search_content'),
+          PreferenceTitle('Tags'),
+          SwitchPreference(
+            'Sort tags alphabetically in the sidebar',
+            'sort_tags_in_sidebar',
+          ),
+          PreferenceTitle('Preview'),
+          SwitchPreference(
+            'Enable single line break syntax',
+            'single_line_break_syntax',
+            desc:
+                'When enabled, single line breaks are rendered as real line breaks',
+          ),
+          /*        PreferenceTitle('Sync'),
         RadioPreference(
           'No Sync',
           '',
@@ -275,15 +269,16 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         */
-        PreferenceTitle('More'),
-        ListTile(
-          title: Text('Recreate tutorial notes'),
-          onTap: () async {
-            if (await showDialog(
+          PreferenceTitle('More'),
+          ListTile(
+            title: Text('Recreate tutorial notes'),
+            onTap: () async {
+              if (await showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
                           title: Text(
-                              'Do you want to recreate the tutorial notes and attachments?'),
+                            'Do you want to recreate the tutorial notes and attachments?',
+                          ),
                           actions: <Widget>[
                             FlatButton(
                               child: Text('Cancel'),
@@ -296,49 +291,51 @@ class _SettingsPageState extends State<SettingsPage> {
                               onPressed: () {
                                 Navigator.of(context).pop(true);
                               },
-                            )
+                            ),
                           ],
-                        )) ??
-                false) {
-              await store.createTutorialNotes();
-              await store.createTutorialAttachments();
-              await store.listNotes();
-              await store.filterAndSortNotes();
-              await store.updateTagList();
-            }
-          },
-        ),
-        /*        PreferenceTitle('Debug'),
+                        ),
+                  ) ??
+                  false) {
+                await store.createTutorialNotes();
+                await store.createTutorialAttachments();
+                await store.listNotes();
+                await store.filterAndSortNotes();
+                await store.updateTagList();
+              }
+            },
+          ),
+          /*        PreferenceTitle('Debug'),
         SwitchPreference(
           'Create sync logfile ',
           'debug_logs_sync',
         ), */
-        PreferenceTitle('Experimental'),
-        SwitchPreference(
-          'Enable Dendron support',
-          'dendron_mode',
-          desc: 'Dendron is a VSCode-based note-taking tool',
-          onChange: () async {
-            await store.listNotes();
-            await store.filterAndSortNotes();
-            await store.updateTagList();
+          PreferenceTitle('Experimental'),
+          SwitchPreference(
+            'Enable Dendron support',
+            'dendron_mode',
+            desc: 'Dendron is a VSCode-based note-taking tool',
+            onChange: () async {
+              await store.listNotes();
+              await store.filterAndSortNotes();
+              await store.updateTagList();
 
-            if (mounted) setState(() {});
-          },
-        ),
-        SwitchPreference(
-          'Automatic bullet points',
-          'auto_bullet_points',
-          desc:
-              'Adds a bullet point to a new line if the line before it had one',
-        ),
-        SwitchPreference(
-          'Show virtual tags',
-          'notes_list_virtual_tags',
-          desc:
-              'Adds a virtual tag (#/path) to notes which are in a subdirectory',
-        ),
-      ]),
+              if (mounted) setState(() {});
+            },
+          ),
+          SwitchPreference(
+            'Automatic bullet points',
+            'auto_bullet_points',
+            desc:
+                'Adds a bullet point to a new line if the line before it had one',
+          ),
+          SwitchPreference(
+            'Show virtual tags',
+            'notes_list_virtual_tags',
+            desc:
+                'Adds a virtual tag (#/path) to notes which are in a subdirectory',
+          ),
+        ],
+      ),
     );
   }
 

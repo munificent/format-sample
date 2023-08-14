@@ -30,14 +30,15 @@ class _SettingsPageOneState extends State<SettingsPageOne> {
                 child: Align(
                   alignment: Alignment.bottomLeft,
                   child: ButtonRoundWithShadow(
-                      size: 48,
-                      borderColor: wood_smoke,
-                      color: white,
-                      callback: () {
-                        Navigator.pop(context);
-                      },
-                      shadowColor: wood_smoke,
-                      iconPath: "assets/icons/arrow_back.svg"),
+                    size: 48,
+                    borderColor: wood_smoke,
+                    color: white,
+                    callback: () {
+                      Navigator.pop(context);
+                    },
+                    shadowColor: wood_smoke,
+                    iconPath: "assets/icons/arrow_back.svg",
+                  ),
                 ),
               ),
             ),
@@ -50,12 +51,7 @@ class _SettingsPageOneState extends State<SettingsPageOne> {
                 text: "Settings",
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: 20,
-              ),
-            )
+            Expanded(flex: 1, child: SizedBox(width: 20)),
           ],
         ),
       ),
@@ -69,12 +65,13 @@ class _SettingsPageOneState extends State<SettingsPageOne> {
                     const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
                 child: SettingsCardItem(
                   setting: Settings(
-                      bgColor: pink_salomn,
-                      title: "Happiness",
-                      text:
-                          "Colorful and Beautiful life if you want to enjoy every moment.",
-                      textColor: white,
-                      enable: true),
+                    bgColor: pink_salomn,
+                    title: "Happiness",
+                    text:
+                        "Colorful and Beautiful life if you want to enjoy every moment.",
+                    textColor: white,
+                    enable: true,
+                  ),
                 ),
               ),
               Padding(
@@ -82,11 +79,12 @@ class _SettingsPageOneState extends State<SettingsPageOne> {
                     const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
                 child: SettingsCardItem(
                   setting: Settings(
-                      bgColor: foam,
-                      title: "Sadness",
-                      text: "Sometime you don’t want to talk.",
-                      textColor: wood_smoke,
-                      enable: false),
+                    bgColor: foam,
+                    title: "Sadness",
+                    text: "Sometime you don’t want to talk.",
+                    textColor: wood_smoke,
+                    enable: false,
+                  ),
                 ),
               ),
               Padding(
@@ -94,11 +92,12 @@ class _SettingsPageOneState extends State<SettingsPageOne> {
                     const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
                 child: SettingsCardItem(
                   setting: Settings(
-                      bgColor: bareley_white,
-                      title: "Friends",
-                      text: "I’ll not help you to finish this.",
-                      textColor: wood_smoke,
-                      enable: false),
+                    bgColor: bareley_white,
+                    title: "Friends",
+                    text: "I’ll not help you to finish this.",
+                    textColor: wood_smoke,
+                    enable: false,
+                  ),
                 ),
               ),
               Padding(
@@ -117,7 +116,7 @@ class _SettingsPageOneState extends State<SettingsPageOne> {
                   borderColor: wood_smoke,
                   callback: () {},
                 ),
-              )
+              ),
             ],
           ),
         ),

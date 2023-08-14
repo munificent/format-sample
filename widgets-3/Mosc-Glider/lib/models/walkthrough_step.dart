@@ -2,11 +2,7 @@ import 'package:flutter/widgets.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-enum WalkthroughStep {
-  step1,
-  step2,
-  step3,
-}
+enum WalkthroughStep { step1, step2, step3 }
 
 extension WalktroughStepExtension on WalkthroughStep {
   int get number {
@@ -39,9 +35,7 @@ extension WalktroughStepExtension on WalkthroughStep {
       case WalkthroughStep.step2:
         return AppLocalizations.of(context)!.walkthroughStep2;
       case WalkthroughStep.step3:
-        return AppLocalizations.of(context)!.walkthroughStep3(
-          endToStart,
-        );
+        return AppLocalizations.of(context)!.walkthroughStep3(endToStart);
     }
   }
 

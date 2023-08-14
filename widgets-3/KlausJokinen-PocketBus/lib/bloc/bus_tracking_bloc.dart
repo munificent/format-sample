@@ -29,15 +29,18 @@ class BusTrackingBloc implements BlocBase {
   }
 
   Future<void> refreshVehicleLocation(
-      BusStop currentStop, String vehicleRef) async {
+    BusStop currentStop,
+    String vehicleRef,
+  ) async {
     //Make sure that we have only 1 Timer running at once.
     _busTrackingLocationTimer?.cancel();
     await _getVehicle(vehicleRef);
     _busTrackingLocationTimer = Timer.periodic(
-        const Duration(seconds: StaticValues.busLocationRefreshInterval),
-        (timer) {
-      _getVehicle(vehicleRef);
-    });
+      const Duration(seconds: StaticValues.busLocationRefreshInterval),
+      (timer) {
+        _getVehicle(vehicleRef);
+      },
+    );
   }
 
   void cancelBusTrackingTimer() => _busTrackingLocationTimer?.cancel();

@@ -18,9 +18,7 @@ class CustomButton extends StatelessWidget {
       color: color,
       onPressed: onPress,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 15,
-        ),
+        padding: EdgeInsets.symmetric(vertical: 15),
         width: double.infinity,
         child: CustomText(
           label,

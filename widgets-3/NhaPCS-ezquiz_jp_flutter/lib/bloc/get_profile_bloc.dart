@@ -9,7 +9,9 @@ class GetProfileBloc extends Bloc<GetProfileEvent, User> {
 
   @override
   Stream<User> mapEventToState(
-      User currentState, GetProfileEvent event) async* {
+    User currentState,
+    GetProfileEvent event,
+  ) async* {
     User user = await ShareValueProvider.shareValueProvider.getUserProfile();
     if (user == null) {
       user = await getUserProfile();
