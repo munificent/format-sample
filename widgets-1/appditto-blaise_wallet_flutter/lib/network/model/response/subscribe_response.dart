@@ -28,7 +28,8 @@ class SubscribeResponse {
 
   SubscribeResponse();
 
-  factory SubscribeResponse.fromJson(Map<String, dynamic> json) =>
-      _$SubscribeResponseFromJson(json);
+  factory SubscribeResponse.fromJson(
+    Map<String, dynamic> json,
+  ) => _$SubscribeResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SubscribeResponseToJson(this);
 }

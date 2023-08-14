@@ -30,13 +30,7 @@ class QuizBrain {
   static List<Question> _failed = new List<Question>();
 
   static var _hiragana = {
-    "あ い う え お": {
-      "あ": "a",
-      "い": "i",
-      "う": "u",
-      "え": "e",
-      "お": "o",
-    },
+    "あ い う え お": {"あ": "a", "い": "i", "う": "u", "え": "e", "お": "o"},
     "か き く け こ": {
       "か": "ka",
       "き": "ki",
@@ -73,13 +67,7 @@ class QuizBrain {
       "で": "de",
       "ど": "do",
     },
-    "な に ぬ ね の": {
-      "な": "na",
-      "に": "ni",
-      "ぬ": "nu",
-      "ね": "ne",
-      "の": "no",
-    },
+    "な に ぬ ね の": {"な": "na", "に": "ni", "ぬ": "nu", "ね": "ne", "の": "no"},
     "は ひ ふ へ ほ": {
       "は": "ha",
       "ひ": "hi",
@@ -97,40 +85,15 @@ class QuizBrain {
       "ぺ": "pe",
       "ぽ": "po",
     },
-    "ま み む め も": {
-      "ま": "ma",
-      "み": "mi",
-      "む": "mu",
-      "め": "me",
-      "も": "mo",
-    },
-    "や ゆ よ": {
-      "や": "ya",
-      "ゆ": "yu",
-      "よ": "yo",
-    },
-    "ら り る れ ろ": {
-      "ら": "ra",
-      "り": "ri",
-      "る": "ru",
-      "れ": "re",
-      "ろ": "ro",
-    },
-    "わ を": {
-      "わ": "wa",
-      "を": "wo",
-    },
-    "ん": {"ん": "n"}
+    "ま み む め も": {"ま": "ma", "み": "mi", "む": "mu", "め": "me", "も": "mo"},
+    "や ゆ よ": {"や": "ya", "ゆ": "yu", "よ": "yo"},
+    "ら り る れ ろ": {"ら": "ra", "り": "ri", "る": "ru", "れ": "re", "ろ": "ro"},
+    "わ を": {"わ": "wa", "を": "wo"},
+    "ん": {"ん": "n"},
   };
 
   static var _katakana = {
-    "ア イ ウ エ オ": {
-      "ア": "a",
-      "イ": "i",
-      "ウ": "u",
-      "エ": "e",
-      "オ": "o",
-    },
+    "ア イ ウ エ オ": {"ア": "a", "イ": "i", "ウ": "u", "エ": "e", "オ": "o"},
     "カ キ ク ケ コ": {
       "カ": "ka",
       "キ": "ki",
@@ -167,13 +130,7 @@ class QuizBrain {
       "デ": "de",
       "ド": "do",
     },
-    "ナ ニ ヌ ネ ノ": {
-      "ナ": "na",
-      "ニ": "ni",
-      "ヌ": "nu",
-      "ネ": "ne",
-      "ノ": "no",
-    },
+    "ナ ニ ヌ ネ ノ": {"ナ": "na", "ニ": "ni", "ヌ": "nu", "ネ": "ne", "ノ": "no"},
     "ハ ヒ フ ヘ ホ": {
       "ハ": "ha",
       "ヒ": "hi",
@@ -191,32 +148,11 @@ class QuizBrain {
       "ペ": "pe",
       "ポ": "po",
     },
-    "マ ミ ム メ モ": {
-      "マ": "ma",
-      "ミ": "mi",
-      "ム": "mu",
-      "メ": "me",
-      "モ": "mo",
-    },
-    "ヤ ユ ヨ": {
-      "ヤ": "ya",
-      "ユ": "yu",
-      "ヨ": "yo",
-    },
-    "ラ リ ル レ ロ": {
-      "ラ": "ra",
-      "リ": "ri",
-      "ル": "ru",
-      "レ": "re",
-      "ロ": "ro",
-    },
-    "ワ ヲ": {
-      "ワ": "wa",
-      "ヲ": "wo",
-    },
-    "ン": {
-      "ン": "n",
-    }
+    "マ ミ ム メ モ": {"マ": "ma", "ミ": "mi", "ム": "mu", "メ": "me", "モ": "mo"},
+    "ヤ ユ ヨ": {"ヤ": "ya", "ユ": "yu", "ヨ": "yo"},
+    "ラ リ ル レ ロ": {"ラ": "ra", "リ": "ri", "ル": "ru", "レ": "re", "ロ": "ro"},
+    "ワ ヲ": {"ワ": "wa", "ヲ": "wo"},
+    "ン": {"ン": "n"},
   };
 
   static void nextQuestion(bool passed) {
@@ -252,8 +188,13 @@ class QuizBrain {
     _failed.clear();
   }
 
-  static void setList(bool h, Map<String, dynamic> hv, bool k,
-      Map<String, dynamic> kv, bool re) {
+  static void setList(
+    bool h,
+    Map<String, dynamic> hv,
+    bool k,
+    Map<String, dynamic> kv,
+    bool re,
+  ) {
     QuizBrain.h = h;
     QuizBrain.k = k;
     QuizBrain.re = re;
@@ -262,14 +203,12 @@ class QuizBrain {
       hv = Map.from(hv)..removeWhere((k, v) => v == false);
 
       hv.forEach(
-        (k, v) => _hiragana[k].forEach(
-          (k, v) {
-            if (re)
-              _quiz.add(Question(v, k, "hiragana"));
-            else
-              _quiz.add(Question(k, v, "hiragana"));
-          },
-        ),
+        (k, v) => _hiragana[k].forEach((k, v) {
+          if (re)
+            _quiz.add(Question(v, k, "hiragana"));
+          else
+            _quiz.add(Question(k, v, "hiragana"));
+        }),
       );
     }
 
@@ -277,14 +216,12 @@ class QuizBrain {
       kv = Map.from(kv)..removeWhere((k, v) => v == false);
 
       kv.forEach(
-        (k, v) => _katakana[k].forEach(
-          (k, v) {
-            if (re)
-              _quiz.add(Question(v, k, "katakana"));
-            else
-              _quiz.add(Question(k, v, "katakana"));
-          },
-        ),
+        (k, v) => _katakana[k].forEach((k, v) {
+          if (re)
+            _quiz.add(Question(v, k, "katakana"));
+          else
+            _quiz.add(Question(k, v, "katakana"));
+        }),
       );
     }
 

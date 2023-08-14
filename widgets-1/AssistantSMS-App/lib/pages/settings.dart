@@ -19,7 +19,8 @@ class SettingsPage extends StatelessWidget {
     bool isDark = getTheme().getIsDark(context);
     getTheme().setBrightness(context, isDark);
     getAnalytics().trackEvent(
-        isDark ? AnalyticsEvent.lightMode : AnalyticsEvent.darkMode);
+      isDark ? AnalyticsEvent.lightMode : AnalyticsEvent.darkMode,
+    );
   }
 
   @override
@@ -42,8 +43,9 @@ class SettingsPage extends StatelessWidget {
   Widget getBody(BuildContext context, SettingViewModel viewModel) {
     List<Widget> widgets = List.empty(growable: true);
 
-    widgets.add(headingSettingTilePresenter(
-        getTranslations().fromKey(LocaleKey.general)));
+    widgets.add(
+      headingSettingTilePresenter(getTranslations().fromKey(LocaleKey.general)),
+    );
 
     widgets.add(languageSettingTilePresenter(
       context,
@@ -61,9 +63,10 @@ class SettingsPage extends StatelessWidget {
             context,
             AppImage.translate,
             getTranslations().fromKey(LocaleKey.translation),
-            getTranslations()
-                .fromKey(LocaleKey.translationIssue)
-                .replaceAll('{0}', getTranslations().fromKey(newLocal.name)),
+            getTranslations().fromKey(LocaleKey.translationIssue).replaceAll(
+              '{0}',
+              getTranslations().fromKey(newLocal.name),
+            ),
             onlyCancelButton: true,
           );
         }
@@ -95,14 +98,13 @@ class SettingsPage extends StatelessWidget {
       onTap: () => launchExternalURL(ExternalUrls.termsAndConditions),
     ));
 
-    widgets.add(
-      legalTilePresenter(description: LocaleKey.fairUseDisclaimer),
-    );
+    widgets.add(legalTilePresenter(description: LocaleKey.fairUseDisclaimer));
 
     widgets.add(emptySpace3x());
 
     return listWithScrollbar(
-        itemCount: widgets.length,
-        itemBuilder: (context, index) => widgets[index]);
+      itemCount: widgets.length,
+      itemBuilder: (context, index) => widgets[index],
+    );
   }
 }

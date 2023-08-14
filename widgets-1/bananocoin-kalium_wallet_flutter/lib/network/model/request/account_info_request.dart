@@ -17,7 +17,8 @@ class AccountInfoRequest extends BaseRequest {
     this.account = account;
   }
 
-  factory AccountInfoRequest.fromJson(Map<String, dynamic> json) =>
-      _$AccountInfoRequestFromJson(json);
+  factory AccountInfoRequest.fromJson(
+    Map<String, dynamic> json,
+  ) => _$AccountInfoRequestFromJson(json);
   Map<String, dynamic> toJson() => _$AccountInfoRequestToJson(this);
 }

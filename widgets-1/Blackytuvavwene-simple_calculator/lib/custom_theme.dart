@@ -46,9 +46,8 @@ class CustomTheme with ChangeNotifier {
         style: TextButton.styleFrom(
           fixedSize: const Size(70, 70),
           minimumSize: const Size(65, 65),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           shadowColor: Colors.transparent,
           backgroundColor: Colors.black12,
           elevation: 15,
@@ -84,9 +83,8 @@ class CustomTheme with ChangeNotifier {
         style: TextButton.styleFrom(
           fixedSize: const Size(70, 70),
           minimumSize: const Size(65, 65),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           shadowColor: Colors.transparent,
           backgroundColor: Colors.black,
           elevation: 15,

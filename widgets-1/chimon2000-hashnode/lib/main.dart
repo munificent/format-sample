@@ -16,17 +16,13 @@ Future main() async {
   await setupConfig();
   final dsn = env['DSN'];
 
-  final ValueNotifier<GraphQLClient> client = clientFor(
-    uri: apiUri,
-  );
+  final ValueNotifier<GraphQLClient> client = clientFor(uri: apiUri);
 
   await SentryFlutter.init(
     (options) => options.dsn = dsn,
     appRunner: () => runApp(HashnodeApp(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => Settings(),
-        ),
+        ChangeNotifierProvider(create: (_) => Settings()),
         ValueListenableProvider.value(value: client),
       ],
     )),

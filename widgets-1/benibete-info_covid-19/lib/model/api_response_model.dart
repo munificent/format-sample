@@ -13,19 +13,21 @@ class APIResponse {
   List<int> errors;
 
   List<String> errorsDescription(S intl) {
-    Map<int, String> errorsMap = {
-      1234: 'someError',
-    };
+    Map<int, String> errorsMap = {1234: 'someError'};
 
-    return errors
-        .map((id) => errorsMap[id] != null ? errorsMap[id] : intl.defaultError)
-        .toList();
+    return errors.map(
+      (id) => errorsMap[id] != null ? errorsMap[id] : intl.defaultError,
+    ).toList();
   }
 
-  APIResponse(this.data, this.statusCode, {this.headers, this.dioErrorType})
-      : errors = headers != null && headers['errorKey'] != null
-            ? [] // Decode errors to [errors]
-            : null {
+  APIResponse(
+    this.data,
+    this.statusCode, {
+    this.headers,
+    this.dioErrorType,
+  }) : errors = headers != null && headers['errorKey'] != null
+           ? [] // Decode errors to [errors]
+           : null {
     logger.i(this);
   }
 

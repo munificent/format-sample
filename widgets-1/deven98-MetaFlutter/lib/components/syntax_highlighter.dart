@@ -141,18 +141,21 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 
       for (_HighlightSpan span in _spans) {
         if (currentPosition != span.start)
-          formattedText
-              .add(TextSpan(text: _src.substring(currentPosition, span.start)));
+          formattedText.add(
+            TextSpan(text: _src.substring(currentPosition, span.start)),
+          );
 
-        formattedText.add(TextSpan(
-            style: span.textStyle(_style), text: span.textForSpan(_src)));
+        formattedText.add(
+          TextSpan(style: span.textStyle(_style), text: span.textForSpan(_src)),
+        );
 
         currentPosition = span.end;
       }
 
       if (currentPosition != _src.length)
-        formattedText
-            .add(TextSpan(text: _src.substring(currentPosition, _src.length)));
+        formattedText.add(
+          TextSpan(text: _src.substring(currentPosition, _src.length)),
+        );
 
       return TextSpan(style: _style.baseStyle, children: formattedText);
     } else {
@@ -191,11 +194,9 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
           endComment = _src.length;
         }
 
-        _spans.add(_HighlightSpan(
-          _HighlightType.comment,
-          startComment,
-          endComment,
-        ));
+        _spans.add(
+          _HighlightSpan(_HighlightType.comment, startComment, endComment),
+        );
 
         if (eof) break;
 
@@ -274,8 +275,11 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 
       // Integer
       if (_scanner.scan(RegExp(r'\d+'))) {
-        _spans.add(_HighlightSpan(_HighlightType.number,
-            _scanner.lastMatch.start, _scanner.lastMatch.end));
+        _spans.add(_HighlightSpan(
+          _HighlightType.number,
+          _scanner.lastMatch.start,
+          _scanner.lastMatch.end,
+        ));
         continue;
       }
 
@@ -368,7 +372,7 @@ enum _HighlightType {
   string,
   punctuation,
   klass,
-  constant
+  constant,
 }
 
 class _HighlightSpan {

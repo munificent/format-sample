@@ -58,24 +58,25 @@ class AppTextField extends StatefulWidget {
   final TextInputAction textInputAction;
   final Function onSubmitted;
 
-  AppTextField(
-      {@required this.label,
-      @required this.style,
-      this.firstButton,
-      this.secondButton,
-      this.controller,
-      this.focusNode,
-      this.textCapitalization,
-      this.inputType = TextInputType.text,
-      this.prefix,
-      this.maxLines,
-      this.inputFormatters,
-      this.onChanged,
-      this.onTap,
-      this.onSubmitted,
-      this.passwordField = false,
-      this.readOnly = false,
-      this.textInputAction = TextInputAction.done});
+  AppTextField({
+    @required this.label,
+    @required this.style,
+    this.firstButton,
+    this.secondButton,
+    this.controller,
+    this.focusNode,
+    this.textCapitalization,
+    this.inputType = TextInputType.text,
+    this.prefix,
+    this.maxLines,
+    this.inputFormatters,
+    this.onChanged,
+    this.onTap,
+    this.onSubmitted,
+    this.passwordField = false,
+    this.readOnly = false,
+    this.textInputAction = TextInputAction.done,
+  });
 
   _AppTextFieldState createState() => _AppTextFieldState();
 }
@@ -94,104 +95,106 @@ class _AppTextFieldState extends State<AppTextField> {
         ),
         Container(
           child: Theme(
-              data: ThemeData(
-                primaryColor: StateContainer.of(context).curTheme.primary,
-                hintColor: StateContainer.of(context).curTheme.primary,
-                splashColor: StateContainer.of(context).curTheme.primary30,
-                highlightColor: StateContainer.of(context).curTheme.primary15,
-                textSelectionColor:
-                    StateContainer.of(context).curTheme.primary30,
-              ),
-              child: Stack(
-                alignment: AlignmentDirectional.center,
-                children: <Widget>[
-                  TextField(
-                    readOnly: widget.readOnly,
-                    controller: widget.controller,
-                    focusNode: widget.focusNode,
-                    obscureText: widget.passwordField,
-                    style: widget.style,
-                    cursorColor: StateContainer.of(context).curTheme.primary,
-                    keyboardType: widget.inputType,
-                    autocorrect: false,
-                    textCapitalization:
-                        widget.textCapitalization ?? TextCapitalization.none,
-                    textInputAction: widget.textInputAction,
-                    maxLines: widget.maxLines,
-                    minLines: 1,
-                    onSubmitted: (text) {
-                      if (widget.textInputAction == TextInputAction.done &&
-                          widget.onSubmitted == null) {
-                        FocusScope.of(context).unfocus();
-                      } else if (widget.onSubmitted != null) {
-                        widget.onSubmitted();
-                      }
-                    },
-                    inputFormatters: widget.inputFormatters,
-                    onTap: widget.onTap,
-                    onChanged: (String newValue) {
-                      if (widget.onChanged != null) {
-                        widget.onChanged(newValue);
-                      }
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: StateContainer.of(context).curTheme.primary),
+            data: ThemeData(
+              primaryColor: StateContainer.of(context).curTheme.primary,
+              hintColor: StateContainer.of(context).curTheme.primary,
+              splashColor: StateContainer.of(context).curTheme.primary30,
+              highlightColor: StateContainer.of(context).curTheme.primary15,
+              textSelectionColor: StateContainer.of(context).curTheme.primary30,
+            ),
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                TextField(
+                  readOnly: widget.readOnly,
+                  controller: widget.controller,
+                  focusNode: widget.focusNode,
+                  obscureText: widget.passwordField,
+                  style: widget.style,
+                  cursorColor: StateContainer.of(context).curTheme.primary,
+                  keyboardType: widget.inputType,
+                  autocorrect: false,
+                  textCapitalization:
+                      widget.textCapitalization ?? TextCapitalization.none,
+                  textInputAction: widget.textInputAction,
+                  maxLines: widget.maxLines,
+                  minLines: 1,
+                  onSubmitted: (text) {
+                    if (widget.textInputAction == TextInputAction.done &&
+                        widget.onSubmitted == null) {
+                      FocusScope.of(context).unfocus();
+                    } else if (widget.onSubmitted != null) {
+                      widget.onSubmitted();
+                    }
+                  },
+                  inputFormatters: widget.inputFormatters,
+                  onTap: widget.onTap,
+                  onChanged: (String newValue) {
+                    if (widget.onChanged != null) {
+                      widget.onChanged(newValue);
+                    }
+                  },
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: StateContainer.of(context).curTheme.primary,
                       ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: StateContainer.of(context).curTheme.primary,
-                            width: 2),
-                      ),
-                      errorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: StateContainer.of(context).curTheme.danger,
-                            width: 2),
-                      ),
-                      prefix: widget.prefix,
-                      suffixIcon: widget.firstButton == null &&
-                              widget.secondButton == null
-                          ? Container(
-                              width: 0,
-                              height: 0,
-                            )
-                          : Container(
-                              width: widget.firstButton == null ||
-                                      widget.secondButton == null
-                                  ? 50
-                                  : 100,
-                              height: 38,
-                            ),
                     ),
-                  ),
-                  // Buttons
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          widget.secondButton != null
-                              ? Container(
-                                  margin: EdgeInsetsDirectional.only(start: 12),
-                                  width: 38,
-                                  height: 38,
-                                  child: widget.secondButton)
-                              : SizedBox(),
-                          widget.firstButton != null
-                              ? Container(
-                                  margin: EdgeInsetsDirectional.only(start: 12),
-                                  width: 38,
-                                  height: 38,
-                                  child: widget.firstButton)
-                              : SizedBox()
-                        ],
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: StateContainer.of(context).curTheme.primary,
+                        width: 2,
                       ),
-                    ],
-                  )
-                ],
-              )),
+                    ),
+                    errorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: StateContainer.of(context).curTheme.danger,
+                        width: 2,
+                      ),
+                    ),
+                    prefix: widget.prefix,
+                    suffixIcon: widget.firstButton == null &&
+                            widget.secondButton == null
+                        ? Container(width: 0, height: 0)
+                        : Container(
+                            width: widget.firstButton == null ||
+                                    widget.secondButton == null
+                                ? 50
+                                : 100,
+                            height: 38,
+                          ),
+                  ),
+                ),
+                // Buttons
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        widget.secondButton != null
+                            ? Container(
+                                margin: EdgeInsetsDirectional.only(start: 12),
+                                width: 38,
+                                height: 38,
+                                child: widget.secondButton,
+                              )
+                            : SizedBox(),
+                        widget.firstButton != null
+                            ? Container(
+                                margin: EdgeInsetsDirectional.only(start: 12),
+                                width: 38,
+                                height: 38,
+                                child: widget.firstButton,
+                              )
+                            : SizedBox(),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

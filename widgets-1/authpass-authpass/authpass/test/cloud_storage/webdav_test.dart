@@ -33,10 +33,15 @@ void main() {
       provider = WebDavProvider(helper: CloudStorageHelperMock());
       // authenticate
       final result = await provider.startAuth((prompt) async {
-        if (prompt is UserAuthenticationPrompt<UrlUsernamePasswordResult,
-            UrlUsernamePasswordPromptData>) {
+        if (prompt is UserAuthenticationPrompt<
+          UrlUsernamePasswordResult,
+          UrlUsernamePasswordPromptData
+        >) {
           prompt.result(UrlUsernamePasswordResult(
-              webDavUrl, webDavUsername, webDavPassword));
+            webDavUrl,
+            webDavUsername,
+            webDavPassword,
+          ));
         } else {
           throw StateError('wrong prompt type.');
         }

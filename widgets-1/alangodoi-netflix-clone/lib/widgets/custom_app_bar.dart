@@ -11,30 +11,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         FlatButton(
           child: Text(
             "Séries",
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Colors.white,
-            ),
+            style: TextStyle(fontSize: 14.0, color: Colors.white),
           ),
           onPressed: () {},
         ),
         FlatButton(
           child: Text(
             "Filmes",
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Colors.white,
-            ),
+            style: TextStyle(fontSize: 14.0, color: Colors.white),
           ),
           onPressed: () {},
         ),
         FlatButton(
           child: Text(
             "Minha lista",
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Colors.white,
-            ),
+            style: TextStyle(fontSize: 14.0, color: Colors.white),
           ),
           onPressed: () {},
         ),

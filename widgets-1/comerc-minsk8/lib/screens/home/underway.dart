@@ -35,10 +35,7 @@ class HomeUnderway extends StatelessWidget {
       pullToRefreshNotificationKey: pullToRefreshNotificationKey,
       poolForReloadTabs: poolForReloadTabs,
     );
-    return SafeArea(
-      bottom: false,
-      child: child,
-    );
+    return SafeArea(bottom: false, child: child);
   }
 }
 

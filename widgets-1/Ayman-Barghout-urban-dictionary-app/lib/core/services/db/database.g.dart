@@ -11,26 +11,34 @@ class Term extends DataClass implements Insertable<Term> {
   final String term;
   final DateTime lastViewed;
   final bool isFavorite;
-  Term(
-      {@required this.term,
-      @required this.lastViewed,
-      @required this.isFavorite});
-  factory Term.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+  Term({
+    @required this.term,
+    @required this.lastViewed,
+    @required this.isFavorite,
+  });
+  factory Term.fromData(
+    Map<String, dynamic> data,
+    GeneratedDatabase db, {
+    String prefix,
+  }) {
     final effectivePrefix = prefix ?? '';
     final stringType = db.typeSystem.forDartType<String>();
     final dateTimeType = db.typeSystem.forDartType<DateTime>();
     final boolType = db.typeSystem.forDartType<bool>();
     return Term(
       term: stringType.mapFromDatabaseResponse(data['${effectivePrefix}term']),
-      lastViewed: dateTimeType
-          .mapFromDatabaseResponse(data['${effectivePrefix}last_viewed']),
-      isFavorite: boolType
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_favorite']),
+      lastViewed: dateTimeType.mapFromDatabaseResponse(
+        data['${effectivePrefix}last_viewed'],
+      ),
+      isFavorite: boolType.mapFromDatabaseResponse(
+        data['${effectivePrefix}is_favorite'],
+      ),
     );
   }
-  factory Term.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+  factory Term.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer serializer,
+  }) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Term(
       term: serializer.fromJson<String>(json['term']),
@@ -62,10 +70,10 @@ class Term extends DataClass implements Insertable<Term> {
   }
 
   Term copyWith({String term, DateTime lastViewed, bool isFavorite}) => Term(
-        term: term ?? this.term,
-        lastViewed: lastViewed ?? this.lastViewed,
-        isFavorite: isFavorite ?? this.isFavorite,
-      );
+    term: term ?? this.term,
+    lastViewed: lastViewed ?? this.lastViewed,
+    isFavorite: isFavorite ?? this.isFavorite,
+  );
   @override
   String toString() {
     return (StringBuffer('Term(')
@@ -78,7 +86,8 @@ class Term extends DataClass implements Insertable<Term> {
 
   @override
   int get hashCode => $mrjf(
-      $mrjc(term.hashCode, $mrjc(lastViewed.hashCode, isFavorite.hashCode)));
+    $mrjc(term.hashCode, $mrjc(lastViewed.hashCode, isFavorite.hashCode)),
+  );
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -101,12 +110,13 @@ class TermsCompanion extends UpdateCompanion<Term> {
     @required String term,
     @required DateTime lastViewed,
     this.isFavorite = const Value.absent(),
-  })  : term = Value(term),
-        lastViewed = Value(lastViewed);
-  TermsCompanion copyWith(
-      {Value<String> term,
-      Value<DateTime> lastViewed,
-      Value<bool> isFavorite}) {
+  }) : term = Value(term),
+       lastViewed = Value(lastViewed);
+  TermsCompanion copyWith({
+    Value<String> term,
+    Value<DateTime> lastViewed,
+    Value<bool> isFavorite,
+  }) {
     return TermsCompanion(
       term: term ?? this.term,
       lastViewed: lastViewed ?? this.lastViewed,
@@ -124,11 +134,7 @@ class $TermsTable extends Terms with TableInfo<$TermsTable, Term> {
   @override
   GeneratedTextColumn get term => _term ??= _constructTerm();
   GeneratedTextColumn _constructTerm() {
-    return GeneratedTextColumn(
-      'term',
-      $tableName,
-      false,
-    );
+    return GeneratedTextColumn('term', $tableName, false);
   }
 
   final VerificationMeta _lastViewedMeta = const VerificationMeta('lastViewed');
@@ -137,11 +143,7 @@ class $TermsTable extends Terms with TableInfo<$TermsTable, Term> {
   GeneratedDateTimeColumn get lastViewed =>
       _lastViewed ??= _constructLastViewed();
   GeneratedDateTimeColumn _constructLastViewed() {
-    return GeneratedDateTimeColumn(
-      'last_viewed',
-      $tableName,
-      false,
-    );
+    return GeneratedDateTimeColumn('last_viewed', $tableName, false);
   }
 
   final VerificationMeta _isFavoriteMeta = const VerificationMeta('isFavorite');
@@ -149,8 +151,12 @@ class $TermsTable extends Terms with TableInfo<$TermsTable, Term> {
   @override
   GeneratedBoolColumn get isFavorite => _isFavorite ??= _constructIsFavorite();
   GeneratedBoolColumn _constructIsFavorite() {
-    return GeneratedBoolColumn('is_favorite', $tableName, false,
-        defaultValue: const Constant(false));
+    return GeneratedBoolColumn(
+      'is_favorite',
+      $tableName,
+      false,
+      defaultValue: const Constant(false),
+    );
   }
 
   @override
@@ -162,24 +168,32 @@ class $TermsTable extends Terms with TableInfo<$TermsTable, Term> {
   @override
   final String actualTableName = 'terms';
   @override
-  VerificationContext validateIntegrity(TermsCompanion d,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    TermsCompanion d, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     if (d.term.present) {
       context.handle(
-          _termMeta, term.isAcceptableValue(d.term.value, _termMeta));
+        _termMeta,
+        term.isAcceptableValue(d.term.value, _termMeta),
+      );
     } else if (isInserting) {
       context.missing(_termMeta);
     }
     if (d.lastViewed.present) {
-      context.handle(_lastViewedMeta,
-          lastViewed.isAcceptableValue(d.lastViewed.value, _lastViewedMeta));
+      context.handle(
+        _lastViewedMeta,
+        lastViewed.isAcceptableValue(d.lastViewed.value, _lastViewedMeta),
+      );
     } else if (isInserting) {
       context.missing(_lastViewedMeta);
     }
     if (d.isFavorite.present) {
-      context.handle(_isFavoriteMeta,
-          isFavorite.isAcceptableValue(d.isFavorite.value, _isFavoriteMeta));
+      context.handle(
+        _isFavoriteMeta,
+        isFavorite.isAcceptableValue(d.isFavorite.value, _isFavoriteMeta),
+      );
     }
     return context;
   }
@@ -221,36 +235,44 @@ class Definition extends DataClass implements Insertable<Definition> {
   final String author;
   final int thumbsUp;
   final int thumbsDown;
-  Definition(
-      {@required this.id,
-      @required this.term,
-      @required this.definition,
-      @required this.example,
-      @required this.author,
-      @required this.thumbsUp,
-      @required this.thumbsDown});
-  factory Definition.fromData(Map<String, dynamic> data, GeneratedDatabase db,
-      {String prefix}) {
+  Definition({
+    @required this.id,
+    @required this.term,
+    @required this.definition,
+    @required this.example,
+    @required this.author,
+    @required this.thumbsUp,
+    @required this.thumbsDown,
+  });
+  factory Definition.fromData(
+    Map<String, dynamic> data,
+    GeneratedDatabase db, {
+    String prefix,
+  }) {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     return Definition(
       id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       term: stringType.mapFromDatabaseResponse(data['${effectivePrefix}term']),
-      definition: stringType
-          .mapFromDatabaseResponse(data['${effectivePrefix}definition']),
+      definition: stringType.mapFromDatabaseResponse(
+        data['${effectivePrefix}definition'],
+      ),
       example:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}example']),
       author:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}author']),
       thumbsUp:
           intType.mapFromDatabaseResponse(data['${effectivePrefix}thumbs_up']),
-      thumbsDown: intType
-          .mapFromDatabaseResponse(data['${effectivePrefix}thumbs_down']),
+      thumbsDown: intType.mapFromDatabaseResponse(
+        data['${effectivePrefix}thumbs_down'],
+      ),
     );
   }
-  factory Definition.fromJson(Map<String, dynamic> json,
-      {ValueSerializer serializer}) {
+  factory Definition.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer serializer,
+  }) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Definition(
       id: serializer.fromJson<int>(json['id']),
@@ -287,8 +309,9 @@ class Definition extends DataClass implements Insertable<Definition> {
       example: example == null && nullToAbsent
           ? const Value.absent()
           : Value(example),
-      author:
-          author == null && nullToAbsent ? const Value.absent() : Value(author),
+      author: author == null && nullToAbsent
+          ? const Value.absent()
+          : Value(author),
       thumbsUp: thumbsUp == null && nullToAbsent
           ? const Value.absent()
           : Value(thumbsUp),
@@ -298,23 +321,23 @@ class Definition extends DataClass implements Insertable<Definition> {
     );
   }
 
-  Definition copyWith(
-          {int id,
-          String term,
-          String definition,
-          String example,
-          String author,
-          int thumbsUp,
-          int thumbsDown}) =>
-      Definition(
-        id: id ?? this.id,
-        term: term ?? this.term,
-        definition: definition ?? this.definition,
-        example: example ?? this.example,
-        author: author ?? this.author,
-        thumbsUp: thumbsUp ?? this.thumbsUp,
-        thumbsDown: thumbsDown ?? this.thumbsDown,
-      );
+  Definition copyWith({
+    int id,
+    String term,
+    String definition,
+    String example,
+    String author,
+    int thumbsUp,
+    int thumbsDown,
+  }) => Definition(
+    id: id ?? this.id,
+    term: term ?? this.term,
+    definition: definition ?? this.definition,
+    example: example ?? this.example,
+    author: author ?? this.author,
+    thumbsUp: thumbsUp ?? this.thumbsUp,
+    thumbsDown: thumbsDown ?? this.thumbsDown,
+  );
   @override
   String toString() {
     return (StringBuffer('Definition(')
@@ -330,16 +353,13 @@ class Definition extends DataClass implements Insertable<Definition> {
   }
 
   @override
-  int get hashCode => $mrjf($mrjc(
-      id.hashCode,
-      $mrjc(
-          term.hashCode,
-          $mrjc(
-              definition.hashCode,
-              $mrjc(
-                  example.hashCode,
-                  $mrjc(author.hashCode,
-                      $mrjc(thumbsUp.hashCode, thumbsDown.hashCode)))))));
+  int get hashCode => $mrjf($mrjc(id.hashCode, $mrjc(term.hashCode, $mrjc(
+    definition.hashCode,
+    $mrjc(
+      example.hashCode,
+      $mrjc(author.hashCode, $mrjc(thumbsUp.hashCode, thumbsDown.hashCode)),
+    ),
+  ))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -378,20 +398,21 @@ class DefinitionsCompanion extends UpdateCompanion<Definition> {
     @required String author,
     @required int thumbsUp,
     @required int thumbsDown,
-  })  : term = Value(term),
-        definition = Value(definition),
-        example = Value(example),
-        author = Value(author),
-        thumbsUp = Value(thumbsUp),
-        thumbsDown = Value(thumbsDown);
-  DefinitionsCompanion copyWith(
-      {Value<int> id,
-      Value<String> term,
-      Value<String> definition,
-      Value<String> example,
-      Value<String> author,
-      Value<int> thumbsUp,
-      Value<int> thumbsDown}) {
+  }) : term = Value(term),
+       definition = Value(definition),
+       example = Value(example),
+       author = Value(author),
+       thumbsUp = Value(thumbsUp),
+       thumbsDown = Value(thumbsDown);
+  DefinitionsCompanion copyWith({
+    Value<int> id,
+    Value<String> term,
+    Value<String> definition,
+    Value<String> example,
+    Value<String> author,
+    Value<int> thumbsUp,
+    Value<int> thumbsDown,
+  }) {
     return DefinitionsCompanion(
       id: id ?? this.id,
       term: term ?? this.term,
@@ -414,8 +435,13 @@ class $DefinitionsTable extends Definitions
   @override
   GeneratedIntColumn get id => _id ??= _constructId();
   GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+    return GeneratedIntColumn(
+      'id',
+      $tableName,
+      false,
+      hasAutoIncrement: true,
+      declaredAsPrimaryKey: true,
+    );
   }
 
   final VerificationMeta _termMeta = const VerificationMeta('term');
@@ -423,11 +449,7 @@ class $DefinitionsTable extends Definitions
   @override
   GeneratedTextColumn get term => _term ??= _constructTerm();
   GeneratedTextColumn _constructTerm() {
-    return GeneratedTextColumn(
-      'term',
-      $tableName,
-      false,
-    );
+    return GeneratedTextColumn('term', $tableName, false);
   }
 
   final VerificationMeta _definitionMeta = const VerificationMeta('definition');
@@ -435,11 +457,7 @@ class $DefinitionsTable extends Definitions
   @override
   GeneratedTextColumn get definition => _definition ??= _constructDefinition();
   GeneratedTextColumn _constructDefinition() {
-    return GeneratedTextColumn(
-      'definition',
-      $tableName,
-      false,
-    );
+    return GeneratedTextColumn('definition', $tableName, false);
   }
 
   final VerificationMeta _exampleMeta = const VerificationMeta('example');
@@ -447,11 +465,7 @@ class $DefinitionsTable extends Definitions
   @override
   GeneratedTextColumn get example => _example ??= _constructExample();
   GeneratedTextColumn _constructExample() {
-    return GeneratedTextColumn(
-      'example',
-      $tableName,
-      false,
-    );
+    return GeneratedTextColumn('example', $tableName, false);
   }
 
   final VerificationMeta _authorMeta = const VerificationMeta('author');
@@ -459,11 +473,7 @@ class $DefinitionsTable extends Definitions
   @override
   GeneratedTextColumn get author => _author ??= _constructAuthor();
   GeneratedTextColumn _constructAuthor() {
-    return GeneratedTextColumn(
-      'author',
-      $tableName,
-      false,
-    );
+    return GeneratedTextColumn('author', $tableName, false);
   }
 
   final VerificationMeta _thumbsUpMeta = const VerificationMeta('thumbsUp');
@@ -471,11 +481,7 @@ class $DefinitionsTable extends Definitions
   @override
   GeneratedIntColumn get thumbsUp => _thumbsUp ??= _constructThumbsUp();
   GeneratedIntColumn _constructThumbsUp() {
-    return GeneratedIntColumn(
-      'thumbs_up',
-      $tableName,
-      false,
-    );
+    return GeneratedIntColumn('thumbs_up', $tableName, false);
   }
 
   final VerificationMeta _thumbsDownMeta = const VerificationMeta('thumbsDown');
@@ -483,16 +489,19 @@ class $DefinitionsTable extends Definitions
   @override
   GeneratedIntColumn get thumbsDown => _thumbsDown ??= _constructThumbsDown();
   GeneratedIntColumn _constructThumbsDown() {
-    return GeneratedIntColumn(
-      'thumbs_down',
-      $tableName,
-      false,
-    );
+    return GeneratedIntColumn('thumbs_down', $tableName, false);
   }
 
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, term, definition, example, author, thumbsUp, thumbsDown];
+  List<GeneratedColumn> get $columns => [
+    id,
+    term,
+    definition,
+    example,
+    author,
+    thumbsUp,
+    thumbsDown,
+  ];
   @override
   $DefinitionsTable get asDslTable => this;
   @override
@@ -500,45 +509,59 @@ class $DefinitionsTable extends Definitions
   @override
   final String actualTableName = 'definitions';
   @override
-  VerificationContext validateIntegrity(DefinitionsCompanion d,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    DefinitionsCompanion d, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     if (d.id.present) {
       context.handle(_idMeta, id.isAcceptableValue(d.id.value, _idMeta));
     }
     if (d.term.present) {
       context.handle(
-          _termMeta, term.isAcceptableValue(d.term.value, _termMeta));
+        _termMeta,
+        term.isAcceptableValue(d.term.value, _termMeta),
+      );
     } else if (isInserting) {
       context.missing(_termMeta);
     }
     if (d.definition.present) {
-      context.handle(_definitionMeta,
-          definition.isAcceptableValue(d.definition.value, _definitionMeta));
+      context.handle(
+        _definitionMeta,
+        definition.isAcceptableValue(d.definition.value, _definitionMeta),
+      );
     } else if (isInserting) {
       context.missing(_definitionMeta);
     }
     if (d.example.present) {
-      context.handle(_exampleMeta,
-          example.isAcceptableValue(d.example.value, _exampleMeta));
+      context.handle(
+        _exampleMeta,
+        example.isAcceptableValue(d.example.value, _exampleMeta),
+      );
     } else if (isInserting) {
       context.missing(_exampleMeta);
     }
     if (d.author.present) {
       context.handle(
-          _authorMeta, author.isAcceptableValue(d.author.value, _authorMeta));
+        _authorMeta,
+        author.isAcceptableValue(d.author.value, _authorMeta),
+      );
     } else if (isInserting) {
       context.missing(_authorMeta);
     }
     if (d.thumbsUp.present) {
-      context.handle(_thumbsUpMeta,
-          thumbsUp.isAcceptableValue(d.thumbsUp.value, _thumbsUpMeta));
+      context.handle(
+        _thumbsUpMeta,
+        thumbsUp.isAcceptableValue(d.thumbsUp.value, _thumbsUpMeta),
+      );
     } else if (isInserting) {
       context.missing(_thumbsUpMeta);
     }
     if (d.thumbsDown.present) {
-      context.handle(_thumbsDownMeta,
-          thumbsDown.isAcceptableValue(d.thumbsDown.value, _thumbsDownMeta));
+      context.handle(
+        _thumbsDownMeta,
+        thumbsDown.isAcceptableValue(d.thumbsDown.value, _thumbsDownMeta),
+      );
     } else if (isInserting) {
       context.missing(_thumbsDownMeta);
     }

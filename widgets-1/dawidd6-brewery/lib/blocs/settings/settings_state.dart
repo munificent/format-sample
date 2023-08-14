@@ -27,8 +27,5 @@ class SettingsLoadedState extends SettingsState {
   }
 
   @override
-  List<Object?> get props => [
-        enableCompletions,
-        completionsHistory,
-      ];
+  List<Object?> get props => [enableCompletions, completionsHistory];
 }

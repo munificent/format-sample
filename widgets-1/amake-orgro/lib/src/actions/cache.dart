@@ -21,12 +21,10 @@ PopupMenuItem<VoidCallback> clearCacheMenuItem(BuildContext context) {
       }
       await prefs.setAccessibleDirs(const []);
       await clearFontCache();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content:
-              Text(AppLocalizations.of(context)!.snackbarMessageCacheCleared),
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content:
+            Text(AppLocalizations.of(context)!.snackbarMessageCacheCleared),
+      ));
     },
     child: Text(AppLocalizations.of(context)!.menuItemClearCache),
   );

@@ -18,32 +18,34 @@ class About extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: RotateAnimatedTextKit(
-                      text: ["ADAPTABLE", "RESILIENCE", "CURIOUS", "EXPLORER"],
-                      textStyle: TextStyle(
-                          fontSize: 22.0,
-                          fontFamily: "BalooBhai",
-                          color: Colors.white70),
-                      textAlign: TextAlign.start,
-                      alignment:
-                          AlignmentDirectional.topStart // or Alignment.topLeft
-                      ),
+                    text: ["ADAPTABLE", "RESILIENCE", "CURIOUS", "EXPLORER"],
+                    textStyle: TextStyle(
+                      fontSize: 22.0,
+                      fontFamily: "BalooBhai",
+                      color: Colors.white70,
+                    ),
+                    textAlign: TextAlign.start,
+                    alignment:
+                        AlignmentDirectional.topStart, // or Alignment.topLeft
+                  ),
                 ),
                 Expanded(
                   child: RotateAnimatedTextKit(
-                      text: [
-                        "LEADERSHIP",
-                        "OPTIMISTIC",
-                        "RESPONSIBLE",
-                        "CREATIVE"
-                      ],
-                      textStyle: TextStyle(
-                          fontSize: 22.0,
-                          fontFamily: "BalooBhai",
-                          color: Colors.white70),
-                      textAlign: TextAlign.start,
-                      alignment:
-                          AlignmentDirectional.topStart // or Alignment.topLeft
-                      ),
+                    text: [
+                      "LEADERSHIP",
+                      "OPTIMISTIC",
+                      "RESPONSIBLE",
+                      "CREATIVE",
+                    ],
+                    textStyle: TextStyle(
+                      fontSize: 22.0,
+                      fontFamily: "BalooBhai",
+                      color: Colors.white70,
+                    ),
+                    textAlign: TextAlign.start,
+                    alignment:
+                        AlignmentDirectional.topStart, // or Alignment.topLeft
+                  ),
                 ),
               ],
             ),
@@ -56,29 +58,27 @@ class About extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                height: 150.0,
-              ),
+              SizedBox(height: 150.0),
               Text(
                 "I have completed Bachelor of Technology in Computer Science from BVCOE,New Delhi.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: Colors.white.withOpacity(0.87),
-                    fontWeight: FontWeight.w700,
-                    fontSize: 25.0),
+                  color: Colors.white.withOpacity(0.87),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 25.0,
+                ),
               ),
-              SizedBox(
-                height: 24.0,
-              ),
+              SizedBox(height: 24.0),
               Container(
                 margin: EdgeInsets.only(top: 10),
                 child: Text(
                   "And I love making Flutter Applications.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.white.withOpacity(0.87),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25.0),
+                    color: Colors.white.withOpacity(0.87),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 25.0,
+                  ),
                 ),
               ),
             ],

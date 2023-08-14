@@ -17,15 +17,11 @@ class CustomSliverAppBar extends StatelessWidget {
       snap: false,
       backgroundColor: Color(0xff0f0f0f),
       flexibleSpace: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Color(0xff0f0f0f),
-        ),
+        decoration: BoxDecoration(color: Color(0xff0f0f0f)),
         child: FlexibleSpaceBar(
           centerTitle: false,
-          background: CachedNetworkImage(
-            imageUrl: posterUrl,
-            fit: BoxFit.cover,
-          ),
+          background:
+              CachedNetworkImage(imageUrl: posterUrl, fit: BoxFit.cover),
         ),
       ),
       bottom: PreferredSize(
@@ -50,9 +46,7 @@ class CustomSliverAppBar extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
-                height: 15,
-              ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -61,14 +55,8 @@ class CustomSliverAppBar extends StatelessWidget {
                     onPressed: () {},
                     child: Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 24,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                        Icon(Icons.add, color: Colors.white, size: 24),
+                        SizedBox(height: 5),
                         Text(
                           'Minha lista',
                           style: TextStyle(
@@ -81,21 +69,16 @@ class CustomSliverAppBar extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
+                  SizedBox(width: 15),
                   RaisedButton(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(3.0),
-                        side: BorderSide(color: Colors.white)),
+                      borderRadius: new BorderRadius.circular(3.0),
+                      side: BorderSide(color: Colors.white),
+                    ),
                     child: Row(
                       children: <Widget>[
-                        Icon(
-                          Icons.play_arrow,
-                          color: Colors.black87,
-                          size: 28,
-                        ),
+                        Icon(Icons.play_arrow, color: Colors.black87, size: 28),
                         Text(
                           "Assistir",
                           style: TextStyle(
@@ -108,22 +91,14 @@ class CustomSliverAppBar extends StatelessWidget {
                     ),
                     onPressed: () {},
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
+                  SizedBox(width: 15),
                   FlatButton(
                     color: Colors.transparent,
                     onPressed: () {},
                     child: Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.info_outline,
-                          color: Colors.white,
-                          size: 24,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                        Icon(Icons.info_outline, color: Colors.white, size: 24),
+                        SizedBox(height: 5),
                         Text(
                           'Saiba mais',
                           style: TextStyle(
@@ -143,42 +118,27 @@ class CustomSliverAppBar extends StatelessWidget {
         ),
       ),
       actions: <Widget>[
-        SizedBox(
-          width: 10,
-        ),
-        Image.asset(
-          'assets/images/netflix_icon.png',
-          width: 48,
-          height: 48,
-        ),
+        SizedBox(width: 10),
+        Image.asset('assets/images/netflix_icon.png', width: 48, height: 48),
         Spacer(),
         FlatButton(
           child: Text(
             "Séries",
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Colors.white,
-            ),
+            style: TextStyle(fontSize: 16.0, color: Colors.white),
           ),
           onPressed: () {},
         ),
         FlatButton(
           child: Text(
             "Filmes",
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Colors.white,
-            ),
+            style: TextStyle(fontSize: 16.0, color: Colors.white),
           ),
           onPressed: () {},
         ),
         FlatButton(
           child: Text(
             "Minha lista",
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Colors.white,
-            ),
+            style: TextStyle(fontSize: 16.0, color: Colors.white),
           ),
           onPressed: () {},
         ),

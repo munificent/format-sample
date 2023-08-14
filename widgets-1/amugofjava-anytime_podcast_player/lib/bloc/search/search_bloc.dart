@@ -39,7 +39,8 @@ class SearchBloc extends Bloc {
 
   void _init() {
     _searchResults = _searchInput.switchMap<BlocState<pcast.SearchResult>>(
-        (SearchEvent event) => _search(event));
+      (SearchEvent event) => _search(event),
+    );
   }
 
   /// Takes the [SearchEvent] to perform either a search, chart fetch or clearing

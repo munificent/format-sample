@@ -88,27 +88,17 @@ class _TrackSymptomState extends State<TrackSymptom> {
         )
         .toList();
 
-    list.add(
-      FutureBuilder<Symptom>(
-        builder: (context, snapshot) {
-          return ListTile(
-            onTap: () => _addNewSymptom(),
-            leading: Icon(
-              Icons.add,
-              color: Theme.of(context).primaryColor,
-              size: 48,
-            ),
-            title: Text(
-              'Add new',
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-          );
-        },
-      ),
-    );
+    list.add(FutureBuilder<Symptom>(
+      builder: (context, snapshot) {
+        return ListTile(
+          onTap: () => _addNewSymptom(),
+          leading:
+              Icon(Icons.add, color: Theme.of(context).primaryColor, size: 48),
+          title: Text('Add new', style: Theme.of(context).textTheme.bodyText2),
+        );
+      },
+    ));
 
-    return ListView(
-      children: list,
-    );
+    return ListView(children: list);
   }
 }

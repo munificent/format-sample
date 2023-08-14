@@ -20,23 +20,28 @@ class SpawnerPainter extends CustomPainter {
 
   static void paintUnit(Canvas canvas) {
     const RadialGradient gradient = RadialGradient(
-        radius: 0.5, colors: [Color(0xfff8d512), Color(0xff81324a)]);
+      radius: 0.5,
+      colors: [Color(0xfff8d512), Color(0xff81324a)],
+    );
 
     canvas.save();
     canvas.translate(0.5, 0.5);
     canvas.scale(0.85);
     canvas.drawPath(spawnerPath(), Paint()..color = Colors.grey);
     canvas.drawPath(
-        spawnerPath(),
-        Paint()
-          ..strokeWidth = 0.05
-          ..style = PaintingStyle.stroke);
+      spawnerPath(),
+      Paint()
+        ..strokeWidth = 0.05
+        ..style = PaintingStyle.stroke,
+    );
     canvas.drawCircle(
-        Offset.zero,
-        0.35,
-        Paint()
-          ..shader = gradient.createShader(
-              Rect.fromCenter(center: Offset.zero, width: 0.70, height: 0.70)));
+      Offset.zero,
+      0.35,
+      Paint()
+        ..shader = gradient.createShader(
+          Rect.fromCenter(center: Offset.zero, width: 0.70, height: 0.70),
+        ),
+    );
     canvas.restore();
   }
 

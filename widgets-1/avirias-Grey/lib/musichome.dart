@@ -88,21 +88,29 @@ class _MusicState extends State<MusicHome> {
       var d = bottomItems[i];
       if (i == 2 || i == 4) {
         bottomOptions.add(Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.03)));
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.03,
+          ),
+        ));
       }
       if (i == 3) {
         bottomOptions.add(Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.15)));
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.15,
+          ),
+        ));
       }
-      bottomOptions.add(new IconButton(
-        icon: Icon(d.icon,
-            color: d.isSelected ? Color(0xff373a46) : Colors.blueGrey.shade600),
-        onPressed: d.onPressed,
-        tooltip: d.tooltip,
-        iconSize: 32.0,
-      ));
+      bottomOptions.add(
+        new IconButton(
+          icon: Icon(
+            d.icon,
+            color: d.isSelected ? Color(0xff373a46) : Colors.blueGrey.shade600,
+          ),
+          onPressed: d.onPressed,
+          tooltip: d.tooltip,
+          iconSize: 32.0,
+        ),
+      );
     }
   }
 
@@ -158,19 +166,19 @@ class _MusicState extends State<MusicHome> {
       List<Song> newSongs = List.from(songs);
       for (Song song in newSongs) db.insertOrUpdateSong(song);
     }).then((val) {
-      scaffoldState.currentState.showSnackBar(new SnackBar(
-        content: Text(
-          "Database Updated",
+      scaffoldState.currentState.showSnackBar(
+        new SnackBar(
+          content: Text("Database Updated"),
+          duration: Duration(milliseconds: 1500),
         ),
-        duration: Duration(milliseconds: 1500),
-      ));
+      );
     }).catchError((error) {
-      scaffoldState.currentState.showSnackBar(new SnackBar(
-        content: Text(
-          "Failed to update database",
+      scaffoldState.currentState.showSnackBar(
+        new SnackBar(
+          content: Text("Failed to update database"),
+          duration: Duration(milliseconds: 1500),
         ),
-        duration: Duration(milliseconds: 1500),
-      ));
+      );
     });
   }
 
@@ -186,34 +194,42 @@ class _MusicState extends State<MusicHome> {
         key: scaffoldState,
         appBar: _selectedIndex == 0
             ? null
-            : GreyAppBar(
-                title: title[_selectedIndex].toLowerCase(),
-              ),
+            : GreyAppBar(title: title[_selectedIndex].toLowerCase()),
         floatingActionButton: new FloatingActionButton(
-            child: new FlutterLogo(
-              colors: Colors.blueGrey,
-              style: FlutterLogoStyle.markOnly,
-            ),
-            backgroundColor: Colors.white,
-            onPressed: () async {
-              var pref = await SharedPreferences.getInstance();
-              var fp = pref.getBool("played");
-              if (fp == null) {
-                scaffoldState.currentState.showSnackBar(
-                    new SnackBar(content: Text("Play your first song.")));
-              } else {
-                Navigator.of(context)
-                    .push(new MaterialPageRoute(builder: (context) {
-                  if (MyQueue.songs == null) {
-                    List<Song> list = new List();
-                    list.add(last);
-                    MyQueue.songs = list;
-                    return new NowPlaying(db, list, 0, 0);
-                  } else
-                    return new NowPlaying(db, MyQueue.songs, MyQueue.index, 1);
-                }));
-              }
-            }),
+          child: new FlutterLogo(
+            colors: Colors.blueGrey,
+            style: FlutterLogoStyle.markOnly,
+          ),
+          backgroundColor: Colors.white,
+          onPressed: () async {
+            var pref = await SharedPreferences.getInstance();
+            var fp = pref.getBool("played");
+            if (fp == null) {
+              scaffoldState.currentState.showSnackBar(
+                new SnackBar(content: Text("Play your first song.")),
+              );
+            } else {
+              Navigator.of(context).push(
+                new MaterialPageRoute(
+                  builder: (context) {
+                    if (MyQueue.songs == null) {
+                      List<Song> list = new List();
+                      list.add(last);
+                      MyQueue.songs = list;
+                      return new NowPlaying(db, list, 0, 0);
+                    } else
+                      return new NowPlaying(
+                        db,
+                        MyQueue.songs,
+                        MyQueue.index,
+                        1,
+                      );
+                  },
+                ),
+              );
+            }
+          },
+        ),
         body: isLoading
             ? Center(child: CircularProgressIndicator())
             : _selectedIndex == 0
@@ -230,8 +246,9 @@ class _MusicState extends State<MusicHome> {
             color: Colors.transparent,
             height: 55.0,
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: bottomOptions),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: bottomOptions,
+            ),
           ),
           notchMargin: 10.0,
           elevation: 0.0,
@@ -259,9 +276,7 @@ class _MusicState extends State<MusicHome> {
                 actions: <Widget>[
                   new FlatButton(
                     onPressed: () => Navigator.of(context).pop(false),
-                    child: new Text(
-                      'No',
-                    ),
+                    child: new Text('No'),
                   ),
                   new FlatButton(
                     onPressed: () {
@@ -284,6 +299,10 @@ class BottomItem {
   VoidCallback onPressed;
   bool isSelected;
 
-  BottomItem(
-      [this.tooltip, this.icon, this.onPressed, this.isSelected = false]);
+  BottomItem([
+    this.tooltip,
+    this.icon,
+    this.onPressed,
+    this.isSelected = false,
+  ]);
 }

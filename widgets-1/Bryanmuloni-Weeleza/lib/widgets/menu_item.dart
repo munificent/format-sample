@@ -13,13 +13,11 @@ class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(10),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          widget.text,
-          SizedBox(
-            width: 5,
-          ),
-          widget.icon,
-        ]));
+      padding: EdgeInsets.all(10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [widget.text, SizedBox(width: 5), widget.icon],
+      ),
+    );
   }
 }

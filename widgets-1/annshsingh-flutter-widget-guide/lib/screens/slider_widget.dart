@@ -34,20 +34,18 @@ class _SliderWidgetState extends State<SliderWidget> {
         title: Text(
           'Slider Widget',
           style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: Utils.ubuntuRegularFont),
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: Utils.ubuntuRegularFont,
+          ),
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.code),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CodeScreen(code: Code.sliderWidgetCode),
-              ),
-            ),
-          )
+            onPressed: () => Navigator.push(context, MaterialPageRoute(
+              builder: (context) => CodeScreen(code: Code.sliderWidgetCode),
+            )),
+          ),
         ],
       ),
       body: Column(
@@ -119,8 +117,10 @@ class _SliderWidgetState extends State<SliderWidget> {
                   divisions: 100,
 
                   ///Value indicator above the slider
-                  labels: RangeLabels("${_rangeValues.start.round()}",
-                      "${_rangeValues.end.round()}"),
+                  labels: RangeLabels(
+                    "${_rangeValues.start.round()}",
+                    "${_rangeValues.end.round()}",
+                  ),
                   onChanged: (RangeValues values) {
                     setState(() {
                       _rangeValues = values;
@@ -153,9 +153,7 @@ class _SliderWidgetState extends State<SliderWidget> {
 
                   ///No.Of divisions from min to max value on the Slider
                   divisions: 100,
-
                   thumbColor: Colors.lightBlue,
-
                   onChanged: (double value) {
                     setState(() {
                       _cupertinoValue = value;

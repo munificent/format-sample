@@ -49,10 +49,7 @@ class HomeTabState extends State<HomeTabApp> {
     if (Platform.isAndroid) {
       myBanner
         ..load()
-        ..show(
-          anchorOffset: 50.0,
-          anchorType: AnchorType.bottom,
-        );
+        ..show(anchorOffset: 50.0, anchorType: AnchorType.bottom);
     }
   }
 
@@ -72,80 +69,69 @@ class HomeTabState extends State<HomeTabApp> {
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
           appBar: AppBar(
-              brightness: Brightness.dark,
-              centerTitle: true,
-              actions: <Widget>[
-                Expanded(
-                  child: Image.asset(
-                    'assets/brand.png',
-                    color: Colors.white60,
-                    filterQuality: FilterQuality.high,
-                    scale: 1.2,
+            brightness: Brightness.dark,
+            centerTitle: true,
+            actions: <Widget>[
+              Expanded(
+                child: Image.asset(
+                  'assets/brand.png',
+                  color: Colors.white60,
+                  filterQuality: FilterQuality.high,
+                  scale: 1.2,
+                ),
+              ),
+            ],
+            bottom: TabBar(
+              indicatorColor: Colors.white60,
+              labelColor: Colors.white60,
+              tabs: [
+                Tab(
+                  child: Text(
+                    'July',
+                    style: TextStyle(fontSize: 15, color: Colors.white60),
                   ),
-                )
+                ),
+                Tab(
+                  child: Text(
+                    'Aug',
+                    style: TextStyle(fontSize: 15, color: Colors.white60),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Sep',
+                    style: TextStyle(fontSize: 15, color: Colors.white60),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Oct',
+                    style: TextStyle(fontSize: 15, color: Colors.white60),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Nov',
+                    style: TextStyle(fontSize: 15, color: Colors.white60),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Dec',
+                    style: TextStyle(fontSize: 15, color: Colors.white60),
+                  ),
+                ),
               ],
-              bottom: TabBar(
-                indicatorColor: Colors.white60,
-                labelColor: Colors.white60,
-                tabs: [
-                  Tab(
-                    child: Text(
-                      'July',
-                      style: TextStyle(fontSize: 15, color: Colors.white60),
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Aug',
-                      style: TextStyle(fontSize: 15, color: Colors.white60),
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Sep',
-                      style: TextStyle(fontSize: 15, color: Colors.white60),
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Oct',
-                      style: TextStyle(fontSize: 15, color: Colors.white60),
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Nov',
-                      style: TextStyle(fontSize: 15, color: Colors.white60),
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Dec',
-                      style: TextStyle(fontSize: 15, color: Colors.white60),
-                    ),
-                  ),
-                ],
-              )),
+            ),
+          ),
           body: TabBarView(
             children: [
-              Home(
-                "7",
-              ),
-              Home(
-                "8",
-              ),
-              Home(
-                "9",
-              ),
-              Home(
-                "10",
-              ),
-              Home(
-                "11",
-              ),
-              Home(
-                "12",
-              ),
+              Home("7"),
+              Home("8"),
+              Home("9"),
+              Home("10"),
+              Home("11"),
+              Home("12"),
             ],
           ),
         ),

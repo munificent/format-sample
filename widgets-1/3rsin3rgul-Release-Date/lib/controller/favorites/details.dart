@@ -103,9 +103,8 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
             alignment: Alignment.topLeft,
             child: SingleChildScrollView(
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: viewportConstraints.maxHeight,
-                ),
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Column(
                     children: <Widget>[
@@ -124,9 +123,7 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
                       gameVideo(context),
                       gameScreenshotsSizedBox(),
                       gameScreenshots(),
-                      SizedBox(
-                        height: 50,
-                      )
+                      SizedBox(height: 50),
                     ],
                   ),
                 ),
@@ -155,10 +152,10 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
                 width: 400,
                 height: 500,
                 placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.black,
-                  ),
-                ),
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.black,
+                      ),
+                    ),
                 errorWidget: (context, url, error) => new Icon(Icons.error),
                 imageUrl:
                     "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${widget.note.imageCoverId}.jpg",
@@ -210,13 +207,14 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
                       tooltip: 'Share this game',
                       onPressed: () {
                         Share.share(
-                            'Check out this game :) ${widget.note.name}');
+                          'Check out this game :) ${widget.note.name}',
+                        );
                       },
                     ),
                     Text("Share"),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ],
@@ -248,10 +246,7 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              children: <Widget>[
-                checkPs4Platform(),
-                checkXboxPlatform(),
-              ],
+              children: <Widget>[checkPs4Platform(), checkXboxPlatform()],
             ),
           ),
           Padding(
@@ -259,7 +254,7 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
             child: Column(
               children: <Widget>[checkPCPlatform(), checkNintendoPlatform()],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -296,13 +291,15 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
                 width: MediaQuery.of(context).size.width,
                 height: 250,
                 placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.white,
-                  ),
-                ),
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
                 errorWidget: (context, url, error) => new Icon(Icons.error),
                 imageUrl: "https://images.igdb"
-                    ".com/igdb/image/upload/t_screenshot_med_2x/${_screenshots[index].imageId}.jpg",
+                    ".com/igdb/image/upload/t_screenshot_med_2x/${_screenshots[
+                      index
+                    ].imageId}.jpg",
               ),
             ),
           );
@@ -324,12 +321,7 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
       child: SizedBox(
         height: 30,
         child: Row(
-          children: <Widget>[
-            Text(
-              '* Genres',
-              style: TextStyle(fontSize: 18),
-            ),
-          ],
+          children: <Widget>[Text('* Genres', style: TextStyle(fontSize: 18))],
         ),
       ),
     );
@@ -368,10 +360,7 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
         height: 30,
         child: Row(
           children: <Widget>[
-            Text(
-              '* Game Modes',
-              style: TextStyle(fontSize: 18),
-            ),
+            Text('* Game Modes', style: TextStyle(fontSize: 18)),
           ],
         ),
       ),
@@ -440,8 +429,10 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
             padding: const EdgeInsets.only(right: 8.0, top: 0, bottom: 0),
             child: GestureDetector(
               onTap: () {
-                _launchURL('https://www.youtube'
-                    '.com/watch?v=${_video[index].videoId}');
+                _launchURL(
+                  'https://www.youtube'
+                  '.com/watch?v=${_video[index].videoId}',
+                );
               },
               child: _video != null
                   ? CachedNetworkImage(
@@ -449,14 +440,15 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
                       width: MediaQuery.of(context).size.width,
                       height: 250,
                       placeholder: (context, url) => Center(
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.black,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) =>
-                          new Icon(Icons.error),
-                      imageUrl:
-                          "https://img.youtube.com/vi/${_video[index].videoId}/0.jpg",
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.black,
+                            ),
+                          ),
+                      errorWidget:
+                          (context, url, error) => new Icon(Icons.error),
+                      imageUrl: "https://img.youtube.com/vi/${_video[
+                        index
+                      ].videoId}/0.jpg",
                     )
                   : Image.asset('assets/dummy.png'),
             ),
@@ -504,13 +496,10 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
           xbox >= 1
               ? Column(
                   children: <Widget>[
-                    Text(
-                      xbox2.last.human,
-                      style: TextStyle(fontSize: 12.0),
-                    ),
+                    Text(xbox2.last.human, style: TextStyle(fontSize: 12.0)),
                   ],
                 )
-              : Text('')
+              : Text(''),
         ],
       ),
     );
@@ -537,13 +526,10 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
           xbox >= 1
               ? Column(
                   children: <Widget>[
-                    Text(
-                      xbox2.last.human,
-                      style: TextStyle(fontSize: 12.0),
-                    ),
+                    Text(xbox2.last.human, style: TextStyle(fontSize: 12.0)),
                   ],
                 )
-              : Text('')
+              : Text(''),
         ],
       ),
     );
@@ -570,13 +556,10 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
           xbox >= 1
               ? Column(
                   children: <Widget>[
-                    Text(
-                      xbox2.last.human,
-                      style: TextStyle(fontSize: 12.0),
-                    ),
+                    Text(xbox2.last.human, style: TextStyle(fontSize: 12.0)),
                   ],
                 )
-              : Text('')
+              : Text(''),
         ],
       ),
     );
@@ -602,13 +585,10 @@ class _FavoriteNoteScreenState extends State<FavoriteNoteScreen> {
           xbox >= 1
               ? Column(
                   children: <Widget>[
-                    Text(
-                      xbox2.last.human,
-                      style: TextStyle(fontSize: 12.0),
-                    ),
+                    Text(xbox2.last.human, style: TextStyle(fontSize: 12.0)),
                   ],
                 )
-              : Text('')
+              : Text(''),
         ],
       ),
     );

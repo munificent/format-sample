@@ -31,9 +31,11 @@ class _SingleNewsViewState extends State<SingleNewsView> {
   }
 
   Text buildTitleText() {
-    return Text('${newsArticle.title}',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 20, fontFamily: 'Lora'));
+    return Text(
+      '${newsArticle.title}',
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 20, fontFamily: 'Lora'),
+    );
   }
 
   @override
@@ -43,9 +45,7 @@ class _SingleNewsViewState extends State<SingleNewsView> {
         children: [
           CustomScrollView(
             slivers: <Widget>[
-              ArticleHeader(
-                newsArticle: newsArticle,
-              ),
+              ArticleHeader(newsArticle: newsArticle),
               SliverList(
                 delegate: SliverChildListDelegate(<Widget>[
                   Container(
@@ -59,28 +59,23 @@ class _SingleNewsViewState extends State<SingleNewsView> {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: SizedBox(
                             width: 200,
-                            child: Divider(
-                              color: Colors.black,
-                            ),
+                            child: Divider(color: Colors.black),
                           ),
                         ),
                         ArticleInformationRow(newsArticle: newsArticle),
                         ArticleContent(
-                            showDescription: showDescription,
-                            newsArticle: newsArticle),
-                        Container(
-                          height: 80,
-                        )
+                          showDescription: showDescription,
+                          newsArticle: newsArticle,
+                        ),
+                        Container(height: 80),
                       ],
                     ),
-                  )
+                  ),
                 ]),
               ),
             ],
           ),
-          SwipeToArticle(
-            newsArticle: newsArticle,
-          ),
+          SwipeToArticle(newsArticle: newsArticle),
         ],
       ),
     );

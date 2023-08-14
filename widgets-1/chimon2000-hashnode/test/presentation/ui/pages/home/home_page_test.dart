@@ -11,32 +11,25 @@ void main() {
   group('HomePage', () {
     testWidgets('smoke test', (WidgetTester tester) async {
       final expected = stories.take(2).toList();
-      final expectedMapList = expected
-          .map((e) => {
-                '__typename': 'Post',
-                'id': e.cuid,
-                ...e.toMap(),
-                'author': {
-                  '__typename': 'Author',
-                  ...e.toMap()['author'],
-                },
-              })
-          .toList();
+      final expectedMapList = expected.map(
+        (e) => {
+          '__typename': 'Post',
+          'id': e.cuid,
+          ...e.toMap(),
+          'author': {'__typename': 'Author', ...e.toMap()['author']},
+        },
+      ).toList();
       final mockedResult = <String, dynamic>{
         'data': {
           '__typename': 'data',
           "current": [expectedMapList[0]],
           'next': [expectedMapList[1]],
-        }
+        },
       };
-      await tester.pumpWidget(
-        QueryMocker(
-          mockedResponse: buildGoodResponse(mockedResult),
-          child: TestWrapper(
-            child: HomePage(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(QueryMocker(
+        mockedResponse: buildGoodResponse(mockedResult),
+        child: TestWrapper(child: HomePage()),
+      ));
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
 

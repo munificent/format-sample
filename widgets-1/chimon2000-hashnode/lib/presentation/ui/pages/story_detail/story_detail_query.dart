@@ -35,11 +35,7 @@ class StoryDetailQuery extends StatelessWidget {
   final String? hostname;
   final BuilderFn builder;
 
-  StoryDetailQuery({
-    required this.slug,
-    required this.builder,
-    this.hostname,
-  });
+  StoryDetailQuery({required this.slug, required this.builder, this.hostname});
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +53,7 @@ class StoryDetailQuery extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
-            child: Text(
-              result.exception.toString(),
-              key: errorTextKey,
-            ),
+            child: Text(result.exception.toString(), key: errorTextKey),
           ),
         );
       },

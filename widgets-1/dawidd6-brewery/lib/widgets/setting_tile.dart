@@ -20,11 +20,11 @@ class SettingTile<T> extends StatelessWidget {
     required this.toggled,
     required this.onSwitchChanged,
     this.enabled = true,
-  })  : value = null,
-        min = null,
-        max = null,
-        onSliderChanged = null,
-        super(key: key);
+  }) : value = null,
+       min = null,
+       max = null,
+       onSliderChanged = null,
+       super(key: key);
 
   SettingTile.slider({
     Key? key,
@@ -35,18 +35,15 @@ class SettingTile<T> extends StatelessWidget {
     required this.max,
     required this.onSliderChanged,
     this.enabled = true,
-  })  : toggled = null,
-        onSwitchChanged = null,
-        super(key: key);
+  }) : toggled = null,
+       onSwitchChanged = null,
+       super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final titleWidget = Padding(
       padding: EdgeInsets.only(bottom: 10.0),
-      child: Text(
-        title,
-        style: BreweryTheme.settingTileTitle,
-      ),
+      child: Text(title, style: BreweryTheme.settingTileTitle),
     );
     final subtitleWidget = Text(
       subtitle,
@@ -78,7 +75,7 @@ class SettingTile<T> extends StatelessWidget {
                 Text(
                   value!.toInt().toString(),
                   style: BreweryTheme.settingTileSubtitle,
-                )
+                ),
               ],
             ),
           ),
