@@ -27,57 +27,61 @@ class _LogInSignUpSwitcherState extends State<LogInSignUpSwitcher>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(125),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            title: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 80,
-                    width: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image(
-                        height: 82,
-                        fit: BoxFit.cover,
-                        image: AssetImage("assets/appLogo.png"),
-                      ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(125),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 80,
+                  width: 80,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image(
+                      height: 82,
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/appLogo.png"),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            bottom: TabBar(
-                controller: controller,
-                indicatorWeight: 4,
-                indicatorColor: Colors.blue,
-                tabs: [
-                  Tab(
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
+          ),
+          bottom: TabBar(
+            controller: controller,
+            indicatorWeight: 4,
+            indicatorColor: Colors.blue,
+            tabs: [
+              Tab(
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
-                  Tab(
-                    child: Text("Sign Up",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16)),
-                  )
-                ]),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        body: TabBarView(
-          children: [LoginPage(), SignUp()],
-          controller: controller,
-        ));
+      ),
+      body:
+          TabBarView(children: [LoginPage(), SignUp()], controller: controller),
+    );
   }
 }

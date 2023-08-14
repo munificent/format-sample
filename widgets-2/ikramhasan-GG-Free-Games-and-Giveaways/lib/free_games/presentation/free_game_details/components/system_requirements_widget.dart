@@ -15,15 +15,9 @@ class SystemRequirementsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '$text1:',
-          style: const TextStyle(color: Colors.white),
-        ),
+        Text('$text1:', style: const TextStyle(color: Colors.white)),
         const SizedBox(width: 16),
-        Text(
-          text2,
-          style: const TextStyle(color: Colors.grey),
-        ),
+        Text(text2, style: const TextStyle(color: Colors.grey)),
         const SizedBox(height: 4),
       ],
     );

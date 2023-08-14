@@ -46,7 +46,11 @@ abstract class CalculateInvoiceTotal {
   BuiltList<InvoiceItemEntity> get lineItems;
 
   double _calculateTaxAmount(
-      double amount, double rate, bool useInclusiveTaxes, int precision) {
+    double amount,
+    double rate,
+    bool useInclusiveTaxes,
+    int precision,
+  ) {
     double taxAmount;
     if (useInclusiveTaxes) {
       taxAmount = amount - (amount / (1 + (rate / 100)));
@@ -56,8 +60,10 @@ abstract class CalculateInvoiceTotal {
     return round(taxAmount, precision);
   }
 
-  Map<String, double> calculateTaxes(
-      {@required bool useInclusiveTaxes, @required int precision}) {
+  Map<String, double> calculateTaxes({
+    @required bool useInclusiveTaxes,
+    @required int precision,
+  }) {
     double total = calculateSubtotal(precision: precision);
     double taxAmount;
     final map = <String, double>{};
@@ -71,21 +77,42 @@ abstract class CalculateInvoiceTotal {
 
       if (taxRate1 != 0) {
         taxAmount = _calculateTaxAmount(
-            lineTotal, taxRate1, useInclusiveTaxes, precision);
-        map.update(item.taxName1, (value) => value + taxAmount,
-            ifAbsent: () => taxAmount);
+          lineTotal,
+          taxRate1,
+          useInclusiveTaxes,
+          precision,
+        );
+        map.update(
+          item.taxName1,
+          (value) => value + taxAmount,
+          ifAbsent: () => taxAmount,
+        );
       }
       if (taxRate2 != 0) {
         taxAmount = _calculateTaxAmount(
-            lineTotal, taxRate2, useInclusiveTaxes, precision);
-        map.update(item.taxName2, (value) => value + taxAmount,
-            ifAbsent: () => taxAmount);
+          lineTotal,
+          taxRate2,
+          useInclusiveTaxes,
+          precision,
+        );
+        map.update(
+          item.taxName2,
+          (value) => value + taxAmount,
+          ifAbsent: () => taxAmount,
+        );
       }
       if (taxRate3 != 0) {
         taxAmount = _calculateTaxAmount(
-            lineTotal, taxRate3, useInclusiveTaxes, precision);
-        map.update(item.taxName3, (value) => value + taxAmount,
-            ifAbsent: () => taxAmount);
+          lineTotal,
+          taxRate3,
+          useInclusiveTaxes,
+          precision,
+        );
+        map.update(
+          item.taxName3,
+          (value) => value + taxAmount,
+          ifAbsent: () => taxAmount,
+        );
       }
     });
 
@@ -106,24 +133,45 @@ abstract class CalculateInvoiceTotal {
     }
 
     if (taxRate1 != 0) {
-      taxAmount =
-          _calculateTaxAmount(total, taxRate1, useInclusiveTaxes, precision);
-      map.update(taxName1, (value) => value + taxAmount,
-          ifAbsent: () => taxAmount);
+      taxAmount = _calculateTaxAmount(
+        total,
+        taxRate1,
+        useInclusiveTaxes,
+        precision,
+      );
+      map.update(
+        taxName1,
+        (value) => value + taxAmount,
+        ifAbsent: () => taxAmount,
+      );
     }
 
     if (taxRate2 != 0) {
-      taxAmount =
-          _calculateTaxAmount(total, taxRate2, useInclusiveTaxes, precision);
-      map.update(taxName2, (value) => value + taxAmount,
-          ifAbsent: () => taxAmount);
+      taxAmount = _calculateTaxAmount(
+        total,
+        taxRate2,
+        useInclusiveTaxes,
+        precision,
+      );
+      map.update(
+        taxName2,
+        (value) => value + taxAmount,
+        ifAbsent: () => taxAmount,
+      );
     }
 
     if (taxRate3 != 0) {
-      taxAmount =
-          _calculateTaxAmount(total, taxRate3, useInclusiveTaxes, precision);
-      map.update(taxName3, (value) => value + taxAmount,
-          ifAbsent: () => taxAmount);
+      taxAmount = _calculateTaxAmount(
+        total,
+        taxRate3,
+        useInclusiveTaxes,
+        precision,
+      );
+      map.update(
+        taxName3,
+        (value) => value + taxAmount,
+        ifAbsent: () => taxAmount,
+      );
     }
 
     return map;
@@ -172,7 +220,10 @@ abstract class CalculateInvoiceTotal {
   }
 
   double getItemTaxable(
-      InvoiceItemEntity item, double invoiceTotal, int precision) {
+    InvoiceItemEntity item,
+    double invoiceTotal,
+    int precision,
+  ) {
     final double qty = round(item.quantity, 5);
     final double cost = round(item.cost, 4);
     final double itemDiscount = round(item.discount, precision);

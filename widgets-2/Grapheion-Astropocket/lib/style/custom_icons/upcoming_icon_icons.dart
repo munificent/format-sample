@@ -21,6 +21,9 @@ class UpcomingIcon {
   static const _kFontFam = 'UpcomingIcon';
   static const _kFontPkg = null;
 
-  static const IconData page_next_outline =
-      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData page_next_outline = IconData(
+    0xe800,
+    fontFamily: _kFontFam,
+    fontPackage: _kFontPkg,
+  );
 }

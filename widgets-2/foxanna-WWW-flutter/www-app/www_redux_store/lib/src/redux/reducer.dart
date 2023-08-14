@@ -26,16 +26,16 @@ class AppReducer {
     required TournamentsTreeReducer tournamentsTreeReducer,
     required InitializationReducer initializationReducer,
     required BookmarksReducer bookmarksReducer,
-  })  : _timerReducer = timerReducer,
-        _latestTournamentsReducer = latestTournamentsReducer,
-        _tournamentReducer = tournamentReducer,
-        _toursReducer = toursReducer,
-        _questionsReducer = questionsReducer,
-        _searchReducer = searchReducer,
-        _settingsReducer = settingsReducer,
-        _tournamentsTreeReducer = tournamentsTreeReducer,
-        _initializationReducer = initializationReducer,
-        _bookmarksReducer = bookmarksReducer;
+  }) : _timerReducer = timerReducer,
+       _latestTournamentsReducer = latestTournamentsReducer,
+       _tournamentReducer = tournamentReducer,
+       _toursReducer = toursReducer,
+       _questionsReducer = questionsReducer,
+       _searchReducer = searchReducer,
+       _settingsReducer = settingsReducer,
+       _tournamentsTreeReducer = tournamentsTreeReducer,
+       _initializationReducer = initializationReducer,
+       _bookmarksReducer = bookmarksReducer;
 
   final TimerReducer _timerReducer;
   final LatestTournamentsReducer _latestTournamentsReducer;
@@ -52,18 +52,18 @@ class AppReducer {
       (state, dynamic action) => _reduce(state, action as IAction);
 
   AppState _reduce(AppState state, IAction action) => AppState(
-        timerState: _timerReducer(state.timerState, action),
-        latestTournamentsState:
-            _latestTournamentsReducer(state.latestTournamentsState, action),
-        tournamentState: _tournamentReducer(state.tournamentState, action),
-        toursState: _toursReducer(state.toursState, action),
-        questionsState: _questionsReducer(state.questionsState, action),
-        searchState: _searchReducer(state.searchState, action),
-        settingsState: _settingsReducer(state.settingsState, action),
-        tournamentsTreeState:
-            _tournamentsTreeReducer(state.tournamentsTreeState, action),
-        initializationState:
-            _initializationReducer(state.initializationState, action),
-        bookmarksState: _bookmarksReducer(state.bookmarksState, action),
-      );
+    timerState: _timerReducer(state.timerState, action),
+    latestTournamentsState:
+        _latestTournamentsReducer(state.latestTournamentsState, action),
+    tournamentState: _tournamentReducer(state.tournamentState, action),
+    toursState: _toursReducer(state.toursState, action),
+    questionsState: _questionsReducer(state.questionsState, action),
+    searchState: _searchReducer(state.searchState, action),
+    settingsState: _settingsReducer(state.settingsState, action),
+    tournamentsTreeState:
+        _tournamentsTreeReducer(state.tournamentsTreeState, action),
+    initializationState:
+        _initializationReducer(state.initializationState, action),
+    bookmarksState: _bookmarksReducer(state.bookmarksState, action),
+  );
 }

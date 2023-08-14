@@ -23,27 +23,39 @@ Widget verticalSpace(double height) => SizedBox(height: height);
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-double screenHeightFraction(BuildContext context,
-        {int dividedBy = 1, double offsetBy = 0}) =>
-    (screenHeight(context) - offsetBy) / dividedBy;
+double screenHeightFraction(
+  BuildContext context, {
+  int dividedBy = 1,
+  double offsetBy = 0,
+}) => (screenHeight(context) - offsetBy) / dividedBy;
 
-double screenWidthFraction(BuildContext context,
-        {int dividedBy = 1, double offsetBy = 0}) =>
-    (screenWidth(context) - offsetBy) / dividedBy;
+double screenWidthFraction(
+  BuildContext context, {
+  int dividedBy = 1,
+  double offsetBy = 0,
+}) => (screenWidth(context) - offsetBy) / dividedBy;
 
-double halfScreenWidth(BuildContext context) =>
-    screenWidthFraction(context, dividedBy: 2);
+double halfScreenWidth(BuildContext context) => screenWidthFraction(
+  context,
+  dividedBy: 2,
+);
 
-double thirdScreenWidth(BuildContext context) =>
-    screenWidthFraction(context, dividedBy: 3);
+double thirdScreenWidth(BuildContext context) => screenWidthFraction(
+  context,
+  dividedBy: 3,
+);
 
 // Box Decorations
 
-BoxDecoration fieldDecortaion =
-    BoxDecoration(borderRadius: BorderRadius.circular(40), color: Colors.white);
+BoxDecoration fieldDecortaion = BoxDecoration(
+  borderRadius: BorderRadius.circular(40),
+  color: Colors.white,
+);
 
 BoxDecoration disabledFieldDecortaion = BoxDecoration(
-    borderRadius: BorderRadius.circular(40), color: Colors.grey[100]);
+  borderRadius: BorderRadius.circular(40),
+  color: Colors.grey[100],
+);
 
 // Field Variables
 
@@ -52,12 +64,16 @@ const double smallFieldHeight = 40;
 const double inputFieldBottomMargin = 30;
 const double inputFieldSmallBottomMargin = 0;
 const EdgeInsets fieldPadding = const EdgeInsets.symmetric(horizontal: 15);
-const EdgeInsets largeFieldPadding =
-    const EdgeInsets.symmetric(horizontal: 15, vertical: 15);
+const EdgeInsets largeFieldPadding = const EdgeInsets.symmetric(
+  horizontal: 15,
+  vertical: 15,
+);
 
 // Text Variables
-const TextStyle buttonTitleTextStyle =
-    const TextStyle(fontWeight: FontWeight.w700, color: Colors.white);
+const TextStyle buttonTitleTextStyle = const TextStyle(
+  fontWeight: FontWeight.w700,
+  color: Colors.white,
+);
 
 // Colors
 const Color themeColor = Color(0xFFf1eee5);

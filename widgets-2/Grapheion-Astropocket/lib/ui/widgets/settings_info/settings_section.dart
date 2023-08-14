@@ -22,7 +22,9 @@ class _SettingsSectionState extends State<SettingsSection> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              left: getWidth(context) / 20.0, right: getWidth(context) / 20.0),
+            left: getWidth(context) / 20.0,
+            right: getWidth(context) / 20.0,
+          ),
           child: Row(
             children: [
               Icon(Icons.wb_sunny_outlined),
@@ -31,17 +33,20 @@ class _SettingsSectionState extends State<SettingsSection> {
                 child: Text(
                   'InSight Weather',
                   style: GoogleFonts.poppins(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.w600,
-                      color: SpecificColors(context).primaryTextColor),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.w600,
+                    color: SpecificColors(context).primaryTextColor,
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
         Padding(
           padding: EdgeInsets.only(
-              top: getWidth(context) / 20.0, left: getWidth(context) / 20.0),
+            top: getWidth(context) / 20.0,
+            left: getWidth(context) / 20.0,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -50,9 +55,10 @@ class _SettingsSectionState extends State<SettingsSection> {
                 child: Text(
                   'Use Celsius instead of Fahrenheit',
                   style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: SpecificColors(context).secondaryTextColor),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: SpecificColors(context).secondaryTextColor,
+                  ),
                 ),
               ),
               Checkbox(
@@ -65,7 +71,7 @@ class _SettingsSectionState extends State<SettingsSection> {
                 },
                 checkColor: SpecificColors(context).checkboxcCheckedColor,
                 activeColor: SpecificColors(context).checkboxActiveBoxColor,
-              )
+              ),
             ],
           ),
         ),
@@ -75,15 +81,18 @@ class _SettingsSectionState extends State<SettingsSection> {
           width: MediaQuery.of(context).size.width,
           height: getWidth(context) / 180,
           margin: EdgeInsets.only(
-              left: getWidth(context) / 20,
-              right: getWidth(context) / 20,
-              top: MediaQuery.of(context).size.height / 20),
+            left: getWidth(context) / 20,
+            right: getWidth(context) / 20,
+            top: MediaQuery.of(context).size.height / 20,
+          ),
           color: SpecificColors(context).blueGreenColor,
         ),
 
         Padding(
           padding: EdgeInsets.only(
-              top: getHeight(context) / 25.0, left: getWidth(context) / 20.0),
+            top: getHeight(context) / 25.0,
+            left: getWidth(context) / 20.0,
+          ),
           child: Row(
             children: [
               Icon(Icons.public_outlined),
@@ -92,81 +101,93 @@ class _SettingsSectionState extends State<SettingsSection> {
                 child: Text(
                   'Planets distance unit',
                   style: GoogleFonts.poppins(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.w600,
-                      color: SpecificColors(context).primaryTextColor),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.w600,
+                    color: SpecificColors(context).primaryTextColor,
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
 
         Padding(
-            padding: EdgeInsets.only(
-                top: getWidth(context) / 20.0, left: getWidth(context) / 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RadioListTile<String>(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                  activeColor: SpecificColors(context).checkboxActiveBoxColor,
-                  value: "miles",
-                  groupValue: distanceUnitType,
-                  title: Text(
-                    'Miles',
-                    style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: SpecificColors(context).secondaryTextColor),
+          padding: EdgeInsets.only(
+            top: getWidth(context) / 20.0,
+            left: getWidth(context) / 20.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RadioListTile<String>(
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                activeColor: SpecificColors(context).checkboxActiveBoxColor,
+                value: "miles",
+                groupValue: distanceUnitType,
+                title: Text(
+                  'Miles',
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: SpecificColors(context).secondaryTextColor,
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      distanceUnitType = "miles";
-                      distanceUnit = distanceUnitType;
-                    });
-                    SetSettings().setSettings('distanceUnit', "miles", String);
-                    isKilometers = false;
-                  },
                 ),
-                RadioListTile<String>(
-                  activeColor: SpecificColors(context).checkboxActiveBoxColor,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                  value: "kilometers",
-                  title: Text(
-                    'Kilometers',
-                    style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: SpecificColors(context).secondaryTextColor),
+                onChanged: (value) {
+                  setState(() {
+                    distanceUnitType = "miles";
+                    distanceUnit = distanceUnitType;
+                  });
+                  SetSettings().setSettings('distanceUnit', "miles", String);
+                  isKilometers = false;
+                },
+              ),
+              RadioListTile<String>(
+                activeColor: SpecificColors(context).checkboxActiveBoxColor,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                value: "kilometers",
+                title: Text(
+                  'Kilometers',
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: SpecificColors(context).secondaryTextColor,
                   ),
-                  groupValue: distanceUnitType,
-                  onChanged: (value) {
-                    setState(() {
-                      distanceUnitType = "kilometers";
-                      distanceUnit = distanceUnitType;
-                    });
-                    SetSettings()
-                        .setSettings('distanceUnit', "kilometers", String);
-                    isKilometers = true;
-                  },
                 ),
-              ],
-            )),
+                groupValue: distanceUnitType,
+                onChanged: (value) {
+                  setState(() {
+                    distanceUnitType = "kilometers";
+                    distanceUnit = distanceUnitType;
+                  });
+                  SetSettings().setSettings(
+                    'distanceUnit',
+                    "kilometers",
+                    String,
+                  );
+                  isKilometers = true;
+                },
+              ),
+            ],
+          ),
+        ),
 
         // Separator
         Container(
           width: MediaQuery.of(context).size.width,
           height: getWidth(context) / 180,
           margin: EdgeInsets.only(
-              left: getWidth(context) / 20,
-              right: getWidth(context) / 20,
-              top: MediaQuery.of(context).size.height / 20),
+            left: getWidth(context) / 20,
+            right: getWidth(context) / 20,
+            top: MediaQuery.of(context).size.height / 20,
+          ),
           color: SpecificColors(context).blueGreenColor,
         ),
 
         Padding(
           padding: EdgeInsets.only(
-              top: getHeight(context) / 25.0, left: getWidth(context) / 20.0),
+            top: getHeight(context) / 25.0,
+            left: getWidth(context) / 20.0,
+          ),
           child: Row(
             children: [
               Icon(RocketIcon.rocket_outline),
@@ -175,17 +196,20 @@ class _SettingsSectionState extends State<SettingsSection> {
                 child: Text(
                   'Launches date format',
                   style: GoogleFonts.poppins(
-                      fontSize: 17.0,
-                      fontWeight: FontWeight.w600,
-                      color: SpecificColors(context).primaryTextColor),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.w600,
+                    color: SpecificColors(context).primaryTextColor,
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
         Padding(
           padding: EdgeInsets.only(
-              top: getWidth(context) / 20.0, left: getWidth(context) / 35.0),
+            top: getWidth(context) / 20.0,
+            left: getWidth(context) / 35.0,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -197,9 +221,10 @@ class _SettingsSectionState extends State<SettingsSection> {
                 title: Text(
                   'Month / Day / Year',
                   style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: SpecificColors(context).secondaryTextColor),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: SpecificColors(context).secondaryTextColor,
+                  ),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -216,9 +241,10 @@ class _SettingsSectionState extends State<SettingsSection> {
                 title: Text(
                   'Day / Month / Year',
                   style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: SpecificColors(context).secondaryTextColor),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: SpecificColors(context).secondaryTextColor,
+                  ),
                 ),
                 groupValue: type,
                 onChanged: (value) {
@@ -231,7 +257,7 @@ class _SettingsSectionState extends State<SettingsSection> {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

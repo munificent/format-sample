@@ -19,7 +19,7 @@ import 'package:warmd/translations/gen/l10n.dart';
 
 class UtilitiesCategoryScreen extends StatelessWidget {
   const UtilitiesCategoryScreen({Key? key, required this.onContinueTapped})
-      : super(key: key);
+    : super(key: key);
 
   final Function(BuildContext) onContinueTapped;
 
@@ -28,15 +28,16 @@ class UtilitiesCategoryScreen extends StatelessWidget {
     final state = context.watch<CriteriaState>();
 
     return _CriteriasScreen(
-        criteriaCategory: state.categories[1],
-        progressValue: 0.3,
-        onContinueTapped: onContinueTapped);
+      criteriaCategory: state.categories[1],
+      progressValue: 0.3,
+      onContinueTapped: onContinueTapped,
+    );
   }
 }
 
 class TravelCategoryScreen extends StatelessWidget {
   const TravelCategoryScreen({Key? key, required this.onContinueTapped})
-      : super(key: key);
+    : super(key: key);
 
   final Function(BuildContext) onContinueTapped;
 
@@ -45,15 +46,16 @@ class TravelCategoryScreen extends StatelessWidget {
     final state = context.watch<CriteriaState>();
 
     return _CriteriasScreen(
-        criteriaCategory: state.categories[2],
-        progressValue: 0.5,
-        onContinueTapped: onContinueTapped);
+      criteriaCategory: state.categories[2],
+      progressValue: 0.5,
+      onContinueTapped: onContinueTapped,
+    );
   }
 }
 
 class FoodCategoryScreen extends StatelessWidget {
   const FoodCategoryScreen({Key? key, required this.onContinueTapped})
-      : super(key: key);
+    : super(key: key);
 
   final Function(BuildContext) onContinueTapped;
 
@@ -62,15 +64,16 @@ class FoodCategoryScreen extends StatelessWidget {
     final state = context.watch<CriteriaState>();
 
     return _CriteriasScreen(
-        criteriaCategory: state.categories[3],
-        progressValue: 0.7,
-        onContinueTapped: onContinueTapped);
+      criteriaCategory: state.categories[3],
+      progressValue: 0.7,
+      onContinueTapped: onContinueTapped,
+    );
   }
 }
 
 class GoodsCategoryScreen extends StatelessWidget {
   const GoodsCategoryScreen({Key? key, required this.onContinueTapped})
-      : super(key: key);
+    : super(key: key);
 
   final Function(BuildContext) onContinueTapped;
 
@@ -79,19 +82,20 @@ class GoodsCategoryScreen extends StatelessWidget {
     final state = context.watch<CriteriaState>();
 
     return _CriteriasScreen(
-        criteriaCategory: state.categories[4],
-        progressValue: 0.9,
-        onContinueTapped: onContinueTapped);
+      criteriaCategory: state.categories[4],
+      progressValue: 0.9,
+      onContinueTapped: onContinueTapped,
+    );
   }
 }
 
 class _CriteriasScreen extends StatefulWidget {
-  const _CriteriasScreen(
-      {Key? key,
-      required this.criteriaCategory,
-      required this.progressValue,
-      required this.onContinueTapped})
-      : super(key: key);
+  const _CriteriasScreen({
+    Key? key,
+    required this.criteriaCategory,
+    required this.progressValue,
+    required this.onContinueTapped,
+  }) : super(key: key);
 
   final CriteriaCategory criteriaCategory;
   final double progressValue;
@@ -122,8 +126,10 @@ class _CriteriasScreenState extends DelayableState<_CriteriasScreen> {
             const Gap(16),
             Text(
               widget.criteriaCategory.title(),
-              style: context.textTheme.headline5
-                  ?.copyWith(color: warmdGreen, fontWeight: FontWeight.bold),
+              style: context.textTheme.headline5?.copyWith(
+                color: warmdGreen,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const Gap(32),
             // We display all criterias, except the one that are necessarily at a specific value (like clean energy percent for some countries)
@@ -174,16 +180,16 @@ class _CriteriasScreenState extends DelayableState<_CriteriasScreen> {
                   child: Text(
                     c.title(),
                     style: context.textTheme.subtitle1?.copyWith(
-                        color: warmdDarkBlue, fontWeight: FontWeight.bold),
+                      color: warmdDarkBlue,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const Gap(12),
                 ConstrainedBox(
                   constraints:
                       const BoxConstraints(maxHeight: 42, maxWidth: 42),
-                  child: SvgPicture.asset(
-                    'assets/${c.key}.svg',
-                  ),
+                  child: SvgPicture.asset('assets/${c.key}.svg'),
                 ),
               ],
             ),
@@ -195,7 +201,9 @@ class _CriteriasScreenState extends DelayableState<_CriteriasScreen> {
               child: MarkupText(
                 explanation,
                 style: context.textTheme.bodyText2?.copyWith(
-                    color: Colors.grey[600], fontWeight: FontWeight.w300),
+                  color: Colors.grey[600],
+                  fontWeight: FontWeight.w300,
+                ),
               ),
             ),
           const Gap(8),
@@ -248,18 +256,17 @@ class _CriteriasScreenState extends DelayableState<_CriteriasScreen> {
               c.currentValue = value!.toDouble();
               state.persist(c);
             },
-            items: labels
-                .mapIndexed(
-                  (index, label) => DropdownMenuItem<int>(
-                    value: index,
-                    child: Text(
-                      label,
-                      style: context.textTheme.bodyText2
-                          ?.copyWith(color: _getDropdownTextColor(c, index)),
-                    ),
+            items: labels.mapIndexed(
+              (index, label) => DropdownMenuItem<int>(
+                value: index,
+                child: Text(
+                  label,
+                  style: context.textTheme.bodyText2?.copyWith(
+                    color: _getDropdownTextColor(c, index),
                   ),
-                )
-                .toList(),
+                ),
+              ),
+            ).toList(),
           ),
         ),
       ),
@@ -337,31 +344,38 @@ class _CriteriasScreenState extends DelayableState<_CriteriasScreen> {
         Row(
           children: [
             Expanded(
-                child: Center(child: Text(valueText1, style: valueTextStyle))),
+              child: Center(child: Text(valueText1, style: valueTextStyle)),
+            ),
             if (!shouldDisplayOnlyThreeValues)
               Expanded(
-                  child:
-                      Center(child: Text(valueText2, style: valueTextStyle))),
+                child: Center(child: Text(valueText2, style: valueTextStyle)),
+              ),
             Expanded(
-                child: Center(child: Text(valueText3, style: valueTextStyle))),
+              child: Center(child: Text(valueText3, style: valueTextStyle)),
+            ),
             if (!shouldDisplayOnlyThreeValues)
               Expanded(
-                  child:
-                      Center(child: Text(valueText4, style: valueTextStyle))),
+                child: Center(child: Text(valueText4, style: valueTextStyle)),
+              ),
             Expanded(
               child: Center(
-                  child: Text(
-                      valueText5 + (c.minValue < 0 || c.unit == '%' ? '' : '+'),
-                      style: valueTextStyle)),
+                child: Text(
+                  valueText5 + (c.minValue < 0 || c.unit == '%' ? '' : '+'),
+                  style: valueTextStyle,
+                ),
+              ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
 
   Widget _buildShortcutChips(
-      BuildContext context, CriteriaState state, Criteria c) {
+    BuildContext context,
+    CriteriaState state,
+    Criteria c,
+  ) {
     final shortcuts = c.shortcuts()!;
 
     return SizedBox(
@@ -372,10 +386,8 @@ class _CriteriasScreenState extends DelayableState<_CriteriasScreen> {
         children: [
           ...shortcuts.entries.map(
             (entry) => ActionChip(
-              label: Text(
-                entry.key,
-                style: const TextStyle(color: warmdDarkBlue),
-              ),
+              label:
+                  Text(entry.key, style: const TextStyle(color: warmdDarkBlue)),
               shape:
                   const StadiumBorder(side: BorderSide(color: warmdDarkBlue)),
               backgroundColor: warmdLightBlue,
@@ -384,7 +396,7 @@ class _CriteriasScreenState extends DelayableState<_CriteriasScreen> {
                 state.persist(c);
               },
             ),
-          )
+          ),
         ],
       ),
     );

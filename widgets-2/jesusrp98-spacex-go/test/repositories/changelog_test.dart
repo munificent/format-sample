@@ -21,9 +21,7 @@ void main() {
       final response = MockResponse();
       const json = 'Just a normal JSON here';
 
-      when(
-        service.getChangelog(),
-      ).thenAnswer((_) => Future.value(response));
+      when(service.getChangelog()).thenAnswer((_) => Future.value(response));
       when(response.data).thenReturn(json);
 
       final output = await repository.fetchData();

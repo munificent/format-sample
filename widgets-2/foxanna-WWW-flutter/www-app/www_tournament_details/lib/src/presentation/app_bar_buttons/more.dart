@@ -6,12 +6,12 @@ class TournamentDetailsAppBarMoreButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => IconButton(
-        icon: const Icon(Icons.more_vert),
-        onPressed: () => _showMenu(context),
-      );
+    icon: const Icon(Icons.more_vert),
+    onPressed: () => _showMenu(context),
+  );
 
   void _showMenu(BuildContext context) => showModalBottomSheet<dynamic>(
-        context: context,
-        builder: (context) => const TournamentDetailsBottomSheet(),
-      );
+    context: context,
+    builder: (context) => const TournamentDetailsBottomSheet(),
+  );
 }

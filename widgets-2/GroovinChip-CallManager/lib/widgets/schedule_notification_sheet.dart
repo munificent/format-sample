@@ -8,10 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ScheduleNotificationSheet extends StatefulWidget {
-  const ScheduleNotificationSheet({
-    Key? key,
-    required this.call,
-  }) : super(key: key);
+  const ScheduleNotificationSheet({Key? key, required this.call})
+    : super(key: key);
 
   final Call call;
 
@@ -72,10 +70,7 @@ class _ScheduleNotificationSheetState extends State<ScheduleNotificationSheet>
               },
               onChanged: (date) => reminderDate = date,
               decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.today,
-                  color: theme.iconTheme.color,
-                ),
+                prefixIcon: Icon(Icons.today, color: theme.iconTheme.color),
                 labelText: 'Reminder Date',
               ),
             ),
@@ -96,10 +91,8 @@ class _ScheduleNotificationSheetState extends State<ScheduleNotificationSheet>
               },
               decoration: InputDecoration(
                 labelText: 'Reminder Time',
-                prefixIcon: Icon(
-                  Icons.access_time,
-                  color: theme.iconTheme.color,
-                ),
+                prefixIcon:
+                    Icon(Icons.access_time, color: theme.iconTheme.color),
               ),
             ),
             const SizedBox(height: 8),

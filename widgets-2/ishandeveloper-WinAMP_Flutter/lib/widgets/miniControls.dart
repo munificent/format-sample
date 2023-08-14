@@ -8,8 +8,13 @@ class MiniControls extends StatefulWidget {
   final double max;
   final Function control;
 
-  MiniControls(
-      {this.units, this.initialValue, this.min, this.max, this.control});
+  MiniControls({
+    this.units,
+    this.initialValue,
+    this.min,
+    this.max,
+    this.control,
+  });
 
   @override
   _MiniControlsState createState() => _MiniControlsState();
@@ -44,26 +49,29 @@ class _MiniControlsState extends State<MiniControls> {
                   bottom: BorderSide(width: 2, color: Color(0xFF555569)),
                 ),
                 image: DecorationImage(
-                    image: AssetImage('assets/gridtexture.png'),
-                    fit: BoxFit.fill,
-                    repeat: ImageRepeat.repeat),
+                  image: AssetImage('assets/gridtexture.png'),
+                  fit: BoxFit.fill,
+                  repeat: ImageRepeat.repeat,
+                ),
               ),
               child: Text(
                 _value.toString(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontFamily: 'Pixer',
-                    fontSize: 19,
-                    color: Color(0XFF04E406)),
+                  fontFamily: 'Pixer',
+                  fontSize: 19,
+                  color: Color(0XFF04E406),
+                ),
               ),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            SizedBox(width: 5),
             Text(
               widget.units,
               style: TextStyle(
-                  fontFamily: 'Pixer', fontSize: 18, color: Colors.white),
+                fontFamily: 'Pixer',
+                fontSize: 18,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -89,15 +97,16 @@ class _MiniControlsState extends State<MiniControls> {
             child: Padding(
               padding: EdgeInsets.all(2.0),
               child: Center(
-                  child: Text(
-                '〣 ',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontFamily: 'Pixer',
-                  fontWeight: FontWeight.bold,
+                child: Text(
+                  '〣 ',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontFamily: 'Pixer',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              )),
+              ),
             ),
             onChanged: (double value) {
               widget.control(value);

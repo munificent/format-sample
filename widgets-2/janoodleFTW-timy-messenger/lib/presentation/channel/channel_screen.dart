@@ -20,9 +20,7 @@ class ChannelScreen extends StatelessWidget {
       builder: (context, vm) {
         return MessagesScrollController(
           scrollController: ScrollController(),
-          child: Column(
-            children: _buildChildren(vm, context),
-          ),
+          child: Column(children: _buildChildren(vm, context)),
         );
       },
       converter: ChannelScreenViewModel.fromStore,
@@ -40,14 +38,10 @@ List<Widget> _buildChildren(ChannelScreenViewModel vm, BuildContext context) {
     _addRsvpHeader(context, widgets);
   }
 
-  widgets.add(MessagesSection(
-    key: Key("MessageSection ${vm.channel.name}"),
-  ));
+  widgets.add(MessagesSection(key: Key("MessageSection ${vm.channel.name}")));
 
   if (vm.userIsMember) {
-    widgets.add(ChatInput(
-      key: Key("ChatInput ${vm.channel.name}"),
-    ));
+    widgets.add(ChatInput(key: Key("ChatInput ${vm.channel.name}")));
   } else {
     if (vm.failedToJoin) {
       // Placeholder until UI specs are ready
@@ -56,11 +50,13 @@ List<Widget> _buildChildren(ChannelScreenViewModel vm, BuildContext context) {
         content: Text("An error occured. Please try again!"),
         actions: <Widget>[
           FlatButton(
-              child: Text("Ok"),
-              onPressed: () {
-                StoreProvider.of<AppState>(context)
-                    .dispatch(ClearFailedJoinAction());
-              })
+            child: Text("Ok"),
+            onPressed: () {
+              StoreProvider.of<AppState>(context).dispatch(
+                ClearFailedJoinAction(),
+              );
+            },
+          ),
         ],
       ));
     }
@@ -74,7 +70,5 @@ void _addRsvpHeader(BuildContext context, List<Widget> widgets) {
   completer.future.then((rsvp) {
     showDialogRsvp(context, rsvp);
   });
-  widgets.add(RsvpHeader(
-    completer: completer,
-  ));
+  widgets.add(RsvpHeader(completer: completer));
 }

@@ -35,8 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: CustomTheme.backgroundColor,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light.copyWith(
-            systemNavigationBarColor: CustomTheme.backgroundColor,
-            statusBarIconBrightness: CustomTheme.brightness),
+          systemNavigationBarColor: CustomTheme.backgroundColor,
+          statusBarIconBrightness: CustomTheme.brightness,
+        ),
         child: Container(
           color: CustomTheme.backgroundColor,
           child: Column(

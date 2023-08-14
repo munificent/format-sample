@@ -65,13 +65,11 @@ class _QuestionCardState extends State<QuestionCard> {
                         transitionOnUserGestures: true,
                         tag: '${widget.questionState.question.info.id}',
                         placeholderBuilder: (context, size, child) => Container(
-                          color: cardColor,
-                          height: size.height,
-                          width: size.width,
-                        ),
-                        child: Container(
-                          color: Colors.transparent,
-                        ),
+                              color: cardColor,
+                              height: size.height,
+                              width: size.width,
+                            ),
+                        child: Container(color: Colors.transparent),
                       ),
                     ),
                   ),
@@ -97,15 +95,16 @@ class _QuestionCardState extends State<QuestionCard> {
             QuestionAnswer(
               show: widget.questionState.showAnswer,
               question: widget.questionState.question,
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  void _onAnswerShown() =>
-      WidgetsBinding.instance!.addPostFrameCallback((d) => _scrollToAnswer());
+  void _onAnswerShown() => WidgetsBinding.instance!.addPostFrameCallback(
+    (d) => _scrollToAnswer(),
+  );
 
   void _scrollToAnswer() {
     final parent = _listViewKey.currentContext?.findRenderObject();
@@ -117,11 +116,10 @@ class _QuestionCardState extends State<QuestionCard> {
     }
 
     final position = box.localToGlobal(Offset.zero, ancestor: parent);
-    _scrollController.animateTo(
-        min(_scrollController.offset + position.dy - Dimensions.defaultSpacing,
-            _scrollController.position.maxScrollExtent),
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut);
+    _scrollController.animateTo(min(
+      _scrollController.offset + position.dy - Dimensions.defaultSpacing,
+      _scrollController.position.maxScrollExtent,
+    ), duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
   }
 
   @override

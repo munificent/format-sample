@@ -4,11 +4,8 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 /// It shows a date divider depending on the date difference
 class SystemMessage extends StatelessWidget {
   /// Constructor for creating a [SystemMessage]
-  const SystemMessage({
-    Key? key,
-    required this.message,
-    this.onMessageTap,
-  }) : super(key: key);
+  const SystemMessage({Key? key, required this.message, this.onMessageTap})
+    : super(key: key);
 
   /// This message
   final Message message;

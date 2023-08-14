@@ -67,9 +67,10 @@ class MatrixInput extends StatelessWidget {
                           child: Text(
                             'Back',
                             style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
-                                color: CustomColors.whiteColor),
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              color: CustomColors.whiteColor,
+                            ),
                           ),
                         ),
                       ),
@@ -81,7 +82,9 @@ class MatrixInput extends StatelessWidget {
                     width: size.width * 0.7,
                     decoration: BoxDecoration(
                       border: Border.all(
-                          width: 2, color: CustomColors.primaryColor),
+                        width: 2,
+                        color: CustomColors.primaryColor,
+                      ),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     child: Center(
@@ -89,37 +92,44 @@ class MatrixInput extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextField(
                           decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Enter Matrix'),
+                            border: InputBorder.none,
+                            hintText: 'Enter Matrix',
+                          ),
                           onChanged: onChanged,
                           style: TextStyle(fontSize: 22),
                           keyboardType: TextInputType.numberWithOptions(
-                              decimal: true, signed: true),
+                            decimal: true,
+                            signed: true,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Text('Note: Separate each value of matrix by comma',
-                      textAlign: TextAlign.center),
+                  Text(
+                    'Note: Separate each value of matrix by comma',
+                    textAlign: TextAlign.center,
+                  ),
                   const Spacer(),
-                  Row(children: [
-                    const SizedBox(width: 20),
-                    Counter(
-                      title: 'Rows',
-                      counter: rowCounter,
-                      addPressed: rowAddPressed,
-                      subtractPressed: rowSubtractPressed,
-                    ),
-                    const Spacer(),
-                    Counter(
-                      title: 'Columns',
-                      counter: columnCounter,
-                      addPressed: columnAddPressed,
-                      subtractPressed: columnSubtractPressed,
-                    ),
-                    const SizedBox(width: 20),
-                  ]),
+                  Row(
+                    children: [
+                      const SizedBox(width: 20),
+                      Counter(
+                        title: 'Rows',
+                        counter: rowCounter,
+                        addPressed: rowAddPressed,
+                        subtractPressed: rowSubtractPressed,
+                      ),
+                      const Spacer(),
+                      Counter(
+                        title: 'Columns',
+                        counter: columnCounter,
+                        addPressed: columnAddPressed,
+                        subtractPressed: columnSubtractPressed,
+                      ),
+                      const SizedBox(width: 20),
+                    ],
+                  ),
                   const SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
@@ -130,7 +140,9 @@ class MatrixInput extends StatelessWidget {
                         width: size.width * 0.7,
                         decoration: BoxDecoration(
                           border: Border.all(
-                              width: 2, color: CustomColors.primaryColor),
+                            width: 2,
+                            color: CustomColors.primaryColor,
+                          ),
                           borderRadius: BorderRadius.circular(35),
                         ),
                         child: Material(
@@ -139,10 +151,13 @@ class MatrixInput extends StatelessWidget {
                             borderRadius: BorderRadius.circular(35),
                             onTap: donePressed,
                             child: Center(
-                              child: Text('Done',
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      color: CustomColors.blackColor)),
+                              child: Text(
+                                'Done',
+                                style: TextStyle(
+                                  fontSize: 26,
+                                  color: CustomColors.blackColor,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -166,13 +181,13 @@ class Counter extends StatelessWidget {
   final GestureTapCallback addPressed;
   final GestureTapCallback subtractPressed;
 
-  const Counter(
-      {Key key,
-      @required this.title,
-      this.counter,
-      this.addPressed,
-      this.subtractPressed})
-      : super(key: key);
+  const Counter({
+    Key key,
+    @required this.title,
+    this.counter,
+    this.addPressed,
+    this.subtractPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -185,9 +200,10 @@ class Counter extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                fontSize: 24,
-                color: CustomColors.primaryColor,
-                fontWeight: FontWeight.w500),
+              fontSize: 24,
+              color: CustomColors.primaryColor,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           const SizedBox(height: 5),
           Divider(
@@ -211,7 +227,9 @@ class Counter extends StatelessWidget {
                     width: 40,
                     decoration: BoxDecoration(
                       border: Border.all(
-                          width: 3, color: CustomColors.primaryColor),
+                        width: 3,
+                        color: CustomColors.primaryColor,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
@@ -240,7 +258,9 @@ class Counter extends StatelessWidget {
                     width: 40,
                     decoration: BoxDecoration(
                       border: Border.all(
-                          width: 3, color: CustomColors.primaryColor),
+                        width: 3,
+                        color: CustomColors.primaryColor,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
@@ -252,7 +272,7 @@ class Counter extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

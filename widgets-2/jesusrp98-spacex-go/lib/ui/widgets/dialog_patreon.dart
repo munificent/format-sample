@@ -14,7 +14,7 @@ const List<String> _patreons = [
   'Pierangelo Pancera',
   'Sam M',
   'Tim van der Linde',
-  'David Morrow'
+  'David Morrow',
 ];
 
 /// Dialog that appears every once in a while, with
@@ -31,15 +31,15 @@ Future<T> showPatreonDialog<T>(BuildContext context) {
             context.translate('about.patreon.body_dialog'),
             textAlign: TextAlign.justify,
             style: Theme.of(context).textTheme.subtitle1.copyWith(
-                  color: Theme.of(context).textTheme.caption.color,
-                ),
+              color: Theme.of(context).textTheme.caption.color,
+            ),
           ),
           for (String patreon in _patreons)
             Text(
               patreon,
               style: Theme.of(context).textTheme.subtitle1.copyWith(
-                    color: Theme.of(context).textTheme.caption.color,
-                  ),
+                color: Theme.of(context).textTheme.caption.color,
+              ),
             ),
           if (Theme.of(context).platform != TargetPlatform.iOS)
             Align(
@@ -52,8 +52,8 @@ Future<T> showPatreonDialog<T>(BuildContext context) {
                     child: Text(
                       context.translate('about.patreon.dismiss'),
                       style: Theme.of(context).textTheme.bodyText2.copyWith(
-                            color: Theme.of(context).textTheme.caption.color,
-                          ),
+                        color: Theme.of(context).textTheme.caption.color,
+                      ),
                     ),
                   ),
                   OutlineButton(
@@ -72,7 +72,7 @@ Future<T> showPatreonDialog<T>(BuildContext context) {
                   ),
                 ],
               ),
-            )
+            ),
         ],
       ),
     ],

@@ -21,7 +21,12 @@ Uint8List overlayImages(Uint8List imgBottom, Uint8List imgTop) {
   } else {
     try {
       src = imglib.copyCrop(
-          src, 0, src.height ~/ 20, src.width.floor(), src.width.floor());
+        src,
+        0,
+        src.height ~/ 20,
+        src.width.floor(),
+        src.width.floor(),
+      );
       src = imglib.copyResize(src, width: dstWidth - 300);
     } catch (e) {
       src = imglib.copyCrop(src, 0, 0, src.width.floor(), src.width.floor());
@@ -34,23 +39,29 @@ Uint8List overlayImages(Uint8List imgBottom, Uint8List imgTop) {
   int dstPostion = ((dst.width - src.width) ~/ 2);
 
   //Overlay imgBottom on the blank image
-  var overlayedImage = imglib.copyInto(image, src,
-      dstX: dstPostion,
-      dstY: dstPostion,
-      srcH: srcWidth,
-      srcW: srcWidth,
-      srcX: 0,
-      srcY: 0,
-      blend: true);
+  var overlayedImage = imglib.copyInto(
+    image,
+    src,
+    dstX: dstPostion,
+    dstY: dstPostion,
+    srcH: srcWidth,
+    srcW: srcWidth,
+    srcX: 0,
+    srcY: 0,
+    blend: true,
+  );
 
   //Overlay imgTop on the resultant overlaayed image from above
-  var finalImage = imglib.copyInto(overlayedImage, dst,
-      dstX: 0,
-      dstY: 0,
-      srcH: dstWidth,
-      srcW: dstWidth,
-      srcX: 0,
-      srcY: 0,
-      blend: true);
+  var finalImage = imglib.copyInto(
+    overlayedImage,
+    dst,
+    dstX: 0,
+    dstY: 0,
+    srcH: dstWidth,
+    srcW: dstWidth,
+    srcX: 0,
+    srcY: 0,
+    blend: true,
+  );
   return imglib.encodePng(finalImage);
 }

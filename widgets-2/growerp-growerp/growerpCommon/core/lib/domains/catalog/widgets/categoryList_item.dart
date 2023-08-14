@@ -18,9 +18,11 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import '../catalog.dart';
 
 class CategoryListItem extends StatelessWidget {
-  const CategoryListItem(
-      {Key? key, required this.category, required this.index})
-      : super(key: key);
+  const CategoryListItem({
+    Key? key,
+    required this.category,
+    required this.index,
+  }) : super(key: key);
 
   final Category category;
   final int index;
@@ -29,47 +31,55 @@ class CategoryListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final _categoryBloc = BlocProvider.of<CategoryBloc>(context);
     return Material(
-        child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.green,
-              child: category.image != null
-                  ? Image.memory(
-                      category.image!,
-                      height: 100,
-                    )
-                  : Text("${category.categoryName![0]}"),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Colors.green,
+          child: category.image != null
+              ? Image.memory(category.image!, height: 100)
+              : Text("${category.categoryName![0]}"),
+        ),
+        title: Row(
+          children: <Widget>[
+            Expanded(
+              child: Text("${category.categoryName}", key: Key("name$index")),
             ),
-            title: Row(
-              children: <Widget>[
-                Expanded(
-                    child: Text("${category.categoryName}",
-                        key: Key("name$index"))),
-                if (!ResponsiveWrapper.of(context).isSmallerThan(TABLET))
-                  Expanded(
-                      child: Text("${category.description}",
-                          key: Key("description$index"),
-                          textAlign: TextAlign.center)),
-                Expanded(
-                    child: Text("${category.nbrOfProducts}",
-                        key: Key("products$index"),
-                        textAlign: TextAlign.center)),
-              ],
+            if (!ResponsiveWrapper.of(context).isSmallerThan(TABLET))
+              Expanded(
+                child: Text(
+                  "${category.description}",
+                  key: Key("description$index"),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            Expanded(
+              child: Text(
+                "${category.nbrOfProducts}",
+                key: Key("products$index"),
+                textAlign: TextAlign.center,
+              ),
             ),
-            onTap: () async {
-              await showDialog(
-                  barrierDismissible: true,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return BlocProvider.value(
-                        value: _categoryBloc, child: CategoryDialog(category));
-                  });
+          ],
+        ),
+        onTap: () async {
+          await showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (BuildContext context) {
+              return BlocProvider.value(
+                value: _categoryBloc,
+                child: CategoryDialog(category),
+              );
             },
-            trailing: IconButton(
-              key: Key('delete$index'),
-              icon: Icon(Icons.delete_forever),
-              onPressed: () {
-                _categoryBloc.add(CategoryDelete(category));
-              },
-            )));
+          );
+        },
+        trailing: IconButton(
+          key: Key('delete$index'),
+          icon: Icon(Icons.delete_forever),
+          onPressed: () {
+            _categoryBloc.add(CategoryDelete(category));
+          },
+        ),
+      ),
+    );
   }
 }

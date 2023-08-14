@@ -38,51 +38,51 @@ class _TimeLinePageState extends State<TimeLinePage> {
           IconButton(
             // ignore: prefer_const_constructors
             icon: Icon(Icons.info_outline),
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const AboutPage())),
-          )
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AboutPage()),
+            ),
+          ),
         ],
       ),
       body: FutureBuilder(
-          future: getRepos(username),
-          builder: (BuildContext ctx, AsyncSnapshot snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-                return const Center(
-                  child: CircularProgressIndicator(),
+        future: getRepos(username),
+        builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return const Center(child: CircularProgressIndicator());
+            default:
+              if (snapshot.hasError) {
+                return Center(child: Text('error: ${snapshot.error}'));
+              } else {
+                final List<RepoModel> data = snapshot.data;
+                return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (ctx, index) => TimelineTile(
+                        alignment: TimelineAlign.manual,
+                        lineXY: 0.3,
+                        beforeLineStyle:
+                            LineStyle(color: Colors.black.withOpacity(0.1)),
+                        indicatorStyle: IndicatorStyle(
+                          indicatorXY: 0.3,
+                          drawGap: true,
+                          width: 30,
+                          height: 30,
+                          indicator: TimelineIndicator(
+                            isFork: data.elementAt(index).fork,
+                          ),
+                        ),
+                        isFirst: index == 0,
+                        isLast: index == data.length - 1,
+                        startChild: StartChild(data: data, index: index),
+                        endChild: EndChild(data: data, index: index),
+                      ),
                 );
-              default:
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text('error: ${snapshot.error}'),
-                  );
-                } else {
-                  final List<RepoModel> data = snapshot.data;
-                  return ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (ctx, index) => TimelineTile(
-                            alignment: TimelineAlign.manual,
-                            lineXY: 0.3,
-                            beforeLineStyle:
-                                LineStyle(color: Colors.black.withOpacity(0.1)),
-                            indicatorStyle: IndicatorStyle(
-                              indicatorXY: 0.3,
-                              drawGap: true,
-                              width: 30,
-                              height: 30,
-                              indicator: TimelineIndicator(
-                                isFork: data.elementAt(index).fork,
-                              ),
-                            ),
-                            isFirst: index == 0,
-                            isLast: index == data.length - 1,
-                            startChild: StartChild(data: data, index: index),
-                            endChild: EndChild(data: data, index: index),
-                          ));
-                }
-            }
-          }),
+              }
+          }
+        },
+      ),
     );
   }
 }

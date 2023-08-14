@@ -22,7 +22,7 @@ void showError(BuildContext context, String message) {
           "CLOSE",
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
-      )
+      ),
     ],
   ).show();
 }

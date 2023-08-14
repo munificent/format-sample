@@ -22,11 +22,7 @@ class VerticalListTile extends StatelessWidget {
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
         leading: image != null
-            ? Container(
-                child: image,
-                height: 80.0,
-                width: 80.0,
-              )
+            ? Container(child: image, height: 80.0, width: 80.0)
             : null,
         subtitle: subtitle != null
             ? Text(subtitle, maxLines: 2, overflow: TextOverflow.ellipsis)
@@ -40,10 +36,7 @@ class VerticalListTile extends StatelessWidget {
 class VerticalListView extends StatelessWidget {
   final List<Widget> children;
 
-  const VerticalListView({
-    Key key,
-    this.children,
-  }) : super(key: key);
+  const VerticalListView({Key key, this.children}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

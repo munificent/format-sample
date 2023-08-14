@@ -47,28 +47,32 @@ class _FilterTabbarState extends State<FilterTabbar>
     global.addFreeFormListBuilder = () => model.addTab(type: TAB_LIST_BUILDER);
 
     final db = DB();
-    final x = Observer(builder: (ctx) {
-      db.setPref('tabs', json.encode(model.toJson));
-      final v = db.getPref('tabs');
-      return Text('hello');
-    });
+    final x = Observer(
+      builder: (ctx) {
+        db.setPref('tabs', json.encode(model.toJson));
+        final v = db.getPref('tabs');
+        return Text('hello');
+      },
+    );
 
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            color: Colors.grey,
-            child: Row(children: [
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Container(
+          color: Colors.grey,
+          child: Row(
+            children: [
               Observer(
                 builder: (ctx) => Flexible(
-                    flex: 10,
-                    child: Container(
-                      color: Colors.grey,
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
+                      flex: 10,
+                      child: Container(
+                        color: Colors.grey,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
                             maxWidth: 200.0 * model.count,
-                            minWidth: 110.0 * model.count),
-                        child: TabBar(
+                            minWidth: 110.0 * model.count,
+                          ),
+                          child: TabBar(
                             isScrollable: true,
                             controller: model.controller,
                             labelColor: Colors.black,
@@ -76,113 +80,137 @@ class _FilterTabbarState extends State<FilterTabbar>
                             indicator: BoxDecoration(
                               color: Colors.white,
                               border: Border(
-                                  left: BorderSide(),
-                                  right: BorderSide(),
-                                  top: BorderSide()),
+                                left: BorderSide(),
+                                right: BorderSide(),
+                                top: BorderSide(),
+                              ),
                             ),
                             tabs: () {
                               final tabIcons = [
                                 Icons.filter_list,
                                 Icons.contacts,
                                 Icons.recent_actors,
-                                Icons.query_builder
+                                Icons.query_builder,
                               ];
                               final x = List.generate(
-                                  model.count,
-                                  (i) => Observer(builder: (ctx) {
-                                        final ict = tabIcons[
-                                                model.tabs[i].model.type],
-                                            filterBtn = model.currentIndex ==
-                                                        i &&
-                                                    ict == Icons.filter_list
-                                                ? Icon(ict, color: Colors.blue)
-                                                : Icon(ict);
+                                model.count,
+                                (i) => Observer(
+                                  builder: (ctx) {
+                                    final ict =
+                                            tabIcons[model.tabs[i].model.type],
+                                        filterBtn = model.currentIndex == i &&
+                                                ict == Icons.filter_list
+                                            ? Icon(ict, color: Colors.blue)
+                                            : Icon(ict);
 
-                                        return Tab(
-                                            child: Container(
-                                          decoration: BoxDecoration(
-                                              border:
-                                                  Border(right: BorderSide())),
-                                          child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                i == model.currentIndex
-                                                    ? Filter(model.tabs[i].model
-                                                        .skierFilterContextModel)
-                                                    : filterBtn,
-                                                Tooltip(
-                                                    message: model
-                                                        .tabs[i].model.title,
-                                                    child: Container(
-                                                        constraints:
-                                                            BoxConstraints(
-                                                                minWidth: 50,
-                                                                maxWidth: 100),
-                                                        child: ClipRect(
-                                                            child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: <Widget>[
-                                                            Text(
-                                                              model.tabs[i]
-                                                                  .model.title,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              softWrap: false,
-                                                            ),
-                                                            Text(
-                                                              model
-                                                                  .tabs[i]
-                                                                  .model
-                                                                  .subTitle,
-                                                              style: TextStyle(
-                                                                  fontSize: 8),
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              softWrap: false,
-                                                            ),
-                                                          ],
-                                                        )))),
-                                                Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 10, right: 10),
-                                                    child: InkWell(
-                                                        hoverColor: Colors.grey,
-                                                        child: Icon(Icons.close,
-                                                            size: 25),
-                                                        onTap: () =>
-                                                            model.deleteTab(i)))
-                                              ]),
-                                        ));
-                                      }));
+                                    return Tab(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border(right: BorderSide()),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            i == model.currentIndex
+                                                ? Filter(
+                                                    model
+                                                        .tabs[i]
+                                                        .model
+                                                        .skierFilterContextModel,
+                                                  )
+                                                : filterBtn,
+                                            Tooltip(
+                                              message:
+                                                  model.tabs[i].model.title,
+                                              child: Container(
+                                                constraints: BoxConstraints(
+                                                  minWidth: 50,
+                                                  maxWidth: 100,
+                                                ),
+                                                child: ClipRect(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        model
+                                                            .tabs[i]
+                                                            .model
+                                                            .title,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        softWrap: false,
+                                                      ),
+                                                      Text(
+                                                        model
+                                                            .tabs[i]
+                                                            .model
+                                                            .subTitle,
+                                                        style: TextStyle(
+                                                          fontSize: 8,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        softWrap: false,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 10,
+                                                right: 10,
+                                              ),
+                                              child: InkWell(
+                                                hoverColor: Colors.grey,
+                                                child:
+                                                    Icon(Icons.close, size: 25),
+                                                onTap: () => model.deleteTab(i),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
 
                               return x;
-                            }()),
+                            }(),
+                          ),
+                        ),
                       ),
-                    )),
+                    ),
               ),
               FlatButton(
-                  child: Icon(Icons.add),
-                  onPressed: () {
-                    model.addTab(type: TAB_POINTS_LIST);
-                  }),
-              Spacer()
-            ]),
+                child: Icon(Icons.add),
+                onPressed: () {
+                  model.addTab(type: TAB_POINTS_LIST);
+                },
+              ),
+              Spacer(),
+            ],
           ),
-          Expanded(child: Observer(
+        ),
+        Expanded(
+          child: Observer(
             builder: (ctx) {
               return TabBarView(
-                  controller: model.controller,
-                  children: List.generate(model.count, (i) => model.tabs[i]));
+                controller: model.controller,
+                children: List.generate(model.count, (i) => model.tabs[i]),
+              );
             },
-          )),
-          Offstage(child: x)
-        ]);
+          ),
+        ),
+        Offstage(child: x),
+      ],
+    );
   }
 }

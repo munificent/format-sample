@@ -68,14 +68,14 @@ class NoteEditor extends StatefulWidget {
     this.parentFolderView, {
     this.editMode = false,
     this.highlightString,
-  })  : existingNote = note,
-        notesFolder = note.parent,
-        defaultEditorType = null,
-        defaultFileFormat = null,
-        existingText = null,
-        existingImages = null,
-        newNoteFileName = null,
-        newNoteExtraProps = null;
+  }) : existingNote = note,
+       notesFolder = note.parent,
+       defaultEditorType = null,
+       defaultFileFormat = null,
+       existingText = null,
+       existingImages = null,
+       newNoteFileName = null,
+       newNoteExtraProps = null;
 
   const NoteEditor.newNote(
     this.notesFolder,
@@ -86,9 +86,9 @@ class NoteEditor extends StatefulWidget {
     this.newNoteExtraProps = const {},
     this.newNoteFileName,
     this.defaultFileFormat,
-  })  : existingNote = null,
-        editMode = true,
-        highlightString = null;
+  }) : existingNote = null,
+       editMode = true,
+       highlightString = null;
 
   @override
   NoteEditorState createState() {
@@ -160,7 +160,8 @@ class NoteEditorState extends State<NoteEditor>
           try {
             var image = await core.Image.copyIntoFs(newNote!.parent, imagePath);
             newNote!.apply(
-                body: newNote!.body + image.toMarkup(newNote!.fileFormat));
+              body: newNote!.body + image.toMarkup(newNote!.fileFormat),
+            );
           } catch (e, st) {
             Log.e("New Note Existing Image", ex: e, stacktrace: st);
           }
@@ -335,10 +336,10 @@ class NoteEditorState extends State<NoteEditor>
     var newFileName = await showDialog(
       context: context,
       builder: (_) => RenameDialog(
-        oldPath: prevNotePath,
-        inputDecoration: tr(LocaleKeys.widgets_NoteEditor_fileName),
-        dialogTitle: tr(LocaleKeys.widgets_NoteEditor_renameFile),
-      ),
+            oldPath: prevNotePath,
+            inputDecoration: tr(LocaleKeys.widgets_NoteEditor_fileName),
+            dialogTitle: tr(LocaleKeys.widgets_NoteEditor_renameFile),
+          ),
     );
     if (newFileName == null) {
       return;
@@ -512,10 +513,8 @@ class NoteEditorState extends State<NoteEditor>
     var allTags = await rootFolder.getNoteTagsRecursively(inlineTagsView);
 
     var route = MaterialPageRoute(
-      builder: (context) => NoteTagEditor(
-        selectedTags: note.tags,
-        allTags: allTags,
-      ),
+      builder:
+          (context) => NoteTagEditor(selectedTags: note.tags, allTags: allTags),
       settings: const RouteSettings(name: '/editTags/'),
     );
     var newTags = await Navigator.of(context).push(route);

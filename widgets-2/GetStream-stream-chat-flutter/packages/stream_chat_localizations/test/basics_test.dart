@@ -21,16 +21,18 @@ void main() {
     ));
 
     final LocalizationTrackerState outerTracker = tester.state(
-        find.byKey(const ValueKey<String>('outer'), skipOffstage: false));
+      find.byKey(const ValueKey<String>('outer'), skipOffstage: false),
+    );
     expect(outerTracker.captionFontSize, 12.0);
     final LocalizationTrackerState innerTracker = tester.state(
-        find.byKey(const ValueKey<String>('inner'), skipOffstage: false));
+      find.byKey(const ValueKey<String>('inner'), skipOffstage: false),
+    );
     expect(innerTracker.captionFontSize, 13.0);
   });
 
   testWidgets(
     'Localizations is compatible with ChangeNotifier.dispose() called '
-    'during didChangeDependencies',
+        'during didChangeDependencies',
     (WidgetTester tester) async {
       // PageView calls ScrollPosition.dispose() during didChangeDependencies.
       await tester.pumpWidget(MaterialApp(
@@ -57,10 +59,7 @@ void main() {
       localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
         GlobalStreamChatLocalizations.delegate,
       ],
-      supportedLocales: const <Locale>[
-        Locale('en', 'US'),
-        Locale('hi'),
-      ],
+      supportedLocales: const <Locale>[Locale('en', 'US'), Locale('hi')],
       home: Container(),
     ));
 

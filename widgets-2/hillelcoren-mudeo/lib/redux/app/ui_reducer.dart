@@ -29,17 +29,19 @@ UIState updateVideoReducer(UIState uiState, UpdateVideo action) {
   final song = uiState.song;
   final tracks = song.tracks;
 
-  final track = tracks
-      .where((track) => track.video.timestamp == action.video.timestamp)
-      .first;
+  final track = tracks.where(
+    (track) => track.video.timestamp == action.video.timestamp,
+  ).first;
 
   if (track == null) {
     return uiState;
   }
 
   final index = tracks.indexOf(track);
-  final updatedTrack = track.rebuild((b) =>
-      b..video.recognitions = action.recognitions ?? track.video.recognitions);
+  final updatedTrack = track.rebuild(
+    (b) =>
+        b..video.recognitions = action.recognitions ?? track.video.recognitions,
+  );
 
   return uiState.rebuild((b) => b..song.tracks[index] = updatedTrack);
 }
@@ -70,12 +72,14 @@ UIState saveVideoReducer(UIState uiState, SaveVideoSuccess action) {
   final index = song.tracks.indexOf(oldTrack);
   final newTrack = oldTrack.rebuild((b) => b..video.replace(video));
 
-  var state = uiState.rebuild((b) => b
-    ..song.tracks[index] = newTrack
-    // TODO remove this workaround
-    ..song.updatedAt = action.refreshUI
-        ? DateTime.now().millisecondsSinceEpoch.toString()
-        : song.updatedAt);
+  var state = uiState.rebuild(
+    (b) => b
+      ..song.tracks[index] = newTrack
+      // TODO remove this workaround
+      ..song.updatedAt = action.refreshUI
+          ? DateTime.now().millisecondsSinceEpoch.toString()
+          : song.updatedAt,
+  );
 
   if (video.isRemoteVideo) {
     if (song.title == null || song.title.isEmpty) {
@@ -84,7 +88,8 @@ UIState saveVideoReducer(UIState uiState, SaveVideoSuccess action) {
 
     if (song.duration == null || song.duration == 0) {
       state = state.rebuild(
-          (b) => b..song.duration = min(video.duration, kMaxSongDuration));
+        (b) => b..song.duration = min(video.duration, kMaxSongDuration),
+      );
     }
   }
 
@@ -96,11 +101,13 @@ UIState saveSongReducer(UIState uiState, SaveSongSuccess action) {
 }
 
 UIState deleteSongReducer(UIState uiState, DeleteSongSuccess action) {
-  return uiState.rebuild((b) => b
-    ..song.replace(SongEntity())
-    ..selectedTabIndex = (uiState.selectedTabIndex == ScreenTabs.EDIT
-        ? ScreenTabs.PROFILE
-        : uiState.selectedTabIndex));
+  return uiState.rebuild(
+    (b) => b
+      ..song.replace(SongEntity())
+      ..selectedTabIndex = (uiState.selectedTabIndex == ScreenTabs.EDIT
+          ? ScreenTabs.PROFILE
+          : uiState.selectedTabIndex),
+  );
 }
 
 UIState addSongReducer(UIState uiState, AddSongSuccess action) {
@@ -111,13 +118,15 @@ UIState addTrackReducer(UIState uiState, AddTrack action) {
   final song = uiState.song;
   final track = action.track;
 
-  return uiState.rebuild((b) => b
-    ..song.duration = song.duration == 0 ? action.duration : song.duration
-    // TODO remove this workaround
-    ..song.updatedAt = action.refreshUI
-        ? DateTime.now().millisecondsSinceEpoch.toString()
-        : song.updatedAt
-    ..song.tracks.add(track));
+  return uiState.rebuild(
+    (b) => b
+      ..song.duration = song.duration == 0 ? action.duration : song.duration
+      // TODO remove this workaround
+      ..song.updatedAt = action.refreshUI
+          ? DateTime.now().millisecondsSinceEpoch.toString()
+          : song.updatedAt
+      ..song.tracks.add(track),
+  );
 }
 
 UIState updateSongReducer(UIState uiState, UpdateSong action) {

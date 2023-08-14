@@ -61,7 +61,10 @@ class ExpenseCategoryListItem extends StatelessWidget {
         onLongPress: () => onLongPress != null
             ? onLongPress()
             : selectEntity(
-                entity: expenseCategory, context: context, longPress: true),
+                entity: expenseCategory,
+                context: context,
+                longPress: true,
+              ),
         leading: showCheckbox
             ? IgnorePointer(
                 ignoring: listUIState.isInMultiselect(),
@@ -83,8 +86,10 @@ class ExpenseCategoryListItem extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
-              Text(formatNumber(expenseCategory.listDisplayAmount, context),
-                  style: Theme.of(context).textTheme.headline6),
+              Text(
+                formatNumber(expenseCategory.listDisplayAmount, context),
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ],
           ),
         ),
@@ -92,11 +97,7 @@ class ExpenseCategoryListItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             subtitle != null && subtitle.isNotEmpty
-                ? Text(
-                    subtitle,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  )
+                ? Text(subtitle, maxLines: 3, overflow: TextOverflow.ellipsis)
                 : Container(),
             EntityStateLabel(expenseCategory),
           ],

@@ -28,18 +28,16 @@ void webReload() => window.location.reload();
 void registerWebView(String html) {
   // ignore: undefined_prefixed_name
   ui.platformViewRegistry.registerViewFactory(
-      html,
-      (int viewId) => IFrameElement()
-        ..src = html
-        ..style.border = 'none');
+    html,
+    (int viewId) => IFrameElement()
+      ..src = html
+      ..style.border = 'none',
+  );
 }
 
 // TODO remove this once supported by Flutter
 class HandCursor extends StatelessWidget {
-  const HandCursor({
-    Key key,
-    this.child,
-  }) : super(key: key);
+  const HandCursor({Key key, this.child}) : super(key: key);
 
   final Widget child;
 

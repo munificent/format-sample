@@ -8,10 +8,7 @@ class CommentHierarchy {
   /// Replies to the parent comment.
   final List<CommentHierarchy>? children;
 
-  CommentHierarchy({
-    required this.comment,
-    this.children,
-  });
+  CommentHierarchy({required this.comment, this.children});
 
   @override
   String toString() {

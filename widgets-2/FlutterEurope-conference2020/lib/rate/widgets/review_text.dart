@@ -7,7 +7,7 @@ class ReviewText extends StatelessWidget {
   final Function(String) onReviewSubmitted;
 
   const ReviewText(this.review, {Key key, @required this.onReviewSubmitted})
-      : super(key: key);
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,10 @@ class ReviewText extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
       child: InkWell(
         onTap: () async {
-          final review = await showWriteReviewModalBottomSheet(context,
-              initialValue: this.review);
+          final review = await showWriteReviewModalBottomSheet(
+            context,
+            initialValue: this.review,
+          );
 
           this.onReviewSubmitted(review);
         },

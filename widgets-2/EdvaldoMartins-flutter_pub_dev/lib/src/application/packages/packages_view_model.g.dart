@@ -12,22 +12,26 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
   Computed<bool>? _$hasErrorComputed;
 
   @override
-  bool get hasError =>
-      (_$hasErrorComputed ??= Computed<bool>(() => super.hasError,
-              name: '_PackagesViewModel.hasError'))
-          .value;
+  bool get hasError => (_$hasErrorComputed ??= Computed<bool>(
+        () => super.hasError,
+        name: '_PackagesViewModel.hasError',
+      ))
+      .value;
   Computed<List<Package>>? _$packagesComputed;
 
   @override
-  List<Package> get packages =>
-      (_$packagesComputed ??= Computed<List<Package>>(() => super.packages,
-              name: '_PackagesViewModel.packages'))
-          .value;
+  List<Package> get packages => (_$packagesComputed ??= Computed<List<Package>>(
+        () => super.packages,
+        name: '_PackagesViewModel.packages',
+      ))
+      .value;
   Computed<bool>? _$hasDataComputed;
 
   @override
-  bool get hasData => (_$hasDataComputed ??= Computed<bool>(() => super.hasData,
-          name: '_PackagesViewModel.hasData'))
+  bool get hasData => (_$hasDataComputed ??= Computed<bool>(
+        () => super.hasData,
+        name: '_PackagesViewModel.hasData',
+      ))
       .value;
 
   final _$_packagesAtom = Atom(name: '_PackagesViewModel._packages');
@@ -67,13 +71,15 @@ mixin _$PackagesViewModel on _PackagesViewModel, Store {
     return _$loadAsyncAction.run(() => super.load(refresh: refresh));
   }
 
-  final _$_PackagesViewModelActionController =
-      ActionController(name: '_PackagesViewModel');
+  final _$_PackagesViewModelActionController = ActionController(
+    name: '_PackagesViewModel',
+  );
 
   @override
   void setData(List<Package> list, bool refresh) {
     final _$actionInfo = _$_PackagesViewModelActionController.startAction(
-        name: '_PackagesViewModel.setData');
+      name: '_PackagesViewModel.setData',
+    );
     try {
       return super.setData(list, refresh);
     } finally {
